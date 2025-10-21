@@ -6,8 +6,7 @@ __pycache__/
 resources/
 results/
 .snakemake.*
-
-# Other folders
 old_scripts/
 dag.svg
 test/
+copilot-instructions.md
