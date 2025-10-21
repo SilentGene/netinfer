@@ -2,7 +2,10 @@
 Network visualization rules
 """
 
-rule aggregate_networks:
+# Only include these rules if visualization is enabled
+if config.get("visualization", {}).get("enabled", True):
+
+    rule aggregate_networks:
     input:
         flashweave = "results/networks/flashweave/network.tsv" if config["flashweave"]["enabled"] else [],
         fastspar = "results/networks/fastspar/network.tsv" if config["fastspar"]["enabled"] else [],
@@ -23,9 +26,9 @@ rule aggregate_networks:
     script:
         "../scripts/aggregate_networks.py"
 
-rule generate_html_viewer:
-    input:
-        network = "results/networks/aggregated_network.tsv",
+    rule generate_html_viewer:
+        input:
+            network = "results/networks/aggregated_network.tsv",
         stats = "results/networks/network_statistics.json",
         abundance = "results/preprocessed/filtered_abundance.tsv",
         taxonomy = "results/preprocessed/processed_taxonomy.tsv"

@@ -22,14 +22,15 @@ include: "workflow/rules/jaccard.smk"
 include: "workflow/rules/visualization.smk"
 
 # Define final output files
-final_outputs = [
-    "results/networks/aggregated_network.tsv",
-    "results/visualization/network_viewer.html"
-]
+final_outputs = ["results/networks/aggregated_network.tsv"]
+
+# Add visualization output if enabled
+if config.get("visualization", {}).get("enabled", True):
+    final_outputs.append("results/visualization/network_viewer.html")
 
 # Add method-specific outputs based on config
-if config["flashweave"]["enabled"]:
-    final_outputs.append("results/networks/flashweave/network.tsv")
+from workflow.rules.flashweave import get_flashweave_output
+final_outputs.extend(get_flashweave_output())
 if config["fastspar"]["enabled"]:
     final_outputs.append("results/networks/fastspar/network.tsv")
 if config["spearman"]["enabled"]:

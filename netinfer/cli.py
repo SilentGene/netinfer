@@ -59,16 +59,43 @@ def create_config(input_file: str,
     
     # Update method selection
     if methods:
-        available_methods = [
-            "flashweave", "fastspar", "spearman",
-            "spieceasi", "propr", "jaccard"
-        ]
-        for method in available_methods:
-            config[method]["enabled"] = method in methods
+        # Define available methods and their config mappings
+        method_mappings = {
+            "flashweave": {"config_key": "flashweave", "he_mode": False},
+            "flashweaveHE": {"config_key": "flashweave", "he_mode": True},
+            "fastspar": {"config_key": "fastspar"},
+            "spearman": {"config_key": "spearman"},
+            "spieceasi": {"config_key": "spieceasi"},
+            "propr": {"config_key": "propr"},
+            "jaccard": {"config_key": "jaccard"}
+        }
+        
+        # Validate methods
+        invalid_methods = [m for m in methods if m not in method_mappings]
+        if invalid_methods:
+            raise ValueError(f"Invalid method(s): {', '.join(invalid_methods)}. "
+                           f"Available methods: {', '.join(method_mappings.keys())}")
+        
+        # Disable all methods by default
+        for method in method_mappings.values():
+            config_key = method["config_key"]
+            if config_key in config:
+                config[config_key]["enabled"] = False
+        
+        # Enable only selected methods
+        for method in methods:
+            mapping = method_mappings[method]
+            config_key = mapping["config_key"]
+            config[config_key]["enabled"] = True
+            
+            # Handle special cases
+            if config_key == "flashweave":
+                config[config_key]["heterogeneous"] = mapping.get("he_mode", False)
     
     # Update visualization
-    if no_visual:
-        config["visualization"]["enabled"] = False
+    if "visualization" not in config:
+        config["visualization"] = {}
+    config["visualization"]["enabled"] = not no_visual
     
     # Create temporary config file
     os.makedirs(output_dir, exist_ok=True)
@@ -128,7 +155,9 @@ def main():
     
     parser.add_argument(
         "--methods",
-        help="Comma-separated list of methods to use (default: all)"
+        help="Comma-separated list of methods to use (default: all). "
+             "Available methods: flashweave, flashweaveHE, fastspar, "
+             "spearman, spieceasi, propr, jaccard"
     )
     
     parser.add_argument(

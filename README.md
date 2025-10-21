@@ -6,6 +6,9 @@
 
 A Snakemake-based bioinformatics pipeline for inferring co-abundance networks from microbiome data.
 
+> [!NOTE]
+> NetInfer is still under development. Please use with caution and report any issues on the GitHub repository.
+
 ## Features
 
 - Multiple network inference methods:
