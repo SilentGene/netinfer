@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""
+NetInfer: A command-line tool for microbiome network inference
+"""
+
+import argparse
+import os
+import sys
+import yaml
+import shutil
+import logging
+from pathlib import Path
+from typing import List, Optional
+
+def setup_logger() -> logging.Logger:
+    """Set up logging configuration."""
+    logger = logging.getLogger('netinfer')
+    logger.setLevel(logging.INFO)
+    
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    
+    # Console handler
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    
+    return logger
+
+def find_package_root() -> Path:
+    """Find the package root directory containing workflow files."""
+    # When installed as a package
+    if getattr(sys, 'frozen', False):
+        return Path(sys._MEIPASS)
+    
+    # During development
+    return Path(__file__).parent
+
+def create_config(input_file: str,
+                 output_dir: str,
+                 taxonomy_file: Optional[str] = None,
+                 metadata_file: Optional[str] = None,
+                 methods: Optional[List[str]] = None,
+                 no_visual: bool = False) -> str:
+    """Create a temporary config file for the pipeline run."""
+    # Load default config
+    package_root = find_package_root()
+    with open(package_root / "config" / "config.yaml") as f:
+        config = yaml.safe_load(f)
+    
+    # Update input/output paths
+    config["input"]["abundance_table"] = os.path.abspath(input_file)
+    if taxonomy_file:
+        config["input"]["taxonomy_table"] = os.path.abspath(taxonomy_file)
+    if metadata_file:
+        config["input"]["metadata_table"] = os.path.abspath(metadata_file)
+    
+    config["output_dir"] = os.path.abspath(output_dir)
+    
+    # Update method selection
+    if methods:
+        available_methods = [
+            "flashweave", "fastspar", "spearman",
+            "spieceasi", "propr", "jaccard"
+        ]
+        for method in available_methods:
+            config[method]["enabled"] = method in methods
+    
+    # Update visualization
+    if no_visual:
+        config["visualization"]["enabled"] = False
+    
+    # Create temporary config file
+    os.makedirs(output_dir, exist_ok=True)
+    config_path = os.path.join(output_dir, "config.yaml")
+    with open(config_path, "w") as f:
+        yaml.dump(config, f)
+    
+    return config_path
+
+def run_pipeline(config_path: str, threads: int) -> int:
+    """Run the Snakemake pipeline with given configuration."""
+    import snakemake
+    
+    package_root = find_package_root()
+    snakefile = package_root / "workflow" / "Snakefile"
+    
+    success = snakemake.snakemake(
+        snakefile=str(snakefile),
+        cores=threads,
+        configfile=config_path,
+        use_conda=True,
+        conda_frontend="mamba",
+        printshellcmds=True,
+        show_failed_logs=True,
+        keep_incomplete=True
+    )
+    
+    return 0 if success else 1
+
+def main():
+    """Main entry point for the command-line interface."""
+    parser = argparse.ArgumentParser(
+        description="NetInfer: Microbiome Network Inference Pipeline"
+    )
+    
+    parser.add_argument(
+        "--input",
+        required=True,
+        help="Input abundance table file (TSV/CSV/BIOM format)"
+    )
+    
+    parser.add_argument(
+        "--output",
+        required=True,
+        help="Output directory for results"
+    )
+    
+    parser.add_argument(
+        "--taxonomy",
+        help="Taxonomy mapping file (optional)"
+    )
+    
+    parser.add_argument(
+        "--metadata",
+        help="Sample metadata file (optional)"
+    )
+    
+    parser.add_argument(
+        "--methods",
+        help="Comma-separated list of methods to use (default: all)"
+    )
+    
+    parser.add_argument(
+        "--threads",
+        type=int,
+        default=1,
+        help="Number of threads to use (default: 1)"
+    )
+    
+    parser.add_argument(
+        "--no-visual",
+        action="store_true",
+        help="Skip visualization generation"
+    )
+    
+    args = parser.parse_args()
+    logger = setup_logger()
+    
+    try:
+        # Parse methods if specified
+        methods = None
+        if args.methods:
+            methods = [m.strip().lower() for m in args.methods.split(",")]
+        
+        # Create configuration
+        logger.info("Creating pipeline configuration...")
+        config_path = create_config(
+            input_file=args.input,
+            output_dir=args.output,
+            taxonomy_file=args.taxonomy,
+            metadata_file=args.metadata,
+            methods=methods,
+            no_visual=args.no_visual
+        )
+        
+        # Run pipeline
+        logger.info("Starting pipeline execution...")
+        result = run_pipeline(config_path, args.threads)
+        
+        if result == 0:
+            logger.info("Pipeline completed successfully!")
+        else:
+            logger.error("Pipeline execution failed.")
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error: {str(e)}")
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())

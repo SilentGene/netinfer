@@ -1,0 +1,22 @@
+name: netinfer-fastspar
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  # FastSpar and dependencies
+  - fastspar
+  - gsl
+  - openblas
+  - armadillo
+  
+  # Python for processing
+  - python>=3.8
+  - pandas
+  - numpy
+  - scipy
+  
+  # Development tools
+  - gcc
+  - make
+  - cmake

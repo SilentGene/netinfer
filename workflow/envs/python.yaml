@@ -1,0 +1,22 @@
+name: netinfer-python
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.8
+  - pandas
+  - numpy
+  - networkx
+  - plotly
+  - scikit-learn
+  - scipy
+  - statsmodels
+  - jinja2
+  - pyyaml
+  - tqdm
+  - biom-format
+  - pip
+  - pip:
+    - pyvis
+    - dash

@@ -1,0 +1,50 @@
+"""
+NetInfer: A Snakemake pipeline for microbiome network inference
+"""
+
+import os
+from snakemake.utils import min_version
+
+# Set minimum Snakemake version
+min_version("6.0.0")
+
+# Load configuration
+configfile: "config/config.yaml"
+
+# Include rules
+include: "workflow/rules/preprocessing.smk"
+include: "workflow/rules/flashweave.smk"
+include: "workflow/rules/fastspar.smk"
+include: "workflow/rules/spearman.smk"
+include: "workflow/rules/spieceasi.smk"
+include: "workflow/rules/propr.smk"
+include: "workflow/rules/jaccard.smk"
+include: "workflow/rules/visualization.smk"
+
+# Define final output files
+final_outputs = [
+    "results/networks/aggregated_network.tsv",
+    "results/visualization/network_viewer.html"
+]
+
+# Add method-specific outputs based on config
+if config["flashweave"]["enabled"]:
+    final_outputs.append("results/networks/flashweave/network.tsv")
+if config["fastspar"]["enabled"]:
+    final_outputs.append("results/networks/fastspar/network.tsv")
+if config["spearman"]["enabled"]:
+    final_outputs.append("results/networks/spearman/network.tsv")
+if config["spieceasi"]["enabled"]:
+    final_outputs.append("results/networks/spieceasi/network.tsv")
+if config["propr"]["enabled"]:
+    final_outputs.append("results/networks/propr/network.tsv")
+if config["jaccard"]["enabled"]:
+    final_outputs.append("results/networks/jaccard/network.tsv")
+
+rule all:
+    input:
+        final_outputs
+
+# Ensure output directories exist
+for path in ["results/networks", "results/visualization", "results/logs"]:
+    os.makedirs(path, exist_ok=True)

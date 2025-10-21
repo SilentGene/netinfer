@@ -1,0 +1,27 @@
+name: netinfer-julia
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Julia base
+  - julia>=1.6
+  
+  # Python interface
+  - python>=3.8
+  - ipython
+  - jupyter
+  
+  # Development tools
+  - gcc
+  - make
+  - cmake
+  
+  # Required for FlashWeave
+  - hdf5
+  - openblas
+  - lapack
+  
+  # Additional dependencies via pip
+  - pip
+  - pip:
+    - flashweave

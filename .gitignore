@@ -1,0 +1,13 @@
+.snakemake/
+__pycache__/
+*.pyc
+.env/
+.venv/
+resources/
+results/
+.snakemake.*
+
+# Other folders
+old_scripts/
+dag.svg
+test/

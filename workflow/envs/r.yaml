@@ -1,0 +1,36 @@
+name: netinfer-r
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - defaults
+dependencies:
+  # R base and essential packages
+  - r-base>=4.0
+  - r-essentials
+  - r-tidyverse
+  
+  # Network analysis packages
+  - r-igraph
+  - bioconductor-spieceasi
+  - r-propr
+  
+  # Statistical packages
+  - r-statmod
+  - bioconductor-preprocesscore
+  - r-mass
+  
+  # Visualization packages
+  - r-ggplot2
+  - r-plotly
+  - r-viridis
+  
+  # Data manipulation
+  - r-data.table
+  - r-matrix
+  - r-jsonlite
+  
+  # Development tools
+  - r-devtools
+  - r-testthat
+  - r-roxygen2

@@ -1,0 +1,58 @@
+# NetInfer Configuration File
+
+# Input files
+input:
+  abundance_table: "resources/abundance_table.tsv"  # OTU/ASV abundance table
+  taxonomy_table: "resources/taxonomy.tsv"          # Optional taxonomy mapping
+  metadata_table: "resources/metadata.tsv"          # Optional sample metadata
+
+# Output directory
+output_dir: "results"
+
+# Global parameters
+min_prevalence: 0.1  # Minimum prevalence for features
+min_abundance: 0.01  # Minimum mean relative abundance
+
+# Method-specific parameters
+flashweave:
+  enabled: true
+  pvalue_threshold: 0.001
+  weight_threshold: 4.0
+  heterogeneous: true  # Use HE mode
+  threads: 8
+
+fastspar:
+  enabled: true
+  pvalue_threshold: 0.05
+  weight_threshold: 0.3
+  iterations: 100
+  threads: 8
+
+spearman:
+  enabled: true
+  fdr_threshold: 0.05
+  rho_threshold: 0.7
+  threads: 8
+
+spieceasi:
+  enabled: true
+  weight_threshold: 0.5
+  method: "mb"  # mb (meinshausen-buhlmann) or glasso
+  threads: 8
+
+propr:
+  enabled: true
+  rho_threshold: 0.5
+  threads: 8
+
+jaccard:
+  enabled: true
+  weight_threshold: 0.3
+  threads: 8
+
+# Visualization parameters
+visualization:
+  max_edges: 10000  # Maximum edges to display in interactive view
+  node_size_by: "degree"  # Options: degree, betweenness, closeness
+  edge_width_by: "weight"  # Options: weight, methods_count
+  color_by: "phylum"  # Taxonomic level for coloring

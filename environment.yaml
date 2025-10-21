@@ -1,0 +1,62 @@
+name: netinfer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  # Core dependencies
+  - python>=3.8
+  - snakemake>=6.0.0
+  - pip
+
+  # Python packages for core functionality
+  - pandas
+  - numpy
+  - networkx
+  - scipy
+  - scikit-learn
+  - statsmodels
+  - plotly
+  - dash
+  - jinja2
+  - pyyaml
+  - tqdm
+  - biom-format
+  - pyvis
+
+  # R dependencies for SPIEC-EASI and propR
+  - r-base>=4.0
+  - r-essentials
+  - r-spieceasi
+  - r-propr
+  - bioconductor-preprocesscore
+  - r-igraph
+  - r-tidyverse
+
+  # Julia dependencies for FlashWeave
+  - julia>=1.6
+  
+  # FastSpar dependencies
+  - fastspar
+  - gsl
+  - openblas
+
+  # Development tools
+  - pytest
+  - black
+  - flake8
+  - mypy
+  - isort
+
+  # Documentation
+  - sphinx
+  - sphinx_rtd_theme
+  - nbsphinx
+  - jupyter
+
+  # Additional dependencies via pip
+  - pip:
+    - flashweave
+    - pylint
+    - jupyterlab
+    - pytest-cov
