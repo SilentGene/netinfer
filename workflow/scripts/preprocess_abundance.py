@@ -6,11 +6,9 @@ It supports input files in TSV, CSV, or BIOM format and outputs a filtered table
 """
 
 import pandas as pd
-import numpy as np
 import logging
 from typing import Tuple
 import yaml
-import sys
 
 def setup_logger(log_file: str) -> logging.Logger:
     """Set up logging to both file and console."""
@@ -35,13 +33,13 @@ def setup_logger(log_file: str) -> logging.Logger:
     
     return logger
 
-def load_abundance_table(file_path: str) -> pd.DataFrame:
-    """Load abundance table from TSV/CSV/BIOM file."""
+def load_abundance_table(file_path: str, logger: logging.Logger = None) -> pd.DataFrame:
+    """Load abundance table from TSV/CSV/BIOM file and remove unmapped rows."""
     if file_path.endswith('.biom'):
         try:
             import biom
             table = biom.load_table(file_path)
-            return pd.DataFrame(
+            df = pd.DataFrame(
                 table.matrix_data.toarray().T,
                 index=table.ids('sample'),
                 columns=table.ids('observation')
@@ -51,7 +49,21 @@ def load_abundance_table(file_path: str) -> pd.DataFrame:
     else:
         # Detect separator based on file extension
         sep = ',' if file_path.endswith('.csv') else '\t'
-        return pd.read_csv(file_path, sep=sep, index_col=0)
+        df = pd.read_csv(file_path, sep=sep, index_col=0)
+    
+    if logger:
+        logger.info(f"Loaded table with initial shape {df.shape}")
+    
+    # Remove rows starting with 'unmapped' or 'Unmapped'
+    unmapped_mask = df.index.str.lower().str.startswith('unmapped')
+    unmapped_count = unmapped_mask.sum()
+    df = df[~unmapped_mask]
+    
+    if logger and unmapped_count > 0:
+        logger.info(f"Removed {unmapped_count} unmapped row(s)")
+        logger.info(f"Table shape after removing unmapped rows: {df.shape}")
+    
+    return df
 
 def filter_features(df: pd.DataFrame, 
                    min_prevalence: float,
@@ -88,8 +100,7 @@ def main(snakemake):
     try:
         # Load abundance table
         logger.info(f"Loading abundance table from {snakemake.input.abundance}")
-        abundance_df = load_abundance_table(snakemake.input.abundance)
-        logger.info(f"Loaded table with shape {abundance_df.shape}")
+        abundance_df = load_abundance_table(snakemake.input.abundance, logger=logger)
         
         # Filter features
         filtered_df, stats = filter_features(
@@ -98,7 +109,8 @@ def main(snakemake):
             min_abundance=snakemake.config['min_abundance']
         )
         
-        # Save filtered table
+        # Save filtered table with "#OTU ID" as the index name
+        filtered_df.index.name = "#OTU ID"
         filtered_df.to_csv(snakemake.output.filtered, sep='\t')
         logger.info(f"Saved filtered table with {filtered_df.shape[1]} features")
         

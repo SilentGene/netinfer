@@ -2,19 +2,20 @@
 FastSpar network inference rules
 """
 
+# Get output directory from config
+outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
+
 rule fastspar_correlation:
     input:
-        abundance = "results/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        correlation = "results/networks/fastspar/correlation.tsv",
-        covariance = "results/networks/fastspar/covariance.tsv"
+        correlation = f"{outdir}/networks/fastspar/correlation.tsv",
+        covariance = f"{outdir}/networks/fastspar/covariance.tsv"
     params:
         iterations = config["fastspar"]["iterations"]
-    conda:
-        "../envs/fastspar.yaml"
     threads: config["fastspar"]["threads"]
     log:
-        "results/logs/fastspar_correlation.log"
+        f"{outdir}/logs/fastspar_correlation.log"
     shell:
         """
         fastspar --otu_table {input.abundance} \
@@ -27,17 +28,15 @@ rule fastspar_correlation:
 
 rule fastspar_bootstrap:
     input:
-        abundance = "results/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        bootstraps = directory("results/networks/fastspar/bootstrap")
+        bootstraps = directory(f"{outdir}/networks/fastspar/bootstrap")
     params:
         iterations = config["fastspar"]["iterations"],
         num_bootstraps = 1000
-    conda:
-        "../envs/fastspar.yaml"
     threads: 1
     log:
-        "results/logs/fastspar_bootstrap.log"
+        f"{outdir}/logs/fastspar_bootstrap.log"
     shell:
         """
         mkdir -p {output.bootstraps}
@@ -49,18 +48,16 @@ rule fastspar_bootstrap:
 
 rule fastspar_pvalues:
     input:
-        abundance = "results/preprocessed/filtered_abundance.tsv",
-        correlation = "results/networks/fastspar/correlation.tsv",
-        bootstraps = "results/networks/fastspar/bootstrap"
+        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv",
+        correlation = f"{outdir}/networks/fastspar/correlation.tsv",
+        bootstraps = f"{outdir}/networks/fastspar/bootstrap"
     output:
-        pvalues = "results/networks/fastspar/pvalues.tsv"
+        pvalues = f"{outdir}/networks/fastspar/pvalues.tsv"
     params:
         iterations = config["fastspar"]["iterations"]
-    conda:
-        "../envs/fastspar.yaml"
     threads: config["fastspar"]["threads"]
     log:
-        "results/logs/fastspar_pvalues.log"
+        f"{outdir}/logs/fastspar_pvalues.log"
     shell:
         """
         fastspar_pvalues --otu_table {input.abundance} \
@@ -74,17 +71,15 @@ rule fastspar_pvalues:
 
 rule fastspar_network:
     input:
-        correlation = "results/networks/fastspar/correlation.tsv",
-        pvalues = "results/networks/fastspar/pvalues.tsv"
+        correlation = f"{outdir}/networks/fastspar/correlation.tsv",
+        pvalues = f"{outdir}/networks/fastspar/pvalues.tsv"
     output:
-        network = "results/networks/fastspar/network.tsv"
+        network = f"{outdir}/networks/fastspar/network.tsv"
     params:
         pvalue_threshold = config["fastspar"]["pvalue_threshold"],
         weight_threshold = config["fastspar"]["weight_threshold"]
-    conda:
-        "../envs/python.yaml"
     threads: 1
     log:
-        "results/logs/fastspar_network.log"
+        f"{outdir}/logs/fastspar_network.log"
     script:
         "../scripts/process_fastspar.py"

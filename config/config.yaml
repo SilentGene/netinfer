@@ -2,19 +2,26 @@
 
 # Input files
 input:
-  abundance_table: "resources/abundance_table.tsv"  # OTU/ASV abundance table
-  taxonomy_table: "resources/taxonomy.tsv"          # Optional taxonomy mapping
-  metadata_table: "resources/metadata.tsv"          # Optional sample metadata
+  abundance_table: ""  # OTU/ASV abundance table
+  taxonomy_table: ""          # Optional taxonomy mapping
+  metadata_table: ""          # Optional sample metadata
 
 # Output directory
-output_dir: "results"
+output_dir: "netinfer_results"
 
-# Global parameters
+# Filtering parameters
 min_prevalence: 0.1  # Minimum prevalence for features
 min_abundance: 0.01  # Minimum mean relative abundance
 
 # Method-specific parameters
 flashweave:
+  enabled: true
+  pvalue_threshold: 0.001
+  weight_threshold: 4.0
+  heterogeneous: false  # Use normal mode
+  threads: 8
+
+flashweaveHE:
   enabled: true
   pvalue_threshold: 0.001
   weight_threshold: 4.0

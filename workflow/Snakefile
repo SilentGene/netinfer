@@ -1,52 +1,68 @@
 """
 NetInfer: A Snakemake pipeline for microbiome network inference
 """
+# netinfer --input test/data/abundance.tsv --output test/testout --taxonomy test/data/taxonomy.tsv --threads 4 --snake_args="--unlock"
 
 import os
+import re
+import sys
+import platform
 from snakemake.utils import min_version
 
 # Set minimum Snakemake version
-min_version("6.0.0")
+min_version("9.0.0")
 
 # Load configuration
 configfile: "config/config.yaml"
 
 # Include rules
-include: "workflow/rules/preprocessing.smk"
-include: "workflow/rules/flashweave.smk"
-include: "workflow/rules/flashweaveHE.smk"
-include: "workflow/rules/fastspar.smk"
-include: "workflow/rules/spearman.smk"
-include: "workflow/rules/spieceasi.smk"
-include: "workflow/rules/propr.smk"
-include: "workflow/rules/jaccard.smk"
-include: "workflow/rules/visualization.smk"
+include: "rules/preprocessing.smk"
+include: "rules/flashweave.smk"
+include: "rules/flashweaveHE.smk"
+include: "rules/fastspar.smk"
+include: "rules/spearman.smk"
+include: "rules/spieceasi.smk"
+include: "rules/propr.smk"
+include: "rules/jaccard.smk"
+include: "rules/visualization.smk"
+
+# Get output directory from config and ensure no whitespace
+outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
 
 # Define final output files
-final_outputs = ["results/networks/aggregated_network.tsv"]
+final_outputs = [f"{outdir}/networks/aggregated_network.tsv"]
 
 # Add visualization output if enabled
 if config.get("visualization", {}).get("enabled", True):
-    final_outputs.append("results/visualization/network_viewer.html")
+    final_outputs.append(f"{outdir}/visualization/network_viewer.html")
 
 # Add method-specific outputs based on config
-from workflow.rules.flashweave import get_flashweave_output
+def get_flashweave_output():
+    """Get FlashWeave output files based on configuration."""
+    outputs = []
+    if config["flashweave"]["enabled"]:
+        if config["flashweave"]["heterogeneous"]:
+            outputs.append(f"{outdir}/networks/flashweave/he/network.tsv")
+        else:
+            outputs.append(f"{outdir}/networks/flashweave/normal/network.tsv")
+    return outputs
+
 final_outputs.extend(get_flashweave_output())
 if config["fastspar"]["enabled"]:
-    final_outputs.append("results/networks/fastspar/network.tsv")
+    final_outputs.append(f"{outdir}/networks/fastspar/network.tsv")
 if config["spearman"]["enabled"]:
-    final_outputs.append("results/networks/spearman/network.tsv")
+    final_outputs.append(f"{outdir}/networks/spearman/network.tsv")
 if config["spieceasi"]["enabled"]:
-    final_outputs.append("results/networks/spieceasi/network.tsv")
+    final_outputs.append(f"{outdir}/networks/spieceasi/network.tsv")
 if config["propr"]["enabled"]:
-    final_outputs.append("results/networks/propr/network.tsv")
+    final_outputs.append(f"{outdir}/networks/propr/network.tsv")
 if config["jaccard"]["enabled"]:
-    final_outputs.append("results/networks/jaccard/network.tsv")
+    final_outputs.append(f"{outdir}/networks/jaccard/network.tsv")
 
 rule all:
     input:
         final_outputs
 
 # Ensure output directories exist
-for path in ["results/networks", "results/visualization", "results/logs"]:
+for path in [f"{outdir}/networks", f"{outdir}/visualization", f"{outdir}/logs"]:
     os.makedirs(path, exist_ok=True)

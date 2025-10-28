@@ -9,8 +9,10 @@ import sys
 import yaml
 import shutil
 import logging
+import subprocess
 from pathlib import Path
 from typing import List, Optional
+import shlex
 from importlib import resources
 
 def setup_logger() -> logging.Logger:
@@ -27,6 +29,30 @@ def setup_logger() -> logging.Logger:
     logger.addHandler(ch)
     
     return logger
+
+def print_snakemake_version(logger: logging.Logger) -> None:
+    """Log the installed Snakemake version early so users see environment info."""
+    try:
+        import snakemake  # type: ignore
+        version = getattr(snakemake, "__version__", None) or getattr(snakemake, "version", None)
+        if version is None:
+            # Fallback: some rare builds expose version via module attribute
+            version = str(snakemake)
+        logger.info(f"Snakemake version: {version}")
+    except Exception as e:
+        logger.warning(f"Could not determine Snakemake version: {e}")
+
+def print_python_version(logger: logging.Logger) -> None:
+    """Log the Python runtime version early for reproducibility."""
+    try:
+        vinfo = sys.version_info
+        version = f"{vinfo.major}.{vinfo.minor}.{vinfo.micro}"
+        # Optional: include implementation (CPython, PyPy, etc.)
+        import platform
+        impl = platform.python_implementation()
+        logger.info(f"Python version: {version} ({impl})")
+    except Exception as e:
+        logger.warning(f"Could not determine Python version: {e}")
 
 def find_config_file() -> Path:
     """Find the config file using modern importlib.resources."""
@@ -97,7 +123,8 @@ def create_config(input_file: str,
     if metadata_file:
         config["input"]["metadata_table"] = os.path.abspath(metadata_file)
     
-    config["output_dir"] = os.path.abspath(output_dir)
+    output_dir_abs = os.path.abspath(output_dir).strip()
+    config["output_dir"] = output_dir_abs
     
     # Update method selection
     if methods:
@@ -139,33 +166,57 @@ def create_config(input_file: str,
         config["visualization"] = {}
     config["visualization"]["enabled"] = not no_visual
     
-    # Create temporary config file
-    os.makedirs(output_dir, exist_ok=True)
-    config_path = os.path.join(output_dir, "config.yaml")
+    # Create temporary config file with clean YAML output (use absolute paths)
+    os.makedirs(output_dir_abs, exist_ok=True)
+    config_path = os.path.abspath(os.path.join(output_dir_abs, "config.yaml"))
     with open(config_path, "w") as f:
-        yaml.dump(config, f)
+        # Use default_flow_style=False to ensure clean formatting
+        yaml.dump(config, f, default_flow_style=False, sort_keys=False)
     
     return config_path
 
-def run_pipeline(config_path: str, threads: int) -> int:
-    """Run the Snakemake pipeline with given configuration."""
-    import snakemake
-    
+def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List[str]] = None) -> int:
+    """Run the Snakemake pipeline with given configuration.
+
+    Uses `python -m snakemake` for compatibility with Snakemake ≥9 where the
+    old programmatic API (snakemake.snakemake) is no longer available.
+    """
     workflow_dir = find_workflow_dir()
     snakefile = workflow_dir / "Snakefile"
-    
-    success = snakemake.snakemake(
-        str(snakefile),
-        cores=threads,
-        configfiles=[config_path],
-        use_conda=True,
-        conda_frontend="mamba",
-        printshellcmds=True,
-        show_failed_logs=True,
-        keep_incomplete=True
-    )
-    
-    return 0 if success else 1
+
+    cmd = [
+        sys.executable, "-m", "snakemake",
+        "--snakefile", str(snakefile),
+        "--cores", str(threads),
+        "--configfiles", config_path,
+        "--use-conda",
+        "--printshellcmds",
+        "--show-failed-logs",
+        "--keep-incomplete",
+    ]
+
+    if extra_snake_args:
+        cmd.extend(extra_snake_args)
+
+    logger = logging.getLogger('netinfer')
+    logger.info("Invoking Snakemake via module runner…")
+    logger.debug("Command: %s", " ".join(cmd))
+
+    # First, attempt to clear any stale lock in the workflow directory.
+    # Safe when no lock exists; required if a previous run was interrupted.
+    unlock_cmd = [
+        sys.executable, "-m", "snakemake",
+        "--snakefile", str(snakefile),
+        "--unlock",
+    ]
+    logger.debug("Pre-run unlock (best-effort): %s", " ".join(unlock_cmd))
+    try:
+        subprocess.run(unlock_cmd, cwd=str(workflow_dir), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception as e:
+        logger.debug("Unlock attempt ignored due to error: %s", e)
+
+    proc = subprocess.run(cmd, cwd=str(workflow_dir))
+    return proc.returncode
 
 def main():
     """Main entry point for the command-line interface."""
@@ -214,9 +265,21 @@ def main():
         action="store_true",
         help="Skip visualization generation"
     )
+    parser.add_argument(
+        "--snake-args", "--snake_args",
+        dest="snake_args",
+        help=(
+            "Additional Snakemake command-line arguments as a single string, "
+            "e.g. --snake-args \"--unlock --rerun-incomplete --dry-run\""
+        )
+    )
     
-    args = parser.parse_args()
+    # Parse known args but allow passthrough of unknown ones (to Snakemake)
+    args, unknown_snake_args = parser.parse_known_args()
     logger = setup_logger()
+    # Print environment versions before any heavy work
+    print_python_version(logger)
+    print_snakemake_version(logger)
     
     try:
         # Parse methods if specified
@@ -235,9 +298,23 @@ def main():
             no_visual=args.no_visual
         )
         
+        # Prepare additional Snakemake args (passthrough)
+        extra_snake_args: Optional[List[str]] = None
+        if args.snake_args:
+            try:
+                extra_snake_args = shlex.split(args.snake_args)
+            except Exception:
+                # Fallback: naive split by whitespace
+                extra_snake_args = args.snake_args.split()
+        # Also include any unknown args from our parser to forward to Snakemake
+        if unknown_snake_args:
+            if extra_snake_args is None:
+                extra_snake_args = []
+            extra_snake_args.extend(unknown_snake_args)
+
         # Run pipeline
         logger.info("Starting pipeline execution...")
-        result = run_pipeline(config_path, args.threads)
+        result = run_pipeline(config_path, args.threads, extra_snake_args)
         
         if result == 0:
             logger.info("Pipeline completed successfully!")

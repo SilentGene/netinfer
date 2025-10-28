@@ -7,7 +7,7 @@ dependencies:
   # Core dependencies
   - python>=3.8
   - pip
-  - snakemake>=7.0.0,<=7.32.3
+  - snakemake>=9.0.0
 
   # Python packages for core functionality
   - pandas
@@ -24,7 +24,7 @@ dependencies:
   - biom-format
   - pyvis
 
-  # R dependencies for SPIEC-EASI and propR
+  # R dependencies for SPIEC-EASI, propR, and Spearman
   - r-base>=4.0
   - r-essentials
   - r-spieceasi
@@ -32,6 +32,9 @@ dependencies:
   - bioconductor-preprocesscore
   - r-igraph
   - r-tidyverse
+  - r-hmisc      # For Spearman correlation
+  - r-reshape2   # For data reshaping in Spearman analysis
+  - r-jsonlite   # For JSON handling
 
   # Julia dependencies for FlashWeave
   - julia>=1.6
@@ -41,18 +44,6 @@ dependencies:
   - gsl
   - openblas
 
-  # Development tools
-  - pytest
-  - black
-  - flake8
-  - mypy
-  - isort
-
-  # Documentation
-  - sphinx
-  - sphinx_rtd_theme
-  - nbsphinx
-  - jupyter
 
   # pip entry
   - pip:

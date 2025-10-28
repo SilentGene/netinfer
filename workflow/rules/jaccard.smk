@@ -2,33 +2,32 @@
 Jaccard index network inference rules
 """
 
+# Get output directory from config
+outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
+
 rule jaccard_network:
     input:
-        abundance = "results/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        network = "results/networks/jaccard/network.tsv",
-        similarity_matrix = "results/networks/jaccard/similarity_matrix.tsv"
+        network = f"{outdir}/networks/jaccard/network.tsv",
+        similarity_matrix = f"{outdir}/networks/jaccard/similarity_matrix.tsv"
     params:
         weight_threshold = config["jaccard"]["weight_threshold"]
-    conda:
-        "../envs/python.yaml"
     threads: config["jaccard"]["threads"]
     log:
-        "results/logs/jaccard.log"
+        f"{outdir}/logs/jaccard.log"
     script:
         "../scripts/run_jaccard.py"
 
 rule jaccard_plots:
     input:
-        network = "results/networks/jaccard/network.tsv",
-        similarity_matrix = "results/networks/jaccard/similarity_matrix.tsv"
+        network = f"{outdir}/networks/jaccard/network.tsv",
+        similarity_matrix = f"{outdir}/networks/jaccard/similarity_matrix.tsv"
     output:
-        heatmap = "results/networks/jaccard/heatmap.pdf",
-        distribution = "results/networks/jaccard/similarity_distribution.pdf"
-    conda:
-        "../envs/python.yaml"
+        heatmap = f"{outdir}/networks/jaccard/heatmap.pdf",
+        distribution = f"{outdir}/networks/jaccard/similarity_distribution.pdf"
     threads: 1
     log:
-        "results/logs/jaccard_plots.log"
+        f"{outdir}/logs/jaccard_plots.log"
     script:
         "../scripts/plot_jaccard.py"

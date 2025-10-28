@@ -2,34 +2,33 @@
 propR network inference rules
 """
 
+# Get output directory from config
+outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
+
 rule propr_network:
     input:
-        abundance = "results/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        network = "results/networks/propr/network.tsv",
-        stats = "results/networks/propr/stats.json",
-        rho_matrix = "results/networks/propr/rho_matrix.tsv"
+        network = f"{outdir}/networks/propr/network.tsv",
+        stats = f"{outdir}/networks/propr/stats.json",
+        rho_matrix = f"{outdir}/networks/propr/rho_matrix.tsv"
     params:
         rho_threshold = config["propr"]["rho_threshold"]
-    conda:
-        "../envs/r.yaml"
     threads: config["propr"]["threads"]
     log:
-        "results/logs/propr.log"
+        f"{outdir}/logs/propr.log"
     script:
         "../scripts/run_propr.R"
 
 rule propr_plots:
     input:
-        network = "results/networks/propr/network.tsv",
-        rho_matrix = "results/networks/propr/rho_matrix.tsv"
+        network = f"{outdir}/networks/propr/network.tsv",
+        rho_matrix = f"{outdir}/networks/propr/rho_matrix.tsv"
     output:
-        heatmap = "results/networks/propr/heatmap.pdf",
-        pca = "results/networks/propr/pca_plot.pdf"
-    conda:
-        "../envs/r.yaml"
+        heatmap = f"{outdir}/networks/propr/heatmap.pdf",
+        pca = f"{outdir}/networks/propr/pca_plot.pdf"
     threads: 1
     log:
-        "results/logs/propr_plots.log"
+        f"{outdir}/logs/propr_plots.log"
     script:
         "../scripts/plot_propr.R"
