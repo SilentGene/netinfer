@@ -1,7 +1,7 @@
 # NetInfer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Snakemake](https://img.shields.io/badge/snakemake-≥6.0.0-brightgreen.svg)](https://snakemake.github.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥7.0.0-brightgreen.svg)](https://snakemake.github.io)
 [![Conda](https://img.shields.io/badge/conda-compatible-brightgreen.svg)](https://docs.conda.io/en/latest/)
 
 A Snakemake-based bioinformatics pipeline for inferring co-abundance networks from microbiome data.
@@ -29,17 +29,20 @@ A Snakemake-based bioinformatics pipeline for inferring co-abundance networks fr
 ### Prerequisites
 
 - [Conda](https://docs.conda.io/en/latest/miniconda.html) (or [Mamba](https://github.com/mamba-org/mamba))
-- [Snakemake](https://snakemake.readthedocs.io/) (≥6.0.0)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/NetInfer.git
+git clone https://github.com/SilentGene/NetInfer.git
 cd NetInfer
 
-# Install the package
-pip install .
+# Create and activate conda environment
+conda env create -f environment.yaml  # it takes a while
+conda activate netinfer
+
+# Install FlashWeave (Julia package)
+julia workflow/scripts/install_flashweave.jl
 ```
 
 ### Basic Usage

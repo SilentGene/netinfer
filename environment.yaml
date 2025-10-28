@@ -6,8 +6,7 @@ channels:
 dependencies:
   # Core dependencies
   - python>=3.8
-  - snakemake>=6.0.0
-  - pip
+  - snakemake>=7.0.0,<=7.32.3
 
   # Python packages for core functionality
   - pandas
@@ -54,9 +53,11 @@ dependencies:
   - nbsphinx
   - jupyter
 
-  # Additional dependencies via pip
+  # Development dependencies from conda-forge
+  - pylint
+  - jupyterlab
+  - pytest-cov
+
+  # pip entry
   - pip:
-    - flashweave
-    - pylint
-    - jupyterlab
-    - pytest-cov
+    - "."  # Install the netinfer package

@@ -27,14 +27,61 @@ def setup_logger() -> logging.Logger:
     
     return logger
 
-def find_package_root() -> Path:
-    """Find the package root directory containing workflow files."""
-    # When installed as a package
-    if getattr(sys, 'frozen', False):
-        return Path(sys._MEIPASS)
-    
-    # During development
-    return Path(__file__).parent
+def find_config_file() -> Path:
+    """Find the config file in various possible locations."""
+    # First, try the current working directory
+    cwd_config = Path.cwd() / "config" / "config.yaml"
+    if cwd_config.exists():
+        return cwd_config
+        
+    # Then try relative to the script location
+    script_config = Path(__file__).parent.parent / "config" / "config.yaml"
+    if script_config.exists():
+        return script_config
+        
+    # Finally try the installed package location
+    package_config = Path(__file__).parent / "config" / "config.yaml"
+    if package_config.exists():
+        return package_config
+        
+    # If not found, provide detailed error message
+    searched_paths = [
+        str(cwd_config),
+        str(script_config),
+        str(package_config)
+    ]
+    raise FileNotFoundError(
+        "Could not find config.yaml in any of the expected locations:\n" +
+        "\n".join(f"- {p}" for p in searched_paths)
+    )
+
+def find_workflow_dir() -> Path:
+    """Find the workflow directory containing Snakefile and related files."""
+    # First, try the current working directory
+    cwd_workflow = Path.cwd() / "workflow"
+    if (cwd_workflow / "Snakefile").exists():
+        return cwd_workflow
+        
+    # Then try relative to the script location
+    script_workflow = Path(__file__).parent.parent / "workflow"
+    if (script_workflow / "Snakefile").exists():
+        return script_workflow
+        
+    # Finally try the installed package location
+    package_workflow = Path(__file__).parent / "workflow"
+    if (package_workflow / "Snakefile").exists():
+        return package_workflow
+        
+    # If not found, provide detailed error message
+    searched_paths = [
+        str(cwd_workflow),
+        str(script_workflow),
+        str(package_workflow)
+    ]
+    raise FileNotFoundError(
+        "Could not find workflow directory with Snakefile in any of the expected locations:\n" +
+        "\n".join(f"- {p}" for p in searched_paths)
+    )
 
 def create_config(input_file: str,
                  output_dir: str,
@@ -44,8 +91,8 @@ def create_config(input_file: str,
                  no_visual: bool = False) -> str:
     """Create a temporary config file for the pipeline run."""
     # Load default config
-    package_root = find_package_root()
-    with open(package_root / "config" / "config.yaml") as f:
+    config_file = find_config_file()
+    with open(config_file) as f:
         config = yaml.safe_load(f)
     
     # Update input/output paths
@@ -109,13 +156,13 @@ def run_pipeline(config_path: str, threads: int) -> int:
     """Run the Snakemake pipeline with given configuration."""
     import snakemake
     
-    package_root = find_package_root()
-    snakefile = package_root / "workflow" / "Snakefile"
+    workflow_dir = find_workflow_dir()
+    snakefile = workflow_dir / "Snakefile"
     
     success = snakemake.snakemake(
-        snakefile=str(snakefile),
+        str(snakefile),
         cores=threads,
-        configfile=config_path,
+        configfiles=[config_path],
         use_conda=True,
         conda_frontend="mamba",
         printshellcmds=True,

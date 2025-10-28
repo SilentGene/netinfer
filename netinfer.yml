@@ -1,0 +1,14 @@
+name: netinfer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.8
+  - pip
+  - snakemake>=7.0.0,<=7.32.3
+  - pandas
+  - numpy
+  - pyyaml
+  - pip:
+    - "."  # Install the netinfer package
