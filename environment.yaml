@@ -6,6 +6,7 @@ channels:
 dependencies:
   # Core dependencies
   - python>=3.8
+  - pip
   - snakemake>=7.0.0,<=7.32.3
 
   # Python packages for core functionality
@@ -52,11 +53,6 @@ dependencies:
   - sphinx_rtd_theme
   - nbsphinx
   - jupyter
-
-  # Development dependencies from conda-forge
-  - pylint
-  - jupyterlab
-  - pytest-cov
 
   # pip entry
   - pip:

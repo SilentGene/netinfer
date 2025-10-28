@@ -11,6 +11,7 @@ import shutil
 import logging
 from pathlib import Path
 from typing import List, Optional
+from importlib import resources
 
 def setup_logger() -> logging.Logger:
     """Set up logging configuration."""
@@ -28,27 +29,24 @@ def setup_logger() -> logging.Logger:
     return logger
 
 def find_config_file() -> Path:
-    """Find the config file in various possible locations."""
-    # First, try the current working directory
+    """Find the config file using modern importlib.resources."""
+    # First try current directory
     cwd_config = Path.cwd() / "config" / "config.yaml"
     if cwd_config.exists():
         return cwd_config
         
-    # Then try relative to the script location
-    script_config = Path(__file__).parent.parent / "config" / "config.yaml"
-    if script_config.exists():
-        return script_config
-        
-    # Finally try the installed package location
-    package_config = Path(__file__).parent / "config" / "config.yaml"
-    if package_config.exists():
-        return package_config
+    # Then try using importlib.resources
+    try:
+        with resources.files("netinfer").joinpath("config/config.yaml") as config_path:
+            if config_path.exists():
+                return config_path
+    except (ImportError, TypeError):
+        pass
         
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_config),
-        str(script_config),
-        str(package_config)
+        "netinfer/config/config.yaml (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find config.yaml in any of the expected locations:\n" +
@@ -56,27 +54,24 @@ def find_config_file() -> Path:
     )
 
 def find_workflow_dir() -> Path:
-    """Find the workflow directory containing Snakefile and related files."""
-    # First, try the current working directory
+    """Find the workflow directory using modern importlib.resources."""
+    # First try current directory
     cwd_workflow = Path.cwd() / "workflow"
     if (cwd_workflow / "Snakefile").exists():
         return cwd_workflow
         
-    # Then try relative to the script location
-    script_workflow = Path(__file__).parent.parent / "workflow"
-    if (script_workflow / "Snakefile").exists():
-        return script_workflow
-        
-    # Finally try the installed package location
-    package_workflow = Path(__file__).parent / "workflow"
-    if (package_workflow / "Snakefile").exists():
-        return package_workflow
+    # Then try using importlib.resources
+    try:
+        with resources.files("netinfer").joinpath("workflow") as workflow_dir:
+            if (workflow_dir / "Snakefile").exists():
+                return workflow_dir
+    except (ImportError, TypeError):
+        pass
         
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_workflow),
-        str(script_workflow),
-        str(package_workflow)
+        "netinfer/workflow (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find workflow directory with Snakefile in any of the expected locations:\n" +
