@@ -1,13 +1,18 @@
 #!/usr/bin/env Rscript
-"""
-SPIEC-EASI network inference
-"""
+# SPIEC-EASI network inference
+
+# Print R version
+message(sprintf("Using: %s", R.version.string))
+# Print script arguments
+message("Script arguments:")
+message(paste(commandArgs(trailingOnly = FALSE), collapse = " "))
 
 # Load required libraries
 suppressPackageStartupMessages({
     library(SpiecEasi)
     library(jsonlite)
     library(tidyverse)
+    library(reshape2)
 })
 
 # Read command line arguments from snakemake
@@ -29,50 +34,96 @@ main <- function() {
     message("Starting SPIEC-EASI network inference")
     
     # Read abundance data
-    abundance_data <- read.table(abundance_file, sep="\t", header=TRUE, row.names=1)
-    message(sprintf("Loaded abundance data with dimensions: %d x %d", 
+    abundance_data <- read_tsv(abundance_file)
+    message(sprintf("Loaded abundance table with %d (OTUs) x %d (samples)", 
                    nrow(abundance_data), ncol(abundance_data)))
     
+    # Ensure output directory exists
+    out_dir <- dirname(network_file)
+    if (!dir.exists(out_dir)) {
+        dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+    }
+
+    # transpose data
+    abundance_data_t <- abundance_data |>
+        pivot_longer(cols = -`#OTU ID`, names_to = "Sample", values_to = "Abundance") |>
+        pivot_wider(names_from = `#OTU ID`, values_from = Abundance)
+    abundance_data_t
+
+    # Convert to matrix
+    otu_mat <- as.matrix(abundance_data_t[,-1])
+
+    # Data integrity checks for SPIEC-EASI
+    otu_mat[is.na(otu_mat)] <- 0 # Replace any NAs with 0
+    otu_mat <- otu_mat[rowSums(otu_mat) > 0, ] # Remove samples with zero counts
+    otu_mat <- otu_mat[, colSums(otu_mat) > 0] # Remove features with zero counts
+
+    message(sprintf(
+        "Dimensions after cleaning for SPIEC-EASI: %d samples, %d OTUs",
+        nrow(otu_mat), ncol(otu_mat)
+    ))
+
+
     # Run SPIEC-EASI
-    se.out <- spiec.easi(t(abundance_data), 
-                         method=method,
-                         lambda.min.ratio=1e-3,
-                         nlambda=50,
-                         pulsar.params=list(thresh=0.05,
-                                          subsample.ratio=0.8,
-                                          rep.num=50,
-                                          ncores=threads))
-    
-    # Get stability metrics
-    stab_metrics <- getStability(se.out)
-    
-    # Get network matrix
-    net_matrix <- getOptMerge(se.out)
-    colnames(net_matrix) <- rownames(net_matrix) <- colnames(abundance_data)
-    
-    # Create edge list
-    edges <- which(abs(net_matrix) >= weight_threshold, arr.ind=TRUE)
-    network_df <- data.frame(
-        source = rownames(net_matrix)[edges[,1]],
-        target = colnames(net_matrix)[edges[,2]],
-        weight = net_matrix[edges]
+    message("Running SPIEC-EASI...")
+    # Use 'mb' for many features (n > 1000), 'glasso' for fewer (n < 1000)
+    se.out <- spiec.easi(
+        otu_mat,
+        method = method,
+        nlambda = 20,
+        lambda.min.ratio = 1e-2,
+        sel.criterion = 'stars',
+        pulsar.params = list(rep.num = 50, ncores = threads),
+        verbose = TRUE
     )
-    network_df <- network_df[network_df$source < network_df$target,]
+    
+    # Function to extract and format the edgelist
+    extract_spieceasi_edges <- function(se_model, genomes) {
+        adj_matrix <- getRefit(se_model)
+        weight_matrix <- symBeta(getOptBeta(se_model), mode = "maxabs")
+        
+        adj_dense <- as.matrix(adj_matrix)
+        weight_dense <- as.matrix(weight_matrix)
+        
+        adj_long <- melt(adj_dense, varnames = c("Taxon A", "Taxon B"), value.name = "Connected")
+        weights_long <- melt(weight_dense, varnames = c("Taxon A", "Taxon B"), value.name = "Weight")
+        
+        adj_long$`Taxon A` <- genomes[adj_long$`Taxon A`]
+        adj_long$`Taxon B` <- genomes[adj_long$`Taxon B`]
+        weights_long$`Taxon A` <- genomes[weights_long$`Taxon A`]
+        weights_long$`Taxon B` <- genomes[weights_long$`Taxon B`]
+        
+        merged_edges <- merge(adj_long, weights_long, by = c("Taxon A", "Taxon B"))
+        edges_only <- merged_edges[merged_edges$Connected == 1 & merged_edges$`Taxon A` != merged_edges$`Taxon B`, ]
+        edges_unique <- edges_only[!duplicated(t(apply(edges_only[, 1:2], 1, sort))), ]
+        edges_unique <- edges_unique[order(edges_unique$Weight, decreasing = TRUE), ]
+        edges_final <- edges_unique[, c("Taxon A", "Taxon B", "Weight")]
+        
+        # Filter for strong correlations
+        edges_filtered <- edges_final[edges_final$Weight > 0.5, ]
+        print(paste("Found", nrow(edges_filtered), "edges with weight > 0.5"))
+        return(edges_filtered)
+    }
+
+    # Extract edges and save to file
+    genomes_used <- colnames(otu_mat)
+    edges_spieceasi <- extract_spieceasi_edges(se.out, genomes = genomes_used)
     
     # Save results
-    write.table(network_df, file=network_file, 
+    write.table(edges_spieceasi, file=network_file, 
                 sep="\t", row.names=FALSE, quote=FALSE)
     
     # Save statistics
+    stab_metrics <- getStability(se.out)
     stats <- list(
         optimal_lambda = se.out$opt.lambda,
         stability_metrics = stab_metrics,
-        edges_count = nrow(network_df),
+        edges_count = nrow(edges_spieceasi),
         method = method
     )
     write_json(stats, stats_file, pretty=TRUE)
     
-    message(sprintf("Completed. Network has %d edges.", nrow(network_df)))
+    message(sprintf("Completed. Network has %d edges.", nrow(edges_spieceasi)))
 }
 
 # Execute main function with error handling

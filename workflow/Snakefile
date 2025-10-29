@@ -1,7 +1,7 @@
 """
 NetInfer: A Snakemake pipeline for microbiome network inference
 """
-# netinfer --input test/data/abundance.tsv --output test/testout --taxonomy test/data/taxonomy.tsv --threads 4 --snake_args="--unlock"
+# netinfer --input test/data/abundance.tsv --output test/testout --taxonomy test/data/taxonomy.tsv --threads 6 --snake_args="--unlock"
 
 import os
 import re
@@ -24,6 +24,7 @@ include: "rules/spearman.smk"
 include: "rules/spieceasi.smk"
 include: "rules/propr.smk"
 include: "rules/jaccard.smk"
+include: "rules/aggregation.smk"
 include: "rules/visualization.smk"
 
 # Get output directory from config and ensure no whitespace
@@ -37,17 +38,6 @@ if config.get("visualization", {}).get("enabled", True):
     final_outputs.append(f"{outdir}/visualization/network_viewer.html")
 
 # Add method-specific outputs based on config
-def get_flashweave_output():
-    """Get FlashWeave output files based on configuration."""
-    outputs = []
-    if config["flashweave"]["enabled"]:
-        if config["flashweave"]["heterogeneous"]:
-            outputs.append(f"{outdir}/networks/flashweave/he/network.tsv")
-        else:
-            outputs.append(f"{outdir}/networks/flashweave/normal/network.tsv")
-    return outputs
-
-final_outputs.extend(get_flashweave_output())
 if config["fastspar"]["enabled"]:
     final_outputs.append(f"{outdir}/networks/fastspar/network.tsv")
 if config["spearman"]["enabled"]:
@@ -58,6 +48,10 @@ if config["propr"]["enabled"]:
     final_outputs.append(f"{outdir}/networks/propr/network.tsv")
 if config["jaccard"]["enabled"]:
     final_outputs.append(f"{outdir}/networks/jaccard/network.tsv")
+if config["flashweave"]["enabled"]:
+    final_outputs.append(f"{outdir}/networks/flashweave/normal/network.tsv")
+if config["flashweaveHE"]["enabled"]:
+    final_outputs.append(f"{outdir}/networks/flashweave/HE/network.tsv")
 
 rule all:
     input:

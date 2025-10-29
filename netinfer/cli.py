@@ -297,6 +297,7 @@ def main():
             methods=methods,
             no_visual=args.no_visual
         )
+        logger.info(f"Configuration file created at: {config_path}")
         
         # Prepare additional Snakemake args (passthrough)
         extra_snake_args: Optional[List[str]] = None

@@ -13,7 +13,7 @@ rule jaccard_network:
         similarity_matrix = f"{outdir}/networks/jaccard/similarity_matrix.tsv"
     params:
         weight_threshold = config["jaccard"]["weight_threshold"]
-    threads: config["jaccard"]["threads"]
+    threads: 1
     log:
         f"{outdir}/logs/jaccard.log"
     script:

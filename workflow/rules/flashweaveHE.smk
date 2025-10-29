@@ -9,25 +9,22 @@ rule flashweave_he_network:
     input:
         abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        network = f"{outdir}/networks/flashweave/he/network.tsv",
-        stats = f"{outdir}/networks/flashweave/he/stats.json"
+        network = f"{outdir}/networks/flashweave/HE/network.tsv",
+        graph = f"{outdir}/networks/flashweave/HE/network.gml"
     params:
         pvalue = config["flashweaveHE"]["pvalue_threshold"],
-        weight = config["flashweaveHE"]["weight_threshold"]
-        # No --no_heterogeneous flag, so it will use default heterogeneous mode
-    threads: config["flashweaveHE"]["threads"]
+        weight = config["flashweaveHE"]["weight_threshold"],
+        script = workflow.source_path("../scripts/run_flashweave.jl")
+    threads: 1
     log:
-        f"{outdir}/logs/flashweave_he.log"
+        f"{outdir}/logs/flashweave_HE.log"
     shell:
         """
-        julia {workflow.basedir}/scripts/run_flashweave.jl \
+        julia {params.script} \
             --data {input.abundance} \
+            --transposed \
             --alpha {params.pvalue} \
-            --output network \
+            --outtable {output.network} \
+            --outgraph {output.graph} \
             2> {log}
-        
-        # Move output files to correct location
-        mkdir -p $(dirname {output.network})
-        mv *_edges_info.tsv {output.network}
-        mv *.gml {output.stats}
         """

@@ -15,7 +15,7 @@ rule spearman_network:
     params:
         fdr_threshold = config["spearman"]["fdr_threshold"],   # FDR significance threshold
         rho_threshold = config["spearman"]["rho_threshold"]    # Minimum absolute correlation
-    threads: config["spearman"]["threads"]
+    threads: 1
     log:
         f"{outdir}/logs/spearman.log"
     script:

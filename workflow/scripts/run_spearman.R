@@ -1,10 +1,15 @@
 #!/usr/bin/env Rscript
-"""
-Spearman correlation network inference
-"""
+# Spearman correlation network inference
+
+# Print R version
+message(sprintf("Using: %s", R.version.string))
+# Print script arguments
+message("Script arguments:")
+message(paste(commandArgs(trailingOnly = FALSE), collapse = " "))
 
 # Load required libraries
 suppressPackageStartupMessages({
+    library(tidyverse)
     library(Hmisc)
     library(reshape2)
     library(jsonlite)
@@ -30,57 +35,68 @@ main <- function() {
     message("Starting Spearman correlation network inference")
     
     # Read abundance data
-    abundance_data <- read.table(abundance_file, sep="\t", header=TRUE, row.names=1)
-    message(sprintf("Loaded abundance data with dimensions: %d x %d", 
+    abundance_data <- read_tsv(abundance_file)
+    message(sprintf("Loaded abundance table with %d (OTUs) x %d (samples)", 
                    nrow(abundance_data), ncol(abundance_data)))
     
-    # Add small pseudocount to avoid rank ties
+    # Ensure output directory exists
+    out_dir <- dirname(network_file)
+    if (!dir.exists(out_dir)) {
+        dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+    }
+
+    # transpose data
+    abundance_data_t <- abundance_data |>
+        pivot_longer(cols = -`#OTU ID`, names_to = "Sample", values_to = "Abundance") |>
+        pivot_wider(names_from = `#OTU ID`, values_from = Abundance)
+    abundance_data_t
+    
+    # Add a small pseudocount to avoid issues with zeros
     pseudocount <- 1e-6
-    abundance_data <- abundance_data + pseudocount
-    
-    # Ensure all numeric
-    stopifnot(all(sapply(abundance_data, is.numeric)))
-    
-    # Compute Spearman correlations
-    message("Computing Spearman correlations...")
-    cor_results <- rcorr(as.matrix(t(abundance_data)), type="spearman")
+    data_spearman <- abundance_data_t[,-1] + pseudocount
+    data_spearman
+
+    # Compute Spearman correlations and p-values
+    cor_results <- rcorr(as.matrix(data_spearman), type = "spearman")
     cor_matrix <- cor_results$r
     p_matrix <- cor_results$P
-    
-    # Save correlation and p-value matrices
-    write.table(cor_matrix, file=correlation_file, 
-                sep="\t", quote=FALSE)
-    write.table(p_matrix, file=pvalues_file,
-                sep="\t", quote=FALSE)
-    
-    # Convert to long format
-    cor_df <- melt(cor_matrix, varnames=c("source", "target"), value.name="correlation")
-    pval_df <- melt(p_matrix, varnames=c("source", "target"), value.name="pvalue")
-    
-    # Merge correlation and p-values
-    network_df <- merge(cor_df, pval_df, by=c("source", "target"))
-    
-    # Remove self-correlations and duplicates
-    network_df <- network_df[network_df$source != network_df$target, ]
-    network_df <- network_df[!duplicated(t(apply(network_df[,1:2], 1, sort))), ]
-    
-    # FDR correction
-    network_df$fdr <- p.adjust(network_df$pvalue, method="fdr")
-    
-    # Filter by FDR and correlation thresholds
-    network_df <- network_df[network_df$fdr < fdr_threshold & 
-                           abs(network_df$correlation) > rho_threshold, ]
-    
-    # Sort by absolute correlation
-    network_df <- network_df[order(abs(network_df$correlation), decreasing=TRUE), ]
+
+    # Convert matrices to long format data frames
+    cor_df <- melt(cor_matrix, varnames = c("Taxon A", "Taxon B"), value.name = "Spearman")
+    pval_df <- melt(p_matrix, varnames = c("Taxon A", "Taxon B"), value.name = "P_value")
+
+    # Merge correlation and p-value data
+    merged_df <- merge(cor_df, pval_df, by = c("Taxon A", "Taxon B"))
+
+    # Remove self-correlations and duplicated pairs
+    merged_df <- merged_df[merged_df$`Taxon A` != merged_df$`Taxon B`, ]
+    merged_df <- merged_df[!duplicated(t(apply(merged_df[, 1:2], 1, sort))), ]
+
+    # Adjust p-values using False Discovery Rate (FDR) correction
+    merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
+
+    # Filter for statistically significant (FDR < 0.05) and strong (Spearman > 0.7) correlations
+    filtered_df <- merged_df[which(merged_df$FDR < 0.05 & merged_df$Spearman > 0.7), ]
+
+    # Sort the results by the strength of the correlation
+    filtered_df_sorted <- filtered_df[order(filtered_df$Spearman, decreasing = TRUE), ]
     
     # Save network
-    write.table(network_df, file=network_file, 
-                sep="\t", row.names=FALSE, quote=FALSE)
-    
-    message(sprintf("Completed. Network has %d edges.", nrow(network_df)))
+    write_tsv(filtered_df_sorted, network_file)
+
+    message(sprintf("Completed. Network has %d edges.", nrow(filtered_df_sorted)))
     message(sprintf("FDR threshold: %f, Correlation threshold: %f", 
                    fdr_threshold, rho_threshold))
+    
+    # Save full correlation and p-value matrices
+    cor_matrix_df <- as.data.frame(cor_matrix)
+    cor_matrix_df <- cbind(Taxon=rownames(cor_matrix_df), cor_matrix_df)
+    write.table(cor_matrix_df, file=correlation_file, 
+                sep="\t", row.names=FALSE, quote=FALSE)
+    p_matrix_df <- as.data.frame(p_matrix)
+    p_matrix_df <- cbind(Taxon=rownames(p_matrix_df), p_matrix_df)
+    write.table(p_matrix_df, file=pvalues_file, 
+                sep="\t", row.names=FALSE, quote=FALSE)
 }
 
 # Execute main function with error handling

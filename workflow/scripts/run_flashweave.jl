@@ -21,11 +21,13 @@ function parse_commandline()
 
         "--alpha"
         help = "Alpha value for statistical significance"
-        default = 0.001
+    arg_type = Float64
+    default = 0.001
 
         "--n_obs_min"
         help = "Minimum number of observations per variable"
-        default = -1
+    arg_type = Int
+    default = -1
 
         "--transposed"
         help = "Whether data needs to be transposed"
@@ -35,8 +37,11 @@ function parse_commandline()
         help = "Whether to use heterogeneous mode (true/false, default: true)"
         action = :store_true  # means if present, it will be true
 
-        "--output"
-        help = "Prefix for output files"
+        "--outtable"
+        help = "output edgelist file"
+
+        "--outgraph"
+        help = "output gml graph file"
     end
 
     return parse_args(s)
@@ -50,36 +55,19 @@ function main()
 
     println("FlashWeave network inference starting...")
 
-    # Get current directory
-    curr_dir = pwd()
-    println("Working directory: $curr_dir")
-
+    # Resolve paths and outputs (with sensible defaults)
     data_path = args["data"]
+    outgraph = args["outgraph"]
+    outtable = args["outtable"]
 
-    # Check if input data file exists
-    if !isfile(data_path)
-        println("Error: Input data file not found: $data_path")
-        return
-    end
-
-    # Define heterogeneous tag
-    hetero_tag = hetero_val ? "heteroTRUE" : "heteroFALSE"
-    
-    # Create output folder
-    base_name_no_ext = splitext(basename(data_path))[1]
-    out_dir = joinpath(curr_dir, base_name_no_ext * "_flashweave" * "_" * hetero_tag)
+    # Working/output directory
+    out_dir = dirname(outtable)
     if !isdir(out_dir)
         mkdir(out_dir)
     end
 
-    # Get alpha value as string
-    alpha_str = string(args["alpha"])
-    alpha_tag = "-p" * alpha_str
-    if args["output"] == nothing
-        out_prefix = joinpath(out_dir, "flashweave_" * base_name_no_ext * alpha_tag * "_" * hetero_tag)
-    else
-        out_prefix = joinpath(out_dir, "flashweave_" * args["output"] * alpha_tag * "_" * hetero_tag)
-    end
+    # Define heterogeneous tag
+    hetero_tag = hetero_val ? "heteroTRUE" : "heteroFALSE"
 
     # Read data file
     data = open(data_path, "r")
@@ -90,7 +78,7 @@ function main()
     # Remove lines starting with "Undefined" or "unmapped"
     data_lines = filter(line -> !startswith(line, "Undefined") && !startswith(line, "unmapped"), data_lines)
     # Save new data file
-    data_new_path = joinpath(out_dir, "$(base_name_no_ext)_remove1n.tsv")
+    data_new_path = joinpath(out_dir, "fw_input_abundance.tsv")
     data_new = open(data_new_path, "w")
     write(data_new, join(data_lines, "\n"))
     close(data_new)
@@ -127,30 +115,27 @@ function main()
     # print the learn_network command
     println("learn_network command: learn_network(\"$(data_new_path)\", $(meta_data_path === nothing ? "nothing" : "\"$(meta_data_path)\""), alpha=$(args["alpha"]), n_obs_min=$(args["n_obs_min"]), normalize=true, transposed=$(args["transposed"]), sensitive=true, heterogeneous=$(hetero_val))")
 
-    save_network("$(out_prefix).gml", netw_results)
-    save_network("$(out_prefix).edgelist", netw_results)
+    # Save network outputs
+    save_network(outgraph, netw_results)
+    edgelist_path = "$(outgraph).edgelist"
+    save_network(edgelist_path, netw_results)
 
-    println("✅ Network inference completed.")
-    println("➡ Results saved to: $(out_prefix).gml and $(out_prefix).edgelist")
+    println("Network inference completed.")
 
-    # Generate a more readable edgelist.tsv
-    edgelist_path = "$(out_prefix).edgelist"
+    # Generate a more readable tsv files
     edgelist = open(edgelist_path, "r")
     edgelist_lines = readlines(edgelist)
     close(edgelist)
     # Remove first 2 lines
     edgelist_lines = edgelist_lines[3:end]
-    # Add a new column
-    edgelist_lines = map(line -> line * "\t" * split(line, "\t")[1] * "-->" * split(line, "\t")[2], edgelist_lines)
     # Add header
-    header = "Source\tTarget\tFlashweave Weight\tSource-->Target"
+    header = "Source\tTarget\tFlashweave Weight"
     edgelist_lines = [header; edgelist_lines]
     # Save new edgelist
-    edgelist_new_path = "$(out_prefix)_edges_info.tsv"
+    edgelist_new_path = outtable
     edgelist_new = open(edgelist_new_path, "w")
     write(edgelist_new, join(edgelist_lines, "\n"))
     close(edgelist_new)
-    println("➡ Edgelist saved to: $(edgelist_new_path)")
 
 end
 

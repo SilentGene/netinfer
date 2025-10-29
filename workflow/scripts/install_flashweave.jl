@@ -20,6 +20,7 @@ try
 		for attempt in 1:max_tries
 			try
 				Pkg.add("FlashWeave")
+				Pkg.add("ArgParse")
 				Pkg.precompile()
 				success = true
 				break
@@ -51,6 +52,7 @@ ENV["JULIA_PKG_SERVER"] = get(ENV, "JULIA_PKG_SERVER", "")  # empty disables pkg
 try
 	println("[NetInfer] Adding FlashWeave (first attempt)...")
 	Pkg.add("FlashWeave")
+	Pkg.add("ArgParse")
 catch e
 	@warn "FlashWeave add failed; retrying with registry update and no Pkg server" exception=(e, catch_backtrace())
 	try

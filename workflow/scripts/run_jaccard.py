@@ -86,6 +86,9 @@ def main(snakemake):
             weight_threshold=snakemake.params.weight_threshold
         )
         logger.info(f"Created network with {len(network_df)} edges")
+
+        # order network_df by weighted similarity descending
+        network_df = network_df.sort_values(by='similarity', ascending=False)
         
         # Save results
         similarity_matrix.to_csv(snakemake.output.similarity_matrix, sep='\t')

@@ -18,21 +18,18 @@ rule flashweave_network:
     params:
         pvalue = config["flashweave"]["pvalue_threshold"],
         weight = config["flashweave"]["weight_threshold"],
-        extra_args = "--no_heterogeneous"  # Force normal mode
-    threads: config["flashweave"]["threads"]
+        script = workflow.source_path("../scripts/run_flashweave.jl")
+    threads: 1
     log:
         f"{outdir}/logs/flashweave_normal.log"
     shell:
         """
-        julia {workflow.basedir}/scripts/run_flashweave.jl \
+        julia {params.script} \
             --data {input.abundance} \
+            --transposed \
             --alpha {params.pvalue} \
-            --output fwNetwork \
-            {params.extra_args} \
+            --outtable {output.network} \
+            --outgraph {output.graph} \
+            --no_heterogeneous \
             2> {log}
-        
-        # Move output files to correct location
-        mkdir -p $(dirname {output.network})
-        mv *_edges_info.tsv {output.network}
-        mv *.gml {output.graph}
         """

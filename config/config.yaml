@@ -31,8 +31,10 @@ flashweaveHE:
 fastspar:
   enabled: true
   pvalue_threshold: 0.05
-  weight_threshold: 0.3
-  iterations: 100
+  correlation_threshold: 0.2
+  weight_threshold_filter: 0.3
+  iterations: 50
+  bootstraps: 1000
   threads: 8
 
 spearman:
@@ -44,7 +46,7 @@ spearman:
 spieceasi:
   enabled: true
   weight_threshold: 0.5
-  method: "mb"  # mb (meinshausen-buhlmann) or glasso
+  method: "mb"  # 'mb' (meinshausen-buhlmann, use mb for n>1000) or 'glasso' for fewer
   threads: 8
 
 propr:

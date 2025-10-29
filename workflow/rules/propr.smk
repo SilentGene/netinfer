@@ -14,7 +14,7 @@ rule propr_network:
         rho_matrix = f"{outdir}/networks/propr/rho_matrix.tsv"
     params:
         rho_threshold = config["propr"]["rho_threshold"]
-    threads: config["propr"]["threads"]
+    threads: 1
     log:
         f"{outdir}/logs/propr.log"
     script:

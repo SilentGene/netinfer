@@ -131,7 +131,9 @@ Key parameters:
 
 ### FastSpar
 - P-value threshold: ≤0.05
-- Weight threshold: ≥0.3
+- Iterations: 1000
+- Correlation threshold: 0.2
+- Absolute value threshold for correlation coefficient: 0.3
 
 ### Spearman
 - FDR threshold: ≤0.05
@@ -156,6 +158,23 @@ The interactive HTML viewer provides:
 - Abundance correlation plots
 - Taxonomy-based coloring
 - Export capabilities
+
+
+## Troubleshooting
+
+If you see an error like:
+
+```
+LockException:
+Error: Directory cannot be locked. Please make sure that no other Snakemake process is trying to create the same files...
+```
+
+it usually means a previous Snakemake run was interrupted and left a lock behind. You can safely unlock and continue.
+
+```bash
+netinfer <original_args> --snake_args="--unlock"
+```
+
 
 ## Contributing
 
