@@ -57,22 +57,23 @@ def print_python_version(logger: logging.Logger) -> None:
 def find_config_file() -> Path:
     """Find the config file using modern importlib.resources."""
     # First try current directory
-    cwd_config = Path.cwd() / "config" / "config.yaml"
-    if cwd_config.exists():
+    cwd_config = Path.cwd() / "config.yaml"
+    if cwd_config.is_file():
         return cwd_config
         
     # Then try using importlib.resources
+    config_path = None
     try:
-        with resources.files("netinfer").joinpath("config/config.yaml") as config_path:
-            if config_path.exists():
-                return config_path
+        config_path = resources.files("netinfer").joinpath("config/config.yaml")
+        if config_path.is_file():
+            return Path(config_path)
     except (ImportError, TypeError):
         pass
         
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_config),
-        "netinfer/config/config.yaml (package resource)"
+        str(config_path) if config_path else "netinfer/config/config.yaml (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find config.yaml in any of the expected locations:\n" +
@@ -104,27 +105,56 @@ def find_workflow_dir() -> Path:
         "\n".join(f"- {p}" for p in searched_paths)
     )
 
-def create_config(input_file: str,
-                 output_dir: str,
+def create_config(input_file: Optional[str] = None,
+                 output_dir: Optional[str] = None,
                  taxonomy_file: Optional[str] = None,
                  metadata_file: Optional[str] = None,
                  methods: Optional[List[str]] = None,
-                 no_visual: bool = False) -> str:
-    """Create a temporary config file for the pipeline run."""
-    # Load default config
-    config_file = find_config_file()
+                 no_visual: bool = False,
+                 base_config_path: Optional[str] = None) -> str:
+    """Create a config file for the pipeline run.
+    
+    Args:
+        input_file: Input abundance table path (overrides config if provided)
+        output_dir: Output directory path (overrides config if provided)
+        taxonomy_file: Taxonomy table path (overrides config if provided)
+        metadata_file: Metadata table path (overrides config if provided)
+        methods: List of methods to enable (overrides config if provided)
+        no_visual: Whether to disable visualization (overrides config if provided)
+        base_config_path: Path to base config file (uses default if None)
+    
+    Returns:
+        Path to the final config file written to output directory
+    """
+    # Load base config (user-specified or default)
+    if base_config_path:
+        config_file = Path(base_config_path)
+        if not config_file.is_file():
+            raise FileNotFoundError(f"Specified config file not found: {base_config_path}")
+    else:
+        config_file = find_config_file()
+    
     with open(config_file) as f:
         config = yaml.safe_load(f)
     
-    # Update input/output paths
-    config["input"]["abundance_table"] = os.path.abspath(input_file)
+    # Update input/output paths (CLI overrides config)
+    if input_file:
+        config["input"]["abundance_table"] = os.path.abspath(input_file)
     if taxonomy_file:
         config["input"]["taxonomy_table"] = os.path.abspath(taxonomy_file)
     if metadata_file:
         config["input"]["metadata_table"] = os.path.abspath(metadata_file)
     
-    output_dir_abs = os.path.abspath(output_dir).strip()
-    config["output_dir"] = output_dir_abs
+    # Determine output directory (required either from CLI or config)
+    if output_dir:
+        output_dir_abs = os.path.abspath(output_dir).strip()
+        config["output_dir"] = output_dir_abs
+    else:
+        # Use output_dir from config file
+        if "output_dir" not in config or not config["output_dir"]:
+            raise ValueError("output_dir must be specified either via --output or in config file")
+        output_dir_abs = os.path.abspath(config["output_dir"]).strip()
+        config["output_dir"] = output_dir_abs
     
     # Update method selection
     if methods:
@@ -226,14 +256,12 @@ def main():
     
     parser.add_argument(
         "--input",
-        required=True,
-        help="Input abundance table file (TSV/CSV/BIOM format)"
+        help="Input abundance table file (TSV/CSV/BIOM format). Overrides config file if specified."
     )
     
     parser.add_argument(
         "--output",
-        required=True,
-        help="Output directory for results"
+        help="Output directory for results. Overrides config file if specified."
     )
     
     parser.add_argument(
@@ -251,6 +279,14 @@ def main():
         help="Comma-separated list of methods to use (default: all). "
              "Available methods: flashweave, flashweaveHE, fastspar, "
              "spearman, spieceasi, propr, jaccard"
+    )
+    
+    parser.add_argument(
+        "--config",
+        help=(
+            "Path to a base config YAML file. CLI arguments will override settings in this file. "
+            "The final merged config will be saved to the output directory."
+        )
     )
     
     parser.add_argument(
@@ -287,7 +323,13 @@ def main():
         if args.methods:
             methods = [m.strip().lower() for m in args.methods.split(",")]
         
-        # Create configuration
+        # Validate that either --input/--output or --config is provided
+        if not args.config and (not args.input or not args.output):
+            raise ValueError(
+                "Either --config must be specified, or both --input and --output must be provided"
+            )
+        
+        # Create configuration (with CLI overrides applied)
         logger.info("Creating pipeline configuration...")
         config_path = create_config(
             input_file=args.input,
@@ -295,7 +337,8 @@ def main():
             taxonomy_file=args.taxonomy,
             metadata_file=args.metadata,
             methods=methods,
-            no_visual=args.no_visual
+            no_visual=args.no_visual,
+            base_config_path=args.config
         )
         logger.info(f"Configuration file created at: {config_path}")
         

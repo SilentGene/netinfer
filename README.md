@@ -48,25 +48,23 @@ julia workflow/scripts/install_flashweave.jl
 ### Basic Usage
 
 1. Prepare your data:
-   - Place your abundance table in `resources/abundance_table.tsv`
-   - (Optional) Add taxonomy table in `resources/taxonomy.tsv`
-   - (Optional) Add metadata table in `resources/metadata.tsv`
+   - Required: abundance table `abundance_table.tsv`
+   - (Optional) taxonomy table `taxonomy.tsv` for additional annotations
+   - (Optional) sample metadata table `metadata.tsv` for `FlashWeave` and additional annotations
 
-2. Configure your analysis:
-   - Edit `config/config.yaml` to set parameters
-   - Enable/disable specific methods
-   - Adjust thresholds and filtering criteria
-
-3. Run the pipeline:
+2. Run the pipeline:
 ```bash
-# Simple run
-netinfer --input abundance_table.tsv --output results_dir --threads 4
+# Simple run with all methods enabled and using default settings
+netinfer --input abundance_table.tsv --output results_dir --threads 6
 
 # Specify methods
-netinfer --input abundance_table.tsv --output results_dir --threads 4 --methods flashweave,fastspar,spearman
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman
 
 # Skip visualization
-netinfer --input abundance_table.tsv --output results_dir --threads 4 --no-visual
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
+
+# Specify every detail via my own config file
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --config my_config.yaml
 ```
 
 ### Output

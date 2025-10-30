@@ -1,7 +1,7 @@
 """
 NetInfer: A Snakemake pipeline for microbiome network inference
 """
-# netinfer --input test/data/abundance.tsv --output test/testout --taxonomy test/data/taxonomy.tsv --threads 6 --snake_args="--unlock"
+# netinfer --input test/data/abundance.tsv --output test/testout --taxonomy test/data/taxonomy.tsv --threads 6 --config config/config.yaml --snake_args="--unlock"
 
 import os
 import re

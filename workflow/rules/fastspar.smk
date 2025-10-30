@@ -77,7 +77,7 @@ rule fastspar_bootstrap_correlation:
     input:
         boot=f"{BOOT_DIR}/boot_{{i}}.tsv"
     output:
-        corr=f"{COR_DIR}/cor_boot{{i}}.tsv",
+        corr=f"{COR_DIR}/cor_boot_{{i}}.tsv",
         cov=f"{COR_DIR}/cov_boot_{{i}}.tsv"
     params:
         iterations=ITER_N,
@@ -103,7 +103,7 @@ rule fastspar_pvalues:
     input:
         abundance=f"{outdir}/preprocessed/filtered_abundance.tsv",
         median_corr=f"{FS_DIR}/median_correlation.tsv",
-        corr=expand(f"{COR_DIR}/cor_boot{{i}}.tsv", i=range(BOOT_N))
+        corr=expand(f"{COR_DIR}/cor_boot_{{i}}.tsv", i=range(BOOT_N))
     output:
         pvalues=f"{FS_DIR}/pvalues.tsv"
     params:
@@ -115,7 +115,7 @@ rule fastspar_pvalues:
         """
         fastspar_pvalues --otu_table {input.abundance} \
                          --correlation {input.median_corr} \
-                         --prefix {BOOT_DIR}/cor_boot_ \
+                         --prefix {COR_DIR}/cor_boot_ \
                          --permutations {params.permutations} \
                          --threads {params.threads} \
                          --outfile {output.pvalues} \
