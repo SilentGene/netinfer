@@ -5,10 +5,6 @@ FlashWeave network inference rules
 # Get output directory from config
 outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
 
-"""
-FlashWeave network inference rules (Normal mode)
-"""
-
 rule flashweave_network:
     input:
         abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
@@ -18,7 +14,7 @@ rule flashweave_network:
     params:
         pvalue = config["flashweave"]["pvalue_threshold"],
         weight = config["flashweave"]["weight_threshold"],
-        script = workflow.source_path("../scripts/run_flashweave.jl")
+        script = "scripts/run_flashweave.jl"
     threads: 1
     log:
         f"{outdir}/logs/flashweave_normal.log"

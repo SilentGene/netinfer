@@ -62,14 +62,14 @@ main <- function() {
     p_matrix <- cor_results$P
 
     # Convert matrices to long format data frames
-    cor_df <- melt(cor_matrix, varnames = c("Taxon A", "Taxon B"), value.name = "Spearman")
-    pval_df <- melt(p_matrix, varnames = c("Taxon A", "Taxon B"), value.name = "P_value")
+    cor_df <- melt(cor_matrix, varnames = c("source", "target"), value.name = "Spearman")
+    pval_df <- melt(p_matrix, varnames = c("source", "target"), value.name = "P_value")
 
     # Merge correlation and p-value data
-    merged_df <- merge(cor_df, pval_df, by = c("Taxon A", "Taxon B"))
+    merged_df <- merge(cor_df, pval_df, by = c("source", "target"))
 
     # Remove self-correlations and duplicated pairs
-    merged_df <- merged_df[merged_df$`Taxon A` != merged_df$`Taxon B`, ]
+    merged_df <- merged_df[merged_df$`source` != merged_df$`target`, ]
     merged_df <- merged_df[!duplicated(t(apply(merged_df[, 1:2], 1, sort))), ]
 
     # Adjust p-values using False Discovery Rate (FDR) correction

@@ -54,10 +54,10 @@ main <- function() {
     rho_matrix <- slot(rho_results, "matrix")
 
     # Convert matrix to a long edgelist format
-    rho_long <- melt(rho_matrix, varnames = c("Taxon A", "Taxon B"), value.name = "Rho")
+    rho_long <- melt(rho_matrix, varnames = c("source", "target"), value.name = "Rho")
 
     # Remove self-correlations and duplicated pairs
-    rho_long <- rho_long[rho_long$`Taxon A` != rho_long$`Taxon B`, ]
+    rho_long <- rho_long[rho_long$`source` != rho_long$`target`, ]
     rho_long <- rho_long[!duplicated(t(apply(rho_long[, 1:2], 1, sort))), ]
 
     # Filter for strong positive proportionality (rho > 0.5)

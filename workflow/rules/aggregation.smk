@@ -8,8 +8,8 @@ taxonomy_in = str(config.get("input", {}).get("taxonomy_table", "")).strip()
 
 rule aggregate_networks:
     input:
-        flashweave = f"{outdir}/networks/flashweave/he/network.tsv" if (config["flashweave"]["enabled"] and config["flashweave"]["heterogeneous"]) else 
-                      f"{outdir}/networks/flashweave/normal/network.tsv" if config["flashweave"]["enabled"] else [],
+        flashweaveNormal = f"{outdir}/networks/flashweave/normal/network.tsv" if config["flashweave"]["enabled"] else [],
+        flashweaveHE = f"{outdir}/networks/flashweave/HE/network.tsv" if config["flashweaveHE"]["enabled"] else [],
         fastspar = f"{outdir}/networks/fastspar/network.tsv" if config["fastspar"]["enabled"] else [],
         spearman = f"{outdir}/networks/spearman/network.tsv" if config["spearman"]["enabled"] else [],
         spieceasi = f"{outdir}/networks/spieceasi/network.tsv" if config["spieceasi"]["enabled"] else [],

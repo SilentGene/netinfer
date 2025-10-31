@@ -85,19 +85,19 @@ main <- function() {
         adj_dense <- as.matrix(adj_matrix)
         weight_dense <- as.matrix(weight_matrix)
         
-        adj_long <- melt(adj_dense, varnames = c("Taxon A", "Taxon B"), value.name = "Connected")
-        weights_long <- melt(weight_dense, varnames = c("Taxon A", "Taxon B"), value.name = "Weight")
+        adj_long <- melt(adj_dense, varnames = c("source", "target"), value.name = "Connected")
+        weights_long <- melt(weight_dense, varnames = c("source", "target"), value.name = "Weight")
         
-        adj_long$`Taxon A` <- genomes[adj_long$`Taxon A`]
-        adj_long$`Taxon B` <- genomes[adj_long$`Taxon B`]
-        weights_long$`Taxon A` <- genomes[weights_long$`Taxon A`]
-        weights_long$`Taxon B` <- genomes[weights_long$`Taxon B`]
+        adj_long$`source` <- genomes[adj_long$`source`]
+        adj_long$`target` <- genomes[adj_long$`target`]
+        weights_long$`source` <- genomes[weights_long$`source`]
+        weights_long$`target` <- genomes[weights_long$`target`]
         
-        merged_edges <- merge(adj_long, weights_long, by = c("Taxon A", "Taxon B"))
-        edges_only <- merged_edges[merged_edges$Connected == 1 & merged_edges$`Taxon A` != merged_edges$`Taxon B`, ]
+        merged_edges <- merge(adj_long, weights_long, by = c("source", "target"))
+        edges_only <- merged_edges[merged_edges$Connected == 1 & merged_edges$`source` != merged_edges$`target`, ]
         edges_unique <- edges_only[!duplicated(t(apply(edges_only[, 1:2], 1, sort))), ]
         edges_unique <- edges_unique[order(edges_unique$Weight, decreasing = TRUE), ]
-        edges_final <- edges_unique[, c("Taxon A", "Taxon B", "Weight")]
+        edges_final <- edges_unique[, c("source", "target", "Weight")]
         
         # Filter for strong correlations
         edges_filtered <- edges_final[edges_final$Weight > 0.5, ]

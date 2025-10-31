@@ -129,7 +129,7 @@ function main()
     # Remove first 2 lines
     edgelist_lines = edgelist_lines[3:end]
     # Add header
-    header = "Source\tTarget\tFlashweave Weight"
+    header = "source\ttarget\tFlashweave Weight"
     edgelist_lines = [header; edgelist_lines]
     # Save new edgelist
     edgelist_new_path = outtable
