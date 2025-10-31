@@ -9,9 +9,15 @@ input:
 # Output directory
 output_dir: "netinfer_results"
 
-# Filtering parameters
-min_prevalence: 0.1  # Minimum prevalence for features
-min_abundance: 0.01  # Minimum mean relative abundance
+# Prefiltering thresholds
+min_prevalence: 0.1  # OTUs should be present in at least 10% of samples
+min_abundance: 0.001  # OTUs should have at least 0.1% relative abundance in at least one sample
+
+# Trusted methods: Edges must be present in at least one method from these trusted methods to be retained in the final aggregated table.
+trusted_methods:
+  - flashweave
+  - flashweaveHE
+  - spieceasi
 
 # Method-specific parameters
 flashweave:
@@ -26,6 +32,12 @@ flashweaveHE:
   pvalue_threshold: 0.001
   weight_threshold: 4.0
   heterogeneous: true  # Use HE mode
+  threads: 8
+
+spieceasi:
+  enabled: true
+  weight_threshold: 0.3
+  method: "mb"  # 'mb' (meinshausen-buhlmann, use mb for n>1000) or 'glasso' for fewer
   threads: 8
 
 fastspar:
@@ -43,20 +55,14 @@ spearman:
   rho_threshold: 0.7
   threads: 8
 
-spieceasi:
-  enabled: true
-  weight_threshold: 0.5
-  method: "mb"  # 'mb' (meinshausen-buhlmann, use mb for n>1000) or 'glasso' for fewer
-  threads: 8
-
 propr:
   enabled: true
-  rho_threshold: 0.5
+  rho_threshold: 0.7
   threads: 8
 
 jaccard:
   enabled: true
-  weight_threshold: 0.3
+  weight_threshold: 0.7
   threads: 8
 
 # Visualization parameters

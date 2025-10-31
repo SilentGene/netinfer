@@ -76,7 +76,7 @@ main <- function() {
     merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
 
     # Filter for statistically significant (FDR < 0.05) and strong (Spearman > 0.7) correlations
-    filtered_df <- merged_df[which(merged_df$FDR < 0.05 & merged_df$Spearman > 0.7), ]
+    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & merged_df$Spearman > rho_threshold), ]
 
     # Sort the results by the strength of the correlation
     filtered_df_sorted <- filtered_df[order(filtered_df$Spearman, decreasing = TRUE), ]

@@ -8,6 +8,7 @@ dependencies:
   - python>=3.8
   - pip
   - snakemake>=9.0.0
+  - coincbc
 
   # Python packages for core functionality
   - pandas

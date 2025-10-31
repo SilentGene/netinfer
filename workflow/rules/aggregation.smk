@@ -8,7 +8,7 @@ taxonomy_in = str(config.get("input", {}).get("taxonomy_table", "")).strip()
 
 rule aggregate_networks:
     input:
-        flashweaveNormal = f"{outdir}/networks/flashweave/normal/network.tsv" if config["flashweave"]["enabled"] else [],
+        flashweave = f"{outdir}/networks/flashweave/normal/network.tsv" if config["flashweave"]["enabled"] else [],
         flashweaveHE = f"{outdir}/networks/flashweave/HE/network.tsv" if config["flashweaveHE"]["enabled"] else [],
         fastspar = f"{outdir}/networks/fastspar/network.tsv" if config["fastspar"]["enabled"] else [],
         spearman = f"{outdir}/networks/spearman/network.tsv" if config["spearman"]["enabled"] else [],
@@ -18,9 +18,12 @@ rule aggregate_networks:
         taxonomy = f"{outdir}/preprocessed/processed_taxonomy.tsv" if taxonomy_in else [],
         abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        network = f"{outdir}/networks/aggregated_network.tsv",
+        combined_table = f"{outdir}/networks/aggregated_network.tsv",
+        combined_graph = f"{outdir}/networks/aggregated_network.gml",
         stats = f"{outdir}/networks/network_statistics.json"
     threads: 1
+    params:
+        trusted_methods = config.get("trusted_methods")
     log:
         f"{outdir}/logs/aggregate_networks.log"
     script:

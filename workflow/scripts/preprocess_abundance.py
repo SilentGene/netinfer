@@ -74,10 +74,10 @@ def filter_features(df: pd.DataFrame,
     rel_abundance = df.div(total_reads, axis=0)
     
     prevalence = (df > 0).mean()
-    mean_abundance = rel_abundance.mean()
+    max_abundance = rel_abundance.max()
     
     # Apply filters
-    mask = (prevalence >= min_prevalence) & (mean_abundance >= min_abundance)
+    mask = (prevalence >= min_prevalence) & (max_abundance >= min_abundance)
     filtered_df = df.loc[:, mask]
     
     # Gather statistics

@@ -12,12 +12,16 @@ A Snakemake-based bioinformatics pipeline for inferring co-abundance networks fr
 ## Features
 
 - Multiple network inference methods:
-  - FlashWeave (HE mode/normal mode)
-  - FastSpar
-  - Jaccard Index
-  - Spearman correlation with FDR correction
-  - SPIEC-EASI
-  - propR
+  - Direct Association Methods:
+      - [FlashWeave (HE mode/normal mode)](https://github.com/meringlab/FlashWeave.jl)
+      - [SPIEC-EASI](https://github.com/zdk123/SpiecEasi)
+  - Correlation-based Methods:
+      - [propr](https://www.nature.com/articles/s41598-017-16520-0)
+      - [Spearman correlation with FDR correction](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient)
+      - [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index)
+      - [FastSpar](https://github.com/scwatts/fastspar)
+
+
 - Interactive HTML visualization
 - Flexible input formats (TSV, CSV, BIOM)
 - Comprehensive output with consensus scores

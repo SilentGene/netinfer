@@ -72,7 +72,7 @@ def main(snakemake):
     
     try:
         # Load abundance data
-        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
+        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0).T
         logger.info(f"Loaded abundance data with shape {abundance_df.shape}")
         
         # Calculate Jaccard similarities
