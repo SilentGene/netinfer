@@ -64,7 +64,7 @@ def find_config_file() -> Path:
     # Then try using importlib.resources
     config_path = None
     try:
-        config_path = resources.files("netinfer").joinpath("config/config.yaml")
+        config_path = resources.files("netinfer").joinpath("../config/config.yaml")
         if config_path.is_file():
             return Path(config_path)
     except (ImportError, TypeError):
@@ -88,17 +88,18 @@ def find_workflow_dir() -> Path:
         return cwd_workflow
         
     # Then try using importlib.resources
+    workflow_dir = None
     try:
-        with resources.files("netinfer").joinpath("workflow") as workflow_dir:
-            if (workflow_dir / "Snakefile").exists():
-                return workflow_dir
+        workflow_dir = resources.files("netinfer").joinpath("../workflow")
+        if (workflow_dir / "Snakefile").exists():
+            return Path(workflow_dir)
     except (ImportError, TypeError):
         pass
         
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_workflow),
-        "netinfer/workflow (package resource)"
+        str(workflow_dir) if workflow_dir else "netinfer/workflow (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find workflow directory with Snakefile in any of the expected locations:\n" +
