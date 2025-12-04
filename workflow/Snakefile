@@ -31,7 +31,7 @@ include: "rules/visualization.smk"
 outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
 
 # Define final output files
-final_outputs = [f"{outdir}/networks/aggregated_network.tsv"]
+final_outputs = [f"{outdir}/networks/aggregated_network.tsv", f"{outdir}/networks/aggregated_network.gml", f"{outdir}/networks/network_statistics.json"]
 
 # Add visualization output if enabled
 if config.get("visualization", {}).get("enabled", True):
