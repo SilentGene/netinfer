@@ -57,7 +57,7 @@ julia workflow/scripts/install_flashweave.jl
    - (Optional) sample metadata table `metadata.tsv` for `FlashWeave` and additional annotations
 
 2. Run the pipeline:
-```bash
+```powershell
 # Simple run with all methods enabled and using default settings
 netinfer --input abundance_table.tsv --output results_dir --threads 6
 
@@ -82,6 +82,7 @@ The pipeline generates:
 ## Input File Formats
 
 ### Abundance Table
+> No matter what column names are, the first column will always be treated as Feature IDs, and the rest columns as Sample IDs.
 - Format: TSV/CSV/BIOM
 - Rows: Features (OTUs/ASVs)
 - Columns: Samples
@@ -96,6 +97,7 @@ Otu2           50       60       40
 ```
 
 ### Taxonomy Table (Optional)
+> No matter what column names are, the first column will always be treated as Feature IDs, and the second column as Taxonomy strings.
 - Format: TSV/CSV
 - Required columns: 
   - Feature ID (matching abundance table)
@@ -129,13 +131,14 @@ Key parameters:
 ### FlashWeave
 - P-value threshold: ≤0.001
 - Weight threshold: ≥4.0
-- Supports heterogeneous mode
+- Supports normal and heterogeneous modes
 
 ### FastSpar
 - P-value threshold: ≤0.05
 - Iterations: 1000
 - Correlation threshold: 0.2
 - Absolute value threshold for correlation coefficient: 0.3
+- This method is computationally intensive; consider using more threads
 
 ### Spearman
 - FDR threshold: ≤0.05
@@ -176,6 +179,8 @@ it usually means a previous Snakemake run was interrupted and left a lock behind
 ```bash
 netinfer <original_args> --snake_args="--unlock"
 ```
+
+## Benchmarks
 
 
 ## Contributing

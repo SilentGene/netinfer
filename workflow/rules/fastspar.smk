@@ -15,6 +15,9 @@ outdir = config.get("output_dir", "results").strip()  # Default to "results" if 
 FS_DIR = f"{outdir}/networks/fastspar"
 BOOT_DIR = f"{FS_DIR}/bootstrap"
 COR_DIR = f"{FS_DIR}/correlations"
+fastspar_log_dir = f"{outdir}/logs/fastspar_corr"
+
+os.makedirs(fastspar_log_dir, exist_ok=True)
 
 # FastSpar parameters (read from config; no internal defaults)
 BOOT_N = int(config["fastspar"]["bootstraps"])  # number of bootstrap tables
@@ -84,7 +87,7 @@ rule fastspar_bootstrap_correlation:
         prefix=COR_DIR
     threads: 1
     log:
-        f"{outdir}/logs/fastspar_bootcorr_{{i}}.log"
+        f"{fastspar_log_dir}/fastspar_bootcorr_{{i}}.log"
     shell:
         """
         fastspar --otu_table {input.boot} \
