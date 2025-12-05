@@ -39,11 +39,22 @@ def prepare_network_data(network_df: pd.DataFrame,
                         max_edges: int = 10000) -> Tuple[Dict, nx.Graph]:
     """Prepare network data for visualization."""
     # Create networkx graph
+    # Identify available edge attributes
+    potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'SpiecEasi', 'PropR', 'Jaccard']
+    available_methods = [col for col in potential_methods if col in network_df.columns]
+    
+    edge_attrs = ['Num supporting methods'] + available_methods
+    # Also include 'methods' and 'methods_count' if they exist (legacy support)
+    if 'methods' in network_df.columns:
+        edge_attrs.append('methods')
+    if 'methods_count' in network_df.columns:
+        edge_attrs.append('methods_count')
+    
     G = nx.from_pandas_edgelist(
         network_df,
-        'source',
-        'target',
-        edge_attr=['methods_count', 'methods']
+        'Taxon A',
+        'Taxon B',
+        edge_attr=edge_attrs
     )
     
     # Calculate node metrics
@@ -73,11 +84,25 @@ def prepare_network_data(network_df: pd.DataFrame,
     
     edges_data = []
     for edge in G.edges(data=True):
+        data = edge[2]
+        
+        # Get method count
+        count = data.get('methods_count', data.get('Num supporting methods', 0))
+        
+        # Get list of methods
+        if 'methods' in data:
+            methods_list = data['methods']
+            if isinstance(methods_list, str):
+                methods_list = methods_list.split(';')
+        else:
+            # Reconstruct from available method columns
+            methods_list = [m for m in available_methods if pd.notnull(data.get(m))]
+            
         edges_data.append({
             'source': edge[0],
             'target': edge[1],
-            'methods_count': edge[2]['methods_count'],
-            'methods': edge[2]['methods']
+            'methods_count': int(count),
+            'methods': methods_list
         })
     
     # Limit edges if needed
@@ -186,8 +211,15 @@ def main(snakemake):
         
         # Load taxonomy data if available
         taxonomy_df = None
-        if Path(snakemake.input.taxonomy).exists():
-            taxonomy_df = pd.read_csv(snakemake.input.taxonomy, sep='\t')
+        taxonomy_input = snakemake.input.taxonomy
+        # Handle Namedlist or list input from snakemake
+        if isinstance(taxonomy_input, (list, tuple)) or 'Namedlist' in str(type(taxonomy_input)):
+            taxonomy_path = str(taxonomy_input[0]) if len(taxonomy_input) > 0 else ""
+        else:
+            taxonomy_path = str(taxonomy_input)
+
+        if taxonomy_path and Path(taxonomy_path).exists():
+            taxonomy_df = pd.read_csv(taxonomy_path, sep='\t')
         
         # Prepare network data
         network_data, G = prepare_network_data(

@@ -56,17 +56,18 @@ def combine_methods(networks: Dict[str, pd.DataFrame], trusted_methods: List[str
     trusted_dfs = [df for method, df in networks.items() if method in trusted_methods and not df.empty]
     if not trusted_dfs:
         raise ValueError("No trusted methods available for aggregation. Please check the config.yaml file.")
-    combined_trusted = reduce(
+    
+    # Outer join for trusted methods to keep union of all trusted edges
+    combined_df = reduce(
         lambda left, right: pd.merge(left, right, on=['source', 'target'], how='outer'),
         trusted_dfs
     )
     
-    # Then, append non-trusted methods
+    # Then, left join non-trusted methods
+    # This ensures we only keep edges present in trusted methods, but annotate them with other methods' info
     non_trusted_dfs = [df for method, df in networks.items() if method not in trusted_methods and not df.empty]
-    if non_trusted_dfs:
-        combined_df = pd.concat([combined_trusted] + non_trusted_dfs, ignore_index=True)
-    else:
-        combined_df = combined_trusted
+    for df in non_trusted_dfs:
+        combined_df = pd.merge(combined_df, df, on=['source', 'target'], how='left')
 
     return combined_df
 
@@ -88,8 +89,8 @@ def calculate_edge_statistics(edge_df: pd.DataFrame,
         stats.append({
             'source': taxon_a,
             'target': taxon_b,
-            'prevalence_a': (abund_a > 0).mean(),
-            'prevalence_b': (abund_b > 0).mean(),
+            'prevalence_a': (abund_a > 0).mean() * 100,
+            'prevalence_b': (abund_b > 0).mean() * 100,
             'mean_abundance_a': abund_a.mean(),
             'mean_abundance_b': abund_b.mean(),
             'max_abundance_a': abund_a.max(),
@@ -126,20 +127,21 @@ def main(snakemake):
     try:
         # Load networks from each method
         networks = {
-            'FlashWeave': load_network_file(snakemake.input.flashweave, 'FlashWeave', logger),
-            'FlashWeaveHE': load_network_file(snakemake.input.flashweaveHE, 'FlashWeaveHE', logger),
-            'FastSpar': load_network_file(snakemake.input.fastspar, 'FastSpar', logger),
-            'Spearman': load_network_file(snakemake.input.spearman, 'Spearman', logger),
-            'SPIEC-EASI': load_network_file(snakemake.input.spieceasi, 'SPIEC-EASI', logger),
-            'propR': load_network_file(snakemake.input.propr, 'propR', logger),
-            'Jaccard': load_network_file(snakemake.input.jaccard, 'Jaccard', logger)
+            'flashweave': load_network_file(snakemake.input.flashweave, 'flashweave', logger),
+            'flashweaveHE': load_network_file(snakemake.input.flashweaveHE, 'flashweaveHE', logger),
+            'fastspar': load_network_file(snakemake.input.fastspar, 'fastspar', logger),
+            'spearman': load_network_file(snakemake.input.spearman, 'spearman', logger),
+            'spieceasi': load_network_file(snakemake.input.spieceasi, 'spieceasi', logger),
+            'propr': load_network_file(snakemake.input.propr, 'propr', logger),
+            'jaccard': load_network_file(snakemake.input.jaccard, 'jaccard', logger)
         }
         
         combined_df = combine_methods(networks, snakemake.params.trusted_methods)
 
         logger.info(f"Combined {len(combined_df)} edges from trusted methods: {snakemake.params.trusted_methods} and appended weights from other methods")
         # export combined_df
-        combined_df.to_csv("../test/testout/test.out.tsv", sep='\t', index=False)
+        #combined_df.to_csv("../test/testout/test.out.tsv", sep='\t', index=False)
+
         
         # add a column "n_methods" indicating how many methods detected each edge. That is the count of non-null values across method columns.
         method_cols = [col for col in combined_df.columns if col not in ['source', 'target']]
@@ -147,11 +149,19 @@ def main(snakemake):
 
         # Load abundance data and calculate edge statistics
         abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
+        abundance_df = abundance_df.T
         edge_stats = calculate_edge_statistics(combined_df.reset_index(), abundance_df)
         
         # Load taxonomy data if available
-        if Path(snakemake.input.taxonomy).exists():
-            taxonomy_df = pd.read_csv(snakemake.input.taxonomy, sep='\t')
+        taxonomy_input = snakemake.input.taxonomy
+        # Handle Namedlist or list input from snakemake
+        if isinstance(taxonomy_input, (list, tuple)) or 'Namedlist' in str(type(taxonomy_input)):
+            taxonomy_path = str(taxonomy_input[0]) if len(taxonomy_input) > 0 else ""
+        else:
+            taxonomy_path = str(taxonomy_input)
+
+        if taxonomy_path and Path(taxonomy_path).exists():
+            taxonomy_df = pd.read_csv(taxonomy_path, sep='\t')
             taxonomy_dict = taxonomy_df.set_index('Feature')['Taxonomy'].to_dict()
             edge_stats['taxonomy_a'] = edge_stats['source'].map(taxonomy_dict)
             edge_stats['taxonomy_b'] = edge_stats['target'].map(taxonomy_dict)
@@ -166,16 +176,43 @@ def main(snakemake):
         # order final_df by n_methods descending and they by max weight across trusted methods
         final_df = final_df.sort_values(by=['n_methods'] + snakemake.params.trusted_methods, ascending=False)
         
-        # Save combined table
-        final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
-        
-        # Save gml graph
+        # Save gml graph (Save before renaming to avoid spaces in GML keys)
         G = nx.from_pandas_edgelist(final_df, 'source', 'target', edge_attr=True)
         nx.write_gml(G, snakemake.output.combined_graph)
 
         # Calculate network-level metrics
         network_stats = calculate_network_metrics(G)
 
+        # Rename columns to formal names for output
+        column_mapping = {
+            'source': 'Taxon A',
+            'target': 'Taxon B',
+            'flashweave': 'FlashWeave',
+            'flashweaveHE': 'FlashWeaveHE',
+            'fastspar': 'FastSpar',
+            'spearman': 'Spearman',
+            'spieceasi': 'SpiecEasi',
+            'propr': 'PropR',
+            'jaccard': 'Jaccard',
+            'prevalence_a': 'Prevalence A (%)',
+            'prevalence_b': 'Prevalence B (%)',
+            'mean_abundance_a': 'Mean Abundance A',
+            'mean_abundance_b': 'Mean Abundance B',
+            'max_abundance_a': 'Max Abundance A',
+            'max_abundance_b': 'Max Abundance B',
+            'abundance_b_at_max_a': 'Abundance B at Max A',
+            'abundance_a_at_max_b': 'Abundance A at Max B',
+            'sample_at_max_a': 'Sample at Max A',
+            'sample_at_max_b': 'Sample at Max B',
+            'taxonomy_a': 'Taxonomy A',
+            'taxonomy_b': 'Taxonomy B',
+            'n_methods': 'Num supporting methods'
+        }
+        final_df = final_df.rename(columns=column_mapping)
+
+        # Save combined table
+        final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
+        
         # Save network statistics
         with open(snakemake.output.stats, 'w') as f:
             json.dump(network_stats, f, indent=2)

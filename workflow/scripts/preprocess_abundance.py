@@ -63,7 +63,8 @@ def load_abundance_table(file_path: str, logger: logging.Logger = None) -> pd.Da
         logger.info(f"Removed {unmapped_count} unmapped row(s)")
         logger.info(f"Table shape after removing unmapped rows: {df.shape}")
     
-    return df
+    # Transpose to Sample x Feature format for processing
+    return df.T
 
 def filter_features(df: pd.DataFrame, 
                    min_prevalence: float,
@@ -82,11 +83,11 @@ def filter_features(df: pd.DataFrame,
     
     # Gather statistics
     stats = {
-        'total_features': df.shape[1],
-        'filtered_features': filtered_df.shape[1],
+        'input_features': df.shape[1],
+        'features_after_filter': filtered_df.shape[1],
         'removed_features': df.shape[1] - filtered_df.shape[1],
-        'min_prevalence': min_prevalence,
-        'min_abundance': min_abundance
+        'specified_min_prevalence': min_prevalence,
+        'specified_min_abundance': min_abundance
     }
     
     return filtered_df, stats
@@ -110,9 +111,11 @@ def main(snakemake):
         )
         
         # Save filtered table with "#OTU ID" as the index name
+        # Transpose back to Feature x Sample format for output
+        filtered_df = filtered_df.T
         filtered_df.index.name = "#OTU ID"
         filtered_df.to_csv(snakemake.output.filtered, sep='\t')
-        logger.info(f"Saved filtered table with {filtered_df.shape[1]} features")
+        logger.info(f"Saved filtered table with {filtered_df.shape[0]} features")
         
         # Save statistics
         with open(snakemake.output.stats, 'w') as f:
