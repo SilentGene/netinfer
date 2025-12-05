@@ -177,7 +177,17 @@ def main(snakemake):
         final_df = final_df.sort_values(by=['n_methods'] + snakemake.params.trusted_methods, ascending=False)
         
         # Save gml graph (Save before renaming to avoid spaces in GML keys)
-        G = nx.from_pandas_edgelist(final_df, 'source', 'target', edge_attr=True)
+        # Create a copy for GML export to handle NaNs without affecting the CSV output
+        gml_df = final_df.copy()
+        
+        # Fill NaNs in numeric columns with 0.0 for GML compatibility (Gephi doesn't like NaNs)
+        numeric_cols = gml_df.select_dtypes(include=[np.number]).columns
+        gml_df[numeric_cols] = gml_df[numeric_cols].fillna(0.0)
+        
+        # Fill NaNs in other columns with empty string
+        gml_df = gml_df.fillna("")
+        
+        G = nx.from_pandas_edgelist(gml_df, 'source', 'target', edge_attr=True)
         nx.write_gml(G, snakemake.output.combined_graph)
 
         # Calculate network-level metrics

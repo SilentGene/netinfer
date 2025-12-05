@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """
-Generate interactive HTML network visualization
+Generate interactive HTML network visualization using Pyvis
 """
 
 import pandas as pd
-import numpy as np
 import json
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import networkx as nx
 from pathlib import Path
 import logging
-from typing import Dict, List, Tuple
-import jinja2
+import os
+from typing import Dict, Tuple
+from pyvis.network import Network
 
 def setup_logger(log_file: str) -> logging.Logger:
     """Set up logging to both file and console."""
@@ -34,22 +32,36 @@ def setup_logger(log_file: str) -> logging.Logger:
     
     return logger
 
+def get_color_from_string(s: str) -> str:
+    """Generate a consistent color from a string."""
+    if not s or pd.isna(s):
+        return '#97C2FC' # Default pyvis blue
+    
+    idx = abs(hash(s)) % len(COLORS)
+    return COLORS[idx]
+
 def prepare_network_data(network_df: pd.DataFrame,
-                        taxonomy_df: pd.DataFrame = None,
                         max_edges: int = 10000) -> Tuple[Dict, nx.Graph]:
     """Prepare network data for visualization."""
-    # Create networkx graph
+    
     # Identify available edge attributes
     potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'SpiecEasi', 'PropR', 'Jaccard']
     available_methods = [col for col in potential_methods if col in network_df.columns]
     
-    edge_attrs = ['Num supporting methods'] + available_methods
-    # Also include 'methods' and 'methods_count' if they exist (legacy support)
+    # Handle column name variations for method count
+    if 'Num supporting methods' in network_df.columns:
+        network_df['methods_count'] = network_df['Num supporting methods']
+    elif 'n_methods' in network_df.columns:
+        network_df['methods_count'] = network_df['n_methods']
+    elif 'methods_count' not in network_df.columns:
+        # Fallback: calculate it if missing
+        network_df['methods_count'] = network_df[available_methods].notnull().sum(axis=1)
+    
+    edge_attrs = ['methods_count'] + available_methods
     if 'methods' in network_df.columns:
         edge_attrs.append('methods')
-    if 'methods_count' in network_df.columns:
-        edge_attrs.append('methods_count')
-    
+
+    # Create graph
     G = nx.from_pandas_edgelist(
         network_df,
         'Taxon A',
@@ -58,197 +70,175 @@ def prepare_network_data(network_df: pd.DataFrame,
     )
     
     # Calculate node metrics
-    node_metrics = {
-        'degree': dict(G.degree()),
-        'betweenness': nx.betweenness_centrality(G),
-        'closeness': nx.closeness_centrality(G)
-    }
+    degrees = dict(G.degree())
+    betweenness = nx.betweenness_centrality(G)
+    closeness = nx.closeness_centrality(G)
     
-    # Add taxonomy information if available
-    if taxonomy_df is not None:
-        taxonomy_dict = taxonomy_df.set_index('Feature')['Taxonomy'].to_dict()
-        nx.set_node_attributes(G, taxonomy_dict, 'taxonomy')
+    nx.set_node_attributes(G, degrees, 'degree')
+    nx.set_node_attributes(G, betweenness, 'betweenness')
+    nx.set_node_attributes(G, closeness, 'closeness')
     
-    # Prepare JSON-serializable data
+    # Reconstruct methods list if missing in edge attributes
+    for u, v, data in G.edges(data=True):
+        if 'methods' not in data:
+            found_methods = [m for m in available_methods if pd.notnull(data.get(m))]
+            data['methods'] = "; ".join(found_methods)
+
+    # Prepare JSON data (legacy requirement)
     nodes_data = []
     for node in G.nodes():
         node_data = {
             'id': node,
-            'degree': node_metrics['degree'][node],
-            'betweenness': node_metrics['betweenness'][node],
-            'closeness': node_metrics['closeness'][node]
+            'degree': degrees[node],
+            'betweenness': betweenness[node],
+            'closeness': closeness[node]
         }
-        if taxonomy_df is not None and node in taxonomy_dict:
-            node_data['taxonomy'] = taxonomy_dict[node]
         nodes_data.append(node_data)
-    
+        
     edges_data = []
-    for edge in G.edges(data=True):
-        data = edge[2]
+    for u, v, data in G.edges(data=True):
+        edge_data = {
+            'source': u,
+            'target': v,
+            'methods_count': data.get('methods_count', 0),
+            'methods': data.get('methods', '')
+        }
+        edges_data.append(edge_data)
+
+    # Filter edges if too many
+    if G.number_of_edges() > max_edges:
+        sorted_edges = sorted(G.edges(data=True), key=lambda x: x[2].get('methods_count', 0), reverse=True)
+        edges_to_keep = sorted_edges[:max_edges]
         
-        # Get method count
-        count = data.get('methods_count', data.get('Num supporting methods', 0))
+        # Create new graph with filtered edges
+        G_filtered = nx.Graph()
+        G_filtered.add_edges_from(edges_to_keep)
         
-        # Get list of methods
-        if 'methods' in data:
-            methods_list = data['methods']
-            if isinstance(methods_list, str):
-                methods_list = methods_list.split(';')
-        else:
-            # Reconstruct from available method columns
-            methods_list = [m for m in available_methods if pd.notnull(data.get(m))]
-            
-        edges_data.append({
-            'source': edge[0],
-            'target': edge[1],
-            'methods_count': int(count),
-            'methods': methods_list
-        })
-    
-    # Limit edges if needed
-    if len(edges_data) > max_edges:
-        edges_data.sort(key=lambda x: x['methods_count'], reverse=True)
-        edges_data = edges_data[:max_edges]
-    
+        # Copy node attributes
+        for node in G_filtered.nodes():
+            if node in G.nodes:
+                G_filtered.nodes[node].update(G.nodes[node])
+        
+        G = G_filtered
+        
+        # Update JSON data to match filtered graph
+        nodes_set = set(G.nodes())
+        nodes_data = [n for n in nodes_data if n['id'] in nodes_set]
+        edges_data = [e for e in edges_data if G.has_edge(e['source'], e['target'])]
+
     return {'nodes': nodes_data, 'edges': edges_data}, G
 
-def create_abundance_plot(source: str,
-                        target: str,
-                        abundance_df: pd.DataFrame) -> go.Figure:
-    """Create abundance correlation plot for a pair of taxa."""
-    fig = make_subplots(rows=2, cols=2,
-                       subplot_titles=['Correlation Plot',
-                                     'Abundance Distribution',
-                                     'Time Series'])
+def style_network(G: nx.Graph, params: Dict):
+    """Apply Pyvis styles to the graph."""
     
-    # Correlation plot
-    fig.add_trace(
-        go.Scatter(x=abundance_df[source],
-                  y=abundance_df[target],
-                  mode='markers',
-                  name='Samples'),
-        row=1, col=1
-    )
+    node_size_by = params.get('node_size_by', 'degree')
+    edge_width_by = params.get('edge_width_by', 'weight')
     
-    # Abundance distributions
-    fig.add_trace(
-        go.Box(y=abundance_df[source], name=source),
-        row=1, col=2
-    )
-    fig.add_trace(
-        go.Box(y=abundance_df[target], name=target),
-        row=1, col=2
-    )
-    
-    # Time series
-    fig.add_trace(
-        go.Scatter(y=abundance_df[source],
-                  name=source,
-                  mode='lines'),
-        row=2, col=1
-    )
-    fig.add_trace(
-        go.Scatter(y=abundance_df[target],
-                  name=target,
-                  mode='lines'),
-        row=2, col=1
-    )
-    
-    return fig
+    # Node styling
+    for node in G.nodes():
+        attrs = G.nodes[node]
+        
+        # Size
+        base_size = 10
+        if node_size_by in attrs:
+            val = attrs[node_size_by]
+            # Normalize or scale? For now just simple scaling
+            attrs['size'] = base_size + (val * 2) 
+        else:
+            attrs['size'] = base_size
+            
+        # Color and Group
+        # Default color since taxonomy is removed
+        attrs['color'] = '#97C2FC'
+        attrs['title'] = f"ID: {node}<br>Degree: {attrs.get('degree',0)}"
+            
+        attrs['label'] = str(node)
 
-def generate_html(network_data: Dict,
-                 stats: Dict,
-                 abundance_df: pd.DataFrame) -> str:
-    """Generate HTML visualization."""
-    template = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>NetInfer Network Visualization</title>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
-        <style>
-            body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
-            #network { height: 600px; border: 1px solid lightgray; }
-            #details { margin-top: 20px; }
-            .stats { margin-bottom: 20px; }
-            .plot { height: 400px; }
-        </style>
-    </head>
-    <body>
-        <h1>Network Visualization</h1>
-        <div class="stats">
-            <h2>Network Statistics</h2>
-            <pre>{{ stats | tojson(indent=2) }}</pre>
-        </div>
-        <div id="network"></div>
-        <div id="details">
-            <h2>Edge Details</h2>
-            <div id="abundance-plot" class="plot"></div>
-        </div>
-        <script>
-            const network_data = {{ network_data | tojson }};
-            // Network visualization code here
-            // (Will be implemented in the full version)
-        </script>
-    </body>
-    </html>
-    """
-    
-    return jinja2.Template(template).render(
-        network_data=network_data,
-        stats=stats
-    )
+    # Edge styling
+    for u, v, data in G.edges(data=True):
+        # Width
+        base_width = 1
+        if edge_width_by == 'weight':
+            # Use methods_count as proxy
+            val = data.get('methods_count', 1)
+            data['width'] = val
+        elif edge_width_by in data:
+            data['width'] = data[edge_width_by]
+        else:
+            data['width'] = base_width
+            
+        # Tooltip
+        methods = data.get('methods', '')
+        count = data.get('methods_count', 0)
+        data['title'] = f"Methods ({count}): {methods}"
 
 def main(snakemake):
-    """Main processing function."""
     logger = setup_logger(snakemake.log[0])
-    logger.info("Starting HTML visualization generation")
+    logger.info("Starting Pyvis visualization generation")
     
     try:
-        # Load network data
+        # Load inputs
         network_df = pd.read_csv(snakemake.input.network, sep='\t')
         
-        # Load taxonomy data if available
-        taxonomy_df = None
-        taxonomy_input = snakemake.input.taxonomy
-        # Handle Namedlist or list input from snakemake
-        if isinstance(taxonomy_input, (list, tuple)) or 'Namedlist' in str(type(taxonomy_input)):
-            taxonomy_path = str(taxonomy_input[0]) if len(taxonomy_input) > 0 else ""
-        else:
-            taxonomy_path = str(taxonomy_input)
-
-        if taxonomy_path and Path(taxonomy_path).exists():
-            taxonomy_df = pd.read_csv(taxonomy_path, sep='\t')
-        
-        # Prepare network data
+        # Prepare data
         network_data, G = prepare_network_data(
-            network_df,
-            taxonomy_df,
+            network_df, 
             max_edges=snakemake.params.max_edges
         )
         
-        # Load network statistics
-        with open(snakemake.input.stats) as f:
-            network_stats = json.load(f)
+        # Style graph for Pyvis
+        style_network(G, snakemake.params)
         
-        # Load abundance data
-        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
+        # Generate Pyvis network
+        # use_DOT=False to avoid graphviz dependency if possible, though pyvis doesn't use it by default
+        net = Network(height="800px", width="100%", bgcolor="#ffffff", font_color="black", select_menu=True, filter_menu=True)
+        net.from_nx(G)
         
-        # Generate HTML
-        html_content = generate_html(network_data, network_stats, abundance_df)
+        # Add physics controls
+        net.show_buttons(filter_=['physics'])
         
-        # Save results
-        with open(snakemake.output.html, 'w') as f:
-            f.write(html_content)
+        # Use Barnes-Hut and disable stabilization via valid JSON options (prevents 0% progress hang)
+        net.set_options("""
+        {
+            "physics": {
+                "enabled": true,
+                "solver": "barnesHut",
+                "stabilization": { "enabled": false },
+                "barnesHut": {
+                    "gravitationalConstant": -2000,
+                    "centralGravity": 0.3,
+                    "springLength": 95,
+                    "springConstant": 0.04,
+                    "damping": 0.09,
+                    "avoidOverlap": 0
+                }
+            }
+        }
+        """)
         
+        # Save HTML
+        # Change directory to output folder so lib/ is generated there
+        output_path = Path(snakemake.output.html)
+        output_dir = output_path.parent
+        output_file = output_path.name
+        
+        current_dir = os.getcwd()
+        try:
+            if not output_dir.exists():
+                output_dir.mkdir(parents=True, exist_ok=True)
+            os.chdir(output_dir)
+            net.save_graph(output_file)
+        finally:
+            os.chdir(current_dir)
+        
+        # Save JSON data
         with open(snakemake.output.data, 'w') as f:
             json.dump(network_data, f, indent=2)
-        
-        logger.info("Completed HTML visualization generation")
+            
+        logger.info(f"Saved visualization to {snakemake.output.html}")
         
     except Exception as e:
-        logger.error(f"Error during HTML generation: {str(e)}")
+        logger.error(f"Error during visualization: {str(e)}")
         raise e
 
 if __name__ == "__main__":
