@@ -112,6 +112,7 @@ def create_config(input_file: Optional[str] = None,
                  metadata_file: Optional[str] = None,
                  methods: Optional[List[str]] = None,
                  no_visual: bool = False,
+                 infer_taxonomy: bool = False,
                  base_config_path: Optional[str] = None) -> str:
     """Create a config file for the pipeline run.
     
@@ -122,6 +123,7 @@ def create_config(input_file: Optional[str] = None,
         metadata_file: Metadata table path (overrides config if provided)
         methods: List of methods to enable (overrides config if provided)
         no_visual: Whether to disable visualization (overrides config if provided)
+        infer_taxonomy: Whether to infer taxonomy from abundance table
         base_config_path: Path to base config file (uses default if None)
     
     Returns:
@@ -145,6 +147,9 @@ def create_config(input_file: Optional[str] = None,
         config["input"]["taxonomy_table"] = os.path.abspath(taxonomy_file)
     if metadata_file:
         config["input"]["metadata_table"] = os.path.abspath(metadata_file)
+    
+    # Set infer_taxonomy flag
+    config["infer_taxonomy"] = infer_taxonomy
     
     # Determine output directory (required either from CLI or config)
     if output_dir:
@@ -271,6 +276,12 @@ def main():
     )
     
     parser.add_argument(
+        "--infer-taxonomy",
+        action="store_true",
+        help="Infer taxonomy from feature IDs in the abundance table (looks for 'd__' or 'p__')"
+    )
+    
+    parser.add_argument(
         "--metadata",
         help="Sample metadata file (optional)"
     )
@@ -339,8 +350,10 @@ def main():
             metadata_file=args.metadata,
             methods=methods,
             no_visual=args.no_visual,
+            infer_taxonomy=args.infer_taxonomy,
             base_config_path=args.config
         )
+        logger.info(f"Configuration file created at: {config_path}")
         logger.info(f"Configuration file created at: {config_path}")
         
         # Prepare additional Snakemake args (passthrough)

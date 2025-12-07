@@ -17,6 +17,8 @@ if not abundance_in:
         "Required config 'input.abundance_table' is empty. Set it in config/config.yaml or run via the 'netinfer' CLI with --input."
     )
 
+infer_tax = config.get("infer_taxonomy", False)
+
 rule preprocess_abundance:
     input:
         abundance = abundance_in
@@ -29,7 +31,18 @@ rule preprocess_abundance:
     script:
         "../scripts/preprocess_abundance.py"
 
-if taxonomy_in:
+if infer_tax:
+    rule infer_taxonomy:
+        input:
+            abundance = abundance_in
+        output:
+            processed = f"{outdir}/preprocessed/processed_taxonomy.tsv"
+        threads: 1
+        log:
+            f"{outdir}/logs/infer_taxonomy.log"
+        script:
+            "../scripts/infer_taxonomy.py"
+elif taxonomy_in:
     rule preprocess_taxonomy:
         input:
             taxonomy = taxonomy_in

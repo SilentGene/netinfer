@@ -129,6 +129,7 @@ def get_diff_phyla_edges(final_df: pd.DataFrame) -> pd.DataFrame:
         if pd.isna(taxonomy) or taxonomy == "":
             return "Unknown"
         for part in taxonomy.split(';'):
+            part = part.strip()
             if part.startswith('p__'):
                 return part[3:].strip()
         return "Unknown"
@@ -249,8 +250,9 @@ def main(snakemake):
         final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
 
         # Association between different phyla
-        diff_phyla_df = get_diff_phyla_edges(final_df)
-        diff_phyla_df.to_csv(snakemake.output.diff_phyla_table, sep='\t', index=False)
+        if snakemake.output.diff_phyla_table:
+            diff_phyla_df = get_diff_phyla_edges(final_df)
+            diff_phyla_df.to_csv(snakemake.output.diff_phyla_table, sep='\t', index=False)
         
         # Save network statistics
         with open(snakemake.output.stats, 'w') as f:

@@ -42,7 +42,7 @@ git clone https://github.com/SilentGene/NetInfer.git
 cd NetInfer
 
 # Create and activate conda environment
-conda env create -f environment.yaml  # it takes a while
+conda env create -f environment.yaml  # creates 'netinfer' environment and installs dependencies
 conda activate netinfer
 
 # Install FlashWeave (Julia package)
@@ -61,13 +61,19 @@ julia workflow/scripts/install_flashweave.jl
 # Simple run with all methods enabled and using default settings
 netinfer --input abundance_table.tsv --output results_dir --threads 6
 
-# Specify methods
+# Include taxonomy
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
+
+# I don't have taxonomy, but want to infer from feature IDs
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-taxonomy
+
+# Only use my favorite methods
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman
 
 # Skip visualization
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
 
-# Specify every detail via my own config file
+# Expert: Specify every detail via my own config file
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --config my_config.yaml
 ```
 
@@ -77,7 +83,8 @@ The pipeline generates:
 1. Filtered and processed input data (`results/preprocessed/`)
 2. Individual network files for each method (`results/networks/`)
 3. Aggregated network with consensus scores (`results/networks/aggregated_network.tsv`)
-4. Interactive HTML visualization (`results/visualization/network_viewer.html`)
+4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/phyla_associations.tsv`)
+5. Interactive HTML visualization (`results/visualization/network_viewer.html`)
 
 ## Input File Formats
 
@@ -90,9 +97,9 @@ The pipeline generates:
 
 Example:
 ```
-Feature         Sample1  Sample2  Sample3
-Otu1           100      150      80
-Otu2           50       60       40
+Feature        Sample1  Sample2  Sample3
+OTU1           100      150      80
+OTU2           50       60       40
 ...
 ```
 
@@ -180,8 +187,33 @@ it usually means a previous Snakemake run was interrupted and left a lock behind
 netinfer <original_args> --snake_args="--unlock"
 ```
 
-## Benchmarks
+## ALL flags
+``` 
+$ netinfer --help
+usage: netinfer [-h] [--input INPUT] [--output OUTPUT] [--taxonomy TAXONOMY] 
+                [--infer-taxonomy] [--metadata METADATA] [--methods METHODS] 
+                [--config CONFIG] [--threads THREADS] [--no-visual] 
+                [--snake-args SNAKE_ARGS]
 
+NetInfer: Microbiome Network Inference Pipeline
+
+options:
+  -h, --help            show this help message and exit
+  --input INPUT         Input abundance table file (TSV/CSV/BIOM format). Overrides config file if specified.
+  --output OUTPUT       Output directory for results. Overrides config file if specified.
+  --taxonomy TAXONOMY   Taxonomy mapping file (optional)
+  --infer-taxonomy      Infer taxonomy from feature IDs in the abundance table (looks for 'd__' or 'p__')
+  --metadata METADATA   Sample metadata file (optional)
+  --methods METHODS     Comma-separated list of methods to use (default: all). Available methods: flashweave, flashweaveHE, fastspar,
+                        spearman, spieceasi, propr, jaccard
+  --config CONFIG       Path to a base config YAML file. CLI arguments will override settings in this file. The final merged config will be
+                        saved to the output directory.
+  --threads THREADS     Number of threads to use (default: 1)
+  --no-visual           Skip visualization generation
+  --snake-args, --snake_args SNAKE_ARGS
+                        Additional Snakemake command-line arguments as a single string, e.g. 
+                        --snake-args "--unlock --rerun-incomplete --dry-run"
+```
 
 ## Contributing
 
@@ -206,6 +238,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Heyu Lin - heyu.lin@qut.edu.au
+Heyu Lin - heyu.lin(SHIFT+2)qut.edu.au
 
 Project Link: [https://github.com/SilentGene/NetInfer](https://github.com/SilentGene/NetInfer)

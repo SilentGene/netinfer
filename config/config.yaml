@@ -6,6 +6,9 @@ input:
   taxonomy_table: ""          # Optional taxonomy mapping
   metadata_table: ""          # Optional sample metadata
 
+# Infer taxonomy from abundance table feature IDs
+infer_taxonomy: false
+
 # Output directory
 output_dir: "netinfer_results"
 
