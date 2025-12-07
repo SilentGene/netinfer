@@ -224,7 +224,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 If you use NetInfer in your research, please cite:
 
 ```bibtex
-@software{netinfer2025,
+@software{netinfer,
   author = {Heyu Lin},
   title = {NetInfer: A Snakemake Pipeline for Microbiome Network Inference},
   year = {2025},
@@ -238,6 +238,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Heyu Lin - heyu.lin(SHIFT+2)qut.edu.au
+Heyu Lin - heyu.lin🌀qut.edu.au
 
 Project Link: [https://github.com/SilentGene/NetInfer](https://github.com/SilentGene/NetInfer)
