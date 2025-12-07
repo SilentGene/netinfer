@@ -119,6 +119,30 @@ def calculate_network_metrics(G: nx.Graph) -> Dict:
     
     return metrics
 
+def get_diff_phyla_edges(final_df: pd.DataFrame) -> pd.DataFrame:
+    """Get edges connecting different phyla based on taxonomy columns."""
+    if 'Taxonomy A' not in final_df.columns or 'Taxonomy B' not in final_df.columns:
+        return pd.DataFrame()  # Return empty DataFrame if taxonomy columns are missing
+
+    def extract_phylum(taxonomy: str) -> str:
+        """ Extract the string after p__ in the taxonomy string. """
+        if pd.isna(taxonomy) or taxonomy == "":
+            return "Unknown"
+        for part in taxonomy.split(';'):
+            if part.startswith('p__'):
+                return part[3:].strip()
+        return "Unknown"
+
+    final_df['Phylum A'] = final_df['Taxonomy A'].apply(extract_phylum)
+    final_df['Phylum B'] = final_df['Taxonomy B'].apply(extract_phylum)
+
+    diff_phyla_df = final_df[final_df['Phylum A'] != final_df['Phylum B']].copy()
+    
+    # Drop the temporary phylum columns
+    diff_phyla_df.drop(columns=['Phylum A', 'Phylum B'], inplace=True)
+    
+    return diff_phyla_df
+
 def main(snakemake):
     """Main processing function."""
     logger = setup_logger(snakemake.log[0])
@@ -162,7 +186,8 @@ def main(snakemake):
 
         if taxonomy_path and Path(taxonomy_path).exists():
             taxonomy_df = pd.read_csv(taxonomy_path, sep='\t')
-            taxonomy_dict = taxonomy_df.set_index('Feature')['Taxonomy'].to_dict()
+            # Use first column as Feature and second as Taxonomy, ignoring column names
+            taxonomy_dict = dict(zip(taxonomy_df.iloc[:, 0], taxonomy_df.iloc[:, 1]))
             edge_stats['taxonomy_a'] = edge_stats['source'].map(taxonomy_dict)
             edge_stats['taxonomy_b'] = edge_stats['target'].map(taxonomy_dict)
         
@@ -222,6 +247,10 @@ def main(snakemake):
 
         # Save combined table
         final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
+
+        # Association between different phyla
+        diff_phyla_df = get_diff_phyla_edges(final_df)
+        diff_phyla_df.to_csv(snakemake.output.diff_phyla_table, sep='\t', index=False)
         
         # Save network statistics
         with open(snakemake.output.stats, 'w') as f:

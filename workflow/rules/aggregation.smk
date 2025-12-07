@@ -20,7 +20,8 @@ rule aggregate_networks:
     output:
         combined_table = f"{outdir}/networks/aggregated_network.tsv",
         combined_graph = f"{outdir}/networks/aggregated_network.gml",
-        stats = f"{outdir}/networks/network_statistics.json"
+        stats = f"{outdir}/networks/network_statistics.json",
+        diff_phyla_table = f"{outdir}/networks/different_phyla_associations.tsv" if taxonomy_in else None
     threads: 1
     params:
         trusted_methods = config.get("trusted_methods")
