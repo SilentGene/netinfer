@@ -163,6 +163,12 @@ def main(snakemake):
         
         combined_df = combine_methods(networks, snakemake.params.trusted_methods)
 
+        # Ensure all trusted methods are present as columns (fill with NaN if missing)
+        # This prevents KeyError during sorting if a trusted method produced no edges
+        for method in snakemake.params.trusted_methods:
+            if method not in combined_df.columns:
+                combined_df[method] = np.nan
+
         logger.info(f"Combined {len(combined_df)} edges from trusted methods: {snakemake.params.trusted_methods} and appended weights from other methods")
         # export combined_df
         #combined_df.to_csv("../test/testout/test.out.tsv", sep='\t', index=False)

@@ -113,8 +113,8 @@ OTU2           50       60       40
 Example:
 ```
 Feature  Taxonomy
-Otu1     k__Bacteria;p__Firmicutes;c__Clostridia
-Otu2     k__Bacteria;p__Bacteroidetes;c__Bacteroidia
+OTU1     k__Bacteria;p__Firmicutes;c__Clostridia
+OTU2     k__Bacteria;p__Bacteroidetes;c__Bacteroidia
 ...
 ```
 
@@ -221,7 +221,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Citation
 
-If you use NetInfer in your research, please cite:
+NetInfer has not been published in a peer-reviewed journal yet. If you use NetInfer in your research, please cite:
 
 ```bibtex
 @software{netinfer,
@@ -232,6 +232,16 @@ If you use NetInfer in your research, please cite:
 }
 ```
 
+## Planned features:
+- HTML visualization has not been available yet
+  - Support network visualization
+  - Node/edge ordering/filtering
+  - Keyword search
+  - Export selected sub-networks
+  - Abundance correlation plots (choose one row and plot the abundance of these two features against different samples, and plot a dot plot between these features with regression line and correlation coefficient)
+- Data transformations (e.g., CLR) on abundance data before association analysis
+- A beautiful logo
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -239,5 +249,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 Heyu Lin - heyu.lin🌀qut.edu.au
-
-Project Link: [https://github.com/SilentGene/NetInfer](https://github.com/SilentGene/NetInfer)
