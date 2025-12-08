@@ -73,7 +73,7 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods 
 # Skip visualization
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
 
-# I’m an expert: specify every detail with my own config file
+# I'm an expert: specify every detail with my own config file
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --config my_config.yaml
 ```
 
@@ -137,7 +137,7 @@ Key parameters:
 
 ### FlashWeave
 - P-value threshold: ≤0.001
-- Weight threshold: ≥4.0
+- Weight threshold: ≥0.4
 - Supports normal and heterogeneous modes
 
 ### FastSpar
@@ -235,7 +235,7 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 }
 ```
 
-## Planned features:
+## Planned features
 - HTML visualization has not been available yet
   - Support network visualization
   - Node/edge ordering/filtering

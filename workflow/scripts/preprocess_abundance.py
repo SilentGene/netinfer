@@ -68,18 +68,20 @@ def load_abundance_table(file_path: str, logger: logging.Logger = None) -> pd.Da
 
 def filter_features(df: pd.DataFrame, 
                    min_prevalence: float,
-                   min_abundance: float) -> Tuple[pd.DataFrame, dict]:
-    """Filter features by prevalence and abundance."""
-    # Calculate statistics
-    total_reads = df.sum(axis=1)
-    rel_abundance = df.div(total_reads, axis=0)
-    
-    prevalence = (df > 0).mean()
-    max_abundance = rel_abundance.max()
-    
+                   min_peak_abundance: float) -> Tuple[pd.DataFrame, dict]:
+    """
+    Filter features by two criteria:
+    1. Prevalence: proportion of samples where feature abundance > 0
+    2. Peak abundance: maximum value across samples
+    """
+    num_samples = df.shape[0]
+    # Calculate prevalence
+    prevalence = (df > 0).sum(axis=0) / num_samples
+    # Calculate peak relative abundance
+    peak_abundance = df.max(axis=0)
     # Apply filters
-    mask = (prevalence >= min_prevalence) & (max_abundance >= min_abundance)
-    filtered_df = df.loc[:, mask]
+    to_keep = (prevalence >= min_prevalence) & (peak_abundance >= min_peak_abundance)
+    filtered_df = df.loc[:, to_keep]
     
     # Gather statistics
     stats = {
@@ -87,7 +89,7 @@ def filter_features(df: pd.DataFrame,
         'features_after_filter': filtered_df.shape[1],
         'removed_features': df.shape[1] - filtered_df.shape[1],
         'specified_min_prevalence': min_prevalence,
-        'specified_min_abundance': min_abundance
+        'specified_min_peak_abundance': min_peak_abundance
     }
     
     return filtered_df, stats
@@ -107,7 +109,7 @@ def main(snakemake):
         filtered_df, stats = filter_features(
             abundance_df,
             min_prevalence=snakemake.config['min_prevalence'],
-            min_abundance=snakemake.config['min_abundance']
+            min_peak_abundance=snakemake.config['min_peak_abundance']
         )
         
         # Save filtered table with "#OTU ID" as the index name

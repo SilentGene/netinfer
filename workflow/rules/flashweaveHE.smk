@@ -27,4 +27,18 @@ rule flashweave_he_network:
             --outtable {output.network} \
             --outgraph {output.graph} \
             2> {log}
+
+        # Post-filter by weight threshold (HE mode)
+        python - << 'PY'
+import pandas as pd
+import numpy as np
+path = r"{output.network}"
+thr = float({params.weight})
+df = pd.read_csv(path, sep='\t')
+if df.shape[1] >= 3:
+    weight_col = df.columns[2]
+    df[weight_col] = pd.to_numeric(df[weight_col], errors='coerce')
+    df = df[df[weight_col] >= thr]
+df.to_csv(path, sep='\t', index=False)
+PY
         """

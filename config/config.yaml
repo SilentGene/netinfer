@@ -14,7 +14,7 @@ output_dir: "netinfer_results"
 
 # Prefiltering thresholds
 min_prevalence: 0.1  # OTUs should be present in at least 10% of samples
-min_abundance: 0.001  # OTUs should have at least 0.1% relative abundance in at least one sample
+min_peak_abundance: 0.1  # Minimum required peak (max per-sample) abundance for a OTU (i.e. the max value in a row of the abundance table)
 
 # Trusted methods: Edges must be present in at least one method from these trusted methods to be retained in the final aggregated table.
 trusted_methods:
@@ -26,14 +26,14 @@ trusted_methods:
 flashweave:
   enabled: true
   pvalue_threshold: 0.001
-  weight_threshold: 4.0
+  weight_threshold: 0.4
   heterogeneous: false  # Use normal mode
   threads: 8
 
 flashweaveHE:
   enabled: true
   pvalue_threshold: 0.001
-  weight_threshold: 4.0
+  weight_threshold: 0.4
   heterogeneous: true  # Use HE mode
   threads: 8
 
