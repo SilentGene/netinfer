@@ -53,8 +53,10 @@ def main(snakemake):
 
         taxonomy_data = []
         for feature in features:
-            # Logic: find 'd__' or 'p__'
+            # Logic: find 'd__' or 'k__' as domain info, otherwise find 'p__' as phylum info
             start_idx = feature.find('d__')
+            if start_idx == -1:
+                start_idx = feature.find('k__')
             if start_idx == -1:
                 start_idx = feature.find('p__')
                 

@@ -52,6 +52,8 @@ def load_network_file(file_path: str, method: str, logger: logging.Logger) -> pd
 
 def combine_methods(networks: Dict[str, pd.DataFrame], trusted_methods: List[str]) -> pd.DataFrame:
     """Combine networks from different methods into a single DataFrame."""
+    # Preserve the intended method order from the input dict
+    method_order = list(networks.keys())
     # First, combine trusted methods
     trusted_dfs = [df for method, df in networks.items() if method in trusted_methods and not df.empty]
     if not trusted_dfs:
@@ -68,6 +70,16 @@ def combine_methods(networks: Dict[str, pd.DataFrame], trusted_methods: List[str
     non_trusted_dfs = [df for method, df in networks.items() if method not in trusted_methods and not df.empty]
     for df in non_trusted_dfs:
         combined_df = pd.merge(combined_df, df, on=['source', 'target'], how='left')
+
+    # Ensure columns exist for all methods whose files were present, even if empty
+    # If a method produced no edges, keep its column with NaNs to indicate no associations
+    for method in networks.keys():
+        if method not in combined_df.columns:
+            combined_df[method] = np.nan
+
+    # Reorder columns to keep a stable order: source, target, then methods in method_order
+    ordered_cols = ['source', 'target'] + method_order
+    combined_df = combined_df[[col for col in ordered_cols if col in combined_df.columns]]
 
     return combined_df
 

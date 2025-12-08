@@ -54,8 +54,8 @@ def load_abundance_table(file_path: str, logger: logging.Logger = None) -> pd.Da
     if logger:
         logger.info(f"Loaded table with initial shape {df.shape}")
     
-    # Remove rows starting with 'unmapped' or 'Unmapped'
-    unmapped_mask = df.index.str.lower().str.startswith('unmapped')
+    # Remove rows with the first column equal to 'unmapped' or 'undefined'
+    unmapped_mask = df.index.str.lower().isin(['unmapped', 'undefined'])
     unmapped_count = unmapped_mask.sum()
     df = df[~unmapped_mask]
     

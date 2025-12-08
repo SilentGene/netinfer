@@ -61,10 +61,10 @@ julia workflow/scripts/install_flashweave.jl
 # Simple run with all methods enabled and using default settings
 netinfer --input abundance_table.tsv --output results_dir --threads 6
 
-# Include taxonomy
+# Include taxonomy to allow more information in the output and produce associations between different phyla
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
 
-# I don't have taxonomy, but want to infer from feature IDs
+# I don't have a taxonomy file, but let's try to infer from feature IDs
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-taxonomy
 
 # Only use my favorite methods
@@ -73,7 +73,7 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods 
 # Skip visualization
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
 
-# Expert: Specify every detail via my own config file
+# I’m an expert: specify every detail with my own config file
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --config my_config.yaml
 ```
 
@@ -113,8 +113,8 @@ OTU2           50       60       40
 Example:
 ```
 Feature  Taxonomy
-OTU1     k__Bacteria;p__Firmicutes;c__Clostridia
-OTU2     k__Bacteria;p__Bacteroidetes;c__Bacteroidia
+OTU1     d__Bacteria;p__Firmicutes;c__Clostridia
+OTU2     d__Bacteria;p__Bacteroidetes;c__Bacteroidia
 ...
 ```
 
@@ -188,7 +188,7 @@ netinfer <original_args> --snake_args="--unlock"
 ```
 
 ## ALL flags
-``` 
+```powershell
 $ netinfer --help
 usage: netinfer [-h] [--input INPUT] [--output OUTPUT] [--taxonomy TAXONOMY] 
                 [--infer-taxonomy] [--metadata METADATA] [--methods METHODS] 
@@ -214,6 +214,9 @@ options:
                         Additional Snakemake command-line arguments as a single string, e.g. 
                         --snake-args "--unlock --rerun-incomplete --dry-run"
 ```
+
+### Continue from interrupted runs
+As Snakemake supports resuming from interrupted runs, you can simply re-run the same command to continue from where it left off.
 
 ## Contributing
 
