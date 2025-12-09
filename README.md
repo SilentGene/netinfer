@@ -16,10 +16,10 @@ A Snakemake-based bioinformatics pipeline for inferring co-abundance networks fr
       - [FlashWeave (HE mode/normal mode)](https://github.com/meringlab/FlashWeave.jl)
       - [SPIEC-EASI](https://github.com/zdk123/SpiecEasi)
   - Correlation-based Methods:
-      - [propr](https://www.nature.com/articles/s41598-017-16520-0)
+      - [FastSpar](https://github.com/scwatts/fastspar)
+      - [propR](https://www.nature.com/articles/s41598-017-16520-0)
       - [Spearman correlation with FDR correction](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient)
       - [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index)
-      - [FastSpar](https://github.com/scwatts/fastspar)
 
 
 - Interactive HTML visualization
@@ -133,30 +133,36 @@ Key parameters:
 - Visualization options
 - Resource allocation
 
-## Method Details
+## Method Configurations
 
-### FlashWeave
+**Trusted methods** by default:
+
+> Associations must be present in at least one method from these trusted methods to be retained in the final aggregated table.
+
+### FlashWeave (HE mode/normal mode)
 - P-value threshold: ≤0.001
 - Weight threshold: ≥0.4
 - Supports normal and heterogeneous modes
 
+### SPIEC-EASI
+- Weight threshold: ≥0.5
+- Methods: MB (Meinshausen-Buhlmann, default) or GLasso
+
+**Other methods**:
+
 ### FastSpar
 - P-value threshold: ≤0.05
 - Iterations: 1000
-- Correlation threshold: 0.2
-- Absolute value threshold for correlation coefficient: 0.3
+- Correlation threshold: ≥0.2
+- Absolute value threshold for correlation coefficient: ≥0.3
 - This method is computationally intensive; consider using more threads
+
+### propR
+- Correlation threshold: ≥0.5
 
 ### Spearman
 - FDR threshold: ≤0.05
 - Correlation threshold: ≥0.7
-
-### SPIEC-EASI
-- Weight threshold: ≥0.5
-- Methods: MB (Meinshausen-Buhlmann) or GLasso
-
-### propR
-- Correlation threshold: ≥0.5
 
 ### Jaccard
 - Similarity threshold: ≥0.3

@@ -162,14 +162,14 @@ def main(snakemake):
     logger.info("Starting network aggregation")
     
     try:
-        # Load networks from each method
+        # This is the order that methods will appear in the final table
         networks = {
             'flashweave': load_network_file(snakemake.input.flashweave, 'flashweave', logger),
             'flashweaveHE': load_network_file(snakemake.input.flashweaveHE, 'flashweaveHE', logger),
-            'fastspar': load_network_file(snakemake.input.fastspar, 'fastspar', logger),
-            'spearman': load_network_file(snakemake.input.spearman, 'spearman', logger),
             'spieceasi': load_network_file(snakemake.input.spieceasi, 'spieceasi', logger),
+            'fastspar': load_network_file(snakemake.input.fastspar, 'fastspar', logger),
             'propr': load_network_file(snakemake.input.propr, 'propr', logger),
+            'spearman': load_network_file(snakemake.input.spearman, 'spearman', logger),
             'jaccard': load_network_file(snakemake.input.jaccard, 'jaccard', logger)
         }
         
