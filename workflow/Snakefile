@@ -56,7 +56,3 @@ if config["flashweaveHE"]["enabled"]:
 rule all:
     input:
         final_outputs
-
-# Ensure output directories exist
-for path in [f"{outdir}/networks", f"{outdir}/visualization", f"{outdir}/logs"]:
-    os.makedirs(path, exist_ok=True)

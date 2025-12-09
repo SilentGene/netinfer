@@ -17,8 +17,6 @@ BOOT_DIR = f"{FS_DIR}/bootstrap"
 COR_DIR = f"{FS_DIR}/correlations"
 fastspar_log_dir = f"{outdir}/logs/fastspar_corr"
 
-os.makedirs(fastspar_log_dir, exist_ok=True)
-
 # FastSpar parameters (read from config; no internal defaults)
 BOOT_N = int(config["fastspar"]["bootstraps"])  # number of bootstrap tables
 ITER_N = int(config["fastspar"]["iterations"])   # iterations for fastspar
