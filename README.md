@@ -4,10 +4,7 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-≥9.0.0-brightgreen.svg)](https://snakemake.github.io)
 [![Conda](https://img.shields.io/badge/conda-compatible-brightgreen.svg)](https://docs.conda.io/en/latest/)
 
-A Snakemake-based bioinformatics pipeline for inferring co-abundance networks from microbiome data.
-
-> [!NOTE]
-> NetInfer is still under development. Please use with caution and report any issues on the GitHub repository.
+A Snakemake-based pipeline for inferring microbiome co-abundance networks, integrating multiple inference tools in one workflow.
 
 ## Features
 
