@@ -14,7 +14,7 @@ rule flashweave_he_network:
     params:
         pvalue = config["flashweaveHE"]["pvalue_threshold"],
         weight = config["flashweaveHE"]["weight_threshold"],
-        script = "scripts/run_flashweave.jl"
+        script = f"{workflow.basedir}/scripts/run_flashweave.jl"
     threads: 1
     log:
         f"{outdir}/logs/flashweave_HE.log"

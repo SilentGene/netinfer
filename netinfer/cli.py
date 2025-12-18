@@ -7,7 +7,6 @@ import argparse
 import os
 import sys
 import yaml
-import shutil
 import logging
 import subprocess
 from pathlib import Path
@@ -229,7 +228,7 @@ def create_config(input_file: Optional[str] = None,
     
     return config_path
 
-def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List[str]] = None) -> int:
+def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List[str]] = None, working_dir: Optional[str] = None) -> int:
     """Run the Snakemake pipeline with given configuration.
 
     Uses `python -m snakemake` for compatibility with Snakemake ≥9 where the
@@ -238,6 +237,13 @@ def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List
     workflow_dir = find_workflow_dir()
     snakefile = workflow_dir / "Snakefile"
 
+    # Determine Snakemake working directory
+    # Prefer the explicit working_dir argument (user-specified output directory)
+    snakemake_directory: Optional[str] = None
+    if working_dir:
+        snakemake_directory = os.path.abspath(working_dir)
+
+    # Build base command
     cmd = [
         sys.executable, "-m", "snakemake",
         "--snakefile", str(snakefile),
@@ -246,8 +252,12 @@ def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List
         "--use-conda",
         "--printshellcmds",
         "--show-failed-logs",
-        "--keep-incomplete",
+        "--keep-incomplete"
     ]
+
+    # Force Snakemake working directory to output_dir
+    if snakemake_directory:
+        cmd.extend(["--directory", snakemake_directory])
 
     if extra_snake_args:
         cmd.extend(extra_snake_args)
@@ -380,7 +390,6 @@ def main():
             suffix=args.suffix
         )
         logger.info(f"Configuration file created at: {config_path}")
-        logger.info(f"Configuration file created at: {config_path}")
         
         # Prepare additional Snakemake args (passthrough)
         extra_snake_args: Optional[List[str]] = None
@@ -398,7 +407,8 @@ def main():
 
         # Run pipeline
         logger.info("Starting pipeline execution...")
-        result = run_pipeline(config_path, args.threads, extra_snake_args)
+        # Force Snakemake working directory to the user-specified output directory when provided
+        result = run_pipeline(config_path, args.threads, extra_snake_args, working_dir=args.output)
         
         if result == 0:
             logger.info("Pipeline completed successfully!")
