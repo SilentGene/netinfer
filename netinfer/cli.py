@@ -113,7 +113,8 @@ def create_config(input_file: Optional[str] = None,
                  methods: Optional[List[str]] = None,
                  no_visual: bool = False,
                  infer_taxonomy: bool = False,
-                 base_config_path: Optional[str] = None) -> str:
+                 base_config_path: Optional[str] = None,
+                 suffix: Optional[str] = None) -> str:
     """Create a config file for the pipeline run.
     
     Args:
@@ -150,6 +151,23 @@ def create_config(input_file: Optional[str] = None,
     
     # Set infer_taxonomy flag
     config["infer_taxonomy"] = infer_taxonomy
+
+    # Sanitize and set optional output suffix
+    if suffix:
+        try:
+            import re
+            # Replace any char not alphanumeric, dash or underscore with underscore
+            clean = re.sub(r"[^A-Za-z0-9_-]", "_", suffix.strip())
+            # Collapse multiple underscores
+            clean = re.sub(r"_+", "_", clean)
+            # Trim underscores from ends
+            clean = clean.strip("_")
+        except Exception:
+            clean = suffix.strip()
+        config["suffix"] = clean
+    else:
+        # Ensure key exists for downstream logic
+        config["suffix"] = ""
     
     # Determine output directory (required either from CLI or config)
     if output_dir:
@@ -321,6 +339,13 @@ def main():
             "e.g. --snake-args \"--unlock --rerun-incomplete --dry-run\""
         )
     )
+    parser.add_argument(
+        "--suffix",
+        help=(
+            "Optional suffix to append to final aggregated outputs (inserted before file extension). "
+            "Invalid filename characters will be replaced with '_'"
+        )
+    )
     
     # Parse known args but allow passthrough of unknown ones (to Snakemake)
     args, unknown_snake_args = parser.parse_known_args()
@@ -351,7 +376,8 @@ def main():
             methods=methods,
             no_visual=args.no_visual,
             infer_taxonomy=args.infer_taxonomy,
-            base_config_path=args.config
+            base_config_path=args.config,
+            suffix=args.suffix
         )
         logger.info(f"Configuration file created at: {config_path}")
         logger.info(f"Configuration file created at: {config_path}")

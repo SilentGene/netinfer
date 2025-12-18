@@ -58,14 +58,14 @@ julia workflow/scripts/install_flashweave.jl
 # Simple run with all methods enabled and using default settings
 netinfer --input abundance_table.tsv --output results_dir --threads 6
 
-# Include taxonomy to allow more information in the output and produce associations between different phyla
+# Include taxonomy to allow more information in the output and produce a addictional file with associations between different phyla
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
 
 # I don't have a taxonomy file, but let's try to infer from feature IDs
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-taxonomy
 
-# Only use my favorite methods
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman
+# Only use my favorite methods, and use my own suffix for output files
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman --suffix samples007
 
 # Skip visualization
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
@@ -79,8 +79,8 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --config m
 The pipeline generates:
 1. Filtered and processed input data (`results/preprocessed/`)
 2. Individual network files for each method (`results/networks/`)
-3. Aggregated network with consensus scores (`results/networks/aggregated_network.tsv`)
-4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/phyla_associations.tsv`)
+3. Merged network with consensus scores (`results/networks/merged_edges.tsv`)
+4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/merged_edges_interphyla.tsv`)
 5. Interactive HTML visualization (`results/visualization/network_viewer.html`)
 
 ## Input File Formats
@@ -195,7 +195,7 @@ netinfer <original_args> --snake_args="--unlock"
 $ netinfer --help
 usage: netinfer [-h] [--input INPUT] [--output OUTPUT] [--taxonomy TAXONOMY] 
                 [--infer-taxonomy] [--metadata METADATA] [--methods METHODS] 
-                [--config CONFIG] [--threads THREADS] [--no-visual] 
+                [--config CONFIG] [--threads THREADS] [--no-visual] [--suffix SUFFIX]
                 [--snake-args SNAKE_ARGS]
 
 NetInfer: Microbiome Network Inference Pipeline
@@ -213,6 +213,7 @@ options:
                         saved to the output directory.
   --threads THREADS     Number of threads to use (default: 1)
   --no-visual           Skip visualization generation
+  --suffix SUFFIX       Suffix to append to output files (default: none)
   --snake-args, --snake_args SNAKE_ARGS
                         Additional Snakemake command-line arguments as a single string, e.g. 
                         --snake-args "--unlock --rerun-incomplete --dry-run"

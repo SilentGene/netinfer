@@ -4,6 +4,9 @@ Network aggregation rules
 
 # Get output directory from config
 outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
+# Optional suffix for outputs
+suffix = str(config.get("suffix", "")).strip()
+suffix_tag = f"-{suffix}" if suffix else ""
 taxonomy_in = str(config.get("input", {}).get("taxonomy_table", "")).strip()
 infer_tax = config.get("infer_taxonomy", False)
 has_taxonomy = bool(taxonomy_in) or infer_tax
@@ -20,10 +23,10 @@ rule aggregate_networks:
         taxonomy = f"{outdir}/preprocessed/processed_taxonomy.tsv" if has_taxonomy else [],
         abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
     output:
-        combined_table = f"{outdir}/networks/aggregated_network.tsv",
-        combined_graph = f"{outdir}/networks/aggregated_network.gml",
-        stats = f"{outdir}/networks/network_statistics.json",
-        diff_phyla_table = f"{outdir}/networks/different_phyla_associations.tsv" if has_taxonomy else []
+        combined_table = f"{outdir}/networks/merged_edges{suffix_tag}.tsv",
+        combined_graph = f"{outdir}/networks/merged_network{suffix_tag}.gml",
+        stats = f"{outdir}/networks/network_info{suffix_tag}.json",
+        diff_phyla_table = f"{outdir}/networks/merged_edges_interphyla{suffix_tag}.tsv" if has_taxonomy else []
     threads: 1
     params:
         trusted_methods = config.get("trusted_methods")

@@ -30,8 +30,16 @@ include: "rules/visualization.smk"
 # Get output directory from config and ensure no whitespace
 outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
 
+# Optional suffix for final aggregated outputs
+suffix = str(config.get("suffix", "")).strip()
+suffix_tag = f"-{suffix}" if suffix else ""
+
 # Define final output files
-final_outputs = [f"{outdir}/networks/aggregated_network.tsv", f"{outdir}/networks/aggregated_network.gml", f"{outdir}/networks/network_statistics.json"]
+final_outputs = [
+    f"{outdir}/networks/merged_edges{suffix_tag}.tsv",
+    f"{outdir}/networks/merged_network{suffix_tag}.gml",
+    f"{outdir}/networks/network_info{suffix_tag}.json"
+]
 
 # Add visualization output if enabled
 if config.get("visualization", {}).get("enabled", True):
