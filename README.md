@@ -81,7 +81,7 @@ The pipeline generates:
 2. Individual network files for each method (`results/networks/`)
 3. Merged network with consensus scores (`results/networks/merged_edges.tsv`)
 4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/merged_edges_interphyla.tsv`)
-5. Interactive HTML visualization (`results/visualization/network_viewer.html`)
+5. Interactive HTML visualization (`results/visualization/network_viewer.html`) - *Not available yet*
 
 ## Input File Formats
 
@@ -249,10 +249,8 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 - Data transformations (e.g., CLR) on abundance data before association analysis
 - A beautiful logo
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
 Heyu Lin - heyu.lin🌀qut.edu.au
+
+...🧙‍♂️🧬
