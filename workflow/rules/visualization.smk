@@ -20,8 +20,7 @@ if config.get("visualization", {}).get("enabled", True):
             taxonomy = f"{outdir}/preprocessed/processed_taxonomy.tsv" if taxonomy_in else [],
             metadata = f"{outdir}/preprocessed/processed_metadata.tsv" if metadata_in else []
         output:
-            html = f"{outdir}/visualization/network_viewer.html",
-            data = f"{outdir}/visualization/network_data.json"
+            html = f"{outdir}/visualization/network_viewer.html"
         params:
             max_edges = config["visualization"]["max_edges"],
             node_size_by = config["visualization"]["node_size_by"],
