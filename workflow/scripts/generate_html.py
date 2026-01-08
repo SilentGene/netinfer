@@ -1,244 +1,400 @@
 #!/usr/bin/env python3
 """
-Generate interactive HTML network visualization using Pyvis
+Generate interactive HTML network visualization dashboard
 """
 
 import pandas as pd
 import json
-import networkx as nx
-from pathlib import Path
 import logging
-import os
-from typing import Dict, Tuple
-from pyvis.network import Network
+from pathlib import Path
+import numpy as np
+from scipy import stats
 
 def setup_logger(log_file: str) -> logging.Logger:
-    """Set up logging to both file and console."""
+    """Set up logging."""
     logger = logging.getLogger('generate_html')
     logger.setLevel(logging.INFO)
-    
     fh = logging.FileHandler(log_file)
-    fh.setLevel(logging.INFO)
-    
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    
+    fh.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logger.addHandler(fh)
-    logger.addHandler(ch)
-    
     return logger
 
-def get_color_from_string(s: str) -> str:
-    """Generate a consistent color from a string."""
-    if not s or pd.isna(s):
-        return '#97C2FC' # Default pyvis blue
-    
-    idx = abs(hash(s)) % len(COLORS)
-    return COLORS[idx]
-
-def prepare_network_data(network_df: pd.DataFrame,
-                        max_edges: int = 10000) -> Tuple[Dict, nx.Graph]:
-    """Prepare network data for visualization."""
-    
-    # Identify available edge attributes
+def get_method_columns(df: pd.DataFrame) -> list:
+    """Identify method columns in the network file."""
     potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'SpiecEasi', 'PropR', 'Jaccard']
-    available_methods = [col for col in potential_methods if col in network_df.columns]
-    
-    # Handle column name variations for method count
-    if 'Num supporting methods' in network_df.columns:
-        network_df['methods_count'] = network_df['Num supporting methods']
-    elif 'n_methods' in network_df.columns:
-        network_df['methods_count'] = network_df['n_methods']
-    elif 'methods_count' not in network_df.columns:
-        # Fallback: calculate it if missing
-        network_df['methods_count'] = network_df[available_methods].notnull().sum(axis=1)
-    
-    edge_attrs = ['methods_count'] + available_methods
-    if 'methods' in network_df.columns:
-        edge_attrs.append('methods')
+    return [col for col in potential_methods if col in df.columns]
 
-    # Create graph
-    G = nx.from_pandas_edgelist(
-        network_df,
-        'Taxon A',
-        'Taxon B',
-        edge_attr=edge_attrs
-    )
+def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: logging.Logger) -> dict:
+    """Prepare data structures for the dashboard."""
     
-    # Calculate node metrics
-    degrees = dict(G.degree())
-    betweenness = nx.betweenness_centrality(G)
-    closeness = nx.closeness_centrality(G)
+    # 1. Process Network Data
+    method_cols = get_method_columns(network_df)
+    logger.info(f"Found method columns: {method_cols}")
     
-    nx.set_node_attributes(G, degrees, 'degree')
-    nx.set_node_attributes(G, betweenness, 'betweenness')
-    nx.set_node_attributes(G, closeness, 'closeness')
-    
-    # Reconstruct methods list if missing in edge attributes
-    for u, v, data in G.edges(data=True):
-        if 'methods' not in data:
-            found_methods = [m for m in available_methods if pd.notnull(data.get(m))]
-            data['methods'] = "; ".join(found_methods)
+    # Ensure required columns exist
+    required_cols = ['Taxon A', 'Taxon B']
+    if not all(col in network_df.columns for col in required_cols):
+        raise ValueError(f"Network file missing required columns: {required_cols}")
 
-    # Prepare JSON data (legacy requirement)
-    nodes_data = []
-    for node in G.nodes():
-        node_data = {
-            'id': node,
-            'degree': degrees[node],
-            'betweenness': betweenness[node],
-            'closeness': closeness[node]
-        }
-        nodes_data.append(node_data)
-        
+    # Create a simplified list of edges for the table
     edges_data = []
-    for u, v, data in G.edges(data=True):
-        edge_data = {
-            'source': u,
-            'target': v,
-            'methods_count': data.get('methods_count', 0),
-            'methods': data.get('methods', '')
+    
+    # Collect all unique taxons involved in the network
+    involved_taxa = set(network_df['Taxon A'].unique()) | set(network_df['Taxon B'].unique())
+    logger.info(f"Unique taxa in network: {len(involved_taxa)}")
+
+    for idx, row in network_df.iterrows():
+        edge = {
+            'id': idx,
+            'TaxonA': row['Taxon A'],
+            'TaxonB': row['Taxon B'],
+            'TaxonomyA': row.get('Taxonomy A', 'N/A'),
+            'TaxonomyB': row.get('Taxonomy B', 'N/A'),
+            'methods': {m: row[m] for m in method_cols if pd.notna(row[m])}
         }
-        edges_data.append(edge_data)
+        edges_data.append(edge)
 
-    # Filter edges if too many
-    if G.number_of_edges() > max_edges:
-        sorted_edges = sorted(G.edges(data=True), key=lambda x: x[2].get('methods_count', 0), reverse=True)
-        edges_to_keep = sorted_edges[:max_edges]
-        
-        # Create new graph with filtered edges
-        G_filtered = nx.Graph()
-        G_filtered.add_edges_from(edges_to_keep)
-        
-        # Copy node attributes
-        for node in G_filtered.nodes():
-            if node in G.nodes:
-                G_filtered.nodes[node].update(G.nodes[node])
-        
-        G = G_filtered
-        
-        # Update JSON data to match filtered graph
-        nodes_set = set(G.nodes())
-        nodes_data = [n for n in nodes_data if n['id'] in nodes_set]
-        edges_data = [e for e in edges_data if G.has_edge(e['source'], e['target'])]
-
-    return {'nodes': nodes_data, 'edges': edges_data}, G
-
-def style_network(G: nx.Graph, params: Dict):
-    """Apply Pyvis styles to the graph."""
+    # 2. Process Abundance Data
+    # Filter abundance matrix to include only taxa present in the network
+    # Assumes abundance_df index is Taxon ID
     
-    node_size_by = params.get('node_size_by', 'degree')
-    edge_width_by = params.get('edge_width_by', 'weight')
-    
-    # Node styling
-    for node in G.nodes():
-        attrs = G.nodes[node]
-        
-        # Size
-        base_size = 10
-        if node_size_by in attrs:
-            val = attrs[node_size_by]
-            # Normalize or scale? For now just simple scaling
-            attrs['size'] = base_size + (val * 2) 
-        else:
-            attrs['size'] = base_size
-            
-        # Color and Group
-        # Default color since taxonomy is removed
-        attrs['color'] = '#97C2FC'
-        attrs['title'] = f"ID: {node}<br>Degree: {attrs.get('degree',0)}"
-            
-        attrs['label'] = str(node)
+    # Check if index name matches or if first column is the ID
+    if abundance_df.index.name != 'Taxon A' and abundance_df.index.name != 'featureid':
+        # heuristic to find the taxon column if it's not the index
+        if 'featureid' in abundance_df.columns:
+            abundance_df.set_index('featureid', inplace=True)
+        elif '#OTU ID' in abundance_df.columns:
+             abundance_df.set_index('#OTU ID', inplace=True)
 
-    # Edge styling
-    for u, v, data in G.edges(data=True):
-        # Width
-        base_width = 1
-        if edge_width_by == 'weight':
-            # Use methods_count as proxy
-            val = data.get('methods_count', 1)
-            data['width'] = val
-        elif edge_width_by in data:
-            data['width'] = data[edge_width_by]
-        else:
-            data['width'] = base_width
-            
-        # Tooltip
-        methods = data.get('methods', '')
-        count = data.get('methods_count', 0)
-        data['title'] = f"Methods ({count}): {methods}"
+    # Intersection of taxa
+    valid_taxa = [t for t in involved_taxa if t in abundance_df.index]
+    missing_taxa = involved_taxa - set(valid_taxa)
+    
+    if missing_taxa:
+        logger.warning(f"{len(missing_taxa)} taxa from network not found in abundance file. Example: {list(missing_taxa)[:3]}")
+
+    filtered_abundance = abundance_df.loc[valid_taxa].copy()
+    
+    # Convert to dictionary conforming to: { 'TaxonID': [v1, v2, v3...] }
+    # And keep sample names
+    samples = list(filtered_abundance.columns)
+    abundance_map = filtered_abundance.to_dict(orient='index')
+    
+    # Clean up numpy types for JSON serialization
+    for taxon, data in abundance_map.items():
+        # data is {sample: value} because orient='index'
+        # we want a sorted list of values corresponding to 'samples' list
+        # Actually to preserve order, let's just grab the values in order of 'samples'
+        # But wait, to_dict(orient='index') gives {col: val}, so we can just look them up
+        values = [data.get(s, 0) for s in samples]
+        # Replace NaN with 0 or null
+        abundance_map[taxon] = [float(v) if pd.notnull(v) else 0 for v in values]
+        
+    return {
+        'edges': edges_data,
+        'samples': samples,
+        'abundance': abundance_map
+    }
+
+def generate_html(data_json: str) -> str:
+    """Generate the full HTML content."""
+    
+    html_template = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetInfer Result</title>
+    
+    <!-- Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+    <!-- Simple Linear Regression Library (Inline for simplicity) -->
+    <script>
+    function linearRegression(x, y) {
+        var n = y.length;
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var sum_yy = 0;
+
+        for (var i = 0; i < n; i++) {
+            sum_x += x[i];
+            sum_y += y[i];
+            sum_xy += (x[i] * y[i]);
+            sum_xx += (x[i] * x[i]);
+            sum_yy += (y[i] * y[i]);
+        }
+
+        var slope = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+        var intercept = (sum_y - slope * sum_x) / n;
+        var r2 = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+
+        return { slope: slope, intercept: intercept, r2: r2 };
+    }
+    </script>
+
+    <style>
+        body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        .header { background-color: #f8f9fa; padding: 10px 20px; border-bottom: 1px solid #dee2e6; }
+        .main-content { flex: 1; display: flex; overflow: hidden; }
+        .left-panel { width: 45%; padding: 10px; overflow-y: auto; border-right: 1px solid #dee2e6; }
+        .right-panel { width: 55%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        
+        .plot-container { border: 1px solid #eee; border-radius: 5px; padding: 5px; background: white; min-height: 250px; }
+        .info-box { background: #e9ecef; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        
+        /* Table styles */
+        #networkTable tbody tr { cursor: pointer; }
+        #networkTable tbody tr.selected { background-color: #0d6efd !important; color: white; }
+        /* Wrap long text in table */
+        #networkTable { table-layout: fixed; width: 100%; }
+        #networkTable td { 
+            white-space: normal !important; 
+            word-wrap: break-word !important; 
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h3>NetInfer Result</h3>
+</div>
+
+<div class="main-content">
+    <div class="left-panel">
+        <table id="networkTable" class="table table-striped table-hover table-sm" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Taxon A</th>
+                    <th>Taxon B</th>
+                    <th>Taxonomy A</th>
+                    <th>Taxonomy B</th>
+                    <!-- Hidden columns for searching/data storage if needed -->
+                    <th style="display:none;">ID</th> 
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="right-panel">
+        <div id="infoBox" class="info-box">
+            <strong>Select a row to view details</strong>
+        </div>
+        
+        <div id="lineChart" class="plot-container"></div>
+        <div id="scatterChart" class="plot-container"></div>
+        <div id="barChart" class="plot-container"></div>
+    </div>
+</div>
+
+<script>
+    // Embed data
+    const DATA = ##DATA_PLACEHOLDER##;
+    
+    $(document).ready(function() {
+        // Initialize DataTable
+        const table = $('#networkTable').DataTable({
+            data: DATA.edges,
+            columns: [
+                { data: 'TaxonA' },
+                { data: 'TaxonB' },
+                { data: 'TaxonomyA' },
+                { data: 'TaxonomyB' },
+                { data: 'id', visible: false }
+            ],
+            scrollY: 'calc(100vh - 150px)',
+            scrollCollapse: true,
+            paging: true,
+            lengthMenu: [[20, 50, 100, -1], [20, 50, 100, "All"]],
+            select: true
+        });
+
+        // Row Selection Handler
+        $('#networkTable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                
+                const trData = table.row(this).data();
+                if (trData) {
+                    updateDashboard(trData);
+                }
+            }
+        });
+        
+        // Auto-select first row
+        // if (DATA.edges.length > 0) {
+        //     $('#networkTable tbody tr:first').click();
+        // }
+    });
+
+    function updateDashboard(edge) {
+        // 1. Update Info Box
+        const html = `
+            <h5>Selected Interaction</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Taxon A:</strong> ${edge.TaxonA}<br>
+                    <small class="text-muted text-break">${edge.TaxonomyA}</small>
+                </div>
+                <div class="col-md-6">
+                    <strong>Taxon B:</strong> ${edge.TaxonB}<br>
+                    <small class="text-muted text-break">${edge.TaxonomyB}</small>
+                </div>
+            </div>
+        `;
+        $('#infoBox').html(html);
+
+        const abA = DATA.abundance[edge.TaxonA];
+        const abB = DATA.abundance[edge.TaxonB];
+        const samples = DATA.samples;
+
+        if (!abA || !abB) {
+            console.error("Abundance data missing for one of the taxa");
+            return;
+        }
+
+        // 2. Line Chart (Abundance Profile)
+        const traceA = {
+            x: samples,
+            y: abA,
+            mode: 'lines+markers',
+            name: 'Taxon A',
+            line: {color: '#1f77b4'}
+        };
+        const traceB = {
+            x: samples,
+            y: abB,
+            mode: 'lines+markers',
+            name: 'Taxon B',
+            line: {color: '#ff7f0e'}
+        };
+        
+        const layoutLine = {
+            title: 'Abundance Profile',
+            margin: { t: 30, b: 40, l: 50, r: 20 },
+            showlegend: true,
+            legend: { x: 0, y: 1.1, orientation: 'h' }
+        };
+        
+        Plotly.newPlot('lineChart', [traceA, traceB], layoutLine, {responsive: true});
+
+        // 3. Scatter Plot + Regression
+        // Calculate regression
+        const reg = linearRegression(abA, abB);
+        
+        // Generate regression line points
+        const minX = Math.min(...abA);
+        const maxX = Math.max(...abA);
+        const lineX = [minX, maxX];
+        const lineY = [reg.intercept + reg.slope * minX, reg.intercept + reg.slope * maxX];
+        
+        const scatterTrace = {
+            x: abA,
+            y: abB,
+            text: samples,
+            mode: 'markers',
+            type: 'scatter',
+            name: 'Samples',
+            marker: { color: 'rgba(0,0,0,0.5)' }
+        };
+        
+        const regLineTrace = {
+            x: lineX,
+            y: lineY,
+            mode: 'lines',
+            type: 'scatter',
+            name: 'Regression',
+            line: { color: 'red', dash: 'dash' }
+        };
+        
+        const layoutScatter = {
+            title: `Correlation (R² = ${reg.r2.toFixed(3)}, Slope = ${reg.slope.toFixed(3)})`,
+            xaxis: { title: 'Abundance Taxon A' },
+            yaxis: { title: 'Abundance Taxon B' },
+            margin: { t: 30, b: 40, l: 50, r: 20 },
+            showlegend: false
+        };
+        
+        Plotly.newPlot('scatterChart', [scatterTrace, regLineTrace], layoutScatter, {responsive: true});
+
+        // 4. Bar Chart (Method Weights)
+        const methods = Object.keys(edge.methods);
+        const weights = Object.values(edge.methods);
+        
+        const barTrace = {
+            x: methods,
+            y: weights,
+            text: weights.map(w => typeof w === 'number' ? w.toFixed(4) : w),
+            textposition: 'auto',
+            type: 'bar',
+            marker: {
+                color: '#66c2a5'
+            }
+        };
+        
+        const layoutBar = {
+            title: 'Inference Methods Weights',
+            xaxis: { title: 'Method' },
+            yaxis: { title: 'Weight/Correlation' },
+            margin: { t: 30, b: 40, l: 50, r: 20 }
+        };
+        
+        Plotly.newPlot('barChart', [barTrace], layoutBar, {responsive: true});
+    }
+</script>
+
+</body>
+</html>
+    """
+    
+    return html_template.replace('##DATA_PLACEHOLDER##', data_json)
 
 def main(snakemake):
     logger = setup_logger(snakemake.log[0])
-    logger.info("Starting Pyvis visualization generation")
+    logger.info("Starting dashboard generation")
     
     try:
-        # Load inputs
+        # Load Inputs
+        logger.info(f"Reading network file: {snakemake.input.network}")
         network_df = pd.read_csv(snakemake.input.network, sep='\t')
         
-        # Prepare data
-        network_data, G = prepare_network_data(
-            network_df, 
-            max_edges=snakemake.params.max_edges
-        )
+        logger.info(f"Reading abundance file: {snakemake.input.abundance}")
+        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
         
-        # Style graph for Pyvis
-        style_network(G, snakemake.params)
+        # Prepare Data
+        data = prepare_data(network_df, abundance_df, logger)
         
-        # Generate Pyvis network
-        # use_DOT=False to avoid graphviz dependency if possible, though pyvis doesn't use it by default
-        net = Network(height="800px", width="100%", bgcolor="#ffffff", font_color="black", select_menu=True, filter_menu=True)
-        net.from_nx(G)
+        # Generate HTML
+        data_json = json.dumps(data)
+        html_content = generate_html(data_json)
         
-        # Add physics controls
-        net.show_buttons(filter_=['physics'])
+        # Output
+        out_path = Path(snakemake.output.html)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
         
-        # Use Barnes-Hut and disable stabilization via valid JSON options (prevents 0% progress hang)
-        net.set_options("""
-        {
-            "physics": {
-                "enabled": true,
-                "solver": "barnesHut",
-                "stabilization": { "enabled": false },
-                "barnesHut": {
-                    "gravitationalConstant": -2000,
-                    "centralGravity": 0.3,
-                    "springLength": 95,
-                    "springConstant": 0.04,
-                    "damping": 0.09,
-                    "avoidOverlap": 0
-                }
-            }
-        }
-        """)
-        
-        # Save HTML
-        # Change directory to output folder so lib/ is generated there
-        output_path = Path(snakemake.output.html)
-        output_dir = output_path.parent
-        output_file = output_path.name
-        
-        current_dir = os.getcwd()
-        try:
-            if not output_dir.exists():
-                output_dir.mkdir(parents=True, exist_ok=True)
-            os.chdir(output_dir)
-            net.save_graph(output_file)
-        finally:
-            os.chdir(current_dir)
-        
-        # Save JSON data
-        with open(snakemake.output.data, 'w') as f:
-            json.dump(network_data, f, indent=2)
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write(html_content)
             
-        logger.info(f"Saved visualization to {snakemake.output.html}")
+        logger.info("Successfully generated dashboard")
         
     except Exception as e:
-        logger.error(f"Error during visualization: {str(e)}")
+        logger.error(f"Error: {e}")
         raise e
 
 if __name__ == "__main__":
