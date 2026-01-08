@@ -149,7 +149,7 @@ def generate_html(data_json: str) -> str:
         .left-panel { width: 45%; padding: 10px; overflow-y: auto; border-right: 1px solid #dee2e6; }
         .right-panel { width: 55%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         
-        .plot-container { border: 1px solid #eee; border-radius: 5px; padding: 5px; background: white; min-height: 250px; }
+        .plot-container { border: 1px solid #eee; border-radius: 5px; padding: 5px; background: white; min-height: 350px; }
         .info-box { background: #e9ecef; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         
         /* Table styles */
@@ -162,6 +162,16 @@ def generate_html(data_json: str) -> str:
             word-wrap: break-word !important; 
             word-break: break-word !important;
             overflow-wrap: break-word !important;
+        }
+        /* Scroll container for line chart */
+        .scroll-container { 
+            overflow-x: auto; 
+            width: 100%; 
+            border: 1px solid #eee; 
+            border-radius: 5px; 
+            background: white; 
+            margin-bottom: 10px; 
+            min-height: 350px;
         }
     </style>
 </head>
@@ -194,7 +204,9 @@ def generate_html(data_json: str) -> str:
             <strong>Select a row to view details</strong>
         </div>
         
-        <div id="lineChart" class="plot-container"></div>
+        <div class="scroll-container">
+             <div id="lineChart" style="height: 100%; min-height: 450px;"></div>
+        </div>
         <div id="scatterChart" class="plot-container"></div>
         <div id="barChart" class="plot-container"></div>
     </div>
@@ -285,14 +297,26 @@ def generate_html(data_json: str) -> str:
             line: {color: '#ff7f0e'}
         };
         
+        // Dynamic width calculation
+        const pxPerSample = 30; // Min pixels per sample label
+        const containerWidth = $('.scroll-container').width();
+        const calcWidth = samples.length * pxPerSample;
+        const finalWidth = Math.max(containerWidth, calcWidth);
+
         const layoutLine = {
             title: 'Abundance Profile',
-            margin: { t: 30, b: 40, l: 50, r: 20 },
+            width: finalWidth, // Apply dynamic width
+            height: 450,
+            margin: { t: 40, r: 20 }, // Let automargin handle bottom/left
+            xaxis: {
+                automargin: true,
+                tickangle: 45
+            },
             showlegend: true,
-            legend: { x: 0, y: 1.1, orientation: 'h' }
+            legend: { x: 0, y: 1.2, orientation: 'h' }
         };
         
-        Plotly.newPlot('lineChart', [traceA, traceB], layoutLine, {responsive: true});
+        Plotly.newPlot('lineChart', [traceA, traceB], layoutLine, {responsive: false}); // responsive: false to respect fixed width
 
         // 3. Scatter Plot + Regression
         // Calculate regression
