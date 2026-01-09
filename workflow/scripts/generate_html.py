@@ -50,7 +50,9 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
             'TaxonB': row['Taxon B'],
             'TaxonomyA': row.get('Taxonomy A', 'N/A'),
             'TaxonomyB': row.get('Taxonomy B', 'N/A'),
-            'methods': {m: row[m] for m in method_cols if pd.notna(row[m])}
+            'PrevalenceA': row.get('Prevalence A (%)', 0.0),
+            'PrevalenceB': row.get('Prevalence B (%)', 0.0),
+            'methods': {m: (float(row[m]) if pd.notna(row[m]) else 0.0) for m in method_cols}
         }
         edges_data.append(edge)
 
@@ -105,18 +107,19 @@ def generate_html(data_json: str) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetInfer Result</title>
+    <title>NetInfer</title>
     
     <!-- Dependencies -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
-    <!-- Simple Linear Regression Library (Inline for simplicity) -->
+    <!-- Simple Linear Regression Library -->
     <script>
     function linearRegression(x, y) {
         var n = y.length;
@@ -143,72 +146,287 @@ def generate_html(data_json: str) -> str:
     </script>
 
     <style>
-        body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-        .header { background-color: #f8f9fa; padding: 10px 20px; border-bottom: 1px solid #dee2e6; }
-        .main-content { flex: 1; display: flex; overflow: hidden; }
-        .left-panel { width: 45%; padding: 10px; overflow-y: auto; border-right: 1px solid #dee2e6; }
-        .right-panel { width: 55%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #546e7a;
+            --accent-color: #009688; /* Teal */
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --text-color: #37474f;
+            --text-light: #78909c;
+            --shadow: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.08);
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body { 
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .header { 
+            background-color: var(--card-bg); 
+            padding: 15px 25px; 
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h3 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            letter-spacing: -0.02em;
+        }
+
+        .badge-science {
+            background-color: rgba(0, 150, 136, 0.1);
+            color: var(--accent-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column;
+            overflow-y: auto; 
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .top-section {
+            display: flex;
+            gap: 20px;
+        }
+
+        .bottom-section {
+            height: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-panel { 
+            width: 50%; 
+            min-width: 450px;
+            min-height: 600px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
         
-        .plot-container { border: 1px solid #eee; border-radius: 5px; padding: 5px; background: white; min-height: 350px; }
-        .info-box { background: #e9ecef; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        .left-panel-content {
+            padding: 15px;
+            height: 100%;
+        }
+
+        .right-panel { 
+            width: 50%; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px;
+            padding-right: 5px; /* Space for scrollbar */
+        }
         
-        /* Table styles */
-        #networkTable tbody tr { cursor: pointer; }
-        #networkTable tbody tr.selected { background-color: #0d6efd !important; color: white; }
-        /* Wrap long text in table */
-        #networkTable { table-layout: fixed; width: 100%; }
+        /* Cards */
+        .chart-wrapper, .info-box, .scroll-container { 
+            border-radius: 8px; 
+            padding: 20px; 
+            background: var(--card-bg); 
+            min-height: 300px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-box { 
+            min-height: auto;
+            background: linear-gradient(to right, #ffffff, #fafafa);
+        }
+        
+        .taxon-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        /* Table Aesthetics */
+        #networkTable {
+            width: 100% !important;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.78rem;
+        }
+        
+        #networkTable thead th {
+            font-weight: 600;
+            color: var(--secondary-color);
+            background-color: #f8f9fa;
+            border-bottom: 2px solid var(--border-color);
+            padding: 12px 10px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.03em;
+        }
+
         #networkTable td { 
             white-space: normal !important; 
             word-wrap: break-word !important; 
             word-break: break-word !important;
             overflow-wrap: break-word !important;
+            padding: 12px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--text-color);
         }
-        /* Scroll container for line chart */
-        .scroll-container { 
-            overflow-x: auto; 
-            width: 100%; 
-            border: 1px solid #eee; 
-            border-radius: 5px; 
-            background: white; 
-            margin-bottom: 10px; 
-            min-height: 350px;
+        
+        #networkTable tbody tr { transition: background-color 0.15s; }
+        #networkTable tbody tr:hover { background-color: #f1f8e9; }
+        #networkTable tbody tr.selected { 
+            background-color: #b2dfdb !important; 
+            color: #004d40 !important;
+        }
+        /* Fix for DataTables Bootstrap 5 which uses box-shadow on cells */
+        #networkTable tbody tr.selected > * {
+            box-shadow: inset 0 0 0 9999px #b2dfdb !important;
+            color: #004d40 !important;
+        }
+
+        /* Pagination Styling */
+        .page-item.active .page-link {
+            background-color: var(--accent-color) !important;
+            border-color: var(--accent-color) !important;
+            color: #fff !important;
+        }
+        .page-link {
+            color: var(--accent-color) !important;
+        }
+        .page-link:hover {
+            color: var(--secondary-color) !important;
+            background-color: #e0f2f1 !important;
+        }
+        .page-link:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 150, 136, 0.25) !important;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cfd8dc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b0bec5; }
+        
+        .dataTables_wrapper .dataTables_info {
+            font-size: 0.8rem !important;
+            color: var(--text-light) !important;
+            padding-top: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-left: 8px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.1);
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h3>NetInfer Result</h3>
+    <h3>NetInfer</h3>
+    <span class="badge-science">Analysis Dashboard</span>
 </div>
 
 <div class="main-content">
-    <div class="left-panel">
-        <table id="networkTable" class="table table-striped table-hover table-sm" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Taxon A</th>
-                    <th>Taxon B</th>
-                    <th>Taxonomy A</th>
-                    <th>Taxonomy B</th>
-                    <!-- Hidden columns for searching/data storage if needed -->
-                    <th style="display:none;">ID</th> 
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="right-panel">
-        <div id="infoBox" class="info-box">
-            <strong>Select a row to view details</strong>
+    <div class="top-section">
+        <div class="left-panel">
+            <div class="left-panel-content">
+                <div style="padding-bottom: 10px; font-size: 16px;">
+                    <b style="color: #455a64;">Network Interactions</b>
+                </div>
+                <table id="networkTable" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Taxon A</th>
+                            <th style="width: 25%">Taxon B</th>
+                            <th style="width: 25%">Taxonomy A</th>
+                            <th style="width: 25%">Taxonomy B</th>
+                            <th style="display:none;">ID</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
-        <div class="scroll-container">
-             <div id="lineChart" style="height: 100%; min-height: 450px;"></div>
+        <div class="right-panel">
+            <div id="infoBox" class="info-box">
+                <div class="text-center text-muted" style="padding: 20px;">
+                    <em>Select an interaction from the table to visualize details.</em>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Wrapper for styling (padding/bg) -->
+                    <div class="chart-wrapper">
+                        <div id="scatterChart"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Wrapper for styling (padding/bg) -->
+                    <div class="chart-wrapper">
+                        <div id="barChart"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="scatterChart" class="plot-container"></div>
-        <div id="barChart" class="plot-container"></div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="scroll-container">
+             <div id="lineChart"></div>
+        </div>
     </div>
 </div>
 
@@ -216,6 +434,29 @@ def generate_html(data_json: str) -> str:
     // Embed data
     const DATA = ##DATA_PLACEHOLDER##;
     
+    // Plotly common config
+    const PLOT_CONFIG = {
+        responsive: true,
+        displayModeBar: 'hover'
+    };
+    
+    const PLOT_TEMPLATE = 'plotly_white';
+    const COLOR_A = '#26a69a'; // Teal Light
+    const COLOR_B = '#f5a233'; // Yellow
+    const COLOR_REG = '#37474f'; // Dark Grey
+    
+    // Method Colors
+    const METHOD_COLORS = {
+        'FlashWeave': '#009688',    // Teal
+        'FlashWeaveHE': '#00695c',  // Dark Teal
+        'FastSpar': '#1E88E5',      // Blue
+        'Spearman': '#8E24AA',      // Purple
+        'SpiecEasi': '#E53935',     // Red
+        'PropR': '#FB8C00',         // Orange
+        'Jaccard': '#546E7A'        // Blue Grey
+    };
+    const DEFAULT_COLOR = '#90A4AE';
+
     $(document).ready(function() {
         // Initialize DataTable
         const table = $('#networkTable').DataTable({
@@ -227,17 +468,24 @@ def generate_html(data_json: str) -> str:
                 { data: 'TaxonomyB' },
                 { data: 'id', visible: false }
             ],
-            scrollY: 'calc(100vh - 150px)',
-            scrollCollapse: true,
             paging: true,
-            lengthMenu: [[20, 50, 100, -1], [20, 50, 100, "All"]],
-            select: true
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+            select: {
+                style: 'single'
+            },
+            language: {
+                search: "",
+                searchPlaceholder: "Search interactions...",
+                info: "Showing _START_ to _END_ of _TOTAL_ edges"
+            },
+            dom: '<"d-flex justify-content-between align-items-center mb-3"lf>rtip'
         });
 
         // Row Selection Handler
         $('#networkTable tbody').on('click', 'tr', function () {
             if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
+                // Do nothing if already selected to avoid clearing
             } else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
@@ -248,25 +496,32 @@ def generate_html(data_json: str) -> str:
                 }
             }
         });
-        
-        // Auto-select first row
-        // if (DATA.edges.length > 0) {
-        //     $('#networkTable tbody tr:first').click();
-        // }
     });
 
     function updateDashboard(edge) {
         // 1. Update Info Box
         const html = `
-            <h5>Selected Interaction</h5>
+            <div style="padding-bottom: 10px; font-size: 16px;">
+                <b style="color: #455a64;">Selected Interaction Overview</b>
+            </div>
             <div class="row">
-                <div class="col-md-6">
-                    <strong>Taxon A:</strong> ${edge.TaxonA}<br>
-                    <small class="text-muted text-break">${edge.TaxonomyA}</small>
+                <div class="col-md-6 border-end">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <div class="w-100 text-start"><span class="taxon-badge" style="background-color: ${COLOR_A}">Taxon A</span></div>
+                        <span class="mb-1 fw-bold">${edge.TaxonA}</span>
+                        <small class="text-muted text-break mb-3" style="font-size: 0.8em; line-height: 1.4;">${edge.TaxonomyA}</small>
+                        <div id="prevChartA" style="width: 120px; height: 120px;"></div>
+                        <div class="text-muted mt-1" style="font-size: 0.75rem;">Prevalence</div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <strong>Taxon B:</strong> ${edge.TaxonB}<br>
-                    <small class="text-muted text-break">${edge.TaxonomyB}</small>
+                <div class="col-md-6 ps-4">
+                     <div class="d-flex flex-column align-items-center text-center">
+                        <div class="w-100 text-start"><span class="taxon-badge" style="background-color: ${COLOR_B}">Taxon B</span></div>
+                        <span class="mb-1 fw-bold">${edge.TaxonB}</span>
+                        <small class="text-muted text-break mb-3" style="font-size: 0.8em; line-height: 1.4;">${edge.TaxonomyB}</small>
+                        <div id="prevChartB" style="width: 120px; height: 120px;"></div>
+                        <div class="text-muted mt-1" style="font-size: 0.75rem;">Prevalence</div>
+                    </div>
                 </div>
             </div>
         `;
@@ -287,44 +542,91 @@ def generate_html(data_json: str) -> str:
             y: abA,
             mode: 'lines+markers',
             name: 'Taxon A',
-            line: {color: '#1f77b4'}
+            line: {color: COLOR_A, width: 2},
+            marker: {size: 6}
         };
         const traceB = {
             x: samples,
             y: abB,
             mode: 'lines+markers',
             name: 'Taxon B',
-            line: {color: '#ff7f0e'}
+            line: {color: COLOR_B, width: 2},
+            marker: {size: 6}
         };
         
         // Dynamic width calculation
-        const pxPerSample = 30; // Min pixels per sample label
-        const containerWidth = $('.scroll-container').width();
+        const pxPerSample = 30; 
+        const containerWidth = $('.scroll-container').width() - 40; // Adjust for padding
         const calcWidth = samples.length * pxPerSample;
         const finalWidth = Math.max(containerWidth, calcWidth);
 
         const layoutLine = {
-            title: 'Abundance Profile',
-            width: finalWidth, // Apply dynamic width
+            title: { text: '<b style="color: #455a64;">Abundance Profile</b>', font: { size: 16 }, x: 0, xanchor: 'left'},
+            width: finalWidth,
             height: 450,
-            margin: { t: 40, r: 20 }, // Let automargin handle bottom/left
+            template: PLOT_TEMPLATE,
+            margin: { t: 40, r: 20, l: 50, b: 80 },
             xaxis: {
                 automargin: true,
-                tickangle: 45
+                tickangle: 45,
+                gridcolor: '#f0f0f0'
+            },
+            yaxis: {
+                gridcolor: '#f0f0f0',
+                zerolinecolor: '#e0e0e0'
             },
             showlegend: true,
-            legend: { x: 0, y: 1.2, orientation: 'h' }
+            legend: { 
+                x: 0.02, 
+                y: 0.98, 
+                xanchor: 'left', 
+                yanchor: 'top', 
+                bgcolor: 'rgba(255, 255, 255, 0.8)',
+                bordercolor: '#000000',
+                borderwidth: 1
+            },
+            font: { family: 'Inter' }
         };
         
-        Plotly.newPlot('lineChart', [traceA, traceB], layoutLine, {responsive: false}); // responsive: false to respect fixed width
+        Plotly.newPlot('lineChart', [traceA, traceB], layoutLine, {responsive: false, displayModeBar: 'hover'});
+
+        // 2.5 Prevalence Donut Charts
+        function renderDonut(divId, value, color, name) {
+            const data = [{
+                values: [value, 100 - value],
+                labels: ['Present', 'Absent'],
+                type: 'pie',
+                hole: 0.7,
+                marker: { colors: [color, '#f5f5f5'] },
+                textinfo: 'none',
+                hoverinfo: 'label+percent',
+                showlegend: false
+            }];
+            const layout = {
+                height: 120,
+                width: 120,
+                margin: { t: 0, b: 0, l: 0, r: 0 },
+                annotations: [{
+                    text: value.toFixed(1) + '%',
+                    showarrow: false,
+                    font: { size: 14, weight: 'bold', color: color }
+                }],
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)'
+            };
+            Plotly.newPlot(divId, data, layout, {displayModeBar: false, staticPlot: false});
+        }
+        
+        renderDonut('prevChartA', edge.PrevalenceA, COLOR_A, 'Taxon A');
+        renderDonut('prevChartB', edge.PrevalenceB, COLOR_B, 'Taxon B');
 
         // 3. Scatter Plot + Regression
-        // Calculate regression
         const reg = linearRegression(abA, abB);
         
-        // Generate regression line points
         const minX = Math.min(...abA);
         const maxX = Math.max(...abA);
+        // Extend line slightly for visuals
+        const span = maxX - minX;
         const lineX = [minX, maxX];
         const lineY = [reg.intercept + reg.slope * minX, reg.intercept + reg.slope * maxX];
         
@@ -335,7 +637,12 @@ def generate_html(data_json: str) -> str:
             mode: 'markers',
             type: 'scatter',
             name: 'Samples',
-            marker: { color: 'rgba(0,0,0,0.5)' }
+            marker: { 
+                color: '#546e7a',
+                size: 8,
+                opacity: 0.6,
+                line: { color: 'white', width: 1 }
+            }
         };
         
         const regLineTrace = {
@@ -344,42 +651,56 @@ def generate_html(data_json: str) -> str:
             mode: 'lines',
             type: 'scatter',
             name: 'Regression',
-            line: { color: 'red', dash: 'dash' }
+            line: { color: COLOR_REG, dash: 'dash', width: 2 }
         };
         
         const layoutScatter = {
-            title: `Correlation (R² = ${reg.r2.toFixed(3)}, Slope = ${reg.slope.toFixed(3)})`,
-            xaxis: { title: 'Abundance Taxon A' },
-            yaxis: { title: 'Abundance Taxon B' },
-            margin: { t: 30, b: 40, l: 50, r: 20 },
-            showlegend: false
+
+            title: { 
+                text: `<b style="color: #455a64;">Correlation</b><br><span style="font-size: 13px; color: #546e7a;">R² = ${reg.r2.toFixed(3)}, Slope = ${reg.slope.toFixed(3)}</span>`, 
+                font: { size: 16 }, 
+                x: 0, 
+                xanchor: 'left',
+                margin: { b: 30 }
+            },
+            height: 300,
+            template: PLOT_TEMPLATE,
+            xaxis: { title: 'Abundance Taxon A', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            yaxis: { title: 'Abundance Taxon B', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            margin: { t: 40, b: 40, l: 50, r: 20 },
+            showlegend: false,
+            font: { family: 'Inter' }
         };
         
-        Plotly.newPlot('scatterChart', [scatterTrace, regLineTrace], layoutScatter, {responsive: true});
+        Plotly.newPlot('scatterChart', [scatterTrace, regLineTrace], layoutScatter, PLOT_CONFIG);
 
-        // 4. Bar Chart (Method Weights)
+        // 4. Bar Chart
         const methods = Object.keys(edge.methods);
         const weights = Object.values(edge.methods);
         
         const barTrace = {
             x: methods,
             y: weights,
-            text: weights.map(w => typeof w === 'number' ? w.toFixed(4) : w),
+            text: weights.map(w => typeof w === 'number' ? w.toFixed(2) : w),
             textposition: 'auto',
             type: 'bar',
             marker: {
-                color: '#66c2a5'
+                color: COLOR_A,
+                opacity: 0.8
             }
         };
         
         const layoutBar = {
-            title: 'Inference Methods Weights',
-            xaxis: { title: 'Method' },
-            yaxis: { title: 'Weight/Correlation' },
-            margin: { t: 30, b: 40, l: 50, r: 20 }
+            title: { text: '<b style="color: #455a64;">Inference Methods Weights</b>', font: { size: 16 }, x: 0, xanchor: 'left' },
+            height: 300,
+            template: PLOT_TEMPLATE,
+            xaxis: { gridcolor: '#f0f0f0', automargin: true },
+            yaxis: { title: 'Weight/Correlation', gridcolor: '#f0f0f0' },
+            margin: { t: 40, b: 40, l: 50, r: 20 },
+            font: { family: 'Inter' }
         };
         
-        Plotly.newPlot('barChart', [barTrace], layoutBar, {responsive: true});
+        Plotly.newPlot('barChart', [barTrace], layoutBar, PLOT_CONFIG);
     }
 </script>
 
