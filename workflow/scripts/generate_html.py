@@ -98,7 +98,7 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
         'abundance': abundance_map
     }
 
-def generate_html(data_json: str) -> str:
+def generate_html(data_json: str, logo_svg: str = "") -> str:
     """Generate the full HTML content."""
     
     html_template = """
@@ -118,7 +118,7 @@ def generate_html(data_json: str) -> str:
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <!-- Simple Linear Regression Library -->
     <script>
     function linearRegression(x, y) {
@@ -171,13 +171,23 @@ def generate_html(data_json: str) -> str:
         }
 
         .header { 
-            background-color: var(--card-bg); 
             padding: 15px 25px; 
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
             z-index: 10;
             display: flex;
             align-items: center;
+        }
+
+        .header-logo {
+            width: 60px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logo svg {
+            width: 100%;
+            height: 100%;
         }
 
         .header h3 {
@@ -186,6 +196,20 @@ def generate_html(data_json: str) -> str:
             font-size: 1.2rem;
             color: var(--primary-color);
             letter-spacing: -0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+        }
+
+        .header-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-link:hover h3 {
+            color: var(--accent-color);
+            transform: translateY(-1px) scale(1.02);
+            text-shadow: 0 4px 8px rgba(0, 150, 136, 0.15);
         }
 
         .badge-science {
@@ -258,17 +282,10 @@ def generate_html(data_json: str) -> str:
 
         .info-box { 
             min-height: auto;
-            background: linear-gradient(to right, #ffffff, #fafafa);
-        }
-        
-        .taxon-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 4px;
-            color: white;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.9em;
+            background: var(--card-bg);
+            border: none;
+            box-shadow: none;
+            padding: 20px;
         }
         
         .section-label {
@@ -290,18 +307,18 @@ def generate_html(data_json: str) -> str:
             width: 100% !important;
             border-collapse: separate;
             border-spacing: 0;
-            font-size: 0.78rem;
+            font-size: 0.65rem;
         }
         
         #networkTable thead th {
-            font-weight: 600;
-            color: var(--secondary-color);
-            background-color: #f8f9fa;
-            border-bottom: 2px solid var(--border-color);
+            font-weight: 700;
+            color: var(--accent-color);
+            background-color: #f8f8f8;
+            border-bottom: none;
             padding: 12px 10px;
             text-transform: uppercase;
             font-size: 0.7rem;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
         }
 
         #networkTable td { 
@@ -309,7 +326,6 @@ def generate_html(data_json: str) -> str:
             word-wrap: break-word !important; 
             word-break: break-word !important;
             overflow-wrap: break-word !important;
-            padding: 12px 10px;
             border-bottom: 1px solid #f0f0f0;
             color: var(--text-color);
         }
@@ -327,13 +343,19 @@ def generate_html(data_json: str) -> str:
         }
 
         /* Pagination Styling */
+        .dataTables_paginate {
+            font-size: 0.75rem;
+        }
+        .page-link {
+            padding: 5px 10px !important;
+            color: var(--accent-color) !important;
+            font-size: 1rem;
+            border: none;
+        }
         .page-item.active .page-link {
             background-color: var(--accent-color) !important;
             border-color: var(--accent-color) !important;
             color: #fff !important;
-        }
-        .page-link {
-            color: var(--accent-color) !important;
         }
         .page-link:hover {
             color: var(--secondary-color) !important;
@@ -341,6 +363,10 @@ def generate_html(data_json: str) -> str:
         }
         .page-link:focus {
             box-shadow: 0 0 0 0.25rem rgba(0, 150, 136, 0.25) !important;
+        }
+        .pagination {
+            --bs-pagination-disabled-bg: none;
+            --bs-pagination-disabled-color: var(--text-color);
         }
 
         /* Scrollbar Styling */
@@ -368,26 +394,126 @@ def generate_html(data_json: str) -> str:
             box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.1);
         }
 
-        .method-selector {
-            font-size: 0.8rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-            background-color: #fff;
-            color: var(--text-color);
-            outline: none;
-            transition: border-color 0.2s;
-            cursor: pointer;
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
         }
+
+        .table-controls-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .table-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dataTables_wrapper .dataTables_length, 
+        .dataTables_wrapper .dataTables_filter {
+            margin: 0 !important;
+            float: none !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            width: 200px;
+            height: 36px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 0 14px;
+            font-size: 0.85rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #f0f2f5;
+            color: #1a1a1a;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:hover {
+            background-color: #e4e6e9;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: var(--accent-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+            width: 240px;
+        }
+
+        .method-selector {
+            height: 32px;
+            padding: 0 30px 0 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23666' d='M0 2l4 4 4-4H0z'/%3E%3C/svg%3E") no-repeat right 10px center;
+            background-size: 8px 8px;
+            appearance: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
         .method-selector:focus {
             border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+        }
+
+        .form-control-sm {
+            background-color: #f8f8f8;
+        }
+
+        .form-control-sm:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 .25rem rgba(49, 165, 154, 0.25);
+        }
+
+        .form-select-sm:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 .25rem rgba(49, 165, 154, 0.25);
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            height: 36px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            padding: 0 8px;
+            font-size: 0.85rem;
+            transition: border-color 0.2s;
+        }
+
+        .dataTables_wrapper .dataTables_length select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+        }
+
+        .control-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h3>NetInfer</h3>
+    <a href="https://github.com/SilentGene/netinfer" target="_blank" class="header-link">
+        <div class="header-logo">##LOGO_PLACEHOLDER##</div>
+        <h3>NetInfer Result</h3>
+    </a>
     <span class="badge-science">Analysis Dashboard</span>
 </div>
 
@@ -395,13 +521,15 @@ def generate_html(data_json: str) -> str:
     <div class="top-section">
         <div class="left-panel">
             <div class="left-panel-content">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div style="font-size: 16px;">
-                        <b style="color: #455a64;">Network Interactions</b>
+                <div class="table-controls">
+                    <div class="table-controls-left">
+                        <b style="color: #2c3e50; font-size: 1.1rem; margin-right: 10px;">Network Interactions</b>
                     </div>
-                    <div>
-                        <span class="text-muted me-2" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">Method:</span>
-                        <select id="methodSelect" class="method-selector"></select>
+                    <div class="table-controls-right" id="customTableTools" style="display: flex; align-items: center; gap: 15px;">
+                        <div class="d-flex align-items-center">
+                            <select id="methodSelect" class="method-selector"></select>
+                        </div>
+                        <!-- DataTables Search and Length flow into here -->
                     </div>
                 </div>
                 <table id="networkTable" class="table table-hover" style="width:100%">
@@ -424,7 +552,7 @@ def generate_html(data_json: str) -> str:
         <div class="right-panel">
             <div id="infoBox" class="info-box">
                 <div class="text-center text-muted" style="padding: 20px;">
-                    <em>Select an interaction from the table to visualize details.</em>
+                    <em>Select an interaction from the table to start visualizing.</em>
                 </div>
             </div>
             
@@ -466,18 +594,6 @@ def generate_html(data_json: str) -> str:
     const COLOR_A = '#26a69a'; // Teal Light
     const COLOR_B = '#f5a233'; // Yellow
     const COLOR_REG = '#37474f'; // Dark Grey
-    
-    // Method Colors
-    const METHOD_COLORS = {
-        'FlashWeave': '#009688',    // Teal
-        'FlashWeaveHE': '#00695c',  // Dark Teal
-        'FastSpar': '#1E88E5',      // Blue
-        'Spearman': '#8E24AA',      // Purple
-        'SpiecEasi': '#E53935',     // Red
-        'PropR': '#FB8C00',         // Orange
-        'Jaccard': '#546E7A'        // Blue Grey
-    };
-    const DEFAULT_COLOR = '#90A4AE';
 
     $(document).ready(function() {
         // Initialize Methods Dropdown
@@ -516,11 +632,21 @@ def generate_html(data_json: str) -> str:
             },
             language: {
                 search: "",
-                searchPlaceholder: "Search interactions...",
-                info: "Showing _START_ to _END_ of _TOTAL_ edges"
+                searchPlaceholder: "Search anything...",
+                lengthMenu: "_MENU_",
+                info: "Showing _START_ to _END_ of _TOTAL_ edges",
+                'paginate': {
+                    'previous': '<',
+                    'next': '>'
+                }
             },
-            dom: '<"d-flex justify-content-between align-items-center mb-3"lf>rtip'
+            dom: '<"table-header-custom"lf>rtip'
         });
+
+        // Move the DataTables controls into our custom container
+        $('.dataTables_length').prepend('<span class="control-label">Show</span>');
+        $('.table-header-custom').appendTo('#customTableTools');
+        $('.table-header-custom').css({'display': 'flex', 'gap': '15px', 'align-items': 'center'});
 
         // Handle Method Change
         $methodSelect.on('change', function() {
@@ -548,26 +674,30 @@ def generate_html(data_json: str) -> str:
     function updateDashboard(edge) {
         // 1. Update Info Box
         const html = `
-            <div style="padding-bottom: 10px; font-size: 16px;">
+            <div style="padding-bottom: 15px; font-size: 16px;">
                 <b style="color: #455a64;">Selected Interaction Overview</b>
             </div>
-            <div class="row">
-                <div class="col-md-6 border-end">
-                    <div class="d-flex flex-column align-items-center text-center">
-                        <div class="w-100 text-start"><span class="taxon-badge" style="background-color: ${COLOR_A}">Taxon A</span></div>
-                        <span class="mb-1 fw-bold">${edge.TaxonA}</span>
-                        <small class="text-muted text-break mb-3" style="font-size: 0.8em; line-height: 1.4;">${edge.TaxonomyA}</small>
-                        <div id="prevChartA" style="width: 120px; height: 120px;"></div>
-                        <div class="text-muted mt-1" style="font-size: 0.75rem;">Prevalence</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div style="background: ${COLOR_A}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(38, 166, 154, 0.15); display: flex; flex-direction: column;">
+                        <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon A</div>
+                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all;">${edge.TaxonA}</h4>
+                        <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyA}</div>
+                        <div class="mt-auto d-flex flex-column align-items-center">
+                            <div id="prevChartA" style="width: 100px; height: 100px;"></div>
+                            <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 5px; opacity: 0.8;">Prevalence</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 ps-4">
-                     <div class="d-flex flex-column align-items-center text-center">
-                        <div class="w-100 text-start"><span class="taxon-badge" style="background-color: ${COLOR_B}">Taxon B</span></div>
-                        <span class="mb-1 fw-bold">${edge.TaxonB}</span>
-                        <small class="text-muted text-break mb-3" style="font-size: 0.8em; line-height: 1.4;">${edge.TaxonomyB}</small>
-                        <div id="prevChartB" style="width: 120px; height: 120px;"></div>
-                        <div class="text-muted mt-1" style="font-size: 0.75rem;">Prevalence</div>
+                <div class="col-md-6">
+                    <div style="background: ${COLOR_B}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(245, 162, 51, 0.15); display: flex; flex-direction: column;">
+                        <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon B</div>
+                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all;">${edge.TaxonB}</h4>
+                        <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyB}</div>
+                        <div class="mt-auto d-flex flex-column align-items-center">
+                            <div id="prevChartB" style="width: 100px; height: 100px;"></div>
+                            <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 5px; opacity: 0.8;">Prevalence</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -643,20 +773,20 @@ def generate_html(data_json: str) -> str:
                 values: [value, 100 - value],
                 labels: ['Present', 'Absent'],
                 type: 'pie',
-                hole: 0.7,
-                marker: { colors: [color, '#f5f5f5'] },
+                hole: 0.75,
+                marker: { colors: ['#ffffff', 'rgba(255, 255, 255, 0.2)'] },
                 textinfo: 'none',
                 hoverinfo: 'label+percent',
                 showlegend: false
             }];
             const layout = {
-                height: 120,
-                width: 120,
+                height: 100,
+                width: 100,
                 margin: { t: 0, b: 0, l: 0, r: 0 },
                 annotations: [{
                     text: value.toFixed(1) + '%',
                     showarrow: false,
-                    font: { size: 14, weight: 'bold', color: color }
+                    font: { size: 12, weight: 'bold', color: '#ffffff' }
                 }],
                 paper_bgcolor: 'rgba(0,0,0,0)',
                 plot_bgcolor: 'rgba(0,0,0,0)'
@@ -708,13 +838,14 @@ def generate_html(data_json: str) -> str:
                 font: { size: 16 }, 
                 x: 0, 
                 xanchor: 'left',
-                margin: { b: 30 }
+                y: 0.96,
+                yanchor: 'top'
             },
             height: 300,
             template: PLOT_TEMPLATE,
             xaxis: { title: 'Abundance Taxon A', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
             yaxis: { title: 'Abundance Taxon B', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
-            margin: { t: 40, b: 40, l: 50, r: 20 },
+            margin: { t: 50, b: 40, l: 50, r: 20 },
             showlegend: false,
             font: { family: 'Inter' }
         };
@@ -738,12 +869,19 @@ def generate_html(data_json: str) -> str:
         };
         
         const layoutBar = {
-            title: { text: '<b style="color: #455a64;">Inference Methods Weights</b>', font: { size: 16 }, x: 0, xanchor: 'left' },
+            title: { 
+                text: '<b style="color: #455a64;">Inference Methods Weights</b>', 
+                font: { size: 16 }, 
+                x: 0, 
+                xanchor: 'left',
+                y: 0.96,
+                yanchor: 'top'
+            },
             height: 300,
             template: PLOT_TEMPLATE,
             xaxis: { gridcolor: '#f0f0f0', automargin: true },
             yaxis: { title: 'Weight/Correlation', gridcolor: '#f0f0f0' },
-            margin: { t: 40, b: 40, l: 50, r: 20 },
+            margin: { t: 50, b: 40, l: 50, r: 20 },
             font: { family: 'Inter' }
         };
         
@@ -755,13 +893,31 @@ def generate_html(data_json: str) -> str:
 </html>
     """
     
-    return html_template.replace('##DATA_PLACEHOLDER##', data_json)
+    return html_template.replace('##DATA_PLACEHOLDER##', data_json).replace('##LOGO_PLACEHOLDER##', logo_svg)
 
 def main(snakemake):
     logger = setup_logger(snakemake.log[0])
     logger.info("Starting dashboard generation")
     
     try:
+        # Load logo if exists
+        logo_svg = ""
+        try:
+            # Path relative to script: ../../docs/logo.svg
+            script_path = Path(__file__).resolve()
+            logo_path = script_path.parent.parent.parent / 'docs' / 'logo.svg'
+            if logo_path.exists():
+                with open(logo_path, 'r', encoding='utf-8') as f:
+                    logo_svg = f.read()
+                    # Remove XML declaration if present
+                    if '<?xml' in logo_svg:
+                        logo_svg = logo_svg[logo_svg.find('?>')+2:].strip()
+                logger.info(f"Loaded logo from {logo_path}")
+            else:
+                logger.warning(f"Logo not found at {logo_path}")
+        except Exception as e:
+            logger.warning(f"Could not load logo: {e}")
+
         # Load Inputs
         logger.info(f"Reading network file: {snakemake.input.network}")
         network_df = pd.read_csv(snakemake.input.network, sep='\t')
@@ -774,7 +930,7 @@ def main(snakemake):
         
         # Generate HTML
         data_json = json.dumps(data)
-        html_content = generate_html(data_json)
+        html_content = generate_html(data_json, logo_svg)
         
         # Output
         out_path = Path(snakemake.output.html)

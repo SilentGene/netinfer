@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_layer_1" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 272.54 173.6">
+  <!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 136)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: #a5a5a5;
+        stroke-width: 2px;
+      }
+
+      .st0, .st1, .st2 {
+        stroke-miterlimit: 10;
+      }
+
+      .st1 {
+        fill: #ea9f48;
+      }
+
+      .st1, .st2 {
+        stroke: #231815;
+      }
+
+      .st2 {
+        fill: #329e93;
+      }
+    </style>
+  </defs>
+  <line class="st0" x1="188.86" y1="93.41" x2="238.44" y2="24.3"/>
+  <line class="st0" x1="262.11" y1="117.08" x2="188.56" y2="93.41"/>
+  <line class="st0" x1="218.58" y1="161.06" x2="188.97" y2="93.41"/>
+  <line class="st0" x1="144.34" y1="64.19" x2="188.86" y2="93.41"/>
+  <line class="st0" x1="145.97" y1="21.06" x2="188.56" y2="92.77"/>
+  <line class="st0" x1="77.36" y1="86.4" x2="20.36" y2="38.58"/>
+  <line class="st0" x1="20.36" y1="142.68" x2="77.36" y2="86.4"/>
+  <line class="st0" x1="145.97" y1="21.06" x2="108.8" y2="112.2"/>
+  <line class="st0" x1="152.53" y1="138.14" x2="188.56" y2="93.41"/>
+  <line class="st0" x1="108.8" y1="111.38" x2="151.8" y2="138.14"/>
+  <line class="st0" x1="77.36" y1="86.4" x2="188.56" y2="92.77"/>
+  <line class="st0" x1="145.97" y1="21.06" x2="77.36" y2="86.4"/>
+  <line class="st0" x1="108.8" y1="111.38" x2="20.36" y2="142.68"/>
+  <circle class="st2" cx="77.36" cy="86.4" r="28.26"/>
+  <circle class="st1" cx="188.56" cy="93.41" r="23.67"/>
+  <circle class="st2" cx="20.36" cy="38.58" r="8.94"/>
+  <circle class="st1" cx="20.36" cy="142.68" r="5.8"/>
+  <circle class="st2" cx="238.44" cy="24.3" r="6.52"/>
+  <circle class="st2" cx="145.97" cy="19.95" r="9.68"/>
+  <circle class="st2" cx="144.34" cy="64.19" r="9.16"/>
+  <circle class="st1" cx="262.11" cy="117.08" r="5.56"/>
+  <circle class="st1" cx="218.58" cy="161.06" r="5.32"/>
+  <circle class="st1" cx="152.53" cy="138.14" r="7.26"/>
+  <circle class="st1" cx="108.8" cy="111.38" r="7.26"/>
+</svg>

@@ -1,3 +1,5 @@
+<img src="doc/logo.svg" alt="netinfer Logo" width="200" />
+
 # NetInfer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
