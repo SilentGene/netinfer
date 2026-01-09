@@ -367,6 +367,21 @@ def generate_html(data_json: str) -> str:
             border-color: var(--accent-color);
             box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.1);
         }
+
+        .method-selector {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: #fff;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .method-selector:focus {
+            border-color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -380,16 +395,23 @@ def generate_html(data_json: str) -> str:
     <div class="top-section">
         <div class="left-panel">
             <div class="left-panel-content">
-                <div style="padding-bottom: 10px; font-size: 16px;">
-                    <b style="color: #455a64;">Network Interactions</b>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div style="font-size: 16px;">
+                        <b style="color: #455a64;">Network Interactions</b>
+                    </div>
+                    <div>
+                        <span class="text-muted me-2" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">Method:</span>
+                        <select id="methodSelect" class="method-selector"></select>
+                    </div>
                 </div>
                 <table id="networkTable" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th style="width: 25%">Taxon A</th>
-                            <th style="width: 25%">Taxon B</th>
-                            <th style="width: 25%">Taxonomy A</th>
-                            <th style="width: 25%">Taxonomy B</th>
+                            <th style="width: 20%">Taxon A</th>
+                            <th style="width: 20%">Taxon B</th>
+                            <th style="width: 20%">Taxonomy A</th>
+                            <th style="width: 20%">Taxonomy B</th>
+                            <th id="methodHeader" style="width: 20%">Score</th>
                             <th style="display:none;">ID</th> 
                         </tr>
                     </thead>
@@ -458,6 +480,17 @@ def generate_html(data_json: str) -> str:
     const DEFAULT_COLOR = '#90A4AE';
 
     $(document).ready(function() {
+        // Initialize Methods Dropdown
+        const methodNames = Object.keys(DATA.edges[0].methods);
+        let currentMethod = methodNames[0];
+        
+        const $methodSelect = $('#methodSelect');
+        methodNames.forEach(m => {
+            $methodSelect.append(`<option value="${m}">${m}</option>`);
+        });
+        
+        $('#methodHeader').text(currentMethod);
+
         // Initialize DataTable
         const table = $('#networkTable').DataTable({
             data: DATA.edges,
@@ -466,6 +499,13 @@ def generate_html(data_json: str) -> str:
                 { data: 'TaxonB' },
                 { data: 'TaxonomyA' },
                 { data: 'TaxonomyB' },
+                { 
+                    data: null, 
+                    render: function(data, type, row) {
+                        const val = row.methods[currentMethod];
+                        return (typeof val === 'number') ? val.toFixed(4) : val;
+                    }
+                },
                 { data: 'id', visible: false }
             ],
             paging: true,
@@ -480,6 +520,13 @@ def generate_html(data_json: str) -> str:
                 info: "Showing _START_ to _END_ of _TOTAL_ edges"
             },
             dom: '<"d-flex justify-content-between align-items-center mb-3"lf>rtip'
+        });
+
+        // Handle Method Change
+        $methodSelect.on('change', function() {
+            currentMethod = $(this).val();
+            $('#methodHeader').text(currentMethod);
+            table.rows().invalidate().draw();
         });
 
         // Row Selection Handler
