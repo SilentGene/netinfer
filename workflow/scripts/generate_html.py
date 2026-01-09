@@ -107,6 +107,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/SilentGene/netinfer/refs/heads/main/docs/logo.svg" sizes="any" type="image/svg+xml">
     <title>NetInfer</title>
     
     <!-- Dependencies -->

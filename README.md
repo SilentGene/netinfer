@@ -1,4 +1,4 @@
-<img src="doc/logo.svg" alt="netinfer Logo" width="200" />
+<img src="docs/logo.svg" alt="netinfer Logo" width="200" />
 
 # NetInfer
 
