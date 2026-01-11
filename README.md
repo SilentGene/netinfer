@@ -83,7 +83,7 @@ The pipeline generates:
 2. Individual network files for each method (`results/networks/`)
 3. Merged network with consensus scores (`results/networks/merged_edges.tsv`)
 4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/merged_edges_interphyla.tsv`)
-5. Interactive HTML visualization (`results/visualization/network_viewer.html`) - *Not available yet*
+5. Interactive HTML visualization (`results/visualization/network_viewer.html`)
 
 ## Input File Formats
 
@@ -241,15 +241,6 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 }
 ```
 
-## Planned features
-- HTML visualization has not been available yet
-  - Support network visualization
-  - Node/edge ordering/filtering
-  - Keyword search
-  - Export selected sub-networks
-  - Abundance correlation plots (choose one row and plot the abundance of these two features against different samples, and plot a dot plot between these features with regression line and correlation coefficient)
-- Data transformations (e.g., CLR) on abundance data before association analysis
-- A beautiful logo
 
 ## Contact
 
