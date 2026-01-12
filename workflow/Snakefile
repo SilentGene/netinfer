@@ -36,30 +36,30 @@ suffix_tag = f"-{suffix}" if suffix else ""
 
 # Define final output files
 final_outputs = [
-    f"{outdir}/networks/merged_edges{suffix_tag}.tsv",
-    f"{outdir}/networks/merged_network{suffix_tag}.gml",
-    f"{outdir}/networks/network_info{suffix_tag}.json"
+    f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
+    f"{outdir}/final_results/merged_network{suffix_tag}.gml",
+    f"{outdir}/final_results/network_info{suffix_tag}.json"
 ]
 
 # Add visualization output if enabled
 if config.get("visualization", {}).get("enabled", True):
-    final_outputs.append(f"{outdir}/visualization/network_viewer.html")
+    final_outputs.append(f"{outdir}/final_results/netinfer_dashboard{suffix_tag}.html")
 
 # Add method-specific outputs based on config
 if config["fastspar"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/fastspar/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/fastspar/network.tsv")
 if config["spearman"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/spearman/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/spearman/network.tsv")
 if config["spieceasi"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/spieceasi/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/spieceasi/network.tsv")
 if config["propr"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/propr/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/propr/network.tsv")
 if config["jaccard"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/jaccard/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/jaccard/network.tsv")
 if config["flashweave"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/flashweave/normal/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/flashweave/normal/network.tsv")
 if config["flashweaveHE"]["enabled"]:
-    final_outputs.append(f"{outdir}/networks/flashweave/HE/network.tsv")
+    final_outputs.append(f"{outdir}/subtool_outputs/flashweave/HE/network.tsv")
 
 rule all:
     input:

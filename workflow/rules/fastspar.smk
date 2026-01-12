@@ -12,7 +12,7 @@ Steps:
 outdir = config.get("output_dir", "results").strip()  # Default to "results" if not specified
 
 # Paths
-FS_DIR = f"{outdir}/networks/fastspar"
+FS_DIR = f"{outdir}/subtool_outputs/fastspar"
 BOOT_DIR = f"{FS_DIR}/bootstrap"
 COR_DIR = f"{FS_DIR}/correlations"
 fastspar_log_dir = f"{outdir}/logs/fastspar_corr"
@@ -28,7 +28,7 @@ W_THR = float(config["fastspar"]["weight_threshold_filter"])         # final |R|
 
 rule fastspar_correlation:
     input:
-        abundance=f"{outdir}/preprocessed/filtered_abundance.tsv"
+        abundance=f"{outdir}/preprocessed_data/filtered_abundance.tsv"
     output:
         correlation=f"{FS_DIR}/median_correlation.tsv",
         covariance=f"{FS_DIR}/median_covariance.tsv"
@@ -54,7 +54,7 @@ rule fastspar_correlation:
 
 rule fastspar_bootstrap:
     input:
-        abundance=f"{outdir}/preprocessed/filtered_abundance.tsv"
+        abundance=f"{outdir}/preprocessed_data/filtered_abundance.tsv"
     output:
         boots=expand(f"{BOOT_DIR}/boot_{{i}}.tsv", i=range(BOOT_N))
     params:
@@ -102,7 +102,7 @@ rule fastspar_bootstrap_correlation:
 rule fastspar_pvalues:
     """Compute p-values from precomputed bootstrap correlations."""
     input:
-        abundance=f"{outdir}/preprocessed/filtered_abundance.tsv",
+        abundance=f"{outdir}/preprocessed_data/filtered_abundance.tsv",
         median_corr=f"{FS_DIR}/median_correlation.tsv",
         corr=expand(f"{COR_DIR}/cor_boot_{{i}}.tsv", i=range(BOOT_N))
     output:

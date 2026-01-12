@@ -14,13 +14,13 @@ if config.get("visualization", {}).get("enabled", True):
 
     rule generate_html_viewer:
         input:
-            network = f"{outdir}/networks/merged_edges{suffix_tag}.tsv",
-            stats = f"{outdir}/networks/network_info{suffix_tag}.json",
-            abundance = f"{outdir}/preprocessed/filtered_abundance.tsv",
-            taxonomy = f"{outdir}/preprocessed/processed_taxonomy.tsv" if taxonomy_in else [],
-            metadata = f"{outdir}/preprocessed/processed_metadata.tsv" if metadata_in else []
+            network = f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
+            stats = f"{outdir}/final_results/network_info{suffix_tag}.json",
+            abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv",
+            taxonomy = f"{outdir}/preprocessed_data/processed_taxonomy.tsv" if taxonomy_in else [],
+            metadata = f"{outdir}/preprocessed_data/processed_metadata.tsv" if metadata_in else []
         output:
-            html = f"{outdir}/visualization/network_viewer.html"
+            html = f"{outdir}/final_results/netinfer_dashboard{suffix_tag}.html"
         params:
             max_edges = config["visualization"]["max_edges"],
             node_size_by = config["visualization"]["node_size_by"],

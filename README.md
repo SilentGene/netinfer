@@ -20,12 +20,15 @@ A Snakemake-based pipeline for inferring microbiome co-abundance networks, integ
       - [Spearman correlation with FDR correction](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient)
       - [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index)
 
-
-- Interactive HTML visualization
+- Interactive HTML dashboard
 - Flexible input formats (TSV, CSV, BIOM)
 - Comprehensive output with consensus scores
 - Parallel execution support
 - Conda environment management
+
+Output interactive html dashboard:
+
+![image](docs/dashboard_screenshot.jpg)
 
 ## Quick Start
 
@@ -79,11 +82,12 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --config m
 ### Output
 
 The pipeline generates:
-1. Filtered and processed input data (`results/preprocessed/`)
-2. Individual network files for each method (`results/networks/`)
-3. Merged network with consensus scores (`results/networks/merged_edges.tsv`)
-4. Associations between different phyla if `--taxonomy` or `--infer-taxonomy` is specified (`results/networks/merged_edges_interphyla.tsv`)
-5. Interactive HTML visualization (`results/visualization/network_viewer.html`)
+1. Filtered and processed input data (`results/preprocessed_data/`)
+2. Individual network files for each method (`results/subtool_outputs/`)
+3. Merged network with consensus scores (`results/final_results/merged_edges.tsv`)
+4. Interactive HTML visualization (`results/final_results/netinfer_dashboard.html`)
+
+
 
 ## Input File Formats
 
@@ -241,6 +245,9 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 }
 ```
 
+# Future plans
+
+- Metadata support. If the metadata file is provided, where sample groups are specified, the pipeline will generate additional visualizations for taxon abundance in each group.
 
 ## Contact
 

@@ -7,10 +7,10 @@ outdir = config.get("output_dir", "results").strip()  # Default to "results" if 
 
 rule spieceasi_network:
     input:
-        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
     output:
-        network = f"{outdir}/networks/spieceasi/network.tsv",
-        stats = f"{outdir}/networks/spieceasi/stats.json"
+        network = f"{outdir}/subtool_outputs/spieceasi/network.tsv",
+        stats = f"{outdir}/subtool_outputs/spieceasi/stats.json"
     params:
         method = config["spieceasi"]["method"],
         weight_threshold = config["spieceasi"]["weight_threshold"]
@@ -22,11 +22,11 @@ rule spieceasi_network:
 
 rule spieceasi_plots:
     input:
-        network = f"{outdir}/networks/spieceasi/network.tsv",
-        stats = f"{outdir}/networks/spieceasi/stats.json"
+        network = f"{outdir}/subtool_outputs/spieceasi/network.tsv",
+        stats = f"{outdir}/subtool_outputs/spieceasi/stats.json"
     output:
-        stability = f"{outdir}/networks/spieceasi/stability_plot.pdf",
-        network_viz = f"{outdir}/networks/spieceasi/network_plot.pdf"
+        stability = f"{outdir}/subtool_outputs/spieceasi/stability_plot.pdf",
+        network_viz = f"{outdir}/subtool_outputs/spieceasi/network_plot.pdf"
     threads: 1
     log:
         f"{outdir}/logs/spieceasi_plots.log"

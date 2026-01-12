@@ -7,10 +7,10 @@ outdir = config.get("output_dir", "results").strip()  # Default to "results" if 
 
 rule flashweave_network:
     input:
-        abundance = f"{outdir}/preprocessed/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
     output:
-        network = f"{outdir}/networks/flashweave/normal/network.tsv",
-        graph = f"{outdir}/networks/flashweave/normal/network.gml"
+        network = f"{outdir}/subtool_outputs/flashweave/normal/network.tsv",
+        graph = f"{outdir}/subtool_outputs/flashweave/normal/network.gml"
     params:
         pvalue = config["flashweave"]["pvalue_threshold"],
         weight = config["flashweave"]["weight_threshold"],

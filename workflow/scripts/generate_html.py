@@ -52,6 +52,7 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
             'TaxonomyB': row.get('Taxonomy B', 'N/A'),
             'PrevalenceA': row.get('Prevalence A (%)', 0.0),
             'PrevalenceB': row.get('Prevalence B (%)', 0.0),
+            'InterPhylum': row.get('Inter phylum', False),
             'methods': {m: (float(row[m]) if pd.notna(row[m]) else 0.0) for m in method_cols}
         }
         edges_data.append(edge)
@@ -95,7 +96,8 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
     return {
         'edges': edges_data,
         'samples': samples,
-        'abundance': abundance_map
+        'abundance': abundance_map,
+        'hasInterPhylumColumn': 'Inter phylum' in network_df.columns
     }
 
 def generate_html(data_json: str, logo_svg: str = "") -> str:
@@ -108,7 +110,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://raw.githubusercontent.com/SilentGene/netinfer/refs/heads/main/docs/logo.svg" sizes="any" type="image/svg+xml">
-    <title>NetInfer</title>
+    <title>NetInfer Result</title>
     
     <!-- Dependencies -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -284,8 +286,6 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
         .info-box { 
             min-height: auto;
             background: var(--card-bg);
-            border: none;
-            box-shadow: none;
             padding: 20px;
         }
         
@@ -506,6 +506,57 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             letter-spacing: 0.05em;
             margin-right: 8px;
         }
+
+        .filter-checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            padding: 4px 12px;
+            background: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-checkbox-container:hover:not(.disabled) {
+            border-color: var(--accent-color);
+            background: #f1f8e9;
+        }
+
+        .filter-checkbox-container.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
+        }
+
+        .filter-checkbox-container input {
+            cursor: inherit;
+            accent-color: var(--accent-color);
+        }
+
+        .github-link-top {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: var(--text-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            opacity: 0.6;
+        }
+
+        .github-link-top:hover {
+            opacity: 1;
+            color: var(--accent-color);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .github-link-top svg {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
@@ -516,6 +567,12 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
         <h3>NetInfer Result</h3>
     </a>
     <span class="badge-science">Analysis Dashboard</span>
+    
+    <a href="https://github.com/SilentGene/netinfer" target="_blank" class="github-link-top" title="View on GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+    </a>
 </div>
 
 <div class="main-content">
@@ -527,6 +584,10 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
                         <b style="color: #2c3e50; font-size: 1.1rem; margin-right: 10px;">Network Interactions</b>
                     </div>
                     <div class="table-controls-right" id="customTableTools" style="display: flex; align-items: center; gap: 15px;">
+                        <div id="interPhylumFilterContainer" class="filter-checkbox-container" title="">
+                            <input type="checkbox" id="interPhylumCheckbox">
+                            <label for="interPhylumCheckbox" style="margin: 0; cursor: inherit;">Inter phylum Only</label>
+                        </div>
                         <div class="d-flex align-items-center">
                             <select id="methodSelect" class="method-selector"></select>
                         </div>
@@ -627,25 +688,49 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             ],
             paging: true,
             pageLength: 10,
-            lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
             select: {
                 style: 'single'
             },
             language: {
                 search: "",
                 searchPlaceholder: "Search anything...",
-                lengthMenu: "_MENU_",
                 info: "Showing _START_ to _END_ of _TOTAL_ edges",
                 'paginate': {
                     'previous': '<',
                     'next': '>'
                 }
             },
-            dom: '<"table-header-custom"lf>rtip'
+            dom: '<"table-header-custom"f>rtip'
         });
 
+        // ---------------------------------------------------------
+        // Inter phylum Filtering Logic
+        // ---------------------------------------------------------
+        const hasInterPhylumData = DATA.hasInterPhylumColumn;
+        
+        const $interPhylumFilterContainer = $('#interPhylumFilterContainer');
+        const $interPhylumCheckbox = $('#interPhylumCheckbox');
+
+        if (!hasInterPhylumData) {
+            $interPhylumFilterContainer.addClass('disabled');
+            $interPhylumCheckbox.prop('disabled', true);
+            $interPhylumFilterContainer.attr('title', '必须在用户使用了--taxonomy or --infer-taxonomy选项的时候，这个选项才会有效。');
+        }
+
+        // Search extension
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                if (!$interPhylumCheckbox.is(':checked')) return true;
+                return DATA.edges[dataIndex].InterPhylum === true;
+            }
+        );
+
+        $interPhylumCheckbox.on('change', function() {
+            table.draw();
+        });
+        // ---------------------------------------------------------
+
         // Move the DataTables controls into our custom container
-        $('.dataTables_length').prepend('<span class="control-label">Show</span>');
         $('.table-header-custom').appendTo('#customTableTools');
         $('.table-header-custom').css({'display': 'flex', 'gap': '15px', 'align-items': 'center'});
 

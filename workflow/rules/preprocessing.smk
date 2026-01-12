@@ -23,8 +23,8 @@ rule preprocess_abundance:
     input:
         abundance = abundance_in
     output:
-        filtered = f"{outdir}/preprocessed/filtered_abundance.tsv",
-        stats = f"{outdir}/preprocessed/abundance_stats.tsv"
+        filtered = f"{outdir}/preprocessed_data/filtered_abundance.tsv",
+        stats = f"{outdir}/preprocessed_data/abundance_stats.tsv"
     threads: 1
     log:
         f"{outdir}/logs/preprocess_abundance.log"
@@ -36,7 +36,7 @@ if infer_tax:
         input:
             abundance = abundance_in
         output:
-            processed = f"{outdir}/preprocessed/processed_taxonomy.tsv"
+            processed = f"{outdir}/preprocessed_data/processed_taxonomy.tsv"
         threads: 1
         log:
             f"{outdir}/logs/infer_taxonomy.log"
@@ -47,7 +47,7 @@ elif taxonomy_in:
         input:
             taxonomy = taxonomy_in
         output:
-            processed = f"{outdir}/preprocessed/processed_taxonomy.tsv"
+            processed = f"{outdir}/preprocessed_data/processed_taxonomy.tsv"
         threads: 1
         log:
             f"{outdir}/logs/preprocess_taxonomy.log"
@@ -59,7 +59,7 @@ if metadata_in:
         input:
             metadata = metadata_in
         output:
-            processed = f"{outdir}/preprocessed/processed_metadata.tsv"
+            processed = f"{outdir}/preprocessed_data/processed_metadata.tsv"
         threads: 1
         log:
             f"{outdir}/logs/preprocess_metadata.log"

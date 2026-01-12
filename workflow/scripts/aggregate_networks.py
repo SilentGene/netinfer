@@ -131,10 +131,10 @@ def calculate_network_metrics(G: nx.Graph) -> Dict:
     
     return metrics
 
-def get_diff_phyla_edges(final_df: pd.DataFrame) -> pd.DataFrame:
-    """Get edges connecting different phyla based on taxonomy columns."""
+def add_phylum_info(final_df: pd.DataFrame) -> pd.DataFrame:
+    """Add boolean column indicating if edge connects different phyla."""
     if 'Taxonomy A' not in final_df.columns or 'Taxonomy B' not in final_df.columns:
-        return pd.DataFrame()  # Return empty DataFrame if taxonomy columns are missing
+        return final_df
 
     def extract_phylum(taxonomy: str) -> str:
         """ Extract the string after p__ in the taxonomy string. """
@@ -149,12 +149,15 @@ def get_diff_phyla_edges(final_df: pd.DataFrame) -> pd.DataFrame:
     final_df['Phylum A'] = final_df['Taxonomy A'].apply(extract_phylum)
     final_df['Phylum B'] = final_df['Taxonomy B'].apply(extract_phylum)
 
-    diff_phyla_df = final_df[final_df['Phylum A'] != final_df['Phylum B']].copy()
+    # Add Boolean column
+    final_df['Inter phylum'] = (final_df['Phylum A'] != final_df['Phylum B']) & \
+                                     (final_df['Phylum A'] != "Unknown") & \
+                                     (final_df['Phylum B'] != "Unknown")
     
     # Drop the temporary phylum columns
-    diff_phyla_df.drop(columns=['Phylum A', 'Phylum B'], inplace=True)
+    final_df.drop(columns=['Phylum A', 'Phylum B'], inplace=True)
     
-    return diff_phyla_df
+    return final_df
 
 def main(snakemake):
     """Main processing function."""
@@ -264,13 +267,20 @@ def main(snakemake):
         }
         final_df = final_df.rename(columns=column_mapping)
 
+        # Add between phyla info and reorder columns
+        if 'Taxonomy A' in final_df.columns and 'Taxonomy B' in final_df.columns:
+            final_df = add_phylum_info(final_df)
+            
+            # Reorder columns: "Inter phylum" between "Sample at Max B" and "Taxonomy A"
+            cols = list(final_df.columns)
+            if 'Inter phylum' in cols:
+                cols.remove('Inter phylum')
+                idx = cols.index('Taxonomy A')
+                cols.insert(idx, 'Inter phylum')
+                final_df = final_df[cols]
+
         # Save combined table
         final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
-
-        # Association between different phyla
-        if snakemake.output.diff_phyla_table:
-            diff_phyla_df = get_diff_phyla_edges(final_df)
-            diff_phyla_df.to_csv(snakemake.output.diff_phyla_table, sep='\t', index=False)
         
         # Save network statistics
         with open(snakemake.output.stats, 'w') as f:
