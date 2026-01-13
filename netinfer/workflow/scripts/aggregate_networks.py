@@ -173,6 +173,7 @@ def main(snakemake):
             'fastspar': load_network_file(snakemake.input.fastspar, 'fastspar', logger),
             'propr': load_network_file(snakemake.input.propr, 'propr', logger),
             'spearman': load_network_file(snakemake.input.spearman, 'spearman', logger),
+            'pearson': load_network_file(snakemake.input.pearson, 'pearson', logger),
             'jaccard': load_network_file(snakemake.input.jaccard, 'jaccard', logger)
         }
         
@@ -248,6 +249,7 @@ def main(snakemake):
             'flashweaveHE': 'FlashWeaveHE',
             'fastspar': 'FastSpar',
             'spearman': 'Spearman',
+            'pearson': 'Pearson',
             'spieceasi': 'SpiecEasi',
             'propr': 'PropR',
             'jaccard': 'Jaccard',

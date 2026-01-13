@@ -40,14 +40,14 @@ Output interactive html dashboard:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SilentGene/NetInfer.git
-cd NetInfer
+git clone https://github.com/SilentGene/netinfer.git
+cd netinfer
 
 # Create and activate conda environment
 conda env create -f environment.yaml  # creates 'netinfer' environment and installs dependencies
 conda activate netinfer
 
-# Install FlashWeave (Julia package)
+# Install FlashWeave by running the provided Julia package
 julia workflow/scripts/install_flashweave.jl
 ```
 
@@ -66,7 +66,7 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6
 # Include taxonomy to allow more information in the output and produce a addictional file with associations between different phyla
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
 
-# I don't have a taxonomy file, but let's try to infer from feature IDs
+# I don't have a separate taxonomy file, but let's try to infer from feature IDs
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-taxonomy
 
 # Only use my favorite methods, and use my own suffix for output files
@@ -85,7 +85,7 @@ The pipeline generates:
 1. Filtered and processed input data (`results/preprocessed_data/`)
 2. Individual network files for each method (`results/subtool_outputs/`)
 3. Merged network with consensus scores (`results/final_results/merged_edges.tsv`)
-4. Interactive HTML visualization (`results/final_results/netinfer_dashboard.html`)
+4. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
 
 
 
@@ -169,17 +169,6 @@ Key parameters:
 
 ### Jaccard
 - Similarity threshold: ≥0.3
-
-## Visualization
-
-The interactive HTML viewer provides:
-- Network graph visualization
-- Edge filtering by weight/method
-- Node highlighting by degree
-- Abundance correlation plots
-- Taxonomy-based coloring
-- Export capabilities
-
 
 ## Troubleshooting
 

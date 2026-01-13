@@ -58,6 +58,10 @@ spearman:
   rho_threshold: 0.7
   threads: 8
 
+pearson:
+  enabled: true
+  threads: 8
+
 propr:
   enabled: true
   rho_threshold: 0.7

@@ -20,6 +20,7 @@ rule aggregate_networks:
         spieceasi = f"{outdir}/subtool_outputs/spieceasi/network.tsv" if config["spieceasi"]["enabled"] else [],
         propr = f"{outdir}/subtool_outputs/propr/network.tsv" if config["propr"]["enabled"] else [],
         jaccard = f"{outdir}/subtool_outputs/jaccard/network.tsv" if config["jaccard"]["enabled"] else [],
+        pearson = f"{outdir}/subtool_outputs/pearson/network.tsv" if config["pearson"]["enabled"] else [],
         taxonomy = f"{outdir}/preprocessed_data/processed_taxonomy.tsv" if has_taxonomy else [],
         abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
     output:

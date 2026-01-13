@@ -24,6 +24,7 @@ include: "rules/spearman.smk"
 include: "rules/spieceasi.smk"
 include: "rules/propr.smk"
 include: "rules/jaccard.smk"
+include: "rules/pearson.smk"
 include: "rules/aggregation.smk"
 include: "rules/visualization.smk"
 
@@ -60,6 +61,8 @@ if config["flashweave"]["enabled"]:
     final_outputs.append(f"{outdir}/subtool_outputs/flashweave/normal/network.tsv")
 if config["flashweaveHE"]["enabled"]:
     final_outputs.append(f"{outdir}/subtool_outputs/flashweave/HE/network.tsv")
+if config["pearson"]["enabled"]:
+    final_outputs.append(f"{outdir}/subtool_outputs/pearson/network.tsv")
 
 rule all:
     input:

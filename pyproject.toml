@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "netinfer"
-version = "0.1.0"
+version = "0.3.0"
 description = "A Snakemake pipeline for microbiome network inference"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -32,32 +32,22 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/SilentGene/NetInfer"
-Repository = "https://github.com/SilentGene/NetInfer"
+Homepage = "https://github.com/SilentGene/netinfer"
+Repository = "https://github.com/SilentGene/netinfer"
 
 [project.scripts]
 netinfer = "netinfer.cli:main"
 
 [tool.hatch.build]
 packages = ["netinfer"]
-package-data = {"netinfer" = [
-    "config/*.yaml",
-    "workflow/**/*",
-    "workflow/rules/*",
-    "workflow/scripts/*",
-    "workflow/envs/*"
-]}
 
 [tool.hatch.build.targets.wheel]
 packages = ["netinfer"]
-only-include = ["netinfer"]
 
 [tool.hatch.build.targets.sdist]
 include = [
     "/netinfer",
-    "/tests",
+    "/test",
     "/*.md",
-    "/LICENSE",
-    "/config",
-    "/workflow"
+    "/LICENSE"
 ]

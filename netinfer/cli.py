@@ -60,10 +60,9 @@ def find_config_file() -> Path:
     if cwd_config.is_file():
         return cwd_config
         
-    # Then try using importlib.resources
-    config_path = None
+    # Then try using importlib.resources (Standard package layout)
     try:
-        config_path = resources.files("netinfer").joinpath("../config/config.yaml")
+        config_path = resources.files("netinfer").joinpath("config/config.yaml")
         if config_path.is_file():
             return Path(config_path)
     except (ImportError, TypeError):
@@ -72,7 +71,7 @@ def find_config_file() -> Path:
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_config),
-        str(config_path) if config_path else "netinfer/config/config.yaml (package resource)"
+        "netinfer/config/config.yaml (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find config.yaml in any of the expected locations:\n" +
@@ -86,10 +85,9 @@ def find_workflow_dir() -> Path:
     if (cwd_workflow / "Snakefile").exists():
         return cwd_workflow
         
-    # Then try using importlib.resources
-    workflow_dir = None
+    # Then try using importlib.resources (Standard package layout)
     try:
-        workflow_dir = resources.files("netinfer").joinpath("../workflow")
+        workflow_dir = resources.files("netinfer").joinpath("workflow")
         if (workflow_dir / "Snakefile").exists():
             return Path(workflow_dir)
     except (ImportError, TypeError):
@@ -98,7 +96,7 @@ def find_workflow_dir() -> Path:
     # If not found, provide detailed error message
     searched_paths = [
         str(cwd_workflow),
-        str(workflow_dir) if workflow_dir else "netinfer/workflow (package resource)"
+        "netinfer/workflow (package resource)"
     ]
     raise FileNotFoundError(
         "Could not find workflow directory with Snakefile in any of the expected locations:\n" +
@@ -136,6 +134,9 @@ def create_config(input_file: Optional[str] = None,
             raise FileNotFoundError(f"Specified config file not found: {base_config_path}")
     else:
         config_file = find_config_file()
+    
+    logger = logging.getLogger('netinfer')
+    logger.info(f"Using base configuration from: {config_file}")
     
     with open(config_file) as f:
         config = yaml.safe_load(f)
@@ -186,6 +187,7 @@ def create_config(input_file: Optional[str] = None,
             "flashweave": {"config_key": "flashweave", "he_mode": False},
             "flashweaveHE": {"config_key": "flashweave", "he_mode": True},
             "fastspar": {"config_key": "fastspar"},
+            "pearson": {"config_key": "pearson"},
             "spearman": {"config_key": "spearman"},
             "spieceasi": {"config_key": "spieceasi"},
             "propr": {"config_key": "propr"},
