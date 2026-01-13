@@ -163,7 +163,7 @@ Key parameters:
 ### propR
 - Correlation threshold: ≥0.5
 
-### Spearman
+### Spearman & Pearson
 - FDR threshold: ≤0.05
 - Correlation threshold: ≥0.7
 

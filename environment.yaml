@@ -36,8 +36,6 @@ dependencies:
   - r-hmisc      # For Spearman correlation
   - r-reshape2   # For data reshaping in Spearman analysis
   - r-jsonlite   # For JSON handling
-  - r-rmthreshold # For RMT thresholding
-  - r-stringi    # Explicitly add to resolve ICU version conflicts
 
   # Julia dependencies for FlashWeave
   - julia>=1.6

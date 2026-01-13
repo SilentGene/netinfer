@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# Pearson (RMT-based) network inference using RMThreshold
+# Pearson correlation network inference (Manual thresholding)
 
 # Print R version
 message(sprintf("Using: %s", R.version.string))
@@ -7,8 +7,8 @@ message(sprintf("Using: %s", R.version.string))
 # Load required libraries
 suppressPackageStartupMessages({
     library(tidyverse)
-    library(RMThreshold)
     library(reshape2)
+    library(Hmisc) # For correlation and p-values
 })
 
 # Read command line arguments from snakemake
@@ -16,8 +16,8 @@ log_file <- snakemake@log[[1]]
 abundance_file <- snakemake@input[["abundance"]]
 network_file <- snakemake@output[["network"]]
 correlation_file <- snakemake@output[["correlation"]]
-# Optional parameters from config
-# RMThreshold parameters could be added here if needed
+fdr_threshold <- snakemake@params[["fdr_threshold"]]
+rho_threshold <- snakemake@params[["rho_threshold"]]
 
 # Set up logging
 log_con <- file(log_file, open="wt")
@@ -26,7 +26,7 @@ sink(log_con, type="output")
 
 # Main function
 main <- function() {
-    message("Starting Pearson (RMT-based) network inference")
+    message("Starting Pearson correlation network inference")
     
     # Read abundance data
     abundance_data <- read_tsv(abundance_file, show_col_types = FALSE)
@@ -48,64 +48,40 @@ main <- function() {
     data_mat <- as.matrix(abundance_data_t[,-1])
     rownames(data_mat) <- abundance_data_t$Sample
     
-    # Compute Pearson correlations
-    message("Computing Pearson correlations...")
-    cor_matrix <- cor(data_mat, method = "pearson")
-    diag(cor_matrix) <- 0  # Set diagonal to 0 for RMT analysis
-    
-    # Use RMThreshold to find the optimal threshold
-    message("Finding optimal threshold using Random Matrix Theory (RMThreshold)...")
-    
-    # rm.get.threshold with robust non-interactive parameters
-    rmt_res <- tryCatch({
-        rm.get.threshold(
-            cor_matrix, 
-            interval = c(0.3, 0.8), 
-            discard.zeros = TRUE, 
-            unfold.method = "spline",
-            plot.comp = FALSE,
-            plot.spacing = FALSE,
-            interactive = FALSE,
-            save.fit = FALSE
-        )
-    }, error = function(e) {
-        message(sprintf("RMThreshold (rm.get.threshold) error: %s", e$message))
-        return(NULL)
-    })
-    
-    # Robustly handle the result
-    optimal_threshold <- if (!is.null(rmt_res) && !is.null(rmt_res$threshold)) {
-        rmt_res$threshold
-    } else {
-        message("RMThreshold failed to find an optimal threshold. Falling back to default: 0.7")
-        0.7
-    }
-    
-    # Diagnostic message
-    # Sometimes rmt_res$threshold might be a vector, take the first one
-    optimal_threshold <- optimal_threshold[1]
-    message(sprintf("Optimal RMT threshold determined: %f", optimal_threshold))
+    # Compute Pearson correlations and p-values using Hmisc::rcorr
+    message("Computing Pearson correlations and p-values...")
+    cor_results <- rcorr(data_mat, type = "pearson")
+    cor_matrix <- cor_results$r
+    p_matrix <- cor_results$P
     
     # Convert matrices to long format data frames
     cor_df <- melt(cor_matrix, varnames = c("source", "target"), value.name = "Pearson")
+    pval_df <- melt(p_matrix, varnames = c("source", "target"), value.name = "P_value")
     
-    # Add diagnostic: show max correlation in the data
-    max_cor <- max(abs(cor_df$Pearson), na.rm = TRUE)
-    message(sprintf("Maximum absolute correlation in data: %f", max_cor))
+    # Merge correlation and p-value data
+    merged_df <- merge(cor_df, pval_df, by = c("source", "target"))
     
     # Remove self-correlations and duplicated pairs
-    cor_df <- cor_df[cor_df$source != cor_df$target, ]
-    cor_df <- cor_df[!duplicated(t(apply(cor_df[, 1:2], 1, sort))), ]
+    merged_df <- merged_df[merged_df$source != merged_df$target, ]
+    merged_df <- merged_df[!duplicated(t(apply(merged_df[, 1:2], 1, sort))), ]
     
-    # Filter by the RMT threshold
-    filtered_df <- cor_df[abs(cor_df$Pearson) >= optimal_threshold, ]
+    # Adjust p-values using False Discovery Rate (FDR) correction
+    merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
+    
+    # Filter for statistically significant (FDR < fdr_threshold) and strong (abs(Pearson) >= rho_threshold) correlations
+    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & abs(merged_df$Pearson) >= rho_threshold), ]
     
     # Sort by absolute correlation strength
-    filtered_df <- filtered_df[order(abs(filtered_df$Pearson), decreasing = TRUE), ]
+    filtered_df_sorted <- filtered_df[order(abs(filtered_df$Pearson), decreasing = TRUE), ]
+    
+    # Diagnostic info
+    max_cor <- max(abs(cor_df$Pearson), na.rm = TRUE)
+    message(sprintf("Maximum absolute correlation in data: %f", max_cor))
+    message(sprintf("FDR threshold: %f, Correlation threshold: %f", fdr_threshold, rho_threshold))
     
     # Save network (edge list)
-    write_tsv(filtered_df, network_file)
-    message(sprintf("Completed. Network has %d edges.", nrow(filtered_df)))
+    write_tsv(filtered_df_sorted, network_file)
+    message(sprintf("Completed. Network has %d edges.", nrow(filtered_df_sorted)))
     
     # Save full correlation matrix
     cor_matrix_df <- as.data.frame(cor_matrix)
@@ -118,7 +94,7 @@ main <- function() {
 tryCatch({
     main()
 }, error = function(e) {
-    message(sprintf("Error in Pearson RMT analysis: %s", e$message))
+    message(sprintf("Error in Pearson analysis: %s", e$message))
     quit(status=1)
 })
 

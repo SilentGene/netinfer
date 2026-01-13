@@ -11,6 +11,9 @@ rule pearson_network:
     output:
         network = f"{outdir}/subtool_outputs/pearson/network.tsv",
         correlation = f"{outdir}/subtool_outputs/pearson/correlation.tsv"
+    params:
+        fdr_threshold = config["pearson"]["fdr_threshold"],
+        rho_threshold = config["pearson"]["rho_threshold"]
     threads: 1
     log:
         f"{outdir}/logs/pearson.log"

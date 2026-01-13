@@ -60,6 +60,8 @@ spearman:
 
 pearson:
   enabled: true
+  fdr_threshold: 0.05
+  rho_threshold: 0.7
   threads: 8
 
 propr:
