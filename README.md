@@ -31,6 +31,8 @@ Output interactive html dashboard:
 
 ![image](docs/dashboard_screenshot.jpg)
 
+We provide an example in [example](example) directory, where you can learn the input file format and the expected output.
+
 ## Quick Start
 
 ### Prerequisites
@@ -194,7 +196,7 @@ options:
   --infer-taxonomy      Infer taxonomy from feature IDs in the abundance table (looks for 'd__' or 'p__')
   --metadata METADATA   Sample metadata file (optional)
   --methods METHODS     Comma-separated list of methods to use (default: all). Available methods: flashweave, flashweaveHE, fastspar,
-                        spearman, spieceasi, propr, jaccard
+                        pearson, spearman, spieceasi, propr, jaccard
   --config CONFIG       Path to a base config YAML file. CLI arguments will override settings in this file. The final merged config will be
                         saved to the output directory.
   --threads THREADS     Number of threads to use (default: 1)
@@ -227,7 +229,7 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 
 # Future plans
 
-- Metadata support. If the metadata file is provided, where sample groups are specified, the pipeline will generate additional visualizations for taxon abundance in each group.
+- Metadata support. If a metadata file is provided with sample groups specified, the pipeline will generate additional visualizations for taxon abundance in each group.
 
 ## Contact
 

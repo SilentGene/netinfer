@@ -320,7 +320,7 @@ def main():
         "--methods",
         help="Comma-separated list of methods to use (default: all). "
              "Available methods: flashweave, flashweaveHE, fastspar, "
-             "spearman, spieceasi, propr, jaccard"
+             "pearson, spearman, spieceasi, propr, jaccard"
     )
     
     parser.add_argument(

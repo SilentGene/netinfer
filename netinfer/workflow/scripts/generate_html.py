@@ -21,7 +21,7 @@ def setup_logger(log_file: str) -> logging.Logger:
 
 def get_method_columns(df: pd.DataFrame) -> list:
     """Identify method columns in the network file."""
-    potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'SpiecEasi', 'PropR', 'Jaccard']
+    potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'Pearson', 'SpiecEasi', 'PropR', 'Jaccard']
     return [col for col in potential_methods if col in df.columns]
 
 def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: logging.Logger) -> dict:
