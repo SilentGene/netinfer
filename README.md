@@ -138,37 +138,27 @@ Key parameters:
 
 ## Method Configurations
 
-**Trusted methods** by default:
+Default:
+
+**Trusted methods**
 
 > Associations must be present in at least one method from these trusted methods to be retained in the final aggregated table.
 
-### FlashWeave (HE mode/normal mode)
-- P-value threshold: ≤0.001
-- Weight threshold: ≥0.4
-- Supports normal and heterogeneous modes
+| Method                   | Key Parameters                                 |
+| ------------------------ | ---------------------------------------------- |
+| FlashWeave (HE / normal) | P-value ≤ 0.001<br>Weight ≥ 0.4                |
+| SPIEC-EASI               | Weight ≥ 0.5<br>Method: MB (default) or GLasso |
 
-### SPIEC-EASI
-- Weight threshold: ≥0.5
-- Methods: MB (Meinshausen-Buhlmann, default) or GLasso
 
 **Other methods**:
 
-### FastSpar
-- P-value threshold: ≤0.05
-- Iterations: 1000
-- Correlation threshold: ≥0.2
-- Absolute value threshold for correlation coefficient: ≥0.3
-- This method is computationally intensive; consider using more threads
-
-### propR
-- Correlation threshold: ≥0.5
-
-### Spearman & Pearson
-- FDR threshold: ≤0.05
-- Correlation threshold: ≥0.7
-
-### Jaccard
-- Similarity threshold: ≥0.3
+| Method             | Key Parameters                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| FastSpar           | P-value ≤ 0.05<br>Iterations: 1000<br>Correlation ≥ 0.2<br>Absolute correlation ≥ 0.3 |
+| propR              | Correlation ≥ 0.5                                                                     |
+| Spearman           | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
+| Pearson            | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
+| Jaccard            | Similarity ≥ 0.3                                                                      |
 
 ## Troubleshooting
 
