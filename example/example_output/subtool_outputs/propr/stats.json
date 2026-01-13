@@ -1,0 +1,7 @@
+{
+  "edges_count": [5644],
+  "rho_threshold": [0.7],
+  "min_rho": ["Inf"],
+  "max_rho": ["-Inf"],
+  "mean_rho": ["NA"]
+}

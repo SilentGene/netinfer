@@ -1,0 +1,5 @@
+features_after_filter: 377
+input_features: 900
+removed_features: 523
+specified_min_peak_abundance: 0.1
+specified_min_prevalence: 0.1

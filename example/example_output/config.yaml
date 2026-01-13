@@ -1,0 +1,62 @@
+input:
+  abundance_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_input/otu_table.tsv
+  taxonomy_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_input/taxonomy_table.tsv
+  metadata_table: ''
+infer_taxonomy: false
+output_dir: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_output
+min_prevalence: 0.1
+min_peak_abundance: 0.1
+trusted_methods:
+- flashweave
+- flashweaveHE
+- spieceasi
+flashweave:
+  enabled: true
+  pvalue_threshold: 0.001
+  weight_threshold: 0.4
+  heterogeneous: false
+  threads: 8
+flashweaveHE:
+  enabled: true
+  pvalue_threshold: 0.001
+  weight_threshold: 0.4
+  heterogeneous: true
+  threads: 8
+spieceasi:
+  enabled: true
+  weight_threshold: 0.3
+  method: mb
+  threads: 8
+fastspar:
+  enabled: true
+  pvalue_threshold: 0.05
+  correlation_threshold: 0.2
+  weight_threshold_filter: 0.3
+  iterations: 50
+  bootstraps: 1000
+  threads: 8
+spearman:
+  enabled: true
+  fdr_threshold: 0.05
+  rho_threshold: 0.7
+  threads: 8
+pearson:
+  enabled: true
+  fdr_threshold: 0.05
+  rho_threshold: 0.7
+  threads: 8
+propr:
+  enabled: true
+  rho_threshold: 0.7
+  threads: 8
+jaccard:
+  enabled: true
+  weight_threshold: 0.7
+  threads: 8
+visualization:
+  max_edges: 10000
+  node_size_by: degree
+  edge_width_by: weight
+  color_by: phylum
+  enabled: true
+suffix: mytest

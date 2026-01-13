@@ -1,0 +1,9 @@
+abundance_table=example_input/otu_table.tsv
+taxonomy_table=example_input/taxonomy_table.tsv
+output_dir=example_output
+
+conda activate /mnt/weka/pkg/cmr/heyu/netinfer
+
+netinfer --input $abundance_table --taxonomy $taxonomy_table --output $output_dir --suffix mytest --threads 8
+
+conda deactivate

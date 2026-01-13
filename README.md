@@ -18,6 +18,7 @@ A Snakemake-based pipeline for inferring microbiome co-abundance networks, integ
       - [FastSpar](https://github.com/scwatts/fastspar)
       - [propR](https://www.nature.com/articles/s41598-017-16520-0)
       - [Spearman correlation with FDR correction](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient)
+      - [Pearson correlation with FDR correction](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)  
       - [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index)
 
 - Interactive HTML dashboard
