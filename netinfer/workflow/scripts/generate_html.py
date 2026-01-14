@@ -9,6 +9,7 @@ import logging
 from pathlib import Path
 import numpy as np
 from scipy import stats
+import base64
 
 def setup_logger(log_file: str) -> logging.Logger:
     """Set up logging."""
@@ -100,7 +101,7 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
         'hasInterPhylumColumn': 'Inter phylum' in network_df.columns
     }
 
-def generate_html(data_json: str, logo_svg: str = "") -> str:
+def generate_html(data_json: str, logo_base64: str = "") -> str:
     """Generate the full HTML content."""
     
     html_template = """
@@ -109,7 +110,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://raw.githubusercontent.com/SilentGene/netinfer/refs/heads/main/docs/logo.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="##FAVICON_PLACEHOLDER##" sizes="any" type="image/svg+xml">
     <title>NetInfer Result</title>
     
     <!-- Dependencies -->
@@ -188,9 +189,10 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             justify-content: center;
         }
 
-        .header-logo svg {
+        .header-logo img {
             width: 100%;
             height: 100%;
+            object-fit: contain;
         }
 
         .header h3 {
@@ -804,7 +806,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             x: samples,
             y: abA,
             mode: 'lines+markers',
-            name: 'Taxon A',
+            name: edge.TaxonA,
             line: {color: COLOR_A, width: 2},
             marker: {size: 6}
         };
@@ -812,7 +814,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             x: samples,
             y: abB,
             mode: 'lines+markers',
-            name: 'Taxon B',
+            name: edge.TaxonB,
             line: {color: COLOR_B, width: 2},
             marker: {size: 6}
         };
@@ -901,7 +903,7 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             type: 'scatter',
             name: 'Samples',
             marker: { 
-                color: '#546e7a',
+                color: COLOR_A,
                 size: 8,
                 opacity: 0.6,
                 line: { color: 'white', width: 1 }
@@ -929,8 +931,8 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
             },
             height: 300,
             template: PLOT_TEMPLATE,
-            xaxis: { title: 'Abundance Taxon A', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
-            yaxis: { title: 'Abundance Taxon B', gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            xaxis: { title: `Abundance ${edge.TaxonA}`, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            yaxis: { title: `Abundance ${edge.TaxonB}`, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
             margin: { t: 50, b: 40, l: 50, r: 20 },
             showlegend: false,
             font: { family: 'Inter' }
@@ -979,31 +981,20 @@ def generate_html(data_json: str, logo_svg: str = "") -> str:
 </html>
     """
     
-    return html_template.replace('##DATA_PLACEHOLDER##', data_json).replace('##LOGO_PLACEHOLDER##', logo_svg)
+
+    favicon_url = f"data:image/svg+xml;base64,{logo_base64}"
+    logo_html = f'<img src="{favicon_url}" alt="NetInfer Logo">'
+
+    return html_template.replace('##DATA_PLACEHOLDER##', data_json).replace('##LOGO_PLACEHOLDER##', logo_html).replace('##FAVICON_PLACEHOLDER##', favicon_url)
 
 def main(snakemake):
     logger = setup_logger(snakemake.log[0])
     logger.info("Starting dashboard generation")
-    
-    try:
-        # Load logo if exists
-        logo_svg = ""
-        try:
-            # Path relative to script: ../../docs/logo.svg
-            script_path = Path(__file__).resolve()
-            logo_path = script_path.parent.parent.parent / 'docs' / 'logo.svg'
-            if logo_path.exists():
-                with open(logo_path, 'r', encoding='utf-8') as f:
-                    logo_svg = f.read()
-                    # Remove XML declaration if present
-                    if '<?xml' in logo_svg:
-                        logo_svg = logo_svg[logo_svg.find('?>')+2:].strip()
-                logger.info(f"Loaded logo from {logo_path}")
-            else:
-                logger.warning(f"Logo not found at {logo_path}")
-        except Exception as e:
-            logger.warning(f"Could not load logo: {e}")
 
+    netinfer_logo_base64 = "PHN2ZyBpZD0iX2xheWVyXzEiIGRhdGEtbmFtZT0ibGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNzIuNTQgMTczLjYiPgogIDwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAzMC4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiAyLjEuMSBCdWlsZCAxMzYpICAtLT4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0MCB7CiAgICAgICAgZmlsbDogbm9uZTsKICAgICAgICBzdHJva2U6ICNhNWE1YTU7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAycHg7CiAgICAgIH0KCiAgICAgIC5zdDAsIC5zdDEsIC5zdDIgewogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgfQoKICAgICAgLnN0MSB7CiAgICAgICAgZmlsbDogI2VhOWY0ODsKICAgICAgfQoKICAgICAgLnN0MSwgLnN0MiB7CiAgICAgICAgc3Ryb2tlOiAjMjMxODE1OwogICAgICB9CgogICAgICAuc3QyIHsKICAgICAgICBmaWxsOiAjMzI5ZTkzOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8bGluZSBjbGFzcz0ic3QwIiB4MT0iMTg4Ljg2IiB5MT0iOTMuNDEiIHgyPSIyMzguNDQiIHkyPSIyNC4zIi8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjI2Mi4xMSIgeTE9IjExNy4wOCIgeDI9IjE4OC41NiIgeTI9IjkzLjQxIi8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjIxOC41OCIgeTE9IjE2MS4wNiIgeDI9IjE4OC45NyIgeTI9IjkzLjQxIi8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjE0NC4zNCIgeTE9IjY0LjE5IiB4Mj0iMTg4Ljg2IiB5Mj0iOTMuNDEiLz4KICA8bGluZSBjbGFzcz0ic3QwIiB4MT0iMTQ1Ljk3IiB5MT0iMjEuMDYiIHgyPSIxODguNTYiIHkyPSI5Mi43NyIvPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSI3Ny4zNiIgeTE9Ijg2LjQiIHgyPSIyMC4zNiIgeTI9IjM4LjU4Ii8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjIwLjM2IiB5MT0iMTQyLjY4IiB4Mj0iNzcuMzYiIHkyPSI4Ni40Ii8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjE0NS45NyIgeTE9IjIxLjA2IiB4Mj0iMTA4LjgiIHkyPSIxMTIuMiIvPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxNTIuNTMiIHkxPSIxMzguMTQiIHgyPSIxODguNTYiIHkyPSI5My40MSIvPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxMDguOCIgeTE9IjExMS4zOCIgeDI9IjE1MS44IiB5Mj0iMTM4LjE0Ii8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9Ijc3LjM2IiB5MT0iODYuNCIgeDI9IjE4OC41NiIgeTI9IjkyLjc3Ii8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjE0NS45NyIgeTE9IjIxLjA2IiB4Mj0iNzcuMzYiIHkyPSI4Ni40Ii8+CiAgPGxpbmUgY2xhc3M9InN0MCIgeDE9IjEwOC44IiB5MT0iMTExLjM4IiB4Mj0iMjAuMzYiIHkyPSIxNDIuNjgiLz4KICA8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI3Ny4zNiIgY3k9Ijg2LjQiIHI9IjI4LjI2Ii8+CiAgPGNpcmNsZSBjbGFzcz0ic3QxIiBjeD0iMTg4LjU2IiBjeT0iOTMuNDEiIHI9IjIzLjY3Ii8+CiAgPGNpcmNsZSBjbGFzcz0ic3QyIiBjeD0iMjAuMzYiIGN5PSIzOC41OCIgcj0iOC45NCIvPgogIDxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjIwLjM2IiBjeT0iMTQyLjY4IiByPSI1LjgiLz4KICA8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIyMzguNDQiIGN5PSIyNC4zIiByPSI2LjUyIi8+CiAgPGNpcmNsZSBjbGFzcz0ic3QyIiBjeD0iMTQ1Ljk3IiBjeT0iMTkuOTUiIHI9IjkuNjgiLz4KICA8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxNDQuMzQiIGN5PSI2NC4xOSIgcj0iOS4xNiIvPgogIDxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjI2Mi4xMSIgY3k9IjExNy4wOCIgcj0iNS41NiIvPgogIDxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjIxOC41OCIgY3k9IjE2MS4wNiIgcj0iNS4zMiIvPgogIDxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjE1Mi41MyIgY3k9IjEzOC4xNCIgcj0iNy4yNiIvPgogIDxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjEwOC44IiBjeT0iMTExLjM4IiByPSI3LjI2Ii8+Cjwvc3ZnPg=="
+    logo_svg = base64.b64decode(netinfer_logo_base64).decode('utf-8')
+
+    try:
         # Load Inputs
         logger.info(f"Reading network file: {snakemake.input.network}")
         network_df = pd.read_csv(snakemake.input.network, sep='\t')
@@ -1016,7 +1007,7 @@ def main(snakemake):
         
         # Generate HTML
         data_json = json.dumps(data)
-        html_content = generate_html(data_json, logo_svg)
+        html_content = generate_html(data_json, netinfer_logo_base64)
         
         # Output
         out_path = Path(snakemake.output.html)

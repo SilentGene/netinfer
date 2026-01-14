@@ -1,9 +1,9 @@
 input:
-  abundance_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_input/otu_table.tsv
-  taxonomy_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_input/taxonomy_table.tsv
+  abundance_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_input/otu_table.tsv
+  taxonomy_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_input/taxonomy_table.tsv
   metadata_table: ''
 infer_taxonomy: false
-output_dir: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/test/example_output
+output_dir: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_output
 min_prevalence: 0.1
 min_peak_abundance: 0.1
 trusted_methods:
