@@ -39,6 +39,7 @@ suffix_tag = f"-{suffix}" if suffix else ""
 final_outputs = [
     f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
     f"{outdir}/final_results/merged_network{suffix_tag}.gml",
+    f"{outdir}/final_results/merged_network{suffix_tag}.gexf",
     f"{outdir}/final_results/network_info{suffix_tag}.json"
 ]
 

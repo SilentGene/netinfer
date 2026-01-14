@@ -235,8 +235,52 @@ def main(snakemake):
         # Fill NaNs in other columns with empty string
         gml_df = gml_df.fillna("")
         
-        G = nx.from_pandas_edgelist(gml_df, 'source', 'target', edge_attr=True)
+        # Identify node-specific columns (those ending in _a or _b)
+        node_cols = [c for c in gml_df.columns if c.endswith(('_a', '_b'))]
+        
+        node_attr_mapping = {} # node -> {attr_name: value}
+        for _, row in gml_df.iterrows():
+            src, tgt = row['source'], row['target']
+            
+            # Map attributes to source node (Node A)
+            if src not in node_attr_mapping:
+                node_attr_mapping[src] = {}
+                for c in node_cols:
+                    # Standard source attributes end in _a and don't describe B
+                    if c.endswith('_a') and 'abundance_b' not in c:
+                        node_attr_mapping[src][c] = row[c]
+                    # Cross-attribute: A's abundance when B is max
+                    if c == 'abundance_a_at_max_b':
+                        node_attr_mapping[src][c] = row[c]
+            
+            # Map attributes to target node (Node B)
+            if tgt not in node_attr_mapping:
+                node_attr_mapping[tgt] = {}
+                for c in node_cols:
+                    # Standard target attributes end in _b and don't describe A
+                    if c.endswith('_b') and 'abundance_a' not in c:
+                        node_attr_mapping[tgt][c] = row[c]
+                    # Cross-attribute: B's abundance when A is max
+                    if c == 'abundance_b_at_max_a':
+                        node_attr_mapping[tgt][c] = row[c]
+                
+        # Drop all node-related columns from edge dataframe
+        gml_edge_df = gml_df.drop(columns=node_cols)
+        
+        # Create Graph: only remaining columns will be edge attributes
+        G = nx.from_pandas_edgelist(gml_edge_df, 'source', 'target', edge_attr=True)
+        
+        # Add attributes to nodes in the network
+        for node, attrs in node_attr_mapping.items():
+            if node in G:
+                for attr_name, val in attrs.items():
+                    G.nodes[node][attr_name] = val
+
         nx.write_gml(G, snakemake.output.combined_graph)
+        
+        # Also export as GEXF for Gephi Lite compatibility
+        nx.write_gexf(G, snakemake.output.combined_gexf)
+
 
         # Calculate network-level metrics
         network_stats = calculate_network_metrics(G)

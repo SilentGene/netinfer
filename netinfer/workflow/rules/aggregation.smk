@@ -26,6 +26,7 @@ rule aggregate_networks:
     output:
         combined_table = f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
         combined_graph = f"{outdir}/final_results/merged_network{suffix_tag}.gml",
+        combined_gexf = f"{outdir}/final_results/merged_network{suffix_tag}.gexf",
         stats = f"{outdir}/final_results/network_info{suffix_tag}.json"
     threads: 1
     params:

@@ -75,11 +75,11 @@ main <- function() {
     # Adjust p-values using False Discovery Rate (FDR) correction
     merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
 
-    # Filter for statistically significant (FDR < 0.05) and strong (Spearman > 0.7) correlations
-    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & merged_df$Spearman > rho_threshold), ]
+    # Filter for statistically significant (FDR < fdr_threshold) and strong (abs(Spearman) > rho_threshold) correlations
+    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & abs(merged_df$Spearman) > rho_threshold), ]
 
-    # Sort the results by the strength of the correlation
-    filtered_df_sorted <- filtered_df[order(filtered_df$Spearman, decreasing = TRUE), ]
+    # Sort the results by the absolute strength of the correlation
+    filtered_df_sorted <- filtered_df[order(abs(filtered_df$Spearman), decreasing = TRUE), ]
     
     # Save network
     write_tsv(filtered_df_sorted, network_file)

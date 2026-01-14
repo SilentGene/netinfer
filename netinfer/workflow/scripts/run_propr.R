@@ -60,11 +60,12 @@ main <- function() {
     rho_long <- rho_long[rho_long$`source` != rho_long$`target`, ]
     rho_long <- rho_long[!duplicated(t(apply(rho_long[, 1:2], 1, sort))), ]
 
-    # Filter for strong positive proportionality (rho > 0.5)
-    rho_filtered <- rho_long[rho_long$Rho > 0.5, ]
+    # Filter for strong proportionality (abs(rho) > rho_threshold)
+    rho_filtered <- rho_long[abs(rho_long$Rho) > rho_threshold, ]
+    message(sprintf("Found %d edges with abs(Rho) > %f", nrow(rho_filtered), rho_threshold))
 
-    # Sort by proportionality value
-    network_df <- rho_filtered[order(rho_filtered$Rho, decreasing = TRUE), ]
+    # Sort by absolute proportionality value
+    network_df <- rho_filtered[order(abs(rho_filtered$Rho), decreasing = TRUE), ]
 
     # Save results
     write.table(network_df, file=network_file, 

@@ -99,9 +99,9 @@ main <- function() {
         edges_unique <- edges_unique[order(edges_unique$Weight, decreasing = TRUE), ]
         edges_final <- edges_unique[, c("source", "target", "Weight")]
         
-        # Filter for strong correlations
-        edges_filtered <- edges_final[edges_final$Weight > 0.5, ]
-        print(paste("Found", nrow(edges_filtered), "edges with weight > 0.5"))
+        # Filter for strong correlations (abs(Weight) > weight_threshold)
+        edges_filtered <- edges_final[abs(edges_final$Weight) > weight_threshold, ]
+        print(paste("Found", nrow(edges_filtered), "edges with abs(weight) >", weight_threshold))
         return(edges_filtered)
     }
 
