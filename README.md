@@ -87,11 +87,10 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --config m
 The pipeline generates:
 1. Filtered and processed input data (`results/preprocessed_data/`)
 2. Individual network files for each method (`results/subtool_outputs/`)
-3. Merged network with consensus scores (`results/final_results/merged_edges.tsv`)
-4. Network statistics with modularity detection (`results/final_results/network_stats.txt`)
-5. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
-
-
+3. Network statistics with modularity detection (`results/final_results/network_stats.txt`)
+4. Merged network edges with consensus scores and community assignment (`results/final_results/merged_edges.tsv`)
+5. Merged network nodes with Zi-Pi analysis (`results/final_results/merged_nodes.tsv`)
+6. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
 
 ## Input File Formats
 

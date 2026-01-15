@@ -163,6 +163,107 @@ def add_phylum_info(final_df: pd.DataFrame) -> pd.DataFrame:
     
     return final_df
 
+def calculate_zi_pi(G: nx.Graph, node_to_community: Dict) -> Dict[str, Dict]:
+    """
+    Calculate Within-module connectivity (Zi) and Among-module connectivity (Pi)
+    for each node based on the Zi-Pi topology framework.
+    
+    Roles:
+    - Peripheral nodes (Specialists): Zi < 2.5 and Pi < 0.62
+    - Connectors (Generalists): Zi < 2.5 and Pi > 0.62
+    - Module hubs (Core nodes): Zi > 2.5 and Pi < 0.62
+    - Network hubs (Super generalists): Zi > 2.5 and Pi > 0.62
+    """
+    node_metrics = {}
+    
+    # Pre-calculate degrees for all nodes
+    degrees = dict(G.degree())
+    
+    # Group nodes by community
+    community_nodes = {}
+    for node, comm_id in node_to_community.items():
+        if comm_id not in community_nodes:
+            community_nodes[comm_id] = []
+        community_nodes[comm_id].append(node)
+        
+    # Calculate stats for each module (community)
+    module_stats = {}
+    for comm_id, nodes in community_nodes.items():
+        # Get degrees of nodes within this module (Kis)
+        kis_values = []
+        for node in nodes:
+            # Degree of node within its own module
+            kis = 0
+            for neighbor in G.neighbors(node):
+                if node_to_community.get(neighbor) == comm_id:
+                    kis += 1
+            kis_values.append(kis)
+        
+        module_stats[comm_id] = {
+            'mean_kis': np.mean(kis_values) if kis_values else 0,
+            'std_kis': np.std(kis_values) if kis_values else 0
+        }
+        
+    # Calculate Zi and Pi for each node
+    for node in G.nodes():
+        if node not in node_to_community:
+            continue
+            
+        comm_id = node_to_community[node]
+        ki = degrees.get(node, 0) # Total degree
+        
+        # Calculate Kis (degree within own module)
+        kis = 0
+        kis_by_module = {} # Count links to each module for Pi calculation
+        
+        for neighbor in G.neighbors(node):
+            neighbor_comm = node_to_community.get(neighbor)
+            if neighbor_comm is not None:
+                if neighbor_comm not in kis_by_module:
+                    kis_by_module[neighbor_comm] = 0
+                kis_by_module[neighbor_comm] += 1
+                
+                if neighbor_comm == comm_id:
+                    kis += 1
+        
+        # Calculate Zi
+        # Zi = (kis - mean_ks) / std_ks
+        mean_ks = module_stats[comm_id]['mean_kis']
+        std_ks = module_stats[comm_id]['std_kis']
+        
+        if std_ks == 0:
+            zi = 0.0
+        else:
+            zi = (kis - mean_ks) / std_ks
+            
+        # Calculate Pi
+        # Pi = 1 - sum((kis_m / ki)^2) for all modules m
+        if ki == 0:
+            pi = 0.0
+        else:
+            sum_sq_ratio = sum([(k_m / ki) ** 2 for k_m in kis_by_module.values()])
+            pi = 1 - sum_sq_ratio
+            
+        # Determine Role
+        if zi < 2.5:
+            if pi < 0.62:
+                role = "Peripheral node" # Specialist
+            else:
+                role = "Connector" # Generalist
+        else:
+            if pi < 0.62:
+                role = "Module hub" # Core
+            else:
+                role = "Network hub" # Super generalist
+                
+        node_metrics[node] = {
+            'Zi': round(zi, 4),
+            'Pi': round(pi, 4),
+            'Role': role
+        }
+        
+    return node_metrics
+
 def main(snakemake):
     """Main processing function."""
     logger = setup_logger(snakemake.log[0])
@@ -292,6 +393,12 @@ def main(snakemake):
         # Add community information as node attribute
         for node in G.nodes():
             G.nodes[node]['louvain_community'] = node_to_community.get(node, -1)
+            
+        # Calculate Zi-Pi metrics and add to node attributes
+        zi_pi_metrics = calculate_zi_pi(G, node_to_community)
+        for node, metrics in zi_pi_metrics.items():
+            for key, value in metrics.items():
+                G.nodes[node][key] = value
         
         # Add community information to the final_df for TSV export
         # Map community IDs for source and target nodes
@@ -362,6 +469,155 @@ def main(snakemake):
         # Save combined table
         final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
         
+        # Export Node Table (merged_nodes.tsv)
+        # Collect all attributes for each node
+        node_data = []
+        for node, attrs in G.nodes(data=True):
+            data_row = {'Node': node}
+            data_row.update(attrs)
+            node_data.append(data_row)
+            
+        nodes_df = pd.DataFrame(node_data)
+        
+        # Renaissance columns if needed (e.g. taxonomy_a -> Taxonomy)
+        # We know from node_attr_mapping logic that attributes were mapped from source/target columns.
+        # Common attributes: 'taxonomy_a'/'taxonomy_b' -> we should standardize this.
+        # However, in G.nodes, we just assigned whatever was in node_attr_mapping.
+        # Let's check what keys are usually there. 
+        # They come from columns ending in _a or _b.
+        # For a node, if it was a source, it got _a attrs. If target, _b attrs.
+        # We need to clean up these keys to remove _a and _b suffixes for the node table.
+        
+        # Create a clean DataFrame
+        cleaned_data = []
+        
+        # Helper to get first non-null value from possible keys
+        def get_val(row_dict, keys):
+            for k in keys:
+                if k in row_dict and pd.notnull(row_dict[k]) and row_dict[k] != "":
+                    return row_dict[k]
+            return None
+
+        # Iterate through node data and clean it up
+        for item in node_data:
+            clean_item = {'Node': item['Node']}
+            
+            # Transfer standard metrics directly
+            for k in ['Zi', 'Pi', 'Role', 'louvain_community']:
+                if k in item:
+                    clean_item[k] = item[k]
+            
+            # identifying keys for taxonomy and abundance
+            # They usually end with _a or _b or have no suffix if they came from node_attr_mapping directly
+            # Let's look at all keys in the item
+            all_keys = list(item.keys())
+            
+            # Find unique base names (e.g. 'taxonomy', 'mean_abundance')
+            base_names = set()
+            for k in all_keys:
+                if k in ['Node', 'Zi', 'Pi', 'Role', 'louvain_community']:
+                    continue
+                if k.endswith('_a'):
+                    base_names.add(k[:-2])
+                elif k.endswith('_b'):
+                    base_names.add(k[:-2])
+                else:
+                    base_names.add(k)
+            
+            # For each base name, try to find a value from _a, _b, or bare versions
+            for base in base_names:
+                # Prioritize keys that might be relevant
+                possible_keys = [base, f"{base}_a", f"{base}_b"]
+                
+                # Special handling for cross-attributes which shouldn't be merged lightly?
+                # e.g. abundance_b_at_max_a -> This is specific to a relationship, maybe not a node property?
+                # Actually, in calculate_edge_statistics:
+                # 'abundance_b_at_max_a': 'Abundance B at Max A'
+                # These were edge attributes. When we mapped them to nodes in line 246 (original code):
+                # if c == 'abundance_a_at_max_b': node_attr_mapping[src][c] = row[c]
+                # So 'Abundance A at Max B' was assigned to Node A. 
+                # This attribute effectively describes Node A.
+                # So it is a valid node attribute. 
+                # Its name in the DF was 'abundance_a_at_max_b'.
+                # Base name would be 'abundance_a_at_max_b' (no _a/_b suffix).
+                # Wait, my previous rename logic strips _b ! 
+                # abundance_a_at_max_b -> ends with _b -> becomes abundance_a_at_max.
+                # This might collide if there is 'abundance_a_at_max'. 
+                # Let's check calculate_edge_statistics names: 
+                # 'abundance_b_at_max_a'
+                # 'abundance_a_at_max_b'
+                # neither of these end in just _a or _b in a way that implies simple node attribute duplication.
+                # BUT, wait.
+                # 'mean_abundance_a' -> ends in _a -> base 'mean_abundance'.
+                # 'mean_abundance_b' -> ends in _b -> base 'mean_abundance'.
+                # This is correct.
+                
+                # However, 'abundance_a_at_max_b' -> ends in _b -> base 'abundance_a_at_max' ??
+                # This logic is dangerous for keys that naturally end in a/b but aren't just copies.
+                # But 'abundance_a_at_max_b' IS the value for Node A.
+                # 'abundance_b_at_max_a' IS the value for Node B.
+                # If we have Node A, we want 'abundance_a_at_max_b'. 
+                # If we convert it to 'abundance_a_at_max', is that meaningful? 
+                # Maybe "Abundance at Max Partner"?
+                
+                # The user output shows columns: "abundance_a_at_max", "abundance_b_at_max".
+                # And duplication of "prevalence", "mean_abundance".
+                
+                # Let's stick to merging "mean_abundance_a" and "mean_abundance_b" into "mean_abundance".
+                # And keeping unique complex metrics if possible, or simplifying them.
+                
+                val = get_val(item, possible_keys)
+                if val is not None:
+                    clean_item[base] = val
+                    
+            cleaned_data.append(clean_item)
+            
+        nodes_df = pd.DataFrame(cleaned_data)
+        
+        # Rename specific columns to match user preference and formal names
+        column_mapping_nodes = {
+            'louvain_community': 'Louvain Community',
+            'Zi': 'Within-module connectivity (Zi)',
+            'Pi': 'Among-module connectivity (Pi)',
+            'Role': 'Zi-Pi Role',
+            'taxonomy': 'Taxonomy',
+            'prevalence': 'Prevalence (%)',
+            'mean_abundance': 'Mean Abundance',
+            'max_abundance': 'Max Abundance',
+            'sample_at_max': 'Sample at Max Abundance'
+        }
+        
+        nodes_df = nodes_df.rename(columns=column_mapping_nodes)
+        
+        # Remove columns that might be confusing or redundant if they were stripped incorrectly
+        # e.g. 'abundance_a_at_max' which came from 'abundance_a_at_max_b'
+        # Let's keep them but maybe rename if they are clear?
+        # Actually 'abundance_a_at_max_b' means "Abundance of A when B is max".
+        # This is an edge property (dependent on B). Mapping it to Node A is only valid in the context of specific edges.
+        # But here we are aggregating to a Node table.
+        # If Node A has many edges, which 'abundance_a_at_max_b' do we keep?
+        # The code at line 246 said:
+        # if src not in node_attr_mapping: ...
+        # So it takes the value from the FIRST edge encountered for that node.
+        # This is somewhat arbitrary for edge-dependent properties.
+        # Standard node properties (abundance, taxonomy) should be constant across edges.
+        # So merging _a and _b for abundance/taxonomy is correct.
+        # But 'abundance_a_at_max_b' varies by edge. Exporting it for a node is misleading.
+        # I should probably DROP edge-specific attributes from the node table to avoid confusion.
+        
+        cols_to_drop = [c for c in nodes_df.columns if 'at_max' in c]
+        nodes_df = nodes_df.drop(columns=cols_to_drop, errors='ignore')
+        
+        # Reorder columns
+        preferred_start = ['Node', 'Taxonomy', 'Zi-Pi Role', 'Within-module connectivity (Zi)', 'Among-module connectivity (Pi)', 'Louvain Community']
+        preferred_start = [c for c in preferred_start if c in nodes_df.columns]
+        
+        other_cols = [c for c in nodes_df.columns if c not in preferred_start]
+        nodes_df = nodes_df[preferred_start + other_cols]
+        
+        # Save node table
+        nodes_df.to_csv(snakemake.output.nodes_table, sep='\t', index=False)
+
         # Save network statistics as tab-separated text file with descriptions
         metric_descriptions = {
             'nodes': 'Total number of nodes (taxa) in the network',

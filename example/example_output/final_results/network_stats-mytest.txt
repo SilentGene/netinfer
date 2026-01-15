@@ -1,0 +1,14 @@
+Item	Value	Description
+nodes	375	Total number of nodes (taxa) in the network
+edges	533	Total number of edges (associations) in the network
+density	0.007600713012477719	Network density, ratio of actual edges to possible edges (0-1)
+num_components	3	Number of connected components in the network
+largest_component_size	370	Number of nodes in the largest connected component
+avg_degree	2.8426666666666667	Average degree (number of connections) per node
+avg_clustering	0.06100317460317461	Average clustering coefficient, measure of local connectivity (0-1)
+modularity_label_propagation	0.5783856467515461	Modularity score using label propagation algorithm (-1 to 1)
+modularity_greedy	0.7556399579005171	Modularity score using greedy optimization algorithm (-1 to 1)
+modularity_louvain	0.761495517249876	Modularity score using Louvain algorithm (-1 to 1)
+num_louvain_communities	15	Number of communities detected by Louvain algorithm
+trusted_methods_used	flashweave, spieceasi	List of trusted methods that contributed to the network
+other_methods_used	propr, spearman, pearson, jaccard	List of other methods that were run and included in the output

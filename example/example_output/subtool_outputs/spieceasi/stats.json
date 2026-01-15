@@ -1,6 +1,6 @@
 {
   "optimal_lambda": {},
-  "stability_metrics": [0.0456],
-  "edges_count": [108],
+  "stability_metrics": [0.0469],
+  "edges_count": [308],
   "method": ["mb"]
 }

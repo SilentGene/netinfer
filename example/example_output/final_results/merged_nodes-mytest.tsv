@@ -1,0 +1,376 @@
+Node	Taxonomy	Zi-Pi Role	Within-module connectivity (Zi)	Among-module connectivity (Pi)	Louvain Community	Prevalence (%)	Max Abundance	Mean Abundance	Sample at Max Abundance
+otu_383	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	1.7757	0.0	14	10.0	0.1475111	0.00779828645	Sample8
+otu_661	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	Peripheral node	0.7668	0.0	14	10.0	0.13219327	0.0069907515000000005	Sample8
+otu_608	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Peripheral node	0.3234	0.0	7	10.0	0.27131152	0.01404629895	Sample8
+otu_91	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAOAJC01;s__	Connector	-1.229	0.6667	7	10.0	0.22301611	0.01166042345	Sample8
+otu_115	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__	Peripheral node	-1.1547	0.0	13	70.0	0.11259478	0.035427850500000004	Sample8
+otu_306	d__Bacteria;p__Arandabacterota;c__Arandabacteria;o__Arandabacterales;f__Arandabacteraceae;g__DATKKY01;s__	Peripheral node	0.0	0.0	13	70.0	0.10309661	0.028339840900000003	Sample7
+otu_121	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__RBG-16-68-12;f__JAFNFQ01;g__JAFNFQ01;s__JAFNFQ01 sp017885655	Peripheral node	-0.2835	0.4444	11	70.0	0.15923457	0.03150871255	Sample12
+otu_719	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.6238	0.0	11	70.0	0.24677987	0.0402859723	Sample12
+otu_718	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.7428	0.0	1	80.0	0.13369161	0.0283953589	Sample20
+otu_883	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	-1.4856	0.0	1	80.0	0.12045777	0.0272353678	Sample14
+otu_317	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	Peripheral node	2.1377	0.0	10	95.0	0.20526846	0.07041472010000001	Sample3
+otu_382	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.9001	0.0	10	95.0	0.16669367	0.05917960815000001	Sample3
+otu_742	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__DATKLL01;s__	Peripheral node	-0.7213	0.0	5	10.0	0.10795405	0.0071519048	Sample19
+otu_850	d__Bacteria;p__Patescibacteriota;c__Kazan-3B-28;o__Kazan-3B-28;f__Kazan-3B-28;g__;s__	Peripheral node	0.0451	0.0	5	10.0	0.19657786	0.0149864055	Sample19
+otu_512	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041480185	Peripheral node	-1.1908	0.5	11	85.0	0.124978594	0.031483910950000006	Sample8
+otu_773	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__	Peripheral node	-1.3684	0.4444	2	85.0	0.104373544	0.027379430399999998	Sample18
+otu_12	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	-1.1908	0.0	11	65.0	0.11550537	0.016353064750000004	Sample8
+otu_863	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__GBS-2;g__;s__	Peripheral node	1.531	0.0	11	65.0	0.108845286	0.014447456749999999	Sample8
+otu_670	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	Peripheral node	-1.3641	0.5	0	40.0	0.10379391	0.019102793200000003	Sample9
+otu_90	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAOAJC01;s__	Peripheral node	-0.2872	0.0	0	40.0	0.102778	0.023894190599999997	Sample9
+otu_157	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	Peripheral node	2.3443	0.0	5	10.0	0.14507858	0.0135633175	Sample19
+otu_519	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__JAAYZQ01;f__JAAYZQ01;g__;s__	Peripheral node	0.7668	0.0	14	10.0	0.18395597	0.0099794634	Sample5
+otu_691	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.7668	0.0	14	10.0	0.16735107	0.00991606485	Sample5
+otu_160	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	0.3151	0.0	12	50.0	1.2912743	0.133026817	Sample9
+otu_881	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	1.1202	0.0	12	50.0	1.6093513	0.12357329955	Sample9
+otu_329	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__	Peripheral node	1.3229	0.0	6	90.0	0.24523488	0.0604395385	Sample9
+otu_68	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	Peripheral node	0.0	0.0	6	90.0	0.37872854	0.08118595070000001	Sample9
+otu_1	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__;s__	Peripheral node	-0.4737	0.0	2	35.0	0.14072034	0.01429616555	Sample10
+otu_161	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	0.4211	0.0	2	35.0	0.14129484	0.01694630435	Sample17
+otu_234	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	Peripheral node	1.0476	0.375	3	10.0	0.34685522	0.018733019	Sample3
+otu_386	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	Peripheral node	-0.3223	0.0	3	10.0	0.22033527	0.0115590482	Sample3
+otu_489	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Peripheral node	-1.3684	0.0	2	45.0	0.10433096	0.01747077255	Sample19
+otu_80	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	Peripheral node	1.3158	0.0	2	45.0	0.1280996	0.028559677299999996	Sample7
+otu_190	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JADGNF01;s__	Peripheral node	-1.4596	0.0	16	90.0	0.26000014	0.07772275725	Sample19
+otu_204	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	Peripheral node	0.2085	0.0	16	90.0	0.18217662	0.0505499696	Sample19
+otu_444	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	Peripheral node	-0.2872	0.4444	0	25.0	0.2884074	0.01920804725	Sample3
+otu_67	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	Peripheral node	0.7898	0.375	0	25.0	0.36670834	0.0229965006	Sample3
+otu_300	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	Peripheral node	-0.4737	0.0	2	40.0	0.15739419	0.030996786600000003	Sample14
+otu_74	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	-1.3684	0.0	2	40.0	0.11052493	0.014287546600000003	Sample7
+otu_31	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__;s__	Peripheral node	-0.3714	0.0	1	85.0	0.15788071	0.03697287875000001	Sample20
+otu_727	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	Peripheral node	-0.3714	0.0	1	85.0	0.17533588	0.0444386471	Sample20
+otu_125	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	Peripheral node	0.0451	0.375	5	20.0	0.11802197	0.0114545953	Sample13
+otu_270	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	Peripheral node	1.5779	0.0	5	20.0	0.1081644	0.0130064173	Sample13
+otu_497	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	0.0451	0.0	5	15.0	0.14467816	0.0114953828	Sample19
+otu_72	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	0.8115	0.0	5	15.0	0.13606246	0.012292950249999999	Sample19
+otu_636	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	Peripheral node	1.3158	0.0	2	50.0	0.17846343	0.01607804845	Sample17
+otu_753	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__JAPLJS01;s__JAPLJS01 sp026388545	Peripheral node	-1.3684	0.0	2	45.0	0.4387696	0.04106913625	Sample17
+otu_432	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JBGQAS01;s__	Peripheral node	0.8115	0.0	5	15.0	0.15979187	0.015548597349999999	Sample20
+otu_885	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	0.0451	0.0	5	15.0	0.16535462	0.01674883345	Sample20
+otu_346	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	1.1547	0.0	13	70.0	0.10647859	0.025838673299999997	Sample18
+otu_643	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	Peripheral node	-1.1547	0.0	13	70.0	0.17627868	0.0409104792	Sample18
+otu_359	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.3714	0.0	1	35.0	0.2794924	0.043070897749999996	Sample19
+otu_871	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__UBA6257;g__JAAZNP01;s__	Peripheral node	0.7428	0.375	1	30.0	0.26138988	0.036109935600000004	Sample19
+otu_730	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__JAFGDM01;s__	Peripheral node	-1.4856	0.5	1	75.0	0.2321232	0.05200100114999999	Sample19
+otu_808	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__Dissulfurispiraceae;g__Fen-1308;s__	Peripheral node	0.7428	0.375	1	75.0	0.1182664	0.0337328254	Sample20
+otu_869	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__GWB1-50-10;g__JBBTQX01;s__	Peripheral node	-0.4737	0.0	2	50.0	0.1410378	0.026684457199999994	Sample18
+otu_275	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__UBA7540;g__JALHUF01;s__JALHUF01 sp022866195	Peripheral node	-1.229	0.0	7	30.0	0.15180002	0.0108506268	Sample8
+otu_588	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	Peripheral node	0.3234	0.56	7	25.0	0.116263285	0.008458429	Sample8
+otu_232	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	Peripheral node	-0.3375	0.0	10	55.00000000000001	0.24048685	0.0467490096	Sample20
+otu_891	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Peripheral node	0.9001	0.375	10	50.0	0.13283531	0.0214330464	Sample8
+otu_311	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__	Peripheral node	-1.4596	0.5	16	65.0	0.27797997	0.02816972145	Sample8
+otu_717	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.2085	0.0	16	70.0	0.24119374	0.02080387005	Sample8
+otu_592	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	Peripheral node	-0.4356	0.0	9	15.0	0.12446317	0.0070942537	Sample13
+otu_95	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__MWBV01;s__	Peripheral node	1.2197	0.0	9	20.0	0.120423496	0.0089321837	Sample13
+otu_4	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	0.4211	0.375	2	65.0	0.13595968	0.032926732400000006	Sample5
+otu_687	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	Peripheral node	1.3158	0.0	2	65.0	0.30500108	0.05352252889999999	Sample6
+otu_124	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	Peripheral node	0.0	0.0	6	65.0	0.27151525	0.05208218415	Sample13
+otu_892	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Peripheral node	1.3229	0.0	6	60.0	0.2010525	0.03631024165	Sample13
+otu_164	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	2.4175	0.5	3	35.0	0.10472861	0.007943775900000002	Sample3
+otu_783	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__Syntrophorhabdales;f__Syntrophorhabdaceae;g__Syntrophorhabdus;s__	Peripheral node	-1.6922	0.0	3	30.0	0.14444034	0.0109013754	Sample3
+otu_376	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.2085	0.0	16	55.00000000000001	0.15730904	0.017282493899999998	Sample8
+otu_746	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	Peripheral node	0.2085	0.0	16	50.0	0.15739901	0.01413227815	Sample8
+otu_439	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__Pelolinea;s__	Peripheral node	1.4142	0.0	4	55.00000000000001	0.11331992	0.02423474775	Sample19
+otu_550	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__RBG-13-51-18;s__	Peripheral node	-0.7071	0.0	4	50.0	0.10104415	0.0224568926	Sample14
+otu_735	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__JAHJQK01 sp030654105	Peripheral node	-0.4901	0.4444	12	75.0	0.34888652	0.04621144995	Sample1
+otu_874	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__2-12-FULL-60-25;f__2-12-FULL-60-25;g__;s__	Peripheral node	-0.4901	0.0	12	70.0	0.2565288	0.031945255799999996	Sample1
+otu_421	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	Peripheral node	-1.3975	0.0	15	70.0	0.41604295	0.06969184945000001	Sample1
+otu_506	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	0.9503	0.375	15	80.0	0.19927125	0.04649100925000001	Sample3
+otu_532	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	Peripheral node	-0.4528	0.0	7	35.0	0.24658702	0.0164740055	Sample8
+otu_69	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	Peripheral node	-0.4528	0.0	7	30.0	0.22474325	0.014656396800000002	Sample8
+otu_14	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	-1.2953	0.5	12	40.0	3.037251	0.23177377465	Sample9
+otu_174	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	-1.2511	0.0	14	20.0	0.11032546	0.007847612950000001	Sample8
+otu_272	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__;g__;s__	Peripheral node	1.7757	0.0	14	15.0	0.11592302	0.00711515435	Sample8
+otu_2	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	-0.7213	0.0	5	40.0	0.122714415	0.022929964650000002	Sample20
+otu_738	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__JAHJQK01 sp030654105	Peripheral node	0.0451	0.0	5	55.00000000000001	0.12618753	0.02470087755	Sample13
+otu_169	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Connector	-1.2633	0.6667	9	50.0	0.13019304	0.014388513350000003	Sample13
+otu_345	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.4356	0.0	9	65.0	0.82527214	0.07294469519999999	Sample13
+otu_677	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JACAEX01;s__	Peripheral node	-1.3641	0.5	0	25.0	0.14818168	0.012601892950000002	Sample13
+otu_103	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	Peripheral node	0.9503	0.0	15	35.0	0.13277389	0.02438679055	Sample2
+otu_44	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	2.1243	0.0	15	50.0	0.5099963	0.04147472435	Sample2
+otu_227	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__	Peripheral node	-0.2872	0.0	0	30.0	0.27481169	0.0215719756	Sample13
+otu_343	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.2872	0.0	0	35.0	0.33314136	0.025923575899999995	Sample13
+otu_230	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	Peripheral node	0.0	0.0	13	75.0	0.30524716	0.04772488885	Sample13
+otu_536	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__JAFGLR01;g__JAFGLR01;s__	Peripheral node	0.0	0.0	13	70.0	0.22189161	0.03483649465000001	Sample13
+otu_29	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__;s__	Peripheral node	0.7898	0.375	0	35.0	0.29676354	0.02703615145	Sample3
+otu_288	d__Bacteria;p__Actinomycetota;c__Coriobacteriia;o__Anaerosomatales;f__;g__;s__	Peripheral node	0.392	0.0	9	70.0	0.13579175	0.0240307247	Sample13
+otu_3	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	0.392	0.0	9	75.0	0.23544781	0.038414375300000005	Sample13
+otu_387	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	Peripheral node	1.2197	0.0	9	30.0	0.1269913	0.012043944849999998	Sample13
+otu_698	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	1.2197	0.0	9	35.0	0.103474565	0.010386403150000001	Sample13
+otu_54	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	0.6238	0.0	11	50.0	0.11488305	0.015092692599999995	Sample8
+otu_406	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	Peripheral node	1.3229	0.0	6	85.0	0.2433214	0.0550732811	Sample9
+otu_762	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	Peripheral node	0.0	0.0	6	80.0	0.42782643	0.07903828314999999	Sample13
+otu_322	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__JAGONC01;g__JAPLDP01;s__	Peripheral node	1.0996	0.0	7	10.0	0.24229334	0.01271261025	Sample8
+otu_814	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__JBGOWS01;s__	Peripheral node	1.0996	0.0	7	10.0	0.1019383	0.0057839141999999994	Sample8
+otu_119	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__UBA472;g__FEN-33;s__	Peripheral node	0.3234	0.0	7	10.0	0.104696155	0.0056008828	Sample8
+otu_280	d__Bacteria;p__Acidobacteriota;c__UBA6911;o__UBA6911;f__UBA6911;g__DASQID01;s__	Peripheral node	0.0451	0.0	5	35.0	0.13386318	0.01953364205	Sample19
+otu_48	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	-0.7213	0.0	5	35.0	0.16813885	0.02468087535	Sample13
+otu_573	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	Peripheral node	1.1547	0.0	13	70.0	0.2501477	0.03723026265	Sample13
+otu_818	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__GWC2-56-14;s__	Peripheral node	-0.4528	0.0	7	10.0	0.4542904	0.02309098555	Sample8
+otu_430	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JAFGXF01;s__	Peripheral node	0.3151	0.56	12	50.0	1.0057175	0.10177318205000001	Sample3
+otu_237	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	Peripheral node	0.3151	0.0	12	40.0	0.39926755	0.03611537925	Sample9
+otu_744	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	Peripheral node	-0.4901	0.0	12	40.0	0.31350657	0.03502699645	Sample3
+otu_500	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	-0.2872	0.4444	0	35.0	0.4899558	0.03930194355	Sample3
+otu_622	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Peripheral node	-0.2872	0.4444	0	35.0	0.2776125	0.01766000415	Sample3
+otu_38	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__QMZP01;f__QMZT01;g__JBGPQP01;s__	Peripheral node	-0.4528	0.0	7	20.0	0.14769924	0.0089772085	Sample8
+otu_53	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	1.8759	0.2778	7	20.0	0.955861	0.05009756654999999	Sample8
+otu_440	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	Peripheral node	-0.2236	0.0	15	35.0	0.19080126	0.0311252503	Sample5
+otu_650	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__Fen-1039;s__	Peripheral node	-1.3975	0.5	15	30.0	0.31183717	0.03210456725	Sample5
+otu_748	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	Peripheral node	0.7668	0.375	14	15.0	0.22052197	0.01845306265	Sample5
+otu_782	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__Syntrophorhabdales;f__Syntrophorhabdaceae;g__Syntrophorhabdus;s__	Peripheral node	1.7757	0.0	14	15.0	0.24259701	0.01548477875	Sample5
+otu_352	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.392	0.0	9	85.0	0.19155493	0.03220843554999999	Sample13
+otu_621	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Connector	-1.2633	0.6667	9	85.0	0.1131015	0.018296162799999995	Sample3
+otu_39	d__Archaea;p__Altiarchaeota;c__Altiarchaeia;o__JAFGQM01;f__JAFGQM01;g__;s__	Connector	-0.2835	0.625	11	65.0	0.17628795	0.04080179825	Sample7
+otu_587	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	Peripheral node	-0.2236	0.4444	15	65.0	0.11170218	0.02523184495	Sample13
+otu_193	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JAOZHU01;s__	Peripheral node	0.3234	0.0	7	15.0	0.10200612	0.00579937665	Sample8
+otu_397	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__;s__	Peripheral node	1.0996	0.0	7	15.0	0.2237223	0.011888997600000001	Sample8
+otu_415	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	Connector	0.0	0.625	6	85.0	0.1301369	0.03522487255	Sample9
+otu_417	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	Peripheral node	-0.2421	0.4444	14	25.0	0.11661719	0.009171093799999998	Sample8
+otu_801	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	Peripheral node	0.7428	0.0	1	85.0	0.21496193	0.051465853949999994	Sample19
+otu_337	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.3151	0.0	12	50.0	2.003648	0.15597984705	Sample9
+otu_350	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.2236	0.0	15	55.00000000000001	0.26349455	0.0424325205	Sample9
+otu_482	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Peripheral node	2.1243	0.32	15	60.0	0.23586127	0.0413646702	Sample1
+otu_356	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.9001	0.0	10	95.0	0.25717837	0.08088796849999999	Sample3
+otu_754	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__JAPLJS01;s__JAPLJS01 sp026388545	Peripheral node	-0.3375	0.0	10	95.0	0.25279176	0.0894454754	Sample3
+otu_154	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__A05DMB-2;s__	Connector	0.0	0.625	13	70.0	0.5592831	0.09341307465000001	Sample18
+otu_175	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	0.0451	0.0	5	20.0	0.15455885	0.01066328315	Sample20
+otu_201	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	Module hub	3.1108	0.0	5	20.0	0.19000264	0.02309365615	Sample20
+otu_676	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JACAEX01;s__	Peripheral node	0.4211	0.0	2	95.0	0.46387416	0.08229638445	Sample8
+otu_558	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__UBA2162;g__JACPPR01;s__	Peripheral node	-0.3714	0.4444	1	40.0	0.1061779	0.0165655771	Sample20
+otu_721	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.7428	0.0	1	45.0	0.13137205	0.023493727	Sample20
+otu_327	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Prolixibacteraceae;g__UBA1413;s__	Peripheral node	0.4211	0.0	2	45.0	0.20733967	0.015468389500000002	Sample17
+otu_518	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	Peripheral node	-1.3684	0.0	2	25.0	0.18448558	0.013754416600000003	Sample17
+otu_286	d__Bacteria;p__Actinomycetota;c__Actinomycetes;o__Actinomycetales;f__Demequinaceae;g__JAFGBM01;s__	Peripheral node	-1.2633	0.0	9	60.0	0.18872014	0.020270698849999998	Sample13
+otu_499	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	0.392	0.0	9	55.00000000000001	0.11264405	0.015635900749999997	Sample13
+otu_777	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__Deferrimicrobium sp937863105	Peripheral node	-0.3223	0.0	3	40.0	0.23784845	0.019022378	Sample3
+otu_559	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__UBA2162;g__JBBITI01;s__	Peripheral node	0.0451	0.0	5	25.0	0.102934696	0.0125049388	Sample19
+otu_764	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	Peripheral node	-0.4737	0.0	2	40.0	0.10263741	0.02258665815	Sample17
+otu_191	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JAGTQT01;s__	Peripheral node	-0.7213	0.0	5	40.0	0.21554922	0.02805075145	Sample19
+otu_477	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Peripheral node	0.0451	0.56	5	35.0	0.251352	0.028008187100000005	Sample19
+otu_526	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__;g__;s__	Peripheral node	0.392	0.0	9	60.0	0.22558436	0.026042838399999997	Sample13
+otu_409	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	Peripheral node	1.0476	0.375	3	15.0	0.15425487	0.008716948499999998	Sample3
+otu_577	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__JALHUB01 sp041501065	Peripheral node	1.0476	0.0	3	15.0	0.13267274	0.010556774000000001	Sample3
+otu_438	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JBGQAS01;s__JBGQAS01 sp041494435	Peripheral node	-0.3223	0.0	3	20.0	0.14688134	0.008964296	Sample3
+otu_843	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__DATJPP01;s__	Peripheral node	-0.3223	0.0	3	15.0	0.32706735	0.0180052781	Sample3
+otu_626	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAPLHP01;s__JAPLHP01 sp026389585	Peripheral node	0.9001	0.375	10	30.0	0.107380375	0.011631286299999998	Sample5
+otu_823	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JAAXXJ01;s__	Peripheral node	-1.5751	0.0	10	35.0	0.21943425	0.028602687699999997	Sample5
+otu_493	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__CG2-30-58-95;s__	Peripheral node	1.531	0.0	11	65.0	0.17597233	0.03922593145	Sample18
+otu_667	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	Peripheral node	0.6238	0.0	11	70.0	0.11848649	0.01946186295	Sample8
+otu_168	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	-0.4528	0.0	7	35.0	0.21102811	0.013905957200000003	Sample8
+otu_19	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	2.0474	0.2778	9	25.0	1.096054	0.0576007538	Sample13
+otu_97	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__SCGC-AAA011-G17;f__VGLX01;g__JAWABC01;s__	Peripheral node	2.0474	0.2778	9	30.0	0.36580536	0.02249783375	Sample13
+otu_520	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__JAAYZQ01;f__JAAYZQ01;g__DAOQVR01;s__	Peripheral node	1.857	0.0	1	75.0	0.1341743	0.03225583225	Sample20
+otu_87	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__CSSed11-243R1;f__CSSed11-243R1;g__;s__	Peripheral node	-0.3714	0.4444	1	80.0	0.18734773	0.047871329799999994	Sample20
+otu_416	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	Connector	-1.2953	0.6667	12	40.0	0.101612486	0.015015523649999998	Sample13
+otu_84	d__Archaea;p__Methanobacteriota_B;c__Thermococci;o__Methanofastidiosales;f__;g__;s__	Peripheral node	-0.7213	0.4444	5	35.0	0.16966324	0.01687226385	Sample20
+otu_617	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Peripheral node	0.7428	0.0	1	80.0	0.13386941	0.0339864128	Sample20
+otu_759	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__	Peripheral node	-0.2236	0.0	15	60.0	0.38218853	0.04718665385	Sample9
+otu_316	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	Peripheral node	0.0	0.0	8	65.0	0.17241056	0.0241836164	Sample20
+otu_847	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__UBA6249;s__	Peripheral node	0.0	0.0	8	60.0	0.18180458	0.02395780015	Sample20
+otu_410	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__UBA9647;s__	Peripheral node	2.2105	0.0	2	25.0	0.113965705	0.01042105095	Sample10
+otu_496	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__Fen-1038;s__	Peripheral node	-1.3684	0.0	2	40.0	0.11849235	0.0163712159	Sample10
+otu_209	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	Peripheral node	0.7898	0.375	0	55.00000000000001	0.6678566	0.0762309032	Sample3
+otu_763	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	Peripheral node	1.8667	0.5	0	55.00000000000001	0.16637862	0.02389038535	Sample3
+otu_751	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp903893135	Peripheral node	0.2085	0.0	16	45.0	0.15129772	0.014586956100000001	Sample8
+otu_250	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__	Peripheral node	-0.3375	0.4444	10	60.0	0.29127914	0.04982425485	Sample13
+otu_71	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	-0.3375	0.0	10	50.0	0.1085235	0.0157368395	Sample8
+otu_851	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__Curtissbacterales;f__DATCJB01;g__;s__	Peripheral node	-0.2835	0.0	11	70.0	0.10909441	0.030357968349999997	Sample8
+otu_100	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__JAGVZT01;g__;s__	Module hub	2.7305	0.0	12	35.0	0.84428775	0.04703402135	Sample1
+otu_287	d__Bacteria;p__Actinomycetota;c__Actinomycetes;o__Mycobacteriales;f__Mycobacteriaceae;g__Mycobacterium;s__	Peripheral node	-0.4901	0.0	12	25.0	0.12275755	0.01169842745	Sample1
+otu_731	d__Bacteria;p__Desulfobacterota;c__RBG-13-43-22;o__RBG-13-43-22;f__RBG-13-43-22;g__RBG-13-43-22;s__	Peripheral node	1.3229	0.0	6	80.0	0.12867273	0.03184684015	Sample13
+otu_402	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	Peripheral node	-0.4356	0.0	9	65.0	0.17127919	0.034499636550000004	Sample13
+otu_77	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	-0.4356	0.0	9	65.0	0.49217436	0.0532317439	Sample13
+otu_765	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	Peripheral node	0.392	0.0	9	40.0	0.14329845	0.013583335049999997	Sample13
+otu_353	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.4356	0.0	9	15.0	0.12464375	0.0071288262000000005	Sample13
+otu_645	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	Peripheral node	0.392	0.0	9	20.0	0.2358444	0.01316671125	Sample13
+otu_135	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	Connector	-0.2236	0.625	15	40.0	0.22434115	0.018313068449999997	Sample3
+otu_16	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	-0.3223	0.4444	3	40.0	0.11338386	0.008864108550000001	Sample3
+otu_523	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	Peripheral node	0.7668	0.0	14	25.0	0.22975834	0.01349785285	Sample5
+otu_703	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.7428	0.0	1	45.0	0.12494065	0.02156070835	Sample14
+otu_784	d__Bacteria;p__DRYD01;c__;o__;f__;g__;s__	Peripheral node	-0.3714	0.0	1	40.0	0.2149156	0.0315309131	Sample19
+otu_452	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__	Peripheral node	0.0451	0.0	5	65.0	0.24500768	0.0353449116	Sample13
+otu_207	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	Peripheral node	-1.3229	0.0	6	85.0	0.12755999	0.04150281910000001	Sample9
+otu_118	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__JAJRAG01 sp041478695	Peripheral node	-0.4356	0.0	9	55.00000000000001	0.2708816	0.061507448549999996	Sample4
+otu_678	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JACAEX01;s__	Peripheral node	0.392	0.0	9	40.0	0.19615363	0.03784294105	Sample15
+otu_217	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__;s__	Peripheral node	0.7898	0.0	0	40.0	0.36829594	0.0244526915	Sample3
+otu_654	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__Fen-1039;s__	Peripheral node	1.8667	0.0	0	40.0	0.15297382	0.0230453803	Sample3
+otu_900	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	Peripheral node	1.8667	0.0	0	20.0	0.2963624	0.0180411864	Sample3
+otu_297	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	Peripheral node	-1.4856	0.5	1	80.0	0.18781264	0.0357869642	Sample20
+otu_816	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__UBA9159;g__DASPUA01;s__	Peripheral node	-0.2421	0.4444	14	55.00000000000001	0.12383061	0.0113573844	Sample8
+otu_880	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	-1.2511	0.0	14	65.0	0.12749718	0.01577218285	Sample8
+otu_108	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	Peripheral node	-0.3375	0.4444	10	95.0	0.18077506	0.048960983799999996	Sample2
+otu_507	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	-1.3684	0.5	2	90.0	0.15581384	0.028952698099999997	Sample5
+otu_107	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	Peripheral node	-0.2236	0.4444	15	55.00000000000001	0.34336987	0.03552103325000001	Sample3
+otu_659	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__RBG-16-54-18;g__RBG-16-54-11;s__	Peripheral node	-0.2236	0.4444	15	50.0	0.7092792	0.05688856645	Sample3
+otu_805	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__JACRGL01;g__;s__	Connector	-1.1908	0.6667	11	50.0	0.13960436	0.01552729545	Sample8
+otu_893	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Peripheral node	-0.2835	0.0	11	50.0	0.11018957	0.01685121035	Sample8
+otu_802	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__2-02-FULL-66-22 sp041489335	Peripheral node	0.0451	0.375	5	40.0	0.13481912	0.015147222399999999	Sample19
+otu_22	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	0.9001	0.56	10	95.0	0.13001643	0.03258867425	Sample13
+otu_711	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.9001	0.375	10	95.0	0.14936027	0.0625845286	Sample18
+otu_580	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	Peripheral node	-1.2633	0.5	9	40.0	0.11081565	0.013049181100000001	Sample13
+otu_202	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	Peripheral node	0.7898	0.0	0	45.0	0.24703144	0.039067160700000006	Sample3
+otu_538	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__JAFGLR01;g__JAFGLR01;s__	Peripheral node	-0.2872	0.0	0	35.0	0.13624464	0.02625431995	Sample3
+otu_531	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	Peripheral node	0.7898	0.0	0	35.0	0.24187228	0.027076839749999998	Sample9
+otu_284	d__Bacteria;p__Acidobacteriota;c__Vicinamibacteria;o__Vicinamibacterales;f__Fen-181;g__;s__	Peripheral node	0.7898	0.0	0	50.0	0.11461033	0.0168210325	Sample3
+otu_263	d__Bacteria;p__Acidobacteriota;c__DASWHO01;o__;f__;g__;s__	Peripheral node	-1.1908	0.5	11	35.0	0.103783846	0.009460001400000001	Sample8
+otu_574	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	Connector	0.2085	0.625	16	40.0	0.1261485	0.010769960249999998	Sample8
+otu_172	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	-0.4528	0.0	7	10.0	0.10535025	0.0057223321	Sample8
+otu_181	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	Peripheral node	1.0996	0.0	7	20.0	0.25782388	0.01420209815	Sample8
+otu_258	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__UBA8522;s__UBA8522 sp017886205	Peripheral node	1.0996	0.0	7	15.0	0.13517232	0.0079964925	Sample8
+otu_5	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	1.857	0.5	1	75.0	0.30451864	0.06450397580000002	Sample19
+otu_198	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	Peripheral node	0.8115	0.0	5	25.0	0.3308416	0.0227032762	Sample20
+otu_723	d__Bacteria;p__Desulfobacterota;c__Desulfobaccia;o__Desulfobaccales;f__0-14-0-80-60-11;g__0-14-0-80-60-11;s__	Peripheral node	0.8115	0.0	5	15.0	0.3921728	0.025329450249999996	Sample20
+otu_894	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Connector	-0.4901	0.625	12	60.0	0.46747765	0.05566753190000001	Sample1
+otu_267	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__DASWZN01;s__	Peripheral node	-0.3223	0.4444	3	30.0	0.19029	0.0222224865	Sample9
+otu_330	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__	Connector	-1.6922	0.6667	3	35.0	0.11263595	0.012975380149999998	Sample9
+otu_565	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	Peripheral node	-1.2633	0.5	9	45.0	0.2512491	0.04326917749999999	Sample15
+otu_794	d__Bacteria;p__Margulisbacteria;c__WOR-1;o__;f__;g__;s__	Peripheral node	-0.3223	0.0	3	50.0	0.16355309	0.015362447599999999	Sample3
+otu_830	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JALNZF01;s__	Peripheral node	0.0451	0.48	5	30.0	0.10848584	0.0150290402	Sample19
+otu_320	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__FEN-979;g__DATJQF01;s__	Peripheral node	0.4211	0.0	2	70.0	0.16672553	0.03775767955	Sample7
+otu_561	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	Peripheral node	0.4211	0.0	2	60.0	0.1299903	0.025855205	Sample7
+otu_206	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	Peripheral node	-1.3229	0.5	6	65.0	0.22817051	0.0434558131	Sample2
+otu_192	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JAOZHU01;s__	Peripheral node	-1.229	0.0	7	50.0	0.16270952	0.01326706805	Sample8
+otu_655	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__Gloeobacterales;f__PMM-0068;g__Sivonenia;s__Sivonenia alaskensis	Peripheral node	0.4211	0.375	2	65.0	0.21833137	0.034344640249999996	Sample14
+otu_745	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	Peripheral node	0.4211	0.0	2	85.0	0.14885534	0.04155357385	Sample14
+otu_827	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JAKAHZ01;s__	Peripheral node	0.0451	0.48	5	60.0	0.17449492	0.035579007950000005	Sample18
+otu_609	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Connector	-1.4596	0.75	16	35.0	0.14928263	0.0125489972	Sample3
+otu_128	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	Peripheral node	-1.1908	0.0	11	30.0	0.11148809	0.00786691635	Sample8
+otu_370	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.2835	0.0	11	30.0	0.10203145	0.0088111803	Sample8
+otu_875	d__Bacteria;p__Patescibacteriota;c__WWE3;o__UBA101185;f__UBA10185;g__JAAZNV01;s__	Peripheral node	0.7428	0.0	1	75.0	0.14305253	0.045310206250000006	Sample20
+otu_318	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	Connector	-1.2633	0.6667	9	50.0	0.19319601	0.026913317800000003	Sample13
+otu_184	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	Peripheral node	0.4211	0.0	2	55.00000000000001	0.12965035	0.02493233015	Sample17
+otu_898	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1359;s__	Peripheral node	1.9254	0.0	12	45.0	0.83826685	0.08261171655000002	Sample9
+otu_826	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JAAXXJ01;s__	Peripheral node	-0.4901	0.4444	12	30.0	0.10786108	0.012289940249999999	Sample9
+otu_855	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__JAPLYW01;g__;s__	Peripheral node	-1.1547	0.5	13	75.0	0.1998367	0.05399898185	Sample19
+otu_305	d__Bacteria;p__Actinomycetota;c__UBA4738;o__UBA4738;f__HRBIN12;g__;s__	Peripheral node	1.8766	0.375	16	55.00000000000001	0.15794341	0.0140321158	Sample8
+otu_543	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__Fen-1077;s__	Peripheral node	-0.4737	0.0	2	75.0	0.33896023	0.061306487650000005	Sample5
+otu_629	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	Peripheral node	1.3158	0.32	2	75.0	0.400537	0.049503983	Sample2
+otu_660	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__RBG-16-54-18;g__RBG-16-54-11;s__	Peripheral node	-0.4901	0.0	12	50.0	0.20361155	0.03061742955	Sample9
+otu_797	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__;f__;g__;s__	Peripheral node	1.1202	0.0	12	50.0	1.6454073	0.13278358715	Sample1
+otu_848	d__Bacteria;p__Omnitrophota;c__Koll11;o__Pluralincolimonadales;f__Pluralincolimonadaceae;g__;s__	Peripheral node	1.1547	0.375	13	80.0	0.12381926	0.03460195945000001	Sample7
+otu_862	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__CG1-02-41-26;g__JAUXAO01;s__	Peripheral node	2.3094	0.0	13	80.0	0.19319172	0.0406788363	Sample18
+otu_32	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__JAWBOD01;s__	Peripheral node	-0.3714	0.5	1	30.0	0.3106417	0.028426311050000003	Sample14
+otu_640	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	Peripheral node	-1.2511	0.5	14	55.00000000000001	0.10634203	0.01837149355	Sample5
+otu_701	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	0.8115	0.32	5	10.0	0.41066757	0.02200234315	Sample20
+otu_545	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBFYTX01;s__	Peripheral node	1.1202	0.32	12	45.0	0.67488486	0.044758086950000005	Sample1
+otu_510	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	0.7668	0.0	14	10.0	0.10382266	0.0064239955	Sample15
+otu_254	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JBGOYP01;s__	Peripheral node	0.4211	0.0	2	50.0	0.17175199	0.031065246350000002	Sample10
+otu_312	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	Peripheral node	-0.2835	0.4444	11	50.0	0.32159168	0.05045931655	Sample18
+otu_635	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	Peripheral node	0.6238	0.0	11	50.0	0.1534172	0.014353234900000001	Sample8
+otu_344	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.0	0.0	13	80.0	0.11819132	0.0334705364	Sample8
+otu_10	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	1.3158	0.0	2	55.00000000000001	0.18376826	0.015128115900000003	Sample17
+otu_66	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	Connector	-1.4856	0.6667	1	75.0	0.63265496	0.06566707335	Sample8
+otu_208	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	Peripheral node	-1.2511	0.5	14	65.0	0.101531535	0.015471352949999998	Sample15
+otu_325	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Prolixibacteraceae;g__SKHV01;s__	Peripheral node	-0.2835	0.0	11	80.0	2.7178364	0.35902901265000003	Sample7
+otu_245	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JALHTW01;s__	Connector	-1.4878	0.6667	5	20.0	0.13243635	0.008453855900000001	Sample14
+otu_357	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	-0.7213	0.0	5	55.00000000000001	0.119939186	0.016761755899999998	Sample19
+otu_246	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JALHTW01;s__JALHTW01 sp022866045	Peripheral node	0.7428	0.0	1	70.0	0.28058904	0.051944257699999996	Sample14
+otu_813	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__DYFC01 sp041658585	Peripheral node	-1.2633	0.5	9	10.0	0.121276066	0.0072921800499999995	Sample13
+otu_319	d__Bacteria;p__Bacillota;c__UBA4882;o__UBA8346;f__UBA8346;g__JAEZJQ01;s__	Peripheral node	-1.229	0.5	7	75.0	0.23687868	0.022717887350000004	Sample8
+otu_116	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__JAJRAG01 sp041478695	Peripheral node	-0.4737	0.4444	2	45.0	0.540369	0.04818763575	Sample8
+otu_508	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	1.3158	0.32	2	45.0	0.111148864	0.015777743099999998	Sample17
+otu_767	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__	Peripheral node	-0.2835	0.0	11	40.0	0.10522187	0.01278479505	Sample18
+otu_886	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	-1.1908	0.0	11	45.0	0.1308344	0.017406573350000003	Sample8
+otu_789	d__Bacteria;p__JABMQX01;c__JABMQX01;o__JABMQX01;f__JABMQX01;g__;s__	Peripheral node	-1.3641	0.5	0	30.0	0.32951373	0.0229416567	Sample9
+otu_834	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JALNZF01;s__	Peripheral node	-1.3641	0.5	0	50.0	0.35606205	0.0320098608	Sample13
+otu_761	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__	Peripheral node	-0.3375	0.4444	10	75.0	0.11334971	0.03973792454999999	Sample14
+otu_131	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	Peripheral node	-0.2835	0.4444	11	10.0	0.48012942	0.02489148925	Sample7
+otu_92	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAQUKY01;s__	Peripheral node	0.0451	0.0	5	50.0	0.17776	0.025281613050000002	Sample19
+otu_541	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__DAOUZD01;s__	Peripheral node	-0.4901	0.0	12	35.0	0.15456814	0.013555429999999999	Sample1
+otu_139	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	Peripheral node	-1.1908	0.0	11	35.0	0.10960148	0.01269719745	Sample18
+otu_295	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	Module hub	3.3456	0.0	11	25.0	0.2223951	0.0161374624	Sample12
+otu_829	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JALNZF01;s__	Peripheral node	0.7668	0.0	14	20.0	1.2308645	0.07283301365	Sample15
+otu_276	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__;s__	Peripheral node	-1.2633	0.0	9	35.0	0.18117407	0.01840027305	Sample9
+otu_447	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	Peripheral node	1.2197	0.5	9	45.0	0.25190023	0.0325641172	Sample11
+otu_138	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	Connector	-1.4878	0.6667	5	95.0	0.32817742	0.04193671565	Sample13
+otu_299	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	Peripheral node	-0.4901	0.4444	12	35.0	0.68215805	0.06574539599999998	Sample1
+otu_589	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	Peripheral node	-0.4901	0.0	12	35.0	0.58528656	0.0562080443	Sample9
+otu_666	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	Peripheral node	-0.3223	0.0	3	10.0	0.13824636	0.0106836093	Sample3
+otu_183	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	Peripheral node	-0.2835	0.4444	11	60.0	0.12039552	0.0358723503	Sample8
+otu_860	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__UBA1400;f__UBA1400;g__;s__	Peripheral node	0.6238	0.0	11	60.0	0.12781933	0.0301965187	Sample5
+otu_737	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__JAHJQK01 sp030654105	Peripheral node	-0.3223	0.0	3	60.0	0.1685473	0.028461217499999997	Sample9
+otu_40	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	-1.3684	0.0	2	40.0	0.18110521	0.0125386516	Sample8
+otu_224	d__Bacteria;p__;c__;o__;f__;g__;s__	Peripheral node	-0.2872	0.4444	0	55.00000000000001	0.7267075	0.07685495035	Sample8
+otu_896	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Peripheral node	-0.4356	0.4444	9	40.0	0.16364469	0.02062418345	Sample13
+otu_868	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__RBG-13-40-8-A;g__JAKJED01;s__	Connector	-1.4856	0.6667	1	50.0	0.11947547	0.0231226683	Sample4
+otu_89	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAKLIN01;s__	Peripheral node	-0.2872	0.0	0	35.0	0.11611616	0.013348665000000001	Sample13
+otu_239	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	Peripheral node	-1.3229	0.5	6	75.0	0.24575232	0.0300090423	Sample13
+otu_429	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	Peripheral node	1.8766	0.0	16	45.0	0.22418487	0.0173723788	Sample8
+otu_79	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__MVRE01 sp026394595	Peripheral node	-1.4596	0.5	16	30.0	0.12389838	0.011774077050000002	Sample8
+otu_113	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__SM1-50 sp017885605	Peripheral node	0.392	0.0	9	45.0	1.8723258	0.14200641149999998	Sample13
+otu_625	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAPLHP01;s__	Peripheral node	1.8759	0.0	7	15.0	0.36623862	0.025158924650000004	Sample8
+otu_872	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA9973;f__GWA1-40-21;g__Bog-1340;s__	Peripheral node	-0.2872	0.4444	0	40.0	0.19005011	0.019230657	Sample3
+otu_73	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	0.6238	0.375	11	95.0	0.1848151	0.0537196586	Sample18
+otu_460	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__FEN-1073;s__	Peripheral node	-1.2633	0.5	9	30.0	0.3464911	0.036482243799999994	Sample8
+otu_668	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	Peripheral node	2.0474	0.0	9	35.0	0.7749909	0.045290163700000004	Sample13
+otu_734	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__	Peripheral node	-0.4356	0.4444	9	75.0	0.12867437	0.0345561353	Sample9
+otu_215	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	Peripheral node	0.2085	0.4444	16	55.00000000000001	0.31625745	0.03830195769999999	Sample3
+otu_55	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	0.392	0.0	9	15.0	0.5933118	0.030757329849999994	Sample13
+otu_603	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__RBG-13-51-36 sp041489785	Peripheral node	1.2197	0.0	9	10.0	0.23639907	0.01226488875	Sample13
+otu_302	d__Bacteria;p__Actinomycetota;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Peripheral node	-0.7213	0.0	5	25.0	0.22061071	0.02418207845	Sample20
+otu_388	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041480535	Peripheral node	-0.4737	0.4444	2	40.0	0.31675464	0.0447083759	Sample6
+otu_775	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__	Peripheral node	-0.2421	0.4444	14	30.0	0.222897	0.01773271235	Sample5
+otu_628	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__JAUYDU01;s__	Peripheral node	0.6238	0.0	11	60.0	0.12394957	0.024632334750000002	Sample18
+otu_653	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__Fen-1039;s__	Peripheral node	-1.1547	0.5	13	95.0	0.13580921	0.0448663039	Sample8
+otu_562	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	Peripheral node	-1.3641	0.5	0	30.0	0.31805724	0.022768949700000006	Sample13
+otu_278	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__RBG-13-68-16;s__	Peripheral node	-1.4878	0.0	5	60.0	0.27417544	0.0408486437	Sample20
+otu_539	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__JAFGLR01;g__JAFGLR01;s__	Peripheral node	-1.2953	0.5	12	25.0	0.14361157	0.015005560299999998	Sample9
+otu_9	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	Peripheral node	1.0476	0.375	3	25.0	0.11173426	0.009180861799999999	Sample3
+otu_611	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Peripheral node	-0.4356	0.0	9	60.0	0.26784065	0.024475686	Sample13
+otu_396	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__;g__;s__	Peripheral node	0.2085	0.4444	16	15.0	0.11017097	0.008099525049999999	Sample8
+otu_713	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	-0.3714	0.0	1	80.0	0.14432156	0.0297973006	Sample19
+otu_618	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	Peripheral node	0.2085	0.0	16	25.0	0.17035763	0.0110050023	Sample8
+otu_681	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	Peripheral node	-0.4356	0.0	9	15.0	0.12257841	0.01018127335	Sample13
+otu_99	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__UBA10117;f__UBA10117;g__DATEUM01;s__	Peripheral node	0.4211	0.0	2	90.0	0.115345515	0.028667706000000005	Sample10
+otu_261	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__UBA2199;f__UBA2199;g__UBA2199;s__	Peripheral node	0.0	0.0	6	55.00000000000001	0.18398587	0.024906982449999997	Sample9
+otu_533	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	Peripheral node	0.6238	0.375	11	40.0	0.19510552	0.03617089175	Sample19
+otu_462	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__FEN-1073;s__	Peripheral node	0.7898	0.375	0	30.0	0.21988901	0.0205561156	Sample3
+otu_479	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Connector	-1.3641	0.6667	0	55.00000000000001	0.790624	0.063988194	Sample9
+otu_841	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	Connector	-0.2236	0.625	15	45.0	0.19158857	0.01990795525	Sample2
+otu_566	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	Peripheral node	-0.2421	0.4444	14	35.0	0.15918343	0.014394275049999999	Sample5
+otu_487	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Peripheral node	0.6238	0.0	11	25.0	0.17411944	0.01850557515	Sample12
+otu_435	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JBGQAS01;s__JBGQAS01 sp041494435	Peripheral node	0.6238	0.56	11	45.0	0.16681343	0.025891314199999998	Sample12
+otu_46	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	-0.4737	0.4444	2	20.0	0.4278657	0.03462986220000001	Sample10
+otu_358	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	Peripheral node	0.0	0.0	13	90.0	0.39785948	0.1030077728	Sample13
+otu_296	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	Peripheral node	-0.2236	0.4444	15	70.0	0.20457959	0.026957013500000005	Sample3
+otu_504	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	Peripheral node	-1.5751	0.0	10	85.0	0.101152875	0.018514464200000004	Sample13
+otu_575	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	Peripheral node	-1.5751	0.5	10	95.0	0.3099336	0.061531016699999996	Sample1
+otu_793	d__Bacteria;p__Krumholzibacteriota;c__Krumholzibacteriia;o__Krumholzibacteriales;f__Krumholzibacteriaceae;g__SSS58A;s__	Peripheral node	-0.3375	0.4444	10	90.0	0.23231634	0.06864392285	Sample14
+otu_256	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__;s__	Peripheral node	-0.2421	0.4444	14	95.0	0.32419002	0.04936364215	Sample15
+otu_864	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__JAPLXL01 sp026396115	Connector	-0.3375	0.625	10	95.0	0.14330654	0.0564230474	Sample8
+otu_145	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__20-14-0-80-47-9;s__	Connector	0.2085	0.625	16	90.0	0.20461902	0.0332994529	Sample8
+otu_673	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	Peripheral node	-1.1547	0.5	13	90.0	0.20319732	0.07767354225	Sample18
+otu_148	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__20-14-0-80-47-9;s__20-14-0-80-47-9 sp022865455	Peripheral node	0.9503	0.56	15	70.0	1.0802919	0.06727478765	Sample3
+otu_642	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	Connector	-1.5751	0.75	10	75.0	0.3253698	0.0411123401	Sample1
+otu_743	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	Peripheral node	-1.2511	0.5	14	65.0	0.15381142	0.01596581125	Sample8
+otu_488	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	Peripheral node	-0.7071	0.0	4	50.0	0.14199485	0.015274699149999998	Sample8
+otu_776	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__	Peripheral node	0.0	0.4444	13	80.0	0.16258371	0.02948226975	Sample18
+otu_149	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__20-14-0-80-47-9;s__20-14-0-80-47-9 sp022865455	Peripheral node	-0.2421	0.0	14	20.0	0.14426377	0.0102000806	Sample8
+otu_70	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	Peripheral node	-0.2872	0.0	0	40.0	0.11028513	0.015577009999999999	Sample13
+otu_45	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	Peripheral node	-0.4901	0.4444	12	40.0	0.2912438	0.0203185071	Sample1
+otu_186	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	Peripheral node	-0.2421	0.0	14	60.0	0.24053138	0.03804355775	Sample5
+otu_127	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	Peripheral node	-0.2236	0.0	15	60.0	0.16864172	0.023838538149999998	Sample3
+otu_314	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	Peripheral node	-0.3375	0.0	10	60.0	0.109234594	0.021828247550000002	Sample5
+otu_888	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	Peripheral node	0.9001	0.0	10	75.0	0.24014264	0.03218693585	Sample5
+otu_549	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JdFR-56;s__	Peripheral node	-0.2236	0.4444	15	20.0	0.116692096	0.011016923549999998	Sample2
+otu_176	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	-0.2835	0.0	11	50.0	0.13163629	0.029859513799999998	Sample7
+otu_292	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	Peripheral node	-0.4528	0.0	7	20.0	0.21986711	0.012048385200000001	Sample8
+otu_188	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__DATKKK01 sp041479765	Peripheral node	-1.3975	0.0	15	35.0	0.19021496	0.0188572377	Sample3
+otu_741	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__Smithellaceae;g__UBA4810;s__	Peripheral node	0.7898	0.0	0	30.0	0.41005483	0.026985855150000005	Sample9
+otu_884	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	-1.2511	0.0	14	80.0	0.14977716	0.019826564100000006	Sample5
+otu_714	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	Peripheral node	-1.1908	0.0	11	25.0	0.12319687	0.0172082232	Sample15
+otu_454	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__DYJB01 sp026390045	Peripheral node	-0.4356	0.0	9	10.0	0.20071517	0.0160052235	Sample11
+otu_265	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__DASWZN01;s__	Peripheral node	-1.3975	0.0	15	30.0	1.0269709	0.056724343350000005	Sample3
+otu_682	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	Peripheral node	-1.3641	0.0	0	45.0	0.22622928	0.0189364094	Sample3
+otu_899	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	Peripheral node	-0.2421	0.0	14	35.0	0.14738482	0.010468321650000001	Sample5
+otu_418	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	Peripheral node	-0.7213	0.0	5	30.0	0.10593391	0.01095287705	Sample20
+otu_285	d__Bacteria;p__Acidobacteriota;c__Vicinamibacteria;o__Vicinamibacterales;f__Fen-181;g__Fen-181;s__	Peripheral node	-1.2511	0.0	14	40.0	0.11115338	0.00979038965	Sample8
+otu_728	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__;s__	Peripheral node	-1.229	0.0	7	80.0	0.20433414	0.027513010299999995	Sample8
+otu_142	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	Peripheral node	-1.229	0.5	7	60.0	0.19966082	0.024788460249999998	Sample3
+otu_63	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	Peripheral node	-0.3223	0.0	3	20.0	0.17045845	0.010712398100000001	Sample3
+otu_466	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	Peripheral node	0.0	0.0	6	55.00000000000001	0.1257568	0.01921879815	Sample9
+otu_170	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	Peripheral node	0.9503	0.0	15	25.0	0.15093759	0.0107405026	Sample2
+otu_879	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	Peripheral node	-1.3229	0.5	6	55.00000000000001	0.2046861	0.03189642365	Sample3
+otu_461	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__FEN-1073;s__	Peripheral node	0.9001	0.375	10	10.0	0.15304826	0.0084885439	Sample16
+otu_774	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__	Peripheral node	-1.4878	0.0	5	70.0	0.16490787	0.0331487041	Sample9

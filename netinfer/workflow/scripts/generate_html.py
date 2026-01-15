@@ -25,7 +25,7 @@ def get_method_columns(df: pd.DataFrame) -> list:
     potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'Pearson', 'SpiecEasi', 'PropR', 'Jaccard']
     return [col for col in potential_methods if col in df.columns]
 
-def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: logging.Logger) -> dict:
+def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, nodes_df: pd.DataFrame, logger: logging.Logger) -> dict:
     """Prepare data structures for the dashboard."""
     
     # 1. Process Network Data
@@ -94,10 +94,24 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, logger: l
         # Replace NaN with 0 or null
         abundance_map[taxon] = [float(v) if pd.notnull(v) else 0 for v in values]
         
+    # 3. Process Node Data
+    nodes_map = {}
+    if nodes_df is not None and not nodes_df.empty:
+        # Expected columns: Node, Taxonomy, Zi-Pi Role, Louvain Community
+        for _, row in nodes_df.iterrows():
+            node_id = str(row['Node'])
+            nodes_map[node_id] = {
+                'Role': row.get('Zi-Pi Role', 'N/A'),
+                'Community': int(row['Louvain Community']) if pd.notnull(row.get('Louvain Community')) else -1,
+                'Zi': float(row['Within-module connectivity (Zi)']) if pd.notnull(row.get('Within-module connectivity (Zi)')) else None,
+                'Pi': float(row['Among-module connectivity (Pi)']) if pd.notnull(row.get('Among-module connectivity (Pi)')) else None
+            }
+            
     return {
         'edges': edges_data,
         'samples': samples,
         'abundance': abundance_map,
+        'nodes': nodes_map,
         'hasInterPhylumColumn': 'Inter phylum' in network_df.columns
     }
 
@@ -759,6 +773,44 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         });
     });
 
+    const ROLE_DESCRIPTIONS = {
+        "Peripheral node": "Specialist: Has few links, mostly connected within its own module.",
+        "Connector": "Generalist: Links different modules, important for network coherence.",
+        "Module hub": "Core Node: Highly connected to other nodes within its own module.",
+        "Network hub": "Super Generalist: Highly connected both within and across modules, critical for network structure."
+    };
+
+    function getBadgesHtml(taxon) {
+        if (!DATA.nodes || !DATA.nodes[taxon]) return "";
+        const nodeData = DATA.nodes[taxon];
+        const role = nodeData.Role;
+        const comm = nodeData.Community;
+        
+        let html = '<div style="position: absolute; top: 15px; right: 15px; display: flex; align-items: center; gap: 8px;">';
+        
+        // Role Badge
+        if (role && role !== 'N/A') {
+            const desc = ROLE_DESCRIPTIONS[role] || "Role determined by Zi-Pi topology analysis.";
+            html += `
+                <span title="${desc}" style="background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px); cursor: help; transition: background 0.2s;">
+                    ${role}
+                </span>
+            `;
+        }
+        
+        // Community Badge
+        if (comm !== undefined && comm !== -1) {
+            html += `
+                <span style="background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px);">
+                    Module #${comm}
+                </span>
+            `;
+        }
+        
+        html += '</div>';
+        return html;
+    }
+
     function updateDashboard(edge) {
         // 1. Update Info Box
         const html = `
@@ -767,9 +819,12 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
             </div>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <div style="background: ${COLOR_A}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(38, 166, 154, 0.15); display: flex; flex-direction: column;">
+                    <div style="background: ${COLOR_A}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(38, 166, 154, 0.15); display: flex; flex-direction: column; position: relative;">
+                        <!-- Badges A -->
+                         ${getBadgesHtml(edge.TaxonA)}
+                         
                         <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon A</div>
-                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all;">${edge.TaxonA}</h4>
+                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all; padding-right: 10px;">${edge.TaxonA}</h4>
                         <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyA}</div>
                         <div class="mt-auto d-flex flex-column align-items-center">
                             <div id="prevChartA" style="width: 100px; height: 100px;"></div>
@@ -778,9 +833,12 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div style="background: ${COLOR_B}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(245, 162, 51, 0.15); display: flex; flex-direction: column;">
+                    <div style="background: ${COLOR_B}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(245, 162, 51, 0.15); display: flex; flex-direction: column; position: relative;">
+                        <!-- Badges B -->
+                        ${getBadgesHtml(edge.TaxonB)}
+                        
                         <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon B</div>
-                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all;">${edge.TaxonB}</h4>
+                        <h4 class="mb-1" style="font-weight: 700; word-break: break-all; padding-right: 10px;">${edge.TaxonB}</h4>
                         <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyB}</div>
                         <div class="mt-auto d-flex flex-column align-items-center">
                             <div id="prevChartB" style="width: 100px; height: 100px;"></div>
@@ -1002,8 +1060,14 @@ def main(snakemake):
         logger.info(f"Reading abundance file: {snakemake.input.abundance}")
         abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
         
+        # Helper to safely read file
+        nodes_df = None
+        if hasattr(snakemake.input, 'nodes') and Path(snakemake.input.nodes).exists():
+             logger.info(f"Reading nodes file: {snakemake.input.nodes}")
+             nodes_df = pd.read_csv(snakemake.input.nodes, sep='\t')
+        
         # Prepare Data
-        data = prepare_data(network_df, abundance_df, logger)
+        data = prepare_data(network_df, abundance_df, nodes_df, logger)
         
         # Generate HTML
         data_json = json.dumps(data)

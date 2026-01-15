@@ -38,6 +38,7 @@ suffix_tag = f"-{suffix}" if suffix else ""
 # Define final output files
 final_outputs = [
     f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
+    f"{outdir}/final_results/merged_nodes{suffix_tag}.tsv",
     f"{outdir}/final_results/merged_network{suffix_tag}.gml",
     f"{outdir}/final_results/merged_network{suffix_tag}.gexf",
     f"{outdir}/final_results/network_stats{suffix_tag}.txt"
