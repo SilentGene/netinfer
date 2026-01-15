@@ -15,7 +15,7 @@ if config.get("visualization", {}).get("enabled", True):
     rule generate_html_viewer:
         input:
             network = f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
-            stats = f"{outdir}/final_results/network_info{suffix_tag}.json",
+            stats = f"{outdir}/final_results/network_stats{suffix_tag}.txt",
             abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv",
             taxonomy = f"{outdir}/preprocessed_data/processed_taxonomy.tsv" if taxonomy_in else [],
             metadata = f"{outdir}/preprocessed_data/processed_metadata.tsv" if metadata_in else []

@@ -88,7 +88,8 @@ The pipeline generates:
 1. Filtered and processed input data (`results/preprocessed_data/`)
 2. Individual network files for each method (`results/subtool_outputs/`)
 3. Merged network with consensus scores (`results/final_results/merged_edges.tsv`)
-4. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
+4. Network statistics with modularity detection (`results/final_results/network_stats.txt`)
+5. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
 
 
 

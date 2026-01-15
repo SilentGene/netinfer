@@ -6,7 +6,6 @@ Aggregate networks from different methods and calculate consensus scores
 import pandas as pd
 import numpy as np
 import networkx as nx
-import json
 import logging
 from typing import Dict, List, Tuple
 from pathlib import Path
@@ -115,18 +114,23 @@ def calculate_edge_statistics(edge_df: pd.DataFrame,
     
     return pd.DataFrame(stats)
 
-def calculate_network_metrics(G: nx.Graph) -> Dict:
+def calculate_network_metrics(G: nx.Graph, trusted_methods_list: List[str] = None, other_methods_list: List[str] = None) -> Dict:
     """Calculate network-level metrics."""
     
     metrics = {
         'nodes': G.number_of_nodes(),
         'edges': G.number_of_edges(),
         'density': nx.density(G),
-        'components': nx.number_connected_components(G),
+        'num_components': nx.number_connected_components(G),
         'largest_component_size': len(max(nx.connected_components(G), key=len)),
         'avg_degree': sum(dict(G.degree()).values()) / G.number_of_nodes(),
         'avg_clustering': nx.average_clustering(G),
-        'methods_used': len(set(nx.get_edge_attributes(G, 'method').values()))
+        'modularity_label_propagation': nx.algorithms.community.modularity(G, nx.algorithms.community.label_propagation_communities(G)),
+        'modularity_greedy': nx.algorithms.community.modularity(G, nx.algorithms.community.greedy_modularity_communities(G)),
+        'modularity_louvain': nx.algorithms.community.modularity(G, nx.algorithms.community.louvain_communities(G)),
+        'num_louvain_communities': len(nx.algorithms.community.louvain_communities(G)),
+        'trusted_methods_used': ", ".join(trusted_methods_list) if trusted_methods_list else "None",
+        'other_methods_used': ", ".join(other_methods_list) if other_methods_list else "None"
     }
     
     return metrics
@@ -276,6 +280,27 @@ def main(snakemake):
                 for attr_name, val in attrs.items():
                     G.nodes[node][attr_name] = val
 
+        # Calculate Louvain community detection
+        louvain_communities = nx.algorithms.community.louvain_communities(G)
+        
+        # Create a mapping from node to community ID
+        node_to_community = {}
+        for community_id, community_nodes in enumerate(louvain_communities):
+            for node in community_nodes:
+                node_to_community[node] = community_id
+        
+        # Add community information as node attribute
+        for node in G.nodes():
+            G.nodes[node]['louvain_community'] = node_to_community.get(node, -1)
+        
+        # Add community information to the final_df for TSV export
+        # Map community IDs for source and target nodes
+        final_df['community_a'] = final_df['source'].map(node_to_community)
+        final_df['community_b'] = final_df['target'].map(node_to_community)
+        
+        # Add a boolean column indicating if edge connects different communities
+        final_df['inter_community'] = final_df['community_a'] != final_df['community_b']
+
         nx.write_gml(G, snakemake.output.combined_graph)
         
         # Also export as GEXF for Gephi Lite compatibility
@@ -283,7 +308,13 @@ def main(snakemake):
 
 
         # Calculate network-level metrics
-        network_stats = calculate_network_metrics(G)
+        # Separate active methods into trusted and other
+        trusted_active = [m for m, df in networks.items() 
+                         if not df.empty and m in snakemake.params.trusted_methods]
+        other_active = [m for m, df in networks.items() 
+                       if not df.empty and m not in snakemake.params.trusted_methods]
+        
+        network_stats = calculate_network_metrics(G, trusted_active, other_active)
 
         # Rename columns to formal names for output
         column_mapping = {
@@ -309,6 +340,9 @@ def main(snakemake):
             'sample_at_max_b': 'Sample at Max B',
             'taxonomy_a': 'Taxonomy A',
             'taxonomy_b': 'Taxonomy B',
+            'community_a': 'Community A',
+            'community_b': 'Community B',
+            'inter_community': 'Inter community',
             'n_methods': 'Num supporting methods'
         }
         final_df = final_df.rename(columns=column_mapping)
@@ -328,9 +362,30 @@ def main(snakemake):
         # Save combined table
         final_df.to_csv(snakemake.output.combined_table, sep='\t', index=False)
         
-        # Save network statistics
+        # Save network statistics as tab-separated text file with descriptions
+        metric_descriptions = {
+            'nodes': 'Total number of nodes (taxa) in the network',
+            'edges': 'Total number of edges (associations) in the network',
+            'density': 'Network density, ratio of actual edges to possible edges (0-1)',
+            'num_components': 'Number of connected components in the network',
+            'largest_component_size': 'Number of nodes in the largest connected component',
+            'avg_degree': 'Average degree (number of connections) per node',
+            'avg_clustering': 'Average clustering coefficient, measure of local connectivity (0-1)',
+            'modularity_label_propagation': 'Modularity score using label propagation algorithm (-1 to 1)',
+            'modularity_greedy': 'Modularity score using greedy optimization algorithm (-1 to 1)',
+            'modularity_louvain': 'Modularity score using Louvain algorithm (-1 to 1)',
+            'num_louvain_communities': 'Number of communities detected by Louvain algorithm',
+            'trusted_methods_used': 'List of trusted methods that contributed to the network',
+            'other_methods_used': 'List of other methods that were run and included in the output'
+        }
+        
         with open(snakemake.output.stats, 'w') as f:
-            json.dump(network_stats, f, indent=2)
+            # Write header
+            f.write('Item\tValue\tDescription\n')
+            # Write each metric
+            for key, value in network_stats.items():
+                description = metric_descriptions.get(key, 'No description available')
+                f.write(f'{key}\t{value}\t{description}\n')
 
 
         logger.info(f"Completed network aggregation. Final network has {len(final_df)} edges.")
