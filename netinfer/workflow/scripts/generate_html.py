@@ -786,7 +786,7 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         const role = nodeData.Role;
         const comm = nodeData.Community;
         
-        let html = '<div style="position: absolute; top: 15px; right: 15px; display: flex; align-items: center; gap: 8px;">';
+        let html = '<div style="display: flex; align-items: center; gap: 8px;">';
         
         // Role Badge
         if (role && role !== 'N/A') {
@@ -801,7 +801,7 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         // Community Badge
         if (comm !== undefined && comm !== -1) {
             html += `
-                <span style="background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px);">
+                <span title="Community ID assigned by Louvain modularity algorithm." style="background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px); cursor: help;">
                     Module #${comm}
                 </span>
             `;
@@ -819,11 +819,13 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
             </div>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <div style="background: ${COLOR_A}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(38, 166, 154, 0.15); display: flex; flex-direction: column; position: relative;">
-                        <!-- Badges A -->
-                         ${getBadgesHtml(edge.TaxonA)}
-                         
-                        <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon A</div>
+                    <div style="background: ${COLOR_A}; color: white; padding: 20px 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(38, 166, 154, 0.15); display: flex; flex-direction: column; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
+                            <div class="text-uppercase" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8; margin-top: 5px;">Taxon A</div>
+                            <!-- Badges A -->
+                            ${getBadgesHtml(edge.TaxonA)}
+                        </div>
+                        
                         <h4 class="mb-1" style="font-weight: 700; word-break: break-all; padding-right: 10px;">${edge.TaxonA}</h4>
                         <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyA}</div>
                         <div class="mt-auto d-flex flex-column align-items-center">
@@ -833,11 +835,13 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div style="background: ${COLOR_B}; color: white; padding: 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(245, 162, 51, 0.15); display: flex; flex-direction: column; position: relative;">
-                        <!-- Badges B -->
-                        ${getBadgesHtml(edge.TaxonB)}
+                    <div style="background: ${COLOR_B}; color: white; padding: 20px 25px; border-radius: 12px; height: 100%; box-shadow: 0 4px 15px rgba(245, 162, 51, 0.15); display: flex; flex-direction: column; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
+                             <div class="text-uppercase" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8; margin-top: 5px;">Taxon B</div>
+                             <!-- Badges B -->
+                             ${getBadgesHtml(edge.TaxonB)}
+                        </div>
                         
-                        <div class="text-uppercase mb-2" style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.8;">Taxon B</div>
                         <h4 class="mb-1" style="font-weight: 700; word-break: break-all; padding-right: 10px;">${edge.TaxonB}</h4>
                         <div class="text-break mb-4" style="font-size: 0.85rem; opacity: 0.9; line-height: 1.4;">${edge.TaxonomyB}</div>
                         <div class="mt-auto d-flex flex-column align-items-center">
