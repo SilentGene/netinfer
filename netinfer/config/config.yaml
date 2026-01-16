@@ -40,7 +40,7 @@ flashweaveHE:
 spieceasi:
   enabled: true
   weight_threshold: 0.3
-  method: "mb"  # 'mb' (meinshausen-buhlmann, use mb for n>1000) or 'glasso' for fewer
+  method: "mb"  # 'mb' (meinshausen-buhlmann, use mb for OTU>1000) or 'glasso' for fewer
   threads: 8
 
 fastspar:
@@ -76,7 +76,4 @@ jaccard:
 
 # Visualization parameters
 visualization:
-  max_edges: 10000  # Maximum edges to display in interactive view
-  node_size_by: "degree"  # Options: degree, betweenness, closeness
-  edge_width_by: "weight"  # Options: weight, methods_count
-  color_by: "phylum"  # Taxonomic level for coloring
+  enabled: true

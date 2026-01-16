@@ -22,11 +22,7 @@ if config.get("visualization", {}).get("enabled", True):
             metadata = f"{outdir}/preprocessed_data/processed_metadata.tsv" if metadata_in else []
         output:
             html = f"{outdir}/final_results/netinfer_dashboard{suffix_tag}.html"
-        params:
-            max_edges = config["visualization"]["max_edges"],
-            node_size_by = config["visualization"]["node_size_by"],
-            edge_width_by = config["visualization"]["edge_width_by"],
-            color_by = config["visualization"]["color_by"]
+
         threads: 1
         log:
             f"{outdir}/logs/generate_html.log"
