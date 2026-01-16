@@ -50,7 +50,7 @@ main <- function() {
     
     # Run propr with Centered Log-Ratio (CLR) transformation
     # The 'propr' function computes proportionality matrix 'rho'
-    rho_results <- propr(data_propr, metric = "rho", symmetrize = TRUE)
+    rho_results <- propr(data_propr, metric = "rho", symmetrize = TRUE)  # use clr transformation by default if no `ivar` is provided
     rho_matrix <- slot(rho_results, "matrix")
 
     # Convert matrix to a long edgelist format

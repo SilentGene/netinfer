@@ -99,7 +99,7 @@ The pipeline generates:
 - Format: TSV/CSV/BIOM
 - Rows: Features (OTUs/ASVs)
 - Columns: Samples
-- Values: Raw counts or relative abundances
+- Values: Raw counts or relative abundances (Raw counts are recommended)
 
 Example:
 ```
@@ -141,21 +141,31 @@ Default:
 
 > Associations must be present in at least one method from these trusted methods to be retained in the final aggregated table.
 
-| Method                   | Key Parameters                                 |
-| ------------------------ | ---------------------------------------------- |
+| Method                   | Default Parameters                             |
+| ------------------------ | -----------------------------------------------|
 | FlashWeave (HE / normal) | P-value ≤ 0.001<br>Weight ≥ 0.4                |
 | SPIEC-EASI               | Weight ≥ 0.5<br>Method: MB (default) or GLasso |
 
 
 **Other methods**:
 
-| Method             | Key Parameters                                                                        |
+| Method             | Default Parameters                                                                    |
 | ------------------ | ------------------------------------------------------------------------------------- |
 | FastSpar           | P-value ≤ 0.05<br>Iterations: 1000<br>Correlation ≥ 0.2<br>Absolute correlation ≥ 0.3 |
 | propR              | Correlation ≥ 0.5                                                                     |
 | Spearman           | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
-| Pearson            | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
+| Pearson            | FDR ≤ 0.05<br>Correlation ≥ 0.7<br>CLR transformation implemented                     |
 | Jaccard            | Similarity ≥ 0.3                                                                      |
+
+## Do I need to transform compositional data?
+
+In most cases, **no**.
+
+- **FlashWeave**, **SPIEC-EASI**, **FastSpar**, and **propR** are designed specifically for compositional data. They incorporate appropriate handling internally (e.g., **CLR (Centered Log-Ratio) transformation** or other compositional-data methods), so you generally do not need to apply an additional transformation yourself.
+- **Spearman correlation** is _rank-based_ and is relatively insensitive to compositionality.
+- **Jaccard** is based on _presence/absence_ and estimates co-occurrence probabilities without relying on abundance values, so no compositional transformation is required.
+- **Pearson correlation** assumes absolute values and can produce spurious correlations on compositional data. Therefore, in the **NetInfer pipeline**, we apply an internal _CLR transformation_ when computing Pearson correlations.
+
 
 ## Troubleshooting
 

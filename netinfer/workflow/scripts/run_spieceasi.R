@@ -66,7 +66,7 @@ main <- function() {
 
     # Run SPIEC-EASI
     message("Running SPIEC-EASI...")
-    # Use 'mb' for many features (n > 1000), 'glasso' for fewer (n < 1000)
+    # Use 'mb' for many features (n > 1000), 'glasso' for fewer (n < 1000). It will perform CLR transformation by default.
     se.out <- spiec.easi(
         otu_mat,
         method = method,

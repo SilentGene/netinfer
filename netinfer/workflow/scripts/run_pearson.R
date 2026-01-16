@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# Pearson correlation network inference (Manual thresholding)
+# Pearson correlation w/ CLR transformation network inference (Manual thresholding)
 
 # Print R version
 message(sprintf("Using: %s", R.version.string))
@@ -48,9 +48,22 @@ main <- function() {
     data_mat <- as.matrix(abundance_data_t[,-1])
     rownames(data_mat) <- abundance_data_t$Sample
     
+    # Apply CLR transformation
+    message("Applying CLR transformation...")
+    # Add pseudocount to handle zeros
+    pseudocount <- 1e-6
+    data_mat_input <- data_mat + pseudocount
+    
+    # Calculate CLR: log(x) - mean(log(x)) per sample (row)
+    # transposing because apply returns (cols x rows) when margin=1
+    data_mat_clr <- t(apply(data_mat_input, 1, function(x) {
+        lx <- log(x)
+        lx - mean(lx)
+    }))
+    
     # Compute Pearson correlations and p-values using Hmisc::rcorr
-    message("Computing Pearson correlations and p-values...")
-    cor_results <- rcorr(data_mat, type = "pearson")
+    message("Computing Pearson correlations and p-values (on CLR data)...")
+    cor_results <- rcorr(data_mat_clr, type = "pearson")
     cor_matrix <- cor_results$r
     p_matrix <- cor_results$P
     
