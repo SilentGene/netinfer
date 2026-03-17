@@ -12,6 +12,7 @@ dependencies:
   - scikit-learn
   - scipy
   - statsmodels
+  - natsort
   - jinja2
   - pyyaml
   - tqdm

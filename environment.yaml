@@ -17,6 +17,7 @@ dependencies:
   - scipy
   - scikit-learn
   - statsmodels
+  - natsort
   - plotly
   - dash
   - jinja2

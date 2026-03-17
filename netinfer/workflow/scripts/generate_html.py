@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 import base64
+from natsort import natsorted
 
 def setup_logger(log_file: str) -> logging.Logger:
     """Set up logging."""
@@ -80,8 +81,8 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, nodes_df:
     filtered_abundance = abundance_df.loc[valid_taxa].copy()
     
     # Convert to dictionary conforming to: { 'TaxonID': [v1, v2, v3...] }
-    # And keep sample names
-    samples = list(filtered_abundance.columns)
+    # And keep sample names, sorted naturally
+    samples = natsorted(list(filtered_abundance.columns))
     abundance_map = filtered_abundance.to_dict(orient='index')
     
     # Clean up numpy types for JSON serialization
