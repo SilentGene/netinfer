@@ -14,6 +14,7 @@ rule flashweave_he_network:
     params:
         pvalue = config["flashweaveHE"]["pvalue_threshold"],
         weight = config["flashweaveHE"]["weight_threshold"],
+        include_negative = config.get("include_negative", False),
         script = f"{workflow.basedir}/scripts/run_flashweave.jl"
     threads: 1
     log:
@@ -34,11 +35,13 @@ import pandas as pd
 import numpy as np
 path = r"{output.network}"
 thr = float({params.weight})
+include_negative = {params.include_negative}
 df = pd.read_csv(path, sep='\t')
 if df.shape[1] >= 3:
     weight_col = df.columns[2]
     df[weight_col] = pd.to_numeric(df[weight_col], errors='coerce')
-    df = df[df[weight_col] >= thr]
+    threshold_values = df[weight_col].abs() if include_negative else df[weight_col]
+    df = df[threshold_values >= thr]
 df.to_csv(path, sep='\t', index=False)
 PY
         """

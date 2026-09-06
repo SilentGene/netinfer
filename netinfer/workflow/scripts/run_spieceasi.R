@@ -22,6 +22,7 @@ network_file <- snakemake@output[["network"]]
 stats_file <- snakemake@output[["stats"]]
 method <- snakemake@params[["method"]]
 weight_threshold <- snakemake@params[["weight_threshold"]]
+include_negative <- snakemake@params[["include_negative"]]
 threads <- snakemake@threads
 
 # Set up logging
@@ -99,9 +100,12 @@ main <- function() {
         edges_unique <- edges_unique[order(edges_unique$Weight, decreasing = TRUE), ]
         edges_final <- edges_unique[, c("source", "target", "Weight")]
         
-        # Filter for strong correlations (abs(Weight) > weight_threshold)
-        edges_filtered <- edges_final[abs(edges_final$Weight) > weight_threshold, ]
-        print(paste("Found", nrow(edges_filtered), "edges with abs(weight) >", weight_threshold))
+        # Keep positive weights by default. In include-negative mode,
+        # retain sufficiently strong negative weights as well.
+        threshold_values <- if (include_negative) abs(edges_final$Weight) else edges_final$Weight
+        edges_filtered <- edges_final[threshold_values >= weight_threshold, ]
+        print(paste("Found", nrow(edges_filtered), "edges at threshold >=",
+                    weight_threshold, "(include negative:", include_negative, ")"))
         return(edges_filtered)
     }
 

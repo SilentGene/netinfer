@@ -13,7 +13,8 @@ rule pearson_network:
         correlation = f"{outdir}/subtool_outputs/pearson/correlation.tsv"
     params:
         fdr_threshold = config["pearson"]["fdr_threshold"],
-        rho_threshold = config["pearson"]["rho_threshold"]
+        rho_threshold = config["pearson"]["rho_threshold"],
+        include_negative = config.get("include_negative", False)
     threads: 1
     log:
         f"{outdir}/logs/pearson.log"

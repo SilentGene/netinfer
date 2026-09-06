@@ -110,6 +110,7 @@ def create_config(input_file: Optional[str] = None,
                  methods: Optional[List[str]] = None,
                  no_visual: bool = False,
                  infer_taxonomy: bool = False,
+                 include_negative: Optional[bool] = None,
                  base_config_path: Optional[str] = None,
                  suffix: Optional[str] = None) -> str:
     """Create a config file for the pipeline run.
@@ -122,6 +123,9 @@ def create_config(input_file: Optional[str] = None,
         methods: List of methods to enable (overrides config if provided)
         no_visual: Whether to disable visualization (overrides config if provided)
         infer_taxonomy: Whether to infer taxonomy from abundance table
+        include_negative: Whether signed association methods should filter
+            on absolute values, retaining sufficiently strong negative edges.
+            If None, preserve the base configuration value.
         base_config_path: Path to base config file (uses default if None)
     
     Returns:
@@ -151,6 +155,11 @@ def create_config(input_file: Optional[str] = None,
     
     # Set infer_taxonomy flag
     config["infer_taxonomy"] = infer_taxonomy
+
+    # By default, retain only positive associations. When requested, apply
+    # method thresholds to absolute values so strong negative edges are kept.
+    if include_negative is not None:
+        config["include_negative"] = include_negative
 
     # Sanitize and set optional output suffix
     if suffix:
@@ -344,6 +353,15 @@ def main():
         help="Skip visualization generation"
     )
     parser.add_argument(
+        "--include-negative",
+        action="store_true",
+        default=None,
+        help=(
+            "Apply signed association thresholds to absolute values, retaining "
+            "strong negative as well as positive associations"
+        )
+    )
+    parser.add_argument(
         "--snake-args", "--snake_args",
         dest="snake_args",
         help=(
@@ -388,6 +406,7 @@ def main():
             methods=methods,
             no_visual=args.no_visual,
             infer_taxonomy=args.infer_taxonomy,
+            include_negative=args.include_negative,
             base_config_path=args.config,
             suffix=args.suffix
         )

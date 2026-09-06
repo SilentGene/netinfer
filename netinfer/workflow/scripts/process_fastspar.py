@@ -32,7 +32,8 @@ def setup_logger(log_file: str) -> logging.Logger:
 def process_fastspar_results(correlation_file: str,
                            pvalue_file: str,
                            pvalue_threshold: float,
-                           weight_threshold: float) -> pd.DataFrame:
+                           weight_threshold: float,
+                           include_negative: bool = False) -> pd.DataFrame:
     """Process FastSpar correlation and p-value matrices into network edges."""
     # Load correlation and p-value matrices
     corr_df = pd.read_csv(correlation_file, sep='\t', index_col=0)
@@ -47,8 +48,10 @@ def process_fastspar_results(correlation_file: str,
             weight = corr_df.iloc[i, j]
             pvalue = pval_df.iloc[i, j]
             
-            # Apply thresholds
-            if abs(weight) >= weight_threshold and pvalue <= pvalue_threshold:
+            # Apply the threshold to positive values by default, or to the
+            # magnitude when strong negative associations were requested.
+            threshold_value = abs(weight) if include_negative else weight
+            if threshold_value >= weight_threshold and pvalue <= pvalue_threshold:
                 edges.append({
                     'source': corr_df.index[i],
                     'target': corr_df.columns[j],
@@ -71,7 +74,8 @@ def main(snakemake):
             correlation_file=snakemake.input.correlation,
             pvalue_file=snakemake.input.pvalues,
             pvalue_threshold=snakemake.params.pvalue_threshold,
-            weight_threshold=snakemake.params.weight_threshold
+            weight_threshold=snakemake.params.weight_threshold,
+            include_negative=snakemake.params.include_negative
         )
         
         # Save network

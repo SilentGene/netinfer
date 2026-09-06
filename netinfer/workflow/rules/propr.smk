@@ -13,7 +13,8 @@ rule propr_network:
         stats = f"{outdir}/subtool_outputs/propr/stats.json",
         rho_matrix = f"{outdir}/subtool_outputs/propr/rho_matrix.tsv"
     params:
-        rho_threshold = config["propr"]["rho_threshold"]
+        rho_threshold = config["propr"]["rho_threshold"],
+        include_negative = config.get("include_negative", False)
     threads: 1
     log:
         f"{outdir}/logs/propr.log"

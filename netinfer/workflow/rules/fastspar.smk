@@ -23,7 +23,7 @@ ITER_N = int(config["fastspar"]["iterations"])   # iterations for fastspar
 THREADS_N = int(config["fastspar"]["threads"])   # threads for fastspar
 COR_THR = float(config["fastspar"]["correlation_threshold"])  # fastspar --threshold
 P_THR = float(config["fastspar"]["pvalue_threshold"])         # final filtering
-W_THR = float(config["fastspar"]["weight_threshold_filter"])         # final |R| threshold
+W_THR = float(config["fastspar"]["weight_threshold_filter"])  # final correlation threshold
 
 
 rule fastspar_correlation:
@@ -132,7 +132,8 @@ rule fastspar_network:
         network=f"{FS_DIR}/network.tsv"
     params:
         pvalue_threshold=P_THR,
-        weight_threshold=W_THR
+        weight_threshold=W_THR,
+        include_negative=config.get("include_negative", False)
     threads: 1
     log:
         f"{outdir}/logs/fastspar_network.log"

@@ -13,7 +13,8 @@ rule spieceasi_network:
         stats = f"{outdir}/subtool_outputs/spieceasi/stats.json"
     params:
         method = config["spieceasi"]["method"],
-        weight_threshold = config["spieceasi"]["weight_threshold"]
+        weight_threshold = config["spieceasi"]["weight_threshold"],
+        include_negative = config.get("include_negative", False)
     threads: config["spieceasi"]["threads"]
     log:
         f"{outdir}/logs/spieceasi.log"

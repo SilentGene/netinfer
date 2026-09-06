@@ -16,6 +16,7 @@ network_file <- snakemake@output[["network"]]
 stats_file <- snakemake@output[["stats"]]
 rho_matrix_file <- snakemake@output[["rho_matrix"]]
 rho_threshold <- snakemake@params[["rho_threshold"]]
+include_negative <- snakemake@params[["include_negative"]]
 threads <- snakemake@threads
 
 # Set up logging
@@ -60,9 +61,12 @@ main <- function() {
     rho_long <- rho_long[rho_long$`source` != rho_long$`target`, ]
     rho_long <- rho_long[!duplicated(t(apply(rho_long[, 1:2], 1, sort))), ]
 
-    # Filter for strong proportionality (abs(rho) > rho_threshold)
-    rho_filtered <- rho_long[abs(rho_long$Rho) > rho_threshold, ]
-    message(sprintf("Found %d edges with abs(Rho) > %f", nrow(rho_filtered), rho_threshold))
+    # Keep positive proportionality values by default. In include-negative
+    # mode, retain sufficiently strong negative values as well.
+    threshold_values <- if (include_negative) abs(rho_long$Rho) else rho_long$Rho
+    rho_filtered <- rho_long[threshold_values >= rho_threshold, ]
+    message(sprintf("Found %d edges at threshold >= %f (include negative: %s)",
+                    nrow(rho_filtered), rho_threshold, include_negative))
 
     # Sort by absolute proportionality value
     network_df <- rho_filtered[order(abs(rho_filtered$Rho), decreasing = TRUE), ]

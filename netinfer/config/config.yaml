@@ -9,6 +9,11 @@ input:
 # Infer taxonomy from abundance table feature IDs
 infer_taxonomy: false
 
+# Keep strong negative associations as well as positive ones by applying
+# signed method thresholds to absolute values. Equivalent to the CLI flag
+# --include-negative. Jaccard is unaffected because its values are non-negative.
+include_negative: false
+
 # Output directory
 output_dir: "netinfer_results"
 
@@ -47,7 +52,7 @@ fastspar:
   enabled: true
   pvalue_threshold: 0.05
   correlation_threshold: 0.2
-  weight_threshold_filter: 0.3
+  weight_threshold_filter: 0.3  # Final correlation threshold
   iterations: 50
   bootstraps: 1000
   threads: 8

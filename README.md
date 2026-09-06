@@ -75,6 +75,9 @@ netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-ta
 # Only use my favorite methods, and use my own suffix for output files
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman --suffix samples007
 
+# Retain strong negative associations too (filter signed methods by absolute value)
+netinfer --input abundance_table.tsv --output results_dir --threads 6 --include-negative
+
 # Skip visualization
 netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
 
@@ -151,11 +154,24 @@ Default:
 
 | Method             | Default Parameters                                                                    |
 | ------------------ | ------------------------------------------------------------------------------------- |
-| FastSpar           | P-value ≤ 0.05<br>Iterations: 1000<br>Correlation ≥ 0.2<br>Absolute correlation ≥ 0.3 |
+| FastSpar           | P-value ≤ 0.05<br>Iterations: 1000<br>Correlation ≥ 0.2<br>Final correlation ≥ 0.3    |
 | propR              | Correlation ≥ 0.5                                                                     |
 | Spearman           | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
 | Pearson            | FDR ≤ 0.05<br>Correlation ≥ 0.7<br>CLR transformation implemented                     |
 | Jaccard            | Similarity ≥ 0.3                                                                      |
+
+By default, signed methods retain only positive associations that meet their
+configured thresholds. Add `--include-negative` to apply each threshold to
+the absolute value instead. For example, with a threshold of `0.7`, both
+correlations `≥ 0.7` and `≤ -0.7` are retained. This applies to FlashWeave,
+FastSpar, propR, Spearman, Pearson, and SPIEC-EASI. Jaccard is unchanged because
+its similarity values are non-negative.
+
+The same behavior can be enabled in a YAML configuration file:
+
+```yaml
+include_negative: true
+```
 
 ## Do I need to transform compositional data?
 
@@ -187,8 +203,8 @@ netinfer <original_args> --snake_args="--unlock"
 $ netinfer --help
 usage: netinfer [-h] [--input INPUT] [--output OUTPUT] [--taxonomy TAXONOMY] 
                 [--infer-taxonomy] [--metadata METADATA] [--methods METHODS] 
-                [--config CONFIG] [--threads THREADS] [--no-visual] [--suffix SUFFIX]
-                [--snake-args SNAKE_ARGS]
+                [--config CONFIG] [--threads THREADS] [--no-visual]
+                [--include-negative] [--snake-args SNAKE_ARGS] [--suffix SUFFIX]
 
 NetInfer: Microbiome Network Inference Pipeline
 
@@ -205,10 +221,12 @@ options:
                         saved to the output directory.
   --threads THREADS     Number of threads to use (default: 1)
   --no-visual           Skip visualization generation
-  --suffix SUFFIX       Suffix to append to output files (default: none)
+  --include-negative    Apply signed association thresholds to absolute values, retaining strong negative as well as positive associations
   --snake-args, --snake_args SNAKE_ARGS
                         Additional Snakemake command-line arguments as a single string, e.g. 
                         --snake-args "--unlock --rerun-incomplete --dry-run"
+  --suffix SUFFIX       Optional suffix to append to final aggregated outputs (inserted before file extension). Invalid filename characters
+                        will be replaced with '_'
 ```
 
 ### Continue from interrupted runs

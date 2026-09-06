@@ -23,6 +23,7 @@ correlation_file <- snakemake@output[["correlation"]]
 pvalues_file <- snakemake@output[["pvalues"]]
 fdr_threshold <- snakemake@params[["fdr_threshold"]]
 rho_threshold <- snakemake@params[["rho_threshold"]]
+include_negative <- snakemake@params[["include_negative"]]
 threads <- snakemake@threads
 
 # Set up logging
@@ -75,8 +76,10 @@ main <- function() {
     # Adjust p-values using False Discovery Rate (FDR) correction
     merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
 
-    # Filter for statistically significant (FDR < fdr_threshold) and strong (abs(Spearman) > rho_threshold) correlations
-    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & abs(merged_df$Spearman) > rho_threshold), ]
+    # Keep positive correlations by default. In include-negative mode,
+    # retain sufficiently strong negative correlations as well.
+    threshold_values <- if (include_negative) abs(merged_df$Spearman) else merged_df$Spearman
+    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & threshold_values >= rho_threshold), ]
 
     # Sort the results by the absolute strength of the correlation
     filtered_df_sorted <- filtered_df[order(abs(filtered_df$Spearman), decreasing = TRUE), ]
@@ -85,8 +88,8 @@ main <- function() {
     write_tsv(filtered_df_sorted, network_file)
 
     message(sprintf("Completed. Network has %d edges.", nrow(filtered_df_sorted)))
-    message(sprintf("FDR threshold: %f, Correlation threshold: %f", 
-                   fdr_threshold, rho_threshold))
+    message(sprintf("FDR threshold: %f, Correlation threshold: %f, Include negative: %s",
+                   fdr_threshold, rho_threshold, include_negative))
     
     # Save full correlation and p-value matrices
     cor_matrix_df <- as.data.frame(cor_matrix)

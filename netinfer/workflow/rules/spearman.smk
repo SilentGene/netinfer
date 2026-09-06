@@ -14,7 +14,8 @@ rule spearman_network:
         pvalues = f"{outdir}/subtool_outputs/spearman/pvalues.tsv"      # Full p-value matrix
     params:
         fdr_threshold = config["spearman"]["fdr_threshold"],   # FDR significance threshold
-        rho_threshold = config["spearman"]["rho_threshold"]    # Minimum absolute correlation
+        rho_threshold = config["spearman"]["rho_threshold"],
+        include_negative = config.get("include_negative", False)
     threads: 1
     log:
         f"{outdir}/logs/spearman.log"

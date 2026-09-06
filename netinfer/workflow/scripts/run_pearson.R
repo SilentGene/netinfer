@@ -18,6 +18,7 @@ network_file <- snakemake@output[["network"]]
 correlation_file <- snakemake@output[["correlation"]]
 fdr_threshold <- snakemake@params[["fdr_threshold"]]
 rho_threshold <- snakemake@params[["rho_threshold"]]
+include_negative <- snakemake@params[["include_negative"]]
 
 # Set up logging
 log_con <- file(log_file, open="wt")
@@ -81,8 +82,10 @@ main <- function() {
     # Adjust p-values using False Discovery Rate (FDR) correction
     merged_df$FDR <- p.adjust(merged_df$P_value, method = "fdr")
     
-    # Filter for statistically significant (FDR < fdr_threshold) and strong (abs(Pearson) >= rho_threshold) correlations
-    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & abs(merged_df$Pearson) >= rho_threshold), ]
+    # Keep positive correlations by default. In include-negative mode,
+    # retain sufficiently strong negative correlations as well.
+    threshold_values <- if (include_negative) abs(merged_df$Pearson) else merged_df$Pearson
+    filtered_df <- merged_df[which(merged_df$FDR < fdr_threshold & threshold_values >= rho_threshold), ]
     
     # Sort by absolute correlation strength
     filtered_df_sorted <- filtered_df[order(abs(filtered_df$Pearson), decreasing = TRUE), ]
@@ -90,7 +93,8 @@ main <- function() {
     # Diagnostic info
     max_cor <- max(abs(cor_df$Pearson), na.rm = TRUE)
     message(sprintf("Maximum absolute correlation in data: %f", max_cor))
-    message(sprintf("FDR threshold: %f, Correlation threshold: %f", fdr_threshold, rho_threshold))
+    message(sprintf("FDR threshold: %f, Correlation threshold: %f, Include negative: %s",
+                    fdr_threshold, rho_threshold, include_negative))
     
     # Save network (edge list)
     write_tsv(filtered_df_sorted, network_file)
