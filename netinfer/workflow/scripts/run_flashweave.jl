@@ -5,6 +5,7 @@
 
 using ArgParse
 using FlashWeave
+using DelimitedFiles
 
 # Set command line arguments
 function parse_commandline()
@@ -47,6 +48,25 @@ function parse_commandline()
     return parse_args(s)
 end
 
+# Keep the processed metadata unchanged: both files passed to FlashWeave
+# must have variable names in the first row and samples in subsequent rows.
+function prepare_abundance(data_path, output_path; transposed::Bool)
+    data_lines = readlines(data_path)
+    # The pipeline's feature-by-sample table has a sample-name header. After
+    # removing it, the first column contains the feature names for FlashWeave.
+    data_lines = data_lines[2:end]
+    data_lines = filter(line -> !startswith(line, "Undefined") && !startswith(line, "unmapped"), data_lines)
+    isempty(data_lines) && error("No abundance features remain for FlashWeave")
+    if transposed
+        table = readdlm(IOBuffer(join(data_lines, "\n")), '\t', String)
+        writedlm(output_path, permutedims(table), '\t')
+    else
+        # Preserve the existing non-transposed input handling.
+        write(output_path, join(data_lines, "\n"))
+    end
+    return output_path
+end
+
 # Main program
 function main()
     args = parse_commandline()
@@ -69,21 +89,11 @@ function main()
     # Define heterogeneous tag
     hetero_tag = hetero_val ? "heteroTRUE" : "heteroFALSE"
 
-    # Read data file
-    data = open(data_path, "r")
-    data_lines = readlines(data)
-    close(data)
-    # Remove first header line
-    data_lines = data_lines[2:end]
-    # Remove lines starting with "Undefined" or "unmapped"
-    data_lines = filter(line -> !startswith(line, "Undefined") && !startswith(line, "unmapped"), data_lines)
-    # Save new data file
+    # FlashWeave applies transposed to BOTH input files. Write abundance in
+    # sample-by-feature orientation so processed metadata can stay sample-by-variable.
     data_new_path = joinpath(out_dir, "fw_input_abundance.tsv")
-    data_new = open(data_new_path, "w")
-    write(data_new, join(data_lines, "\n"))
-    close(data_new)
-    println("Input data file header removed and saved to: $data_new_path")
-    println("Using data: $data_path")
+    prepare_abundance(data_path, data_new_path; transposed=args["transposed"])
+    println("Prepared FlashWeave abundance table: $data_new_path")
 
     meta_data_path = get(args, "meta", nothing)
 
@@ -95,7 +105,7 @@ function main()
             alpha=args["alpha"],
             n_obs_min=args["n_obs_min"],
             normalize=true,
-            transposed=args["transposed"],
+            transposed=false,
             sensitive=true,
             heterogeneous=hetero_val
         )
@@ -106,14 +116,14 @@ function main()
             alpha=args["alpha"],
             n_obs_min=args["n_obs_min"],
             normalize=true,
-            transposed=args["transposed"],
+            transposed=false,
             sensitive=true,
             heterogeneous=hetero_val
         )
     end
 
     # print the learn_network command
-    println("learn_network command: learn_network(\"$(data_new_path)\", $(meta_data_path === nothing ? "nothing" : "\"$(meta_data_path)\""), alpha=$(args["alpha"]), n_obs_min=$(args["n_obs_min"]), normalize=true, transposed=$(args["transposed"]), sensitive=true, heterogeneous=$(hetero_val))")
+    println("learn_network command: learn_network(\"$(data_new_path)\", $(meta_data_path === nothing ? "nothing" : "\"$(meta_data_path)\""), alpha=$(args["alpha"]), n_obs_min=$(args["n_obs_min"]), normalize=true, transposed=false, sensitive=true, heterogeneous=$(hetero_val))")
 
     # Save network outputs
     save_network(outgraph, netw_results)
@@ -139,4 +149,6 @@ function main()
 
 end
 
-main()
+if abspath(PROGRAM_FILE) == @__FILE__
+    main()
+end

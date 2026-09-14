@@ -57,7 +57,8 @@ elif taxonomy_in:
 if metadata_in:
     rule preprocess_metadata:
         input:
-            metadata = metadata_in
+            metadata = metadata_in,
+            abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
         output:
             processed = f"{outdir}/preprocessed_data/processed_metadata.tsv"
         threads: 1

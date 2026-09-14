@@ -35,9 +35,9 @@ main <- function() {
     message("Starting SPIEC-EASI network inference")
     
     # Read abundance data
-    abundance_data <- read_tsv(abundance_file)
+    abundance_data <- read_tsv(abundance_file, show_col_types = FALSE)
     message(sprintf("Loaded abundance table with %d (OTUs) x %d (samples)", 
-                   nrow(abundance_data), ncol(abundance_data)))
+                   nrow(abundance_data), ncol(abundance_data) - 1L))
     
     # Ensure output directory exists
     out_dir <- dirname(network_file)
@@ -68,16 +68,33 @@ main <- function() {
     # Run SPIEC-EASI
     message("Running SPIEC-EASI...")
     # Use 'mb' for many features (n > 1000), 'glasso' for fewer (n < 1000). It will perform CLR transformation by default.
-    se.out <- spiec.easi(
-        otu_mat,
-        method = method,
-        nlambda = 20,
-        lambda.min.ratio = 1e-2,
-        sel.criterion = 'stars',
-        pulsar.params = list(rep.num = 50, ncores = threads),
-        verbose = TRUE
-    )
-    
+    message(sprintf("R: %s; SpiecEasi: %s; pulsar: %s; requested cores: %d",
+                    getRversion(), packageVersion("SpiecEasi"),
+                    packageVersion("pulsar"), threads))
+    run_inference <- function(ncores) {
+        spiec.easi(
+            otu_mat,
+            method = method,
+            nlambda = 20,
+            lambda.min.ratio = 1e-2,
+            sel.criterion = 'stars',
+            pulsar.params = list(rep.num = 50, ncores = ncores),
+            verbose = TRUE
+        )
+    }
+    se.out <- tryCatch(run_inference(threads), error = function(e) {
+        # Some SpiecEasi/pulsar versions cannot resolve sparseiCov in workers.
+        # Retry only this known parallel failure; propagate all other errors.
+        missing_estimator <- grepl(
+            "object 'sparseiCov' of mode 'function' was not found",
+            conditionMessage(e), fixed = TRUE
+        )
+        if (threads <= 1L || !missing_estimator) stop(e)
+        message(sprintf("Parallel SPIEC-EASI failed: %s", conditionMessage(e)))
+        message("Retrying SPIEC-EASI with ncores = 1 (this may take longer).")
+        run_inference(1L)
+    })
+
     # Function to extract and format the edgelist
     extract_spieceasi_edges <- function(se_model, genomes) {
         adj_matrix <- getRefit(se_model)

@@ -10,6 +10,7 @@ results/
 old_scripts/
 dag.svg
 test/
+tests/
 copilot*
 example/example_output/.snakemake/
 example/example_output/logs/*

@@ -51,7 +51,7 @@ conda env create -f environment.yaml  # creates 'netinfer' environment and insta
 conda activate netinfer
 
 # Install FlashWeave by running the provided Julia package
-julia workflow/scripts/install_flashweave.jl
+julia netinfer/workflow/scripts/install_flashweave.jl
 ```
 
 ### Basic Usage
@@ -128,9 +128,19 @@ OTU2     d__Bacteria;p__Bacteroidetes;c__Bacteroidia
 ```
 
 ### Metadata Table (Optional)
-- Format: TSV/CSV
-- Rows: Samples (matching abundance table)
-- Columns: Metadata variables
+> This table is only used by FlashWeave and for additional annotations in the final output.
+- Format: TSV or CSV with a header
+- First column: unique, nonempty sample names matching the abundance table columns exactly (no missing or extra samples).
+- Remaining columns: metadata variables.
+
+Example:
+```
+Samples  Group  Location
+Sample1  groupA  Site1
+Sample2  groupB  Site2
+Sample3  groupA  Site1
+...
+
 
 ## Configuration
 
@@ -214,7 +224,7 @@ options:
   --output OUTPUT       Output directory for results. Overrides config file if specified.
   --taxonomy TAXONOMY   Taxonomy mapping file (optional)
   --infer-taxonomy      Infer taxonomy from feature IDs in the abundance table (looks for 'd__' or 'p__')
-  --metadata METADATA   Sample metadata file (optional)
+  --metadata METADATA   Sample metadata file used by FlashWeave and for additional annotations in the final output (optional)
   --methods METHODS     Comma-separated list of methods to use (default: all). Available methods: flashweave, flashweaveHE, fastspar,
                         pearson, spearman, spieceasi, propr, jaccard
   --config CONFIG       Path to a base config YAML file. CLI arguments will override settings in this file. The final merged config will be

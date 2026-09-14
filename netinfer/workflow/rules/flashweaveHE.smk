@@ -7,11 +7,13 @@ outdir = config.get("output_dir", "results").strip()  # Default to "results" if 
 
 rule flashweave_he_network:
     input:
-        abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv",
+        metadata = [f"{outdir}/preprocessed_data/processed_metadata.tsv"] if metadata_in else []
     output:
         network = f"{outdir}/subtool_outputs/flashweave/HE/network.tsv",
         graph = f"{outdir}/subtool_outputs/flashweave/HE/network.gml"
     params:
+        metadata_flag = lambda wildcards, input: "--meta" if input.metadata else "",
         pvalue = config["flashweaveHE"]["pvalue_threshold"],
         weight = config["flashweaveHE"]["weight_threshold"],
         include_negative = config.get("include_negative", False),
@@ -23,6 +25,7 @@ rule flashweave_he_network:
         """
         julia {params.script} \
             --data {input.abundance} \
+            {params.metadata_flag} {input.metadata:q} \
             --transposed \
             --alpha {params.pvalue} \
             --outtable {output.network} \
