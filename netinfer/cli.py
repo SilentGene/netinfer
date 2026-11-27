@@ -14,6 +14,8 @@ from typing import List, Optional
 import shlex
 from importlib import resources
 
+from netinfer import __version__
+
 def setup_logger() -> logging.Logger:
     """Set up logging configuration."""
     logger = logging.getLogger('netinfer')
@@ -265,6 +267,9 @@ def create_config(count_file: Optional[str] = None,
         config["visualization"] = {}
     config["visualization"]["enabled"] = not no_visual
     
+    # Record which NetInfer version produced this run
+    config["netinfer_version"] = __version__
+
     # Create temporary config file with clean YAML output (use absolute paths)
     os.makedirs(output_dir_abs, exist_ok=True)
     config_path = os.path.abspath(os.path.join(output_dir_abs, "config.yaml"))
@@ -331,6 +336,11 @@ def main():
     """Main entry point for the command-line interface."""
     parser = argparse.ArgumentParser(
         description="NetInfer: Microbiome Network Inference Pipeline"
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version=f"NetInfer {__version__}"
     )
     
     parser.add_argument(
@@ -449,6 +459,7 @@ def main():
     args, unknown_snake_args = parser.parse_known_args()
     logger = setup_logger()
     # Print environment versions before any heavy work
+    logger.info(f"NetInfer version: {__version__}")
     print_python_version(logger)
     print_snakemake_version(logger)
     
