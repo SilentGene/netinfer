@@ -47,7 +47,6 @@ packages = ["netinfer"]
 [tool.hatch.build.targets.sdist]
 include = [
     "/netinfer",
-    "/test",
     "/*.md",
     "/LICENSE"
 ]

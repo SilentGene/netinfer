@@ -295,7 +295,6 @@ def run_pipeline(config_path: str, threads: int, extra_snake_args: Optional[List
         "--snakefile", str(snakefile),
         "--cores", str(threads),
         "--configfiles", config_path,
-        "--use-conda",
         "--printshellcmds",
         "--show-failed-logs",
         "--keep-incomplete"

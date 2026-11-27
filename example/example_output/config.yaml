@@ -1,11 +1,16 @@
 input:
-  abundance_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_input/otu_table.tsv
-  taxonomy_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_input/taxonomy_table.tsv
+  count_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/coverM-genome_count.tsv
+  relative_abundance_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/coverm-genome_relativeabundance.tsv
+  other_table: ''
+  taxonomy_table: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/MQMAGs_info.tsv
   metadata_table: ''
 infer_taxonomy: false
+include_negative: true
 output_dir: /mnt/hpccs01/work/microbiome/users/heyu/netinfer/example/example_output
+min_sample_depth: 1000
 min_prevalence: 0.1
-min_peak_abundance: 0.1
+min_prevalent_samples: 0
+min_peak_rel_abundance: 0.001
 trusted_methods:
 - flashweave
 - flashweaveHE
@@ -54,9 +59,5 @@ jaccard:
   weight_threshold: 0.7
   threads: 8
 visualization:
-  max_edges: 10000
-  node_size_by: degree
-  edge_width_by: weight
-  color_by: phylum
   enabled: true
-suffix: mytest
+suffix: ''

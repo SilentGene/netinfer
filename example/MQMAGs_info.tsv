@@ -1,0 +1,1136 @@
+MAG	Taxonomy_R220	Completeness.checkm2	Contamination.checkm2	contig_num
+genome0001	d__Bacteria;p__Acidobacteriota;c__;o__;f__;g__;s__	82.36	2.28	1299
+genome0002	d__Bacteria;p__Acidobacteriota;c__;o__;f__;g__;s__	53.14	9.92	2001
+genome0003	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__	83.37	0.04	383
+genome0004	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__	80.43	1.31	411
+genome0005	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__	70.84	4.97	792
+genome0006	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__	67.98	2.26	642
+genome0007	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGAV01;g__JBGOXI01;s__JBGOXI01 sp041479055	96.42	1.67	78
+genome0008	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__JAFGBC01;g__JAFGBC01;s__	87.18	6.66	876
+genome0009	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__;s__	69.5	5.78	771
+genome0010	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__DATKJS01;s__	89.5	1.63	391
+genome0011	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__DATKJS01;s__	89.39	4.8	448
+genome0012	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	92.34	1.04	270
+genome0013	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	89.73	2.92	331
+genome0014	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	80.37	1.73	631
+genome0015	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	79.61	0.43	657
+genome0016	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__JALHVH01;s__	55.46	0.57	508
+genome0017	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	94.36	1.13	322
+genome0018	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	85.06	3.52	378
+genome0019	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	83.24	3.93	203
+genome0020	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	72.43	0.9	573
+genome0021	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	59.15	0.77	367
+genome0022	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	56.4	4.89	351
+genome0023	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__	51.1	0.31	356
+genome0024	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__RBG-16-66-30 sp026393975	92.63	0.4	279
+genome0025	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__RBG-16-66-30 sp041479905	72.6	0.5	382
+genome0026	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__RBG-16-66-30 sp041479905	53.89	3.74	666
+genome0027	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__RBG-16-66-30;g__RBG-16-66-30;s__RBG-16-66-30 sp041479905	51.13	2.99	602
+genome0028	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JALHTW01;s__	92.59	0.47	236
+genome0029	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JALHTW01;s__JALHTW01 sp022866045	90.26	0.92	233
+genome0030	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__	94.47	1.32	154
+genome0031	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__	73.45	2.33	700
+genome0032	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__	65.16	0.73	617
+genome0033	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__JAPKZH01 sp026393905	94.84	2.61	260
+genome0034	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JAPKZH01;s__JAPKZH01 sp026393905	92.95	1.94	535
+genome0035	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JBGOYP01;s__	87.54	5.82	963
+genome0036	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JBGOYP01;s__	57.89	6.9	1273
+genome0037	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__JBGOYP01;s__JBGOYP01 sp041479785	93.85	2.79	573
+genome0038	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA4085;g__UBA4085;s__	87.23	0.69	361
+genome0039	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__;s__	92.29	1.36	277
+genome0040	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__;s__	50.78	0.67	567
+genome0041	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__UBA8522;s__	72.21	0.8	327
+genome0042	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__UBA8522;s__UBA8522 sp017886205	95.78	1.11	82
+genome0043	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__UBA8522;s__UBA8522 sp017886205	95.6	1.46	251
+genome0044	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__Aminicenantales;f__UBA8522;g__UBA8522;s__UBA8522 sp017886205	86.51	0.31	422
+genome0045	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__UBA2199;f__UBA2199;g__JAKAGC01;s__	93.07	4.92	630
+genome0046	d__Bacteria;p__Acidobacteriota;c__Aminicenantia;o__UBA2199;f__UBA2199;g__UBA2199;s__	93.33	1.57	148
+genome0047	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__DASWZN01;s__	100.0	0.66	292
+genome0048	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__DASWZN01;s__	78.46	4.23	1033
+genome0049	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__Fen-178;s__	92.85	4.51	1052
+genome0050	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__Fen-178;s__	52.05	1.41	1390
+genome0051	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__JACQZT01;s__	56.41	7.09	1103
+genome0052	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__JACQZT01;s__	55.5	4.87	1410
+genome0053	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__JACQZT01;s__	55.02	7.31	1749
+genome0054	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__JACQZT01;s__	51.88	0.68	1541
+genome0055	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	96.85	3.02	1274
+genome0056	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	95.97	0.76	681
+genome0057	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	95.73	2.4	437
+genome0058	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	94.57	2.48	655
+genome0059	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__Bryobacterales;f__Bryobacteraceae;g__VFZS01;s__	87.44	0.78	594
+genome0060	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__UBA7540;g__Bog-366;s__	68.66	4.08	1021
+genome0061	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__UBA7540;g__JALHUF01;s__	88.24	1.7	369
+genome0062	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__UBA7540;g__JALHUF01;s__	75.69	0.44	286
+genome0063	d__Bacteria;p__Acidobacteriota;c__Terriglobia;o__UBA7540;f__UBA7540;g__JALHUF01;s__JALHUF01 sp022866195	99.01	1.21	79
+genome0064	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__;s__	68.41	2.3	562
+genome0065	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__RBG-13-68-16;s__	88.37	0.81	716
+genome0066	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__RBG-13-68-16;s__	88.26	1.5	702
+genome0067	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__RBG-13-68-16;s__	54.83	2.32	942
+genome0068	d__Bacteria;p__Acidobacteriota;c__Thermoanaerobaculia;o__Thermoanaerobaculales;f__Thermoanaerobaculaceae;g__RBG-13-68-16;s__RBG-13-68-16 sp022865555	95.73	2.09	457
+genome0069	d__Bacteria;p__Acidobacteriota;c__UBA6911;o__UBA6911;f__UBA6911;g__;s__	65.04	1.04	517
+genome0070	d__Bacteria;p__Acidobacteriota;c__UBA6911;o__UBA6911;f__UBA6911;g__;s__	62.13	2.0	1261
+genome0071	d__Bacteria;p__Acidobacteriota;c__UBA6911;o__UBA6911;f__UBA6911;g__DASQID01;s__	92.24	5.33	1979
+genome0072	d__Bacteria;p__Acidobacteriota;c__UBA6911;o__UBA6911;f__UBA6911;g__JAFNAG01;s__	51.2	9.38	1503
+genome0073	d__Bacteria;p__Acidobacteriota;c__Vicinamibacteria;o__Vicinamibacterales;f__Fen-181;g__;s__	99.51	0.68	544
+genome0074	d__Bacteria;p__Acidobacteriota;c__Vicinamibacteria;o__Vicinamibacterales;f__Fen-181;g__;s__	52.68	1.12	829
+genome0075	d__Bacteria;p__Acidobacteriota;c__Vicinamibacteria;o__Vicinamibacterales;f__Fen-181;g__Fen-181;s__	97.65	3.8	431
+genome0076	d__Bacteria;p__Actinomycetota;c__Coriobacteriia;o__Anaerosomatales;f__;g__;s__	68.45	0.54	529
+genome0077	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__;s__	58.63	0.09	267
+genome0078	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__Hydromicrobium;s__	81.53	2.19	456
+genome0079	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__Hydromicrobium;s__Hydromicrobium sp014894375	85.77	0.46	228
+genome0080	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__Hydromicrobium;s__Hydromicrobium sp014894375	83.46	0.0	244
+genome0081	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__Hydromicrobium;s__Hydromicrobium sp018894445	94.39	0.82	284
+genome0082	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	96.24	1.3	220
+genome0083	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	93.98	0.45	208
+genome0084	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	89.64	0.56	262
+genome0085	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	82.53	0.19	284
+genome0086	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	78.02	0.73	256
+genome0087	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__	67.65	2.14	205
+genome0088	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	88.75	0.09	195
+genome0089	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	88.13	0.21	373
+genome0090	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	84.97	0.41	343
+genome0091	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	84.63	0.8	362
+genome0092	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	82.53	0.02	176
+genome0093	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	80.99	1.05	353
+genome0094	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	78.75	0.43	173
+genome0095	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	76.71	0.09	319
+genome0096	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	76.58	0.01	186
+genome0097	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	74.62	0.86	194
+genome0098	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	63.73	2.25	493
+genome0099	d__Bacteria;p__Actinomycetota;c__Humimicrobiia;o__Humimicrobiales;f__Humimicrobiaceae;g__JAHILC01;s__JAHILC01 sp018897225	50.8	0.16	283
+genome0100	d__Bacteria;p__Actinomycetota;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__Fen-549;s__	71.37	1.63	447
+genome0101	d__Bacteria;p__Actinomycetota;c__Thermoleophilia;o__UBA2241;f__UBA2241;g__CAIXSE01;s__	58.64	2.23	785
+genome0102	d__Bacteria;p__Actinomycetota;c__Thermoleophilia;o__UBA2241;f__UBA2241;g__PALSA-647;s__PALSA-647 sp003132585	58.34	3.49	498
+genome0103	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__CG10238-14;g__JASEGC01;s__	90.39	2.82	228
+genome0104	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__SCSR01;g__;s__	91.21	0.01	9
+genome0105	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__SCSR01;g__;s__	82.79	0.83	91
+genome0106	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__SCSR01;g__;s__	74.41	0.32	124
+genome0107	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__SCSR01;g__JAGVVV01;s__	50.49	0.57	161
+genome0108	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__SCSR01;g__JAPLUY01;s__	79.58	0.01	103
+genome0109	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__GW2011-AR5;f__GW2011-AR5;g__;s__	90.53	0.71	82
+genome0110	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__GW2011-AR5;f__GW2011-AR5;g__;s__	90.12	0.39	68
+genome0111	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__GW2011-AR5;f__GW2011-AR5;g__;s__	83.84	0.5	98
+genome0112	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__QMZP01;f__QMZP01;g__JAPLVB01;s__	53.75	0.14	165
+genome0113	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__;s__	93.55	0.0	28
+genome0114	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__;s__	90.03	0.13	104
+genome0115	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__;s__	75.89	2.98	784
+genome0116	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__JAWBOD01;s__	93.22	0.03	11
+genome0117	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__JAWBOD01;s__	87.99	0.28	76
+genome0118	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__Aenigmatarchaeaceae;g__JAWBOD01;s__	67.19	0.12	104
+genome0119	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__JAHLMS01;g__;s__	91.33	0.31	59
+genome0120	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__Aenigmatarchaeales;f__JAHLMS01;g__JAHLMS01;s__	54.11	1.41	186
+genome0121	d__Archaea;p__Aenigmatarchaeota;c__Aenigmatarchaeia;o__CG10238-14;f__CG10238-14;g__CG10238-14;s__	73.3	0.12	289
+genome0122	d__Archaea;p__Altiarchaeota;c__Altiarchaeia;o__JAFGQM01;f__JAFGQM01;g__;s__	85.45	0.66	33
+genome0123	d__Bacteria;p__Arandabacterota;c__Arandabacteria;o__Arandabacterales;f__Arandabacteraceae;g__DATKKY01;s__	88.73	0.66	602
+genome0124	d__Bacteria;p__Armatimonadota;c__Hebobacteria;o__Hebobacterales;f__Hebobacteraceae;g__;s__	88.88	2.81	305
+genome0125	d__Bacteria;p__Armatimonadota;c__UBA5829;o__UBA5829;f__DTLH01;g__;s__	98.56	1.08	165
+genome0126	d__Archaea;p__Asgardarchaeota;c__Lokiarchaeia;o__Helarchaeales;f__HEL-GB-A;g__DATKTP01;s__	93.62	8.59	591
+genome0127	d__Archaea;p__Asgardarchaeota;c__Lokiarchaeia;o__Helarchaeales;f__HEL-GB-A;g__DATKTP01;s__	93.6	6.21	429
+genome0128	d__Archaea;p__Asgardarchaeota;c__Lokiarchaeia;o__Sigynarchaeales;f__CR-4;g__CR-4;s__	97.93	5.75	530
+genome0129	d__Archaea;p__Asgardarchaeota;c__Thorarchaeia;o__Thorarchaeales;f__Thorarchaeaceae;g__OWC5;s__	91.56	2.3	147
+genome0130	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__	98.7	0.97	130
+genome0131	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	98.32	0.93	273
+genome0132	d__Bacteria;p__Atribacterota;c__JS1;o__SB-45;f__34-128;g__CG2-30-33-13;s__CG2-30-33-13 sp041490145	76.62	0.14	358
+genome0133	d__Bacteria;p__Bacillota;c__Fermentithermobacillia;o__Fermentithermobacillales;f__Fermentithermobacillaceae;g__JBBDIP01;s__	88.7	0.1	268
+genome0134	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__FEN-979;g__FEN-979;s__	60.28	1.94	799
+genome0135	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__JAGONC01;g__JAPLDP01;s__	94.2	1.61	278
+genome0136	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__JAGOPY01;g__;s__	96.62	0.87	44
+genome0137	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Prolixibacteraceae;g__UBA1413;s__	82.61	2.45	1113
+genome0138	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__	94.46	2.87	200
+genome0139	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__	93.74	2.63	296
+genome0140	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__LJUQ01 sp041480755	92.9	0.8	330
+genome0141	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__LJUQ01 sp041480755	55.87	0.99	583
+genome0142	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__SM23-62;g__LJUQ01;s__LJUQ01 sp041480755	52.55	0.3	515
+genome0143	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__UBA10428;g__UBA10428;s__	62.83	1.51	1035
+genome0144	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__UBA10428;g__UBA5072;s__	82.82	3.46	383
+genome0145	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__UBA10428;g__UBA5072;s__	57.07	0.22	463
+genome0146	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	99.47	0.7	113
+genome0147	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	98.0	0.15	121
+genome0148	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	97.89	0.98	77
+genome0149	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	96.59	0.36	121
+genome0150	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	96.56	2.23	219
+genome0151	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	95.79	0.85	210
+genome0152	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	95.76	1.15	163
+genome0153	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	93.84	1.21	384
+genome0154	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	93.36	3.01	475
+genome0155	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	93.2	2.48	775
+genome0156	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	90.8	1.27	728
+genome0157	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	88.84	0.78	431
+genome0158	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	87.76	0.11	737
+genome0159	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	87.01	1.81	400
+genome0160	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	86.61	1.5	444
+genome0161	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	86.32	1.01	486
+genome0162	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	83.31	0.83	344
+genome0163	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	81.54	2.17	805
+genome0164	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	80.23	3.77	837
+genome0165	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	79.03	1.96	685
+genome0166	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	77.04	0.04	404
+genome0167	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	76.89	0.69	341
+genome0168	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	76.56	0.27	381
+genome0169	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	67.61	2.45	596
+genome0170	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	65.02	1.2	899
+genome0171	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	62.57	1.77	605
+genome0172	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	56.51	7.22	1456
+genome0173	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	55.27	3.72	1081
+genome0174	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	53.07	9.02	1413
+genome0175	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	53.06	4.84	1343
+genome0176	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	52.05	0.43	478
+genome0177	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__	51.68	3.49	1458
+genome0178	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp026391215	95.61	2.6	502
+genome0179	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp026391215	59.19	2.38	1014
+genome0180	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	94.74	0.05	215
+genome0181	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	93.59	0.89	121
+genome0182	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	86.13	0.21	594
+genome0183	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	70.42	1.33	749
+genome0184	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041479075	59.64	1.23	888
+genome0185	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__LD21;s__LD21 sp041480535	84.19	2.56	449
+genome0186	d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__VadinHA17;g__SR-FBR-E99;s__	51.14	5.42	968
+genome0187	d__Bacteria;p__Bacteroidota_A;c__;o__;f__;g__;s__	96.83	0.01	151
+genome0188	d__Bacteria;p__Bacteroidota_A;c__;o__;f__;g__;s__	84.59	0.7	445
+genome0189	d__Bacteria;p__Bacteroidota_A;c__;o__;f__;g__;s__	54.65	5.59	1323
+genome0190	d__Bacteria;p__Bacteroidota_A;c__Ignavibacteria;o__Ignavibacteriales;f__SURF-24;g__JAPLFH01;s__	91.08	3.38	1119
+genome0191	d__Bacteria;p__Bacteroidota_A;c__Ignavibacteria;o__SJA-28;f__OLB5;g__;s__	100.0	0.34	56
+genome0192	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__;g__;s__	98.56	1.13	272
+genome0193	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__;s__	100.0	1.73	67
+genome0194	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__;s__	89.51	2.31	721
+genome0195	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__;s__	75.43	5.11	827
+genome0196	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__;s__	60.75	0.85	586
+genome0197	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	87.22	1.84	735
+genome0198	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	82.55	1.0	482
+genome0199	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	80.4	0.31	557
+genome0200	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	67.69	0.22	542
+genome0201	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__Fen-1298;s__	63.59	3.88	713
+genome0202	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__UBA9647;s__	94.4	1.69	534
+genome0203	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__UBA9647;s__	55.6	9.31	1374
+genome0204	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__UBA9647;s__	52.25	9.37	1313
+genome0205	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA10030;g__UBA9647;s__	50.0	7.54	961
+genome0206	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA6906;g__;s__	54.97	0.26	660
+genome0207	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA6906;g__Fen-1255;s__	52.08	9.26	1652
+genome0208	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA6906;g__JAPUKJ01;s__	87.4	2.58	752
+genome0209	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA6906;g__UBA6906;s__	61.09	1.28	925
+genome0210	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA8401;g__JAGVPT01;s__	63.41	0.15	768
+genome0211	d__Bacteria;p__Bacteroidota_A;c__UBA10030;o__UBA10030;f__UBA8401;g__JAGVPT01;s__	53.32	1.87	661
+genome0212	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__CAIOGO01;s__CAIOGO01 sp903857865	83.09	7.65	566
+genome0213	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__CAIOGO01;s__CAIOGO01 sp903857865	74.26	2.78	322
+genome0214	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__CAIOGO01;s__CAIOGO01 sp903857865	54.0	1.22	288
+genome0215	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__JAPLGE01;s__	86.99	2.47	197
+genome0216	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__JAPLGE01;s__JAPLGE01 sp026390315	84.13	3.19	388
+genome0217	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__JAPLGE01;s__JAPLGE01 sp026390315	80.33	3.57	413
+genome0218	d__Bacteria;p__Bipolaricaulota;c__Bipolaricaulia;o__UBA7950;f__UBA9294;g__JAPLGE01;s__JAPLGE01 sp026390315	67.44	0.47	189
+genome0219	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Caldisericales;f__Caldisericaceae;g__CG2-30-36-11;s__CG2-30-36-11 sp001871575	99.95	0.65	36
+genome0220	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Caldisericales;f__Caldisericaceae;g__CG2-30-36-11;s__CG2-30-36-11 sp001871575	96.71	0.85	37
+genome0221	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__;g__;s__	52.24	8.66	1239
+genome0222	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	95.87	0.03	87
+genome0223	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	91.85	1.02	334
+genome0224	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	83.7	0.87	151
+genome0225	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	82.13	1.47	289
+genome0226	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	81.91	0.12	280
+genome0227	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	74.25	0.82	174
+genome0228	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	68.28	1.08	373
+genome0229	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	62.43	0.74	307
+genome0230	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	61.12	8.01	773
+genome0231	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	58.14	4.8	636
+genome0232	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__	51.77	0.46	245
+genome0233	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__Cryosericum sp026390215	53.7	1.44	237
+genome0234	d__Bacteria;p__Caldisericota;c__Caldisericia;o__Cryosericales;f__Cryosericaceae;g__Cryosericum;s__Cryosericum sp030652945	69.45	1.24	395
+genome0235	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	98.8	1.61	31
+genome0236	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	88.98	4.3	514
+genome0237	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	88.84	2.73	454
+genome0238	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	87.83	3.23	508
+genome0239	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	69.74	1.34	240
+genome0240	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	63.55	2.7	774
+genome0241	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	60.1	4.44	853
+genome0242	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	58.79	8.6	1102
+genome0243	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__;s__	50.12	0.43	232
+genome0244	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JAFGXF01;s__	73.93	1.22	296
+genome0245	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JBGQAS01;s__	85.16	2.35	440
+genome0246	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__JBGQAS01;s__JBGQAS01 sp041494435	72.92	0.04	158
+genome0247	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__Pelolinea;s__	93.65	3.29	130
+genome0248	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__Pelolinea;s__	85.57	5.85	540
+genome0249	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__Pelolinea;s__	77.02	6.13	619
+genome0250	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__Pelolinea;s__	64.31	3.91	327
+genome0251	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__UBA700;s__	74.19	0.49	466
+genome0252	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Anaerolineaceae;g__UBA700;s__	68.27	3.4	1540
+genome0253	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	83.32	4.4	716
+genome0254	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	77.03	4.84	794
+genome0255	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	76.64	3.93	506
+genome0256	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	72.02	2.39	308
+genome0257	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	66.15	4.17	738
+genome0258	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	63.86	2.44	681
+genome0259	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	63.74	1.92	338
+genome0260	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__DRKV01;g__;s__	51.89	8.59	1393
+genome0261	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__;s__	55.59	0.38	713
+genome0262	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	95.27	6.4	320
+genome0263	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	94.33	6.34	472
+genome0264	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	93.26	1.15	346
+genome0265	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	92.87	3.23	639
+genome0266	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	89.93	5.04	632
+genome0267	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DATEAV01;s__	81.81	0.77	513
+genome0268	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__	94.32	2.32	265
+genome0269	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__	93.51	4.37	383
+genome0270	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__	58.98	3.06	650
+genome0271	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__	53.13	7.4	1655
+genome0272	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__DYJB01 sp026390045	60.36	1.15	594
+genome0273	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__DYJB01;s__DYJB01 sp026390045	57.41	0.86	598
+genome0274	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__E44-bin32;g__JBGOYQ01;s__	53.39	4.57	996
+genome0275	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__;s__	97.55	1.18	78
+genome0276	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__;s__	90.71	4.64	405
+genome0277	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__FEN-1073;s__	85.91	5.27	737
+genome0278	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__FEN-1073;s__	63.62	0.42	723
+genome0279	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__RBG-16-64-43;g__RBG-16-64-43;s__	90.39	4.42	350
+genome0280	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	85.59	3.79	282
+genome0281	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	73.33	9.91	1486
+genome0282	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	66.33	0.68	165
+genome0283	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	63.8	0.98	777
+genome0284	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	58.75	9.03	1745
+genome0285	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__;s__	54.76	6.62	1418
+genome0286	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__CAIQJJ01;s__	55.59	0.85	461
+genome0287	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	97.47	0.69	213
+genome0288	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	96.08	1.17	234
+genome0289	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	95.9	1.42	251
+genome0290	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	85.68	3.98	418
+genome0291	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	82.11	2.1	296
+genome0292	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	67.66	0.58	481
+genome0293	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	65.86	4.76	1168
+genome0294	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	59.42	0.7	737
+genome0295	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	54.74	0.7	619
+genome0296	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__FEB-25;s__	51.07	8.87	1317
+genome0297	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__UBA4823;g__JAJZSS01;s__	90.85	3.55	474
+genome0298	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__;s__	95.46	3.03	210
+genome0299	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__;s__	89.16	3.04	360
+genome0300	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__CG2-30-58-95;s__	75.11	1.88	561
+genome0301	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__CG2-30-58-95;s__	57.45	0.82	501
+genome0302	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__CG2-30-58-95;s__	53.5	0.83	508
+genome0303	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__Fen-1038;s__	95.47	0.11	435
+genome0304	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__Fen-1038;s__	93.47	3.63	574
+genome0305	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA5195;s__	54.22	0.39	519
+genome0306	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	92.87	0.58	184
+genome0307	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	88.22	0.32	289
+genome0308	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	82.44	1.8	528
+genome0309	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	80.63	3.74	538
+genome0310	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	77.8	8.97	406
+genome0311	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	68.23	3.12	411
+genome0312	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	67.69	1.0	540
+genome0313	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	62.45	1.17	686
+genome0314	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	62.27	0.24	647
+genome0315	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	56.84	7.74	714
+genome0316	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	56.6	0.16	574
+genome0317	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	56.5	6.34	1184
+genome0318	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	55.77	6.5	1377
+genome0319	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	53.55	2.35	558
+genome0320	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	53.3	0.45	528
+genome0321	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	52.44	1.04	179
+genome0322	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	51.75	0.29	696
+genome0323	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__	51.62	1.29	370
+genome0324	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041480185	84.61	1.24	383
+genome0325	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041480185	81.48	2.57	425
+genome0326	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041480185	61.72	2.15	692
+genome0327	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041489005	62.5	2.21	417
+genome0328	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Anaerolineales;f__Villigracilaceae;g__UBA877;s__UBA877 sp041489005	53.52	2.82	407
+genome0329	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	72.92	1.98	1032
+genome0330	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	72.89	1.68	879
+genome0331	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	67.74	1.39	1021
+genome0332	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	65.45	0.96	839
+genome0333	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	63.81	2.5	893
+genome0334	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	51.45	0.15	1268
+genome0335	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__Fen-1058;f__Fen-1058;g__JBGLNJ01;s__	50.58	0.99	987
+genome0336	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__JAAYZQ01;f__JAAYZQ01;g__DAOQVR01;s__	53.17	4.29	990
+genome0337	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	95.65	3.96	390
+genome0338	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	94.37	3.32	263
+genome0339	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	92.93	3.2	120
+genome0340	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	92.64	3.62	223
+genome0341	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	89.38	3.38	534
+genome0342	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	75.7	1.13	518
+genome0343	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	70.0	1.03	682
+genome0344	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	55.99	1.05	560
+genome0345	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	52.05	0.8	548
+genome0346	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA2200;f__UBA2200;g__;s__	50.09	0.38	342
+genome0347	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA4142;f__UBA4142;g__DYLA01;s__	86.49	1.84	365
+genome0348	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA4142;f__UBA4142;g__VGOB01;s__	64.95	2.44	899
+genome0349	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA4142;f__UBA4142;g__VGOB01;s__	54.61	0.07	697
+genome0350	d__Bacteria;p__Chloroflexota;c__Anaerolineae;o__UBA7937;f__B3-Chlor;g__JAUVXJ01;s__	92.03	2.19	190
+genome0351	d__Bacteria;p__Chloroflexota;c__Chloroflexia;o__Chloroflexales;f__Chloroflexaceae;g__UBA1466;s__	96.03	1.41	368
+genome0352	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__BS750m-G39;g__;s__	72.06	4.7	434
+genome0353	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__BS750m-G39;g__;s__	70.59	2.22	126
+genome0354	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__BS750m-G39;g__;s__	64.25	1.92	274
+genome0355	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__BS750m-G39;g__;s__	53.1	7.31	1463
+genome0356	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__BS750m-G39;g__E44-bin88;s__E44-bin88 sp022865485	94.57	0.16	26
+genome0357	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__;s__	61.91	1.83	576
+genome0358	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	97.62	1.73	49
+genome0359	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	91.78	1.43	250
+genome0360	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	86.64	0.88	234
+genome0361	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	66.62	8.2	730
+genome0362	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	64.92	1.22	256
+genome0363	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	55.19	0.19	262
+genome0364	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__Fen-1064;g__JAURWL01;s__	54.47	3.6	283
+genome0365	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__JAFGLR01;g__JAFGLR01;s__	93.35	0.44	171
+genome0366	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__;s__	93.1	1.84	277
+genome0367	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__;s__	84.78	1.52	243
+genome0368	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__DAOUZD01;s__	80.68	1.71	399
+genome0369	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__Fen-1077;s__	73.84	1.58	398
+genome0370	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBFYTX01;s__	91.49	0.71	133
+genome0371	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBFYTX01;s__	90.6	6.71	401
+genome0372	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBFYTX01;s__	50.82	0.45	320
+genome0373	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBFYTX01;s__	50.02	3.69	426
+genome0374	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBGOXU01;s__	51.43	4.31	915
+genome0375	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBGOXU01;s__JBGOXU01 sp041479305	63.5	0.66	361
+genome0376	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBGPRB01;s__	91.75	2.29	80
+genome0377	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBGPRB01;s__	90.59	9.27	548
+genome0378	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__JBGPRB01;s__	62.14	2.12	532
+genome0379	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__RBG-13-51-18;s__	91.34	1.2	218
+genome0380	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__RBG-13-51-18;s__	87.59	1.88	126
+genome0381	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__RBG-16-60-22;g__RBG-13-51-18;s__	72.23	3.85	333
+genome0382	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__UBA2162;g__;s__	96.6	2.33	56
+genome0383	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__Dehalococcoidales;f__UBA2162;g__JBBITI01;s__	97.16	5.49	199
+genome0384	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__;s__	90.23	2.32	259
+genome0385	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	81.89	0.01	321
+genome0386	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	81.17	2.96	467
+genome0387	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	80.69	0.02	338
+genome0388	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	78.66	0.73	367
+genome0389	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	76.45	1.59	665
+genome0390	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	76.38	0.2	355
+genome0391	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	76.24	0.42	371
+genome0392	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	74.0	0.54	332
+genome0393	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	71.87	0.01	352
+genome0394	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	71.48	0.36	321
+genome0395	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	70.25	0.32	342
+genome0396	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	69.63	0.55	399
+genome0397	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	69.01	0.18	351
+genome0398	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	68.39	0.03	328
+genome0399	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	66.57	0.45	311
+genome0400	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	66.45	1.35	377
+genome0401	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	61.36	1.26	534
+genome0402	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	60.18	1.47	357
+genome0403	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	58.84	2.8	581
+genome0404	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOUEO01;s__	54.6	0.39	324
+genome0405	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOULP01;s__	86.95	1.19	451
+genome0406	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__DAOULP01;s__	62.05	0.69	473
+genome0407	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	89.5	2.72	448
+genome0408	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	52.2	1.33	581
+genome0409	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__	51.16	6.51	1241
+genome0410	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__DSTF01;f__JALHUB01;g__JALHUB01;s__JALHUB01 sp041501065	67.29	1.06	393
+genome0411	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	97.13	0.91	24
+genome0412	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	92.34	0.94	109
+genome0413	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	72.74	5.07	182
+genome0414	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	67.96	1.5	146
+genome0415	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	65.54	3.77	251
+genome0416	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	64.38	1.04	14
+genome0417	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	57.94	1.73	188
+genome0418	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	56.23	0.1	176
+genome0419	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__AB-539-J10;g__RBG-13-51-36;s__	50.8	3.41	291
+genome0420	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	95.47	1.34	156
+genome0421	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	83.99	4.38	146
+genome0422	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	78.8	0.34	125
+genome0423	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	78.11	1.16	290
+genome0424	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	65.46	0.12	228
+genome0425	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	64.98	3.22	56
+genome0426	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	60.16	0.66	333
+genome0427	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	60.09	0.08	125
+genome0428	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__9FT-COMBO-48-23;s__	60.08	0.8	316
+genome0429	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__GIF9;f__UBA5629;g__UBA6808;s__	92.81	4.89	831
+genome0430	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__JACVQG01;f__JAHKAY01;g__JAHKAY01;s__	60.14	0.85	229
+genome0431	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__;s__	80.55	1.53	262
+genome0432	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__;s__	71.01	1.27	434
+genome0433	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__;s__	63.57	4.12	184
+genome0434	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	74.73	0.17	461
+genome0435	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	66.76	1.04	414
+genome0436	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	63.58	0.07	339
+genome0437	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	61.57	0.93	684
+genome0438	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	58.1	1.58	416
+genome0439	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAFGCL01;s__	52.03	0.69	387
+genome0440	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAPLHP01;s__JAPLHP01 sp026389585	94.34	0.74	398
+genome0441	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAPLHP01;s__JAPLHP01 sp026389585	90.76	0.43	377
+genome0442	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__JAPLHP01;s__JAPLHP01 sp026389585	84.84	1.47	219
+genome0443	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__RBG-13-53-26;s__RBG-13-53-26 sp041478585	89.73	1.49	221
+genome0444	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__VGOE01;s__	54.28	4.77	904
+genome0445	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__VGOE01;s__VGOE01 sp041478915	72.54	4.41	437
+genome0446	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__VGOE01;s__VGOE01 sp041478915	65.73	3.05	460
+genome0447	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__RBG-13-53-26;f__RBG-13-53-26;g__VGOE01;s__VGOE01 sp041478915	60.81	0.69	253
+genome0448	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__;s__	97.51	0.81	251
+genome0449	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__;s__	85.31	2.63	517
+genome0450	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__JAUYDU01;s__	65.25	0.64	216
+genome0451	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__JAUYDU01;s__	55.32	8.02	1570
+genome0452	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	91.73	2.1	271
+genome0453	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	74.55	0.67	306
+genome0454	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	74.18	0.41	341
+genome0455	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	73.65	1.91	232
+genome0456	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	73.06	4.3	357
+genome0457	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	68.93	1.08	216
+genome0458	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	66.87	0.91	359
+genome0459	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SM23-28-2;f__SM23-28-2;g__SM23-28-2;s__	64.6	0.08	308
+genome0460	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__JAUWZY01;g__JAUWZY01;s__	89.9	4.58	263
+genome0461	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SpSt-899;g__JAQTRE01;s__	73.09	0.15	210
+genome0462	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	95.36	9.24	57
+genome0463	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	94.94	3.35	168
+genome0464	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	94.22	3.54	146
+genome0465	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	74.21	0.49	344
+genome0466	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	64.9	1.05	241
+genome0467	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	63.2	0.97	292
+genome0468	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	63.04	1.04	415
+genome0469	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__;s__	52.74	4.4	1229
+genome0470	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	94.76	1.58	298
+genome0471	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	80.86	2.51	659
+genome0472	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	80.32	3.5	617
+genome0473	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	76.02	2.64	653
+genome0474	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	65.36	0.21	272
+genome0475	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	65.29	1.99	331
+genome0476	d__Bacteria;p__Chloroflexota;c__Dehalococcoidia;o__SZUA-161;f__SZUA-161;g__JACWAE01;s__	51.77	1.54	541
+genome0477	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	67.12	0.27	713
+genome0478	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	63.22	0.62	669
+genome0479	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	62.83	1.68	724
+genome0480	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	61.24	0.62	451
+genome0481	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	57.59	2.26	792
+genome0482	d__Bacteria;p__Chloroflexota;c__DTOL01;o__DTOL01;f__;g__;s__	57.04	0.32	438
+genome0483	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__CTSoil-043;s__	77.68	0.23	326
+genome0484	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__Fen-1039;s__	57.7	1.89	486
+genome0485	d__Bacteria;p__Chloroflexota;c__Limnocylindria;o__Limnocylindrales;f__CSP1-4;g__Fen-1039;s__	54.2	0.53	683
+genome0486	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__Cyanobacteriales;f__Microcoleaceae;g__JBEDKD01;s__	76.65	0.22	737
+genome0487	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__Gloeomargaritales;f__;g__;s__	53.57	1.59	31
+genome0488	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__Gloeomargaritales;f__;g__;s__	52.73	1.24	84
+genome0489	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__Gloeomargaritales;f__;g__;s__	51.99	0.0	50
+genome0490	d__Bacteria;p__Cyanobacteriota;c__Cyanobacteriia;o__PCC-6307;f__;g__;s__	55.37	0.06	39
+genome0491	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__;g__;s__	59.98	9.93	1282
+genome0492	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__RBG-16-54-18;g__RBG-16-54-11;s__	96.59	2.33	270
+genome0493	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__RBG-16-54-18;g__RBG-16-54-11;s__	76.75	2.78	196
+genome0494	d__Bacteria;p__Desulfobacterota;c__B13-G15;o__B13-G15;f__RBG-16-54-18;g__RBG-16-54-11;s__	63.83	2.53	623
+genome0495	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	61.96	9.2	1542
+genome0496	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	60.51	6.37	1311
+genome0497	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	53.19	9.35	522
+genome0498	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	50.87	9.63	870
+genome0499	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	50.78	8.63	1193
+genome0500	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__;g__;s__	50.68	7.63	1073
+genome0501	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	89.72	1.05	698
+genome0502	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	71.34	0.11	523
+genome0503	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	68.86	0.0	335
+genome0504	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	64.32	7.9	1741
+genome0505	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__;s__	58.72	0.98	411
+genome0506	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	80.23	2.64	710
+genome0507	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	79.91	1.68	798
+genome0508	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	78.05	1.02	690
+genome0509	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	77.84	0.3	567
+genome0510	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	72.27	3.03	582
+genome0511	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	68.7	1.27	518
+genome0512	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	68.13	0.78	601
+genome0513	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	63.76	2.13	508
+genome0514	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	61.76	0.33	421
+genome0515	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	59.62	0.64	314
+genome0516	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	56.63	1.33	457
+genome0517	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__DATIGG01;s__	56.5	2.92	933
+genome0518	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JACAEX01;s__	91.44	2.67	853
+genome0519	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JACAEX01;s__	81.17	0.92	405
+genome0520	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	99.01	6.52	295
+genome0521	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	85.95	3.63	587
+genome0522	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	83.09	2.57	511
+genome0523	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	78.08	2.85	828
+genome0524	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	72.52	1.6	453
+genome0525	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	64.43	1.01	290
+genome0526	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	61.19	0.57	537
+genome0527	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	59.66	0.3	803
+genome0528	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	58.73	6.69	1069
+genome0529	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	58.55	0.92	546
+genome0530	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	57.17	2.91	629
+genome0531	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	57.11	0.16	395
+genome0532	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	54.34	0.02	228
+genome0533	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	53.14	8.2	1066
+genome0534	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__JBFMAE01;s__	50.02	7.76	1046
+genome0535	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	72.78	0.17	412
+genome0536	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	62.52	1.24	703
+genome0537	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	55.59	0.43	280
+genome0538	d__Bacteria;p__Desulfobacterota;c__BSN033;o__BSN033;f__UBA1163;g__UBA1163;s__	54.71	7.09	1173
+genome0539	d__Bacteria;p__Desulfobacterota;c__Desulfobaccia;o__Desulfobaccales;f__0-14-0-80-60-11;g__0-14-0-80-60-11;s__	80.32	0.3	523
+genome0540	d__Bacteria;p__Desulfobacterota;c__Desulfobaccia;o__Desulfobaccales;f__0-14-0-80-60-11;g__0-14-0-80-60-11;s__	67.05	0.76	823
+genome0541	d__Bacteria;p__Desulfobacterota;c__Desulfobaccia;o__Desulfobaccales;f__Desulfobaccaceae;g__Desulfobacca;s__	53.46	1.33	538
+genome0542	d__Bacteria;p__Desulfobacterota;c__Desulfobacteria;o__Desulfobacterales;f__UBA2174_A;g__SpSt-501;s__	90.43	1.9	636
+genome0543	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	87.57	4.49	755
+genome0544	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	84.74	2.71	858
+genome0545	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	76.12	2.74	674
+genome0546	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	74.95	4.01	974
+genome0547	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	72.0	2.44	375
+genome0548	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	65.84	2.22	545
+genome0549	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	57.6	0.74	492
+genome0550	d__Bacteria;p__Desulfobacterota;c__Desulfomonilia;o__UBA1062;f__UBA1062;g__MWEI01;s__	56.34	1.2	507
+genome0551	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__;s__	85.9	2.99	741
+genome0552	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__;s__	83.22	0.89	789
+genome0553	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__;s__	65.38	0.48	435
+genome0554	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__JAFGDM01;s__	80.13	0.68	581
+genome0555	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__JAFGDM01;s__	75.53	3.94	731
+genome0556	d__Bacteria;p__Desulfobacterota;c__DSM-4660;o__Desulfatiglandales;f__HGW-15;g__JAFGDM01;s__	57.91	0.19	955
+genome0557	d__Bacteria;p__Desulfobacterota;c__RBG-13-43-22;o__RBG-13-43-22;f__RBG-13-43-22;g__;s__	63.73	8.26	1423
+genome0558	d__Bacteria;p__Desulfobacterota;c__RBG-13-43-22;o__RBG-13-43-22;f__RBG-13-43-22;g__RBG-13-43-22;s__	85.07	3.85	871
+genome0559	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JACRCA01;s__	85.72	1.96	555
+genome0560	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JACRCA01;s__	72.38	4.77	1103
+genome0561	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JACRCA01;s__	59.12	0.38	632
+genome0562	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__	82.45	2.19	572
+genome0563	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__	57.9	0.58	430
+genome0564	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__JAHJQK01 sp030654105	80.64	0.92	374
+genome0565	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__JAHJQK01;s__JAHJQK01 sp030654105	56.19	3.58	640
+genome0566	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__SM23-61;s__SM23-61 sp026388915	95.47	6.24	870
+genome0567	d__Bacteria;p__Desulfobacterota;c__SM23-61;o__SM23-61;f__SM23-61;g__SM23-61;s__SM23-61 sp026388915	89.56	2.68	605
+genome0568	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__Smithellaceae;g__UBA4810;s__	58.59	2.83	416
+genome0569	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__Smithellaceae;g__UBA4810;s__	57.37	4.75	675
+genome0570	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__Smithellaceae;g__UBA4810;s__	56.17	2.28	691
+genome0571	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__Smithellaceae;g__UBA4810;s__	55.99	4.58	400
+genome0572	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__DATKLL01;s__	81.64	5.66	988
+genome0573	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__	59.09	1.87	444
+genome0574	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	91.74	5.52	739
+genome0575	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	89.61	1.42	324
+genome0576	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	80.04	1.91	549
+genome0577	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	79.8	1.57	533
+genome0578	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	75.89	2.24	539
+genome0579	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	75.01	1.71	529
+genome0580	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	73.53	1.21	485
+genome0581	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	64.96	0.41	483
+genome0582	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__Fen-1135;s__Fen-1135 sp003142295	58.67	0.29	351
+genome0583	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__JAPLJQ01;s__	78.38	3.19	605
+genome0584	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2185;g__JAPLJS01;s__JAPLJS01 sp026388545	76.08	0.63	338
+genome0585	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2192;g__UBA2192;s__	99.1	1.48	674
+genome0586	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2192;g__UBA2192;s__	86.77	1.5	672
+genome0587	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA2192;g__UBA2192;s__	85.78	4.06	714
+genome0588	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__	81.99	4.34	471
+genome0589	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	86.15	3.77	726
+genome0590	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	76.64	3.51	536
+genome0591	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	76.01	3.94	1159
+genome0592	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	73.57	1.36	524
+genome0593	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	69.25	8.7	819
+genome0594	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	68.38	1.31	518
+genome0595	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	65.7	1.6	558
+genome0596	d__Bacteria;p__Desulfobacterota;c__Syntrophia;o__Syntrophales;f__UBA5619;g__UBA5619;s__UBA5619 sp003141195	57.69	2.2	441
+genome0597	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__	91.11	0.07	879
+genome0598	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__	88.94	0.31	783
+genome0599	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__	83.99	0.01	609
+genome0600	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__	82.06	0.0	493
+genome0601	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__CAIYCZ01;f__CAIYCZ01;g__JAPLIX01;s__JAPLIX01 sp026388865	65.51	1.67	713
+genome0602	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__JAGOGO01;f__JAGOGO01;g__G026625185;s__	76.18	1.54	426
+genome0603	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__JAPLJA01;f__JAPLJA01;g__JAPLJA01;s__	97.34	2.36	327
+genome0604	d__Bacteria;p__Desulfobacterota;c__WTBG01;o__WTBG01;f__WTBG01;g__JAZFSJ01;s__	94.44	2.26	459
+genome0605	d__Bacteria;p__Desulfobacterota_B;c__Binatia;o__HRBIN30;f__JAGDMS01;g__;s__	81.65	0.15	547
+genome0606	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__	83.5	1.4	492
+genome0607	d__Bacteria;p__Desulfobacterota_E;c__Deferrimicrobia;o__Deferrimicrobiales;f__Deferrimicrobiaceae;g__Deferrimicrobium;s__Deferrimicrobium sp937863105	61.05	3.72	421
+genome0608	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__;f__;g__;s__	50.19	8.92	1378
+genome0609	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__Syntrophorhabdales;f__Syntrophorhabdaceae;g__JAPLKF01;s__JAPLKF01 sp026388215	91.01	0.45	237
+genome0610	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__Syntrophorhabdales;f__Syntrophorhabdaceae;g__Syntrophorhabdus;s__	74.14	4.92	743
+genome0611	d__Bacteria;p__Desulfobacterota_G;c__Syntrophorhabdia;o__Syntrophorhabdales;f__Syntrophorhabdaceae;g__Syntrophorhabdus;s__	65.97	1.99	308
+genome0612	d__Bacteria;p__Edwardsbacteria;c__;o__;f__;g__;s__	89.44	3.13	520
+genome0613	d__Bacteria;p__Electryoneota;c__AABM5-125-24;o__Hatepunaeales;f__Hatepunaeaceae;g__;s__	56.78	1.08	871
+genome0614	d__Bacteria;p__Gemmatimonadota;c__Gemmatimonadetes;o__Gemmatimonadales;f__GWC2-71-9;g__JAGGAG01;s__	86.44	1.55	773
+genome0615	d__Bacteria;p__Gemmatimonadota;c__Gemmatimonadetes;o__Gemmatimonadales;f__JACORV01;g__JADGQW01;s__	51.24	0.55	643
+genome0616	d__Archaea;p__Hadarchaeota;c__Hadarchaeia;o__Hadarchaeales;f__Hadarchaeaceae;g__DYFS01;s__DYFS01 sp041490225	93.98	0.07	15
+genome0617	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	89.61	0.45	326
+genome0618	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	86.08	0.38	262
+genome0619	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	85.03	0.06	116
+genome0620	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	81.58	1.66	341
+genome0621	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	80.94	0.86	353
+genome0622	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	77.8	0.0	379
+genome0623	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	66.21	0.31	378
+genome0624	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	61.45	1.31	351
+genome0625	d__Archaea;p__Halobacteriota;c__Bog-38;o__Bog-38;f__Bog-38;g__Bog-38;s__	60.0	0.87	395
+genome0626	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	91.61	1.39	227
+genome0627	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	85.46	0.3	176
+genome0628	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	80.6	0.09	397
+genome0629	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	72.38	0.05	210
+genome0630	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	69.75	0.38	336
+genome0631	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	66.7	0.49	383
+genome0632	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	64.4	0.3	388
+genome0633	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	64.15	7.01	763
+genome0634	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	60.78	1.2	385
+genome0635	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	57.15	7.57	657
+genome0636	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	56.82	0.31	377
+genome0637	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	53.5	9.33	544
+genome0638	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__	52.38	0.08	329
+genome0639	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__Methanoregula;s__Methanoregula sp003141335	92.7	0.41	311
+genome0640	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	94.48	0.19	90
+genome0641	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	93.13	1.91	154
+genome0642	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	87.75	0.22	160
+genome0643	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	74.87	0.0	307
+genome0644	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	65.11	2.28	285
+genome0645	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	57.47	1.89	344
+genome0646	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__	51.23	0.27	547
+genome0647	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__MVRE01 sp026394595	63.97	8.62	405
+genome0648	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__MVRE01 sp026394595	59.66	5.55	381
+genome0649	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__MVRE01 sp026394595	56.0	0.05	191
+genome0650	d__Archaea;p__Halobacteriota;c__Methanomicrobia;o__Methanomicrobiales;f__Methanospirillaceae;g__MVRE01;s__MVRE01 sp026394595	55.74	0.51	218
+genome0651	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanoperedenaceae;g__Methanoperedens;s__	65.4	0.57	490
+genome0652	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Fen-7;s__	93.74	1.26	223
+genome0653	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Fen-7;s__	67.32	3.65	666
+genome0654	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Fen-7;s__	60.4	0.83	286
+genome0655	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Fen-7;s__	54.02	0.27	566
+genome0656	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__JALHSR01;s__	81.26	1.17	532
+genome0657	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	72.01	0.0	301
+genome0658	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	69.65	0.3	451
+genome0659	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	67.41	0.16	457
+genome0660	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	67.2	2.56	773
+genome0661	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	59.49	1.67	791
+genome0662	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	56.84	0.0	280
+genome0663	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	55.73	0.52	418
+genome0664	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__	53.97	0.51	778
+genome0665	d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanotrichales;f__Methanotrichaceae;g__Methanothrix;s__Methanothrix sp026394475	89.66	0.0	236
+genome0666	d__Bacteria;p__Hydrogenedentota;c__Hydrogenedentia;o__Hydrogenedentales;f__SLHB01;g__;s__	95.63	1.28	921
+genome0667	d__Archaea;p__Iainarchaeota;c__Iainarchaeia;o__Iainarchaeales;f__GCA-2688035;g__;s__	70.62	0.86	308
+genome0668	d__Archaea;p__Iainarchaeota;c__Iainarchaeia;o__Iainarchaeales;f__JAAZKV01;g__JAAZKV01;s__	78.8	1.67	183
+genome0669	d__Bacteria;p__JABMQX01;c__JABMQX01;o__JABMQX01;f__JABMQX01;g__JAUYEE01;s__	98.46	0.89	187
+genome0670	d__Bacteria;p__JAJVIF01;c__JAJVIF01;o__JAGGVT01;f__JAGGVT01;g__;s__	92.84	1.75	318
+genome0671	d__Bacteria;p__JAJVIF01;c__JAJVIF01;o__JAPKYR01;f__JAPKYR01;g__JAPKYR01;s__	59.17	1.57	804
+genome0672	d__Bacteria;p__JAJVIF01;c__JAJVIF01;o__JAPKYR01;f__JAPKYR01;g__JAPKYR01;s__JAPKYR01 sp026394215	75.0	0.37	682
+genome0673	d__Bacteria;p__JAMOTN01;c__;o__;f__;g__;s__	50.66	7.23	1631
+genome0674	d__Bacteria;p__JANLFM01;c__JANLFM01;o__JANLFM01;f__JANLFM01;g__JAPLHX01;s__	94.86	2.3	77
+genome0675	d__Bacteria;p__JANLFM01;c__JANLFM01;o__JANLFM01;f__JANLFM01;g__JAPLHX01;s__	92.78	0.93	146
+genome0676	d__Bacteria;p__JAUVQV01;c__JAUVQV01;o__;f__;g__;s__	60.23	9.91	1421
+genome0677	d__Bacteria;p__Krumholzibacteriota;c__Krumholzibacteriia;o__Krumholzibacteriales;f__Krumholzibacteriaceae;g__SSS58A;s__	95.6	0.07	115
+genome0678	d__Bacteria;p__Krumholzibacteriota;c__Krumholzibacteriia;o__WVZY01;f__WVZY01;g__;s__	70.24	1.62	641
+genome0679	d__Bacteria;p__Margulisbacteria;c__WOR-1;o__;f__;g__;s__	56.16	0.79	315
+genome0680	d__Bacteria;p__Margulisbacteria;c__WOR-1;o__O2-12-FULL-45-9;f__XYB2-FULL-48-7;g__;s__	69.31	1.37	394
+genome0681	d__Archaea;p__Methanobacteriota;c__Methanobacteria;o__Methanobacteriales;f__Methanobacteriaceae;g__Methanobacterium;s__	82.33	0.02	120
+genome0682	d__Archaea;p__Methanobacteriota;c__Methanobacteria;o__Methanobacteriales;f__Methanobacteriaceae;g__Methanobacterium;s__	52.1	5.47	1036
+genome0683	d__Archaea;p__Methanobacteriota_B;c__Thermococci;o__Methanofastidiosales;f__;g__;s__	97.82	2.03	26
+genome0684	d__Archaea;p__Methanobacteriota_B;c__Thermococci;o__Methanofastidiosales;f__;g__;s__	96.54	1.53	128
+genome0685	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__;f__;g__;s__	52.43	4.71	956
+genome0686	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__;f__;g__;s__	50.5	1.09	652
+genome0687	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	96.6	1.93	372
+genome0688	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	92.71	0.04	293
+genome0689	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	89.15	2.93	1299
+genome0690	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	53.69	4.75	1352
+genome0691	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__	51.32	9.89	1774
+genome0692	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__2-02-FULL-66-22;g__2-02-FULL-66-22;s__2-02-FULL-66-22 sp041489335	64.68	2.01	820
+genome0693	d__Bacteria;p__Methylomirabilota;c__Methylomirabilia;o__Methylomirabilales;f__JACRGL01;g__;s__	95.21	1.85	732
+genome0694	d__Archaea;p__Micrarchaeota;c__Micrarchaeia;o__Anstonellales;f__Bilamarchaeaceae;g__Bilamarchaeum;s__	67.53	2.13	262
+genome0695	d__Archaea;p__Micrarchaeota;c__Micrarchaeia;o__Fermentimicrarchaeales;f__Fermentimicrarchaeaceae;g__;s__	94.93	2.64	57
+genome0696	d__Archaea;p__Micrarchaeota;c__Micrarchaeia;o__Fermentimicrarchaeales;f__Fermentimicrarchaeaceae;g__Fermentimicrarchaeum;s__	92.35	3.3	107
+genome0697	d__Bacteria;p__Myxococcota;c__B64-G9;o__B64-G9;f__B64-G9;g__;s__	95.67	3.3	284
+genome0698	d__Bacteria;p__Myxococcota;c__B64-G9;o__B64-G9;f__B64-G9;g__;s__	93.83	1.01	542
+genome0699	d__Bacteria;p__Myxococcota;c__B64-G9;o__B64-G9;f__B64-G9;g__;s__	73.72	8.83	638
+genome0700	d__Bacteria;p__Myxococcota;c__Myxococcia;o__Myxococcales;f__Anaeromyxobacteraceae;g__CAIOAK01;s__	80.85	1.58	843
+genome0701	d__Bacteria;p__Myxococcota;c__Myxococcia;o__Myxococcales;f__Anaeromyxobacteraceae;g__CAIOAK01;s__	66.62	1.17	796
+genome0702	d__Bacteria;p__Myxococcota;c__Myxococcia;o__Myxococcales;f__Anaeromyxobacteraceae;g__CAIOAK01;s__	59.63	2.57	1070
+genome0703	d__Bacteria;p__Myxococcota;c__Myxococcia;o__Myxococcales;f__Anaeromyxobacteraceae;g__CAIOAK01;s__	54.28	1.57	682
+genome0704	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__UBA10117;f__UBA10117;g__DATEUM01;s__	82.14	0.2	75
+genome0705	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__UBA10117;f__UBA10117;g__DATEUM01;s__	69.38	1.11	78
+genome0706	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__UBA10117;f__UBA10117;g__JAWCLD01;s__	60.91	1.0	210
+genome0707	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__CG1-02-47-18;g__;s__	67.81	0.44	285
+genome0708	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__GCA-2687795;g__;s__	70.51	0.83	311
+genome0709	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__JAGVZT01;g__;s__	94.63	0.6	21
+genome0710	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__JAGVZT01;g__;s__	65.92	0.43	293
+genome0711	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__SM23-78;g__SM23-78;s__	80.39	0.69	120
+genome0712	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__SM23-78;g__SM23-78;s__	74.02	0.94	128
+genome0713	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__UBA525;g__UBA153;s__	82.55	0.67	201
+genome0714	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__UBA525;g__UBA153;s__	53.52	3.48	903
+genome0715	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__UBA9642;g__;s__	51.71	5.31	1369
+genome0716	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Woesearchaeales;f__WJKL01;g__JAGVIO01;s__	92.81	0.68	43
+genome0717	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__CSSed11-243R1;f__;g__;s__	50.05	0.01	172
+genome0718	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__CAIPOI01;s__	65.99	1.02	194
+genome0719	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__DAIEOU01;s__	56.73	1.0	164
+genome0720	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAQUKY01;s__	83.58	2.23	216
+genome0721	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JAVYLW01;s__	91.95	2.07	166
+genome0722	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JBGQNO01;s__	86.63	0.11	94
+genome0723	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JBGQNO01;s__	84.77	0.12	49
+genome0724	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__JBGQNO01;s__	76.43	0.15	110
+genome0725	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__MFWN01;s__	82.56	1.07	95
+genome0726	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__MFWN01;s__	78.57	1.87	336
+genome0727	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__MWBV01;s__	86.72	0.32	33
+genome0728	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__GW2011-AR1;g__MWBV01;s__	83.55	1.12	95
+genome0729	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__UBA284;g__JAPLYB01;s__	63.32	1.01	230
+genome0730	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__UBA284;g__JAPLYB01;s__	51.92	6.12	702
+genome0731	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__Pacearchaeales;f__UBA284;g__JAVZYK01;s__	79.46	0.73	120
+genome0732	d__Archaea;p__Nanobdellota;c__Nanobdellia;o__UBA10117;f__UBA10117;g__CAIPHS01;s__	81.61	0.17	98
+genome0733	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DASPRG01;s__	100.0	1.86	303
+genome0734	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__	74.14	1.16	512
+genome0735	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__DYFC01 sp041658585	92.51	0.01	451
+genome0736	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__DYFC01 sp041658585	92.04	0.28	479
+genome0737	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__DYFC01 sp041658585	78.01	1.02	261
+genome0738	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__DYFC01;s__DYFC01 sp041658585	74.78	0.0	180
+genome0739	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__VGWX01;s__	87.56	0.11	273
+genome0740	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__SM23-35;g__VGWZ01;s__VGWZ01 sp041489235	61.92	0.84	444
+genome0741	d__Bacteria;p__Nitrospirota;c__Thermodesulfovibrionia;o__Thermodesulfovibrionales;f__UBA6898;g__JAOUFP01;s__	69.6	3.37	590
+genome0742	d__Bacteria;p__Nitrospirota;c__UBA9217;o__UBA9217;f__UBA9217;g__JALNZF01;s__	85.07	1.96	635
+genome0743	d__Bacteria;p__;c__;o__;f__;g__;s__	54.48	6.09	2563
+genome0744	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__JAHJCI01;g__JAOZPD01;s__	93.77	1.66	99
+genome0745	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__JAMWDD01;g__JAQUNK01;s__	74.36	1.41	233
+genome0746	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	95.48	0.11	63
+genome0747	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	92.18	6.24	287
+genome0748	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	84.13	0.0	173
+genome0749	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	83.37	2.94	204
+genome0750	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	74.55	0.54	442
+genome0751	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	68.72	1.47	367
+genome0752	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	61.95	1.35	404
+genome0753	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	57.66	1.38	208
+genome0754	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	56.59	7.24	1127
+genome0755	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__;s__	54.74	2.29	679
+genome0756	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__PPR-0468;s__	54.67	0.57	467
+genome0757	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__UBA1562;s__	70.78	2.36	357
+genome0758	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__UBA6249;s__	78.74	0.8	234
+genome0759	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__VGKG01;s__	55.22	5.51	650
+genome0760	d__Bacteria;p__Omnitrophota;c__Koll11;o__Gygaellales;f__Profunditerraquicolaceae;g__VGKK01;s__	53.17	8.55	641
+genome0761	d__Bacteria;p__Omnitrophota;c__Koll11;o__Velamenicoccales;f__JABMQK01;g__;s__	92.46	2.48	70
+genome0762	d__Bacteria;p__Omnitrophota;c__Koll11;o__Velamenicoccales;f__JABMQK01;g__;s__	52.89	7.4	760
+genome0763	d__Bacteria;p__Omnitrophota;c__Koll11;o__Velesiimonadales;f__;g__;s__	53.86	9.2	2316
+genome0764	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__GWA2-46-15;g__GWA2-46-15;s__	79.93	1.33	137
+genome0765	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__JAHCRE01;g__;s__	96.72	0.89	8
+genome0766	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__JAHCRE01;g__JAHCRE01;s__	97.45	2.11	43
+genome0767	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__JBGOYX01;g__JBGOYX01;s__	61.75	7.27	500
+genome0768	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXK01;s__	70.77	1.03	120
+genome0769	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__	100.0	0.0	40
+genome0770	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__	51.56	7.3	752
+genome0771	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__JAPLXL01 sp026396115	94.35	0.01	88
+genome0772	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__JAPLXL01 sp026396115	63.26	0.07	118
+genome0773	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JAPLXL01;s__JAPLXL01 sp026396115	57.48	0.75	116
+genome0774	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__RBG-13-42-11;g__JBBTTI01;s__	63.22	0.23	175
+genome0775	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Moranbacterales;f__UBA11712;g__;s__	52.51	3.07	330
+genome0776	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Portnoybacterales;f__GWB1-42-6;g__JAHIST01;s__	83.86	2.03	200
+genome0777	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__;g__;s__	51.87	8.62	1189
+genome0778	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__RBG-13-40-8-A;g__;s__	63.06	0.38	135
+genome0779	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__RBG-13-40-8-A;g__JAKJED01;s__	98.04	0.08	44
+genome0780	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__RBG-13-40-8-A;g__JAKJED01;s__	55.57	0.8	141
+genome0781	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__RBG-13-40-8-A;f__RBG-13-40-8-A;g__RBG-13-40-8-A;s__	99.93	0.99	10
+genome0782	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__;g__;s__	100.0	1.13	24
+genome0783	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__JAAZHW01;g__JAKLFS01;s__	51.44	0.42	114
+genome0784	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__JAPLYJ01;g__JAPLYJ01;s__	52.8	3.63	156
+genome0785	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__JAVHQB01;g__JAVHQB01;s__	62.62	3.75	119
+genome0786	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__UBA6257;g__JAAZNP01;s__	98.71	0.08	51
+genome0787	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__UBA6257;g__JAAZNP01;s__	85.37	0.08	119
+genome0788	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA6257;f__UBA6257;g__JAAZNP01;s__	56.78	0.54	105
+genome0789	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__UBA9973;f__CAIJYI01;g__CAIJYI01;s__	83.66	2.19	175
+genome0790	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__CAIXNZ01;f__CAIXNZ01;g__;s__	100.0	2.33	145
+genome0791	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__CAIXNZ01;f__CAIXNZ01;g__CAIXNZ01;s__	52.41	7.23	436
+genome0792	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__CAIXNZ01;f__CAIXNZ01;g__JAPLYC01;s__	97.76	1.45	87
+genome0793	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__SG8-24;f__SG8-24;g__JBAYFM01;s__	94.69	5.43	173
+genome0794	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__UBA10025;f__;g__;s__	95.5	0.22	59
+genome0795	d__Bacteria;p__Patescibacteriota;c__Patescibacteriia;o__UBA10025;f__;g__;s__	52.7	0.69	395
+genome0796	d__Bacteria;p__Patescibacteriota;c__UBA1384;o__JAHJRZ01;f__JAHJRZ01;g__;s__	58.89	8.63	299
+genome0797	d__Bacteria;p__Patescibacteriota;c__WWE3;o__9FT-COMBO-53-11;f__9FT-COMBO-53-11;g__;s__	81.78	0.04	95
+genome0798	d__Bacteria;p__Patescibacteriota;c__WWE3;o__UBA101185;f__UBA10185;g__;s__	94.14	0.0	15
+genome0799	d__Bacteria;p__Patescibacteriota;c__WWE3;o__UBA101185;f__UBA10185;g__JAAZNV01;s__	94.64	0.21	47
+genome0800	d__Bacteria;p__Patescibacteriota;c__Doudnabacteria;o__UBA920;f__O2-02-FULL-48-8;g__;s__	87.27	3.25	166
+genome0801	d__Bacteria;p__Patescibacteriota;c__Doudnabacteria;o__UBA920;f__UBA920;g__;s__	99.45	0.62	56
+genome0802	d__Bacteria;p__Patescibacteriota;c__Doudnabacteria;o__UBA920;f__UBA920;g__;s__	76.37	0.64	207
+genome0803	d__Bacteria;p__Patescibacteriota;c__Doudnabacteria;o__UBA920;f__UBA920;g__;s__	59.29	7.17	623
+genome0804	d__Bacteria;p__Patescibacteriota;c__Doudnabacteria;o__UBA920;f__UBA920;g__;s__	55.45	1.85	187
+genome0805	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__Curtissbacterales;f__GWA2-41-24;g__;s__	50.16	0.89	243
+genome0806	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__GWA2-44-7;f__Amesbacteraceae;g__DAHXMV01;s__	86.86	2.01	169
+genome0807	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__GWA2-44-7;f__UBA8517;g__HO2-FULL-38-9;s__	55.24	1.58	329
+genome0808	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__GWA2-44-7;f__UBA8517;g__JAPLZT01;s__	86.93	0.41	202
+genome0809	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__GWA2-44-7;f__UBA8517;g__UBA8517;s__	83.55	0.14	112
+genome0810	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__;g__;s__	50.59	4.4	190
+genome0811	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__JAPLYW01;g__;s__	96.22	1.04	19
+genome0812	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__JAPLYW01;g__;s__	71.11	1.62	244
+genome0813	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__JAPLYW01;g__;s__	64.01	4.78	224
+genome0814	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__PFEM01;f__JAPLYW01;g__JAPLYW01;s__	62.69	5.21	337
+genome0815	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__UBA10105;f__UBA927;g__;s__	100.0	2.12	36
+genome0816	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__UBA10105;f__UBA927;g__UBA10108;s__	96.33	8.03	303
+genome0817	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__UBA10105;f__UBA927;g__UBA10108;s__	62.47	2.36	300
+genome0818	d__Bacteria;p__Patescibacteriota;c__Microgenomatia;o__Woykebacterales;f__RBG-16-39-9b;g__GWB1-45-5;s__	80.42	0.47	202
+genome0819	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__2-12-FULL-40-12;g__;s__	63.42	3.06	398
+genome0820	d__Bacteria;p__Patescibacteriota;c__Minisyncoccia;o__Minisyncoccales;f__CG1-02-41-26;g__JAUXAO01;s__	97.37	0.2	27
+genome0821	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	94.87	1.25	293
+genome0822	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	92.72	0.86	375
+genome0823	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	90.04	2.22	526
+genome0824	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	89.39	1.19	321
+genome0825	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	88.22	3.78	606
+genome0826	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	85.86	3.02	307
+genome0827	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	81.6	6.75	395
+genome0828	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	79.76	4.28	557
+genome0829	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	79.66	3.66	351
+genome0830	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	78.41	2.18	461
+genome0831	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	77.93	1.14	328
+genome0832	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	74.88	3.33	556
+genome0833	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	66.58	0.61	632
+genome0834	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	62.53	3.41	423
+genome0835	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__;s__	51.3	9.04	689
+genome0836	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	96.87	1.61	82
+genome0837	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	74.52	1.86	557
+genome0838	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	63.19	0.18	317
+genome0839	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	61.0	1.79	361
+genome0840	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	57.84	0.74	300
+genome0841	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	57.81	1.22	293
+genome0842	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	56.32	0.28	513
+genome0843	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	54.93	0.38	230
+genome0844	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	53.71	1.58	258
+genome0845	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__CAIYOL01;s__	53.32	0.85	329
+genome0846	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1359;s__	87.94	0.46	260
+genome0847	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1359;s__	70.67	0.88	454
+genome0848	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1359;s__	66.61	3.93	570
+genome0849	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1359;s__	65.16	1.46	399
+genome0850	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	94.8	1.84	133
+genome0851	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	90.06	3.02	265
+genome0852	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	87.18	2.06	335
+genome0853	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__Fen-1362;s__	67.15	6.22	766
+genome0854	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__G020352515;s__	96.8	2.75	193
+genome0855	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFGPJ01;s__	94.04	1.61	466
+genome0856	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFGRL01;s__	53.56	2.45	550
+genome0857	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFNGF01;s__	52.35	8.44	1409
+genome0858	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFNGF01;s__JAFNGF01 sp017885385	97.13	1.68	71
+genome0859	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFNGF01;s__JAFNGF01 sp017885385	85.79	1.61	560
+genome0860	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAFNGF01;s__JAFNGF01 sp017885385	81.23	3.69	842
+genome0861	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__JAUWAY01;s__	94.15	1.2	365
+genome0862	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerobacaceae;g__PLanc-01;s__	82.19	3.58	533
+genome0863	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__Anaerohalosphaeraceae;g__UBA7708;s__	72.51	3.26	591
+genome0864	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__UBA12454;g__JAPLMW01;s__	90.98	5.41	424
+genome0865	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__UBA12454;g__JAPLMW01;s__	81.08	4.55	780
+genome0866	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__UBA12454;g__JAPLMW01;s__	59.84	4.7	535
+genome0867	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__Sedimentisphaerales;f__UBA12454;g__JAPLMW01;s__JAPLMW01 sp041478555	86.19	2.09	364
+genome0868	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__SM23-33;f__SM23-33;g__JALHTV01;s__	91.68	2.59	296
+genome0869	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__SM23-33;f__SM23-33;g__JBAZTO01;s__	88.06	8.12	461
+genome0870	d__Bacteria;p__Planctomycetota;c__Phycisphaerae;o__UBA1845;f__UBA1845;g__SBAX01;s__	90.68	1.74	727
+genome0871	d__Bacteria;p__Planctomycetota;c__SKW154;o__SKW154;f__;g__;s__	86.23	0.63	407
+genome0872	d__Bacteria;p__Pseudomonadota;c__Alphaproteobacteria;o__Rhizobiales;f__Aestuariivirgaceae;g__Aestuariivirga;s__	79.34	1.37	987
+genome0873	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Burkholderiales;f__Burkholderiaceae;g__CAIKUF01;s__	82.21	1.99	1022
+genome0874	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Burkholderiales;f__Burkholderiaceae;g__Rubrivivax;s__	79.53	4.31	1464
+genome0875	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Burkholderiales;f__Casimicrobiaceae;g__VBCG01;s__	50.47	4.94	1175
+genome0876	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Burkholderiales;f__Gallionellaceae;g__39-52-133;s__	52.8	1.29	795
+genome0877	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Burkholderiales;f__Gallionellaceae;g__39-52-133;s__	50.2	7.81	1290
+genome0878	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Methylococcales;f__Methylomonadaceae;g__Methylobacter_C;s__	69.72	1.87	617
+genome0879	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Pseudomonadales;f__Azotimanducaceae;g__DATJGR01;s__	86.06	3.93	1090
+genome0880	d__Bacteria;p__Pseudomonadota;c__Gammaproteobacteria;o__Steroidobacterales;f__Steroidobacteraceae;g__RPQJ01;s__	50.73	3.89	961
+genome0881	d__Bacteria;p__SM23-31;c__SM23-31;o__JAUVVT01;f__JAUVVT01;g__JAUWXV01;s__	99.49	0.48	79
+genome0882	d__Bacteria;p__Spirochaetota;c__Spirochaetia;o__SZUA-6;f__Fen-1364;g__JAPLSM01;s__	69.38	2.19	919
+genome0883	d__Bacteria;p__Spirochaetota;c__Spirochaetia;o__SZUA-6;f__Fen-1364;g__JAPLSM01;s__	54.08	0.37	910
+genome0884	d__Bacteria;p__Spirochaetota;c__Spirochaetia;o__SZUA-6;f__Fen-1364;g__JAPLSM01;s__	50.76	0.14	1005
+genome0885	d__Bacteria;p__Spirochaetota;c__Spirochaetia;o__Treponematales;f__;g__;s__	54.09	7.95	1610
+genome0886	d__Bacteria;p__Spirochaetota;c__UBA4802;o__UBA4802;f__JAFGDQ01;g__JAFGSG01;s__	87.1	2.9	883
+genome0887	d__Bacteria;p__Spirochaetota;c__UBA4802;o__UBA4802;f__UBA5550;g__RBG-16-49-21;s__	89.67	8.52	867
+genome0888	d__Bacteria;p__Sumerlaeota;c__;o__;f__;g__;s__	99.74	1.46	268
+genome0889	d__Bacteria;p__Sumerlaeota;c__;o__;f__;g__;s__	77.36	0.46	902
+genome0890	d__Bacteria;p__Sumerlaeota;c__Sumerlaeia;o__JADFCW01;f__JADFCW01;g__;s__	85.37	2.03	1474
+genome0891	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JAGMDE01;s__	81.93	4.88	413
+genome0892	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	81.19	0.13	266
+genome0893	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	76.61	0.02	197
+genome0894	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	76.51	0.0	387
+genome0895	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	66.66	0.29	196
+genome0896	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	62.31	0.32	363
+genome0897	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	62.18	0.03	156
+genome0898	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	60.61	0.52	194
+genome0899	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	59.78	0.0	185
+genome0900	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	59.73	0.9	185
+genome0901	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	57.98	0.0	151
+genome0902	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	55.26	0.5	227
+genome0903	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	55.06	0.0	134
+genome0904	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	54.94	4.91	624
+genome0905	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	54.93	0.0	143
+genome0906	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	52.33	0.23	117
+genome0907	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__JBFYMG01;s__	52.26	0.08	157
+genome0908	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	89.4	3.17	297
+genome0909	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	85.86	7.82	176
+genome0910	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__	79.2	0.48	320
+genome0911	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__SM1-50 sp002506745	92.07	0.55	185
+genome0912	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__SM1-50 sp017885605	96.15	0.17	68
+genome0913	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__SM1-50 sp017885605	81.79	0.85	443
+genome0914	d__Archaea;p__Thermoplasmatota;c__E2;o__DHVEG-1;f__DHVEG-1;g__SM1-50;s__SM1-50 sp026394435	51.66	0.2	363
+genome0915	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__	99.85	0.46	60
+genome0916	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__JAJRAG01 sp041478695	99.68	0.86	50
+genome0917	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__JAJRAG01 sp041478695	93.52	0.79	110
+genome0918	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__JACIVX01;g__JAJRAG01;s__JAJRAG01 sp041478695	66.55	0.01	335
+genome0919	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__UBA472;g__FEN-33;s__	78.34	0.19	226
+genome0920	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Methanomassiliicoccales;f__UBA472;g__JAJRAL01;s__	80.13	0.11	378
+genome0921	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__RBG-16-68-12;f__JAFNFQ01;g__JAFNFQ01;s__	96.09	1.98	28
+genome0922	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__RBG-16-68-12;f__JAFNFQ01;g__JAFNFQ01;s__JAFNFQ01 sp017885655	94.21	3.24	46
+genome0923	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__UBA10834;f__UBA10834;g__COMBO-56-21;s__	96.14	1.01	82
+genome0924	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__UBA10834;f__UBA10834;g__COMBO-56-21;s__	90.41	0.4	115
+genome0925	d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__UBA10834;f__UBA10834;g__COMBO-56-21;s__	55.22	0.35	346
+genome0926	d__Archaea;p__Thermoproteota;c__;o__;f__;g__;s__	53.73	7.1	1665
+genome0927	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	95.96	2.24	149
+genome0928	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	94.95	1.55	102
+genome0929	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	91.19	0.41	249
+genome0930	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	87.29	1.89	345
+genome0931	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	86.78	2.03	335
+genome0932	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	82.52	0.89	321
+genome0933	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	80.61	3.66	322
+genome0934	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	80.19	3.79	336
+genome0935	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	77.09	1.93	301
+genome0936	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	75.74	0.55	308
+genome0937	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	74.73	2.15	330
+genome0938	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	74.54	2.3	267
+genome0939	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	72.13	2.18	352
+genome0940	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	67.52	2.78	324
+genome0941	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	66.47	1.17	357
+genome0942	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	58.51	9.17	1549
+genome0943	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__40CM-2-53-6;g__;s__	55.17	1.39	353
+genome0944	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	84.48	0.34	287
+genome0945	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	83.8	0.61	285
+genome0946	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	79.64	1.62	259
+genome0947	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	78.48	3.31	265
+genome0948	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	75.45	1.12	251
+genome0949	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	74.4	0.72	225
+genome0950	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	73.56	0.81	249
+genome0951	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__JALHTG01;g__;s__	69.91	0.76	241
+genome0952	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__RBG-13-38-9;g__JAPKYM01;s__	95.24	2.77	82
+genome0953	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__RBG-13-38-9;g__JAPKYM01;s__	82.97	2.38	343
+genome0954	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__40CM-2-53-6;f__RBG-13-38-9;g__JAPKYM01;s__JAPKYM01 sp026394315	72.44	2.03	312
+genome0955	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	79.99	0.15	267
+genome0956	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	78.75	0.73	247
+genome0957	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	71.2	0.6	242
+genome0958	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	69.86	0.33	251
+genome0959	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	68.93	1.84	202
+genome0960	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	66.9	0.65	238
+genome0961	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	65.97	1.14	244
+genome0962	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	65.96	0.02	242
+genome0963	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	64.57	0.62	230
+genome0964	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	63.46	0.38	239
+genome0965	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathyarchaeaceae;g__;s__	53.44	0.14	250
+genome0966	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	99.56	6.19	55
+genome0967	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	95.44	1.61	132
+genome0968	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	93.16	1.88	73
+genome0969	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	92.1	2.44	229
+genome0970	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	88.89	1.15	305
+genome0971	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	87.17	0.93	220
+genome0972	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	82.07	2.35	228
+genome0973	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	79.56	2.88	371
+genome0974	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	77.65	1.83	249
+genome0975	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	72.66	6.23	575
+genome0976	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	72.33	0.66	344
+genome0977	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	59.28	9.22	1002
+genome0978	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	58.81	5.82	749
+genome0979	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	58.44	0.03	190
+genome0980	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	54.16	8.79	1352
+genome0981	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	51.24	9.32	1549
+genome0982	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	50.23	4.14	1690
+genome0983	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	50.19	3.46	605
+genome0984	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__;s__	50.06	3.81	481
+genome0985	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__20-14-0-80-47-9;s__20-14-0-80-47-9 sp022865455	97.34	1.89	116
+genome0986	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__20-14-0-80-47-9;s__20-14-0-80-47-9 sp022865455	90.73	1.36	116
+genome0987	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__A05DMB-2;s__	95.36	1.97	240
+genome0988	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	85.85	2.43	470
+genome0989	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	74.88	7.17	1249
+genome0990	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	73.92	0.91	717
+genome0991	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	70.32	9.54	1540
+genome0992	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	65.48	4.35	343
+genome0993	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	64.53	0.99	280
+genome0994	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	64.52	0.61	222
+genome0995	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	64.46	1.76	541
+genome0996	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	61.14	0.04	182
+genome0997	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	60.81	0.4	202
+genome0998	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	59.18	8.21	851
+genome0999	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	54.77	0.11	176
+genome1000	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	52.98	1.99	123
+genome1001	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	52.35	0.34	164
+genome1002	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__	50.29	2.97	287
+genome1003	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	85.02	0.21	341
+genome1004	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	81.2	1.93	311
+genome1005	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	80.37	2.8	503
+genome1006	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	78.84	0.44	283
+genome1007	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	77.14	0.31	311
+genome1008	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	56.05	0.1	307
+genome1009	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__Bathycorpusculum;s__Bathycorpusculum sp003133625	50.91	0.48	307
+genome1010	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	96.68	4.05	70
+genome1011	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	94.65	0.72	202
+genome1012	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	92.9	1.66	169
+genome1013	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	90.93	2.14	222
+genome1014	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	90.73	0.68	261
+genome1015	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	89.15	1.37	233
+genome1016	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	88.02	2.28	201
+genome1017	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	87.22	5.18	368
+genome1018	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	85.91	1.52	219
+genome1019	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	85.68	1.55	237
+genome1020	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	84.46	4.07	235
+genome1021	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	83.09	1.04	282
+genome1022	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	75.28	0.33	272
+genome1023	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	61.46	0.69	250
+genome1024	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	58.61	5.88	816
+genome1025	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	58.09	0.54	184
+genome1026	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__	54.5	0.57	365
+genome1027	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__DASPPK01 sp041479575	91.73	2.92	164
+genome1028	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPPK01;s__DASPPK01 sp041479575	70.84	0.82	432
+genome1029	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPTR01;s__	95.9	3.67	26
+genome1030	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPTR01;s__	51.61	1.23	434
+genome1031	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DASPTR01;s__DASPTR01 sp041481045	65.62	0.5	434
+genome1032	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATDQZ01;s__	63.03	2.11	365
+genome1033	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATDQZ01;s__	57.78	1.87	224
+genome1034	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	100.0	3.24	18
+genome1035	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	100.0	2.13	113
+genome1036	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	94.2	1.12	168
+genome1037	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	93.53	1.1	170
+genome1038	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	92.8	2.56	121
+genome1039	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__	89.72	2.12	245
+genome1040	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__DATKKK01 sp041479765	87.56	1.41	279
+genome1041	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__DATKKK01 sp041479765	71.07	2.7	310
+genome1042	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__DATKKK01 sp041479765	67.06	2.69	312
+genome1043	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DATKKK01;s__DATKKK01 sp041479765	53.42	0.4	234
+genome1044	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DRUK01;s__	96.81	1.07	179
+genome1045	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__DRUK01;s__DRUK01 sp022865885	100.0	1.61	39
+genome1046	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JADGNF01;s__	93.19	1.14	136
+genome1047	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JADGNF01;s__	64.43	0.79	334
+genome1048	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JAOZHU01;s__	95.83	1.73	155
+genome1049	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JAOZHU01;s__	55.82	4.67	366
+genome1050	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGPAV01;s__	99.13	4.08	471
+genome1051	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGPAV01;s__JBGPAV01 sp041480925	88.2	0.81	149
+genome1052	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGPAV01;s__JBGPAV01 sp041480925	80.72	0.9	125
+genome1053	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	98.15	2.36	27
+genome1054	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	93.28	2.82	217
+genome1055	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	93.16	1.49	202
+genome1056	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	92.39	3.28	210
+genome1057	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	91.58	1.97	199
+genome1058	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	87.38	0.03	189
+genome1059	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	87.03	2.06	235
+genome1060	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	75.51	0.74	249
+genome1061	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	64.42	4.57	438
+genome1062	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQME01;s__	58.95	4.77	549
+genome1063	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	96.79	2.93	68
+genome1064	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	95.19	4.89	128
+genome1065	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	88.97	4.51	307
+genome1066	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	67.39	5.0	697
+genome1067	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	57.82	0.4	233
+genome1068	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__	53.39	0.76	220
+genome1069	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	99.55	3.23	96
+genome1070	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	96.95	1.56	101
+genome1071	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	77.75	0.98	91
+genome1072	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__JBGQMW01;s__JBGQMW01 sp041500785	74.85	0.47	229
+genome1073	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	89.91	2.38	261
+genome1074	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	73.57	0.77	382
+genome1075	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	71.78	0.45	347
+genome1076	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	67.15	0.54	292
+genome1077	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	62.07	0.77	375
+genome1078	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	61.62	4.62	523
+genome1079	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	57.14	1.56	276
+genome1080	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	52.5	5.78	650
+genome1081	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	51.96	0.43	264
+genome1082	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	51.67	0.5	276
+genome1083	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__Bathycorpusculaceae;g__UBA11855;s__	50.59	0.29	257
+genome1084	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__DTEX01;g__PIYB01;s__	99.76	2.46	35
+genome1085	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__DTEX01;g__PIYB01;s__	92.49	0.46	222
+genome1086	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__DTEX01;g__PIYB01;s__	87.32	0.5	260
+genome1087	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__Bathyarchaeales;f__DTEX01;g__PIYB01;s__	55.65	8.1	1540
+genome1088	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__;g__;s__	61.57	8.79	919
+genome1089	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	90.96	7.82	266
+genome1090	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	76.0	2.94	467
+genome1091	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	70.59	8.54	1199
+genome1092	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	64.43	3.87	406
+genome1093	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__	59.21	0.86	411
+genome1094	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__RBG-16-48-13;f__GCA-020355125;g__JBGOZA01;s__JBGOZA01 sp041480025	66.03	0.25	292
+genome1095	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__;s__	96.96	3.72	40
+genome1096	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__;s__	95.36	3.98	87
+genome1097	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	92.85	6.31	146
+genome1098	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	84.83	5.4	393
+genome1099	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	78.09	6.37	580
+genome1100	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	63.0	3.75	695
+genome1101	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	53.64	3.29	290
+genome1102	d__Archaea;p__Thermoproteota;c__Bathyarchaeia;o__TCS64;f__TCS64;g__UBA8941;s__	52.76	3.78	430
+genome1103	d__Archaea;p__Thermoproteota;c__Methanomethylicia;o__Methanomethylicales;f__Methanomethylicaceae;g__JACTUC01;s__	54.67	3.28	540
+genome1104	d__Archaea;p__Thermoproteota;c__Nitrososphaeria;o__Conexivisphaerales;f__DTJL01;g__DATKKG01;s__	93.01	1.63	169
+genome1105	d__Archaea;p__Thermoproteota;c__Nitrososphaeria;o__JACIWG01;f__JACIWG01;g__;s__	57.12	9.1	1602
+genome1106	d__Bacteria;p__UBA10199;c__UBA10199;o__2-02-FULL-44-16;f__JAAZCA01;g__;s__	70.61	7.4	628
+genome1107	d__Bacteria;p__Verrucomicrobiota;c__Verrucomicrobiia;o__Limisphaerales;f__UBA11358;g__UBA11358;s__	95.08	4.63	500
+genome1108	d__Bacteria;p__Verrucomicrobiota;c__Verrucomicrobiia;o__Opitutales;f__Opitutaceae;g__Fen-1467;s__	92.3	0.66	721
+genome1109	d__Bacteria;p__Verrucomicrobiota;c__Verrucomicrobiia;o__Palsa-1439;f__Palsa-1439;g__;s__	61.83	3.58	1941
+genome1110	d__Bacteria;p__WOR-3;c__WOR-3;o__SM23-42;f__DASVHD01;g__;s__	95.87	1.13	419
+genome1111	d__Bacteria;p__WOR-3;c__WOR-3;o__SM23-42;f__DASVHD01;g__;s__	92.98	1.58	355
+genome1112	d__Bacteria;p__WOR-3;c__WOR-3;o__SM23-42;f__DASVHD01;g__;s__	58.66	0.91	537
+genome1113	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__;g__;s__	93.83	3.15	505
+genome1114	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__CAIPLT01;g__CAIPLT01;s__	95.97	0.1	22
+genome1115	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__CAIPLT01;g__CAIPLT01;s__	95.49	0.13	50
+genome1116	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__CAIPLT01;g__CAIPLT01;s__	92.83	0.14	99
+genome1117	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__CAIPLT01;g__CAIPLT01;s__	66.62	3.12	284
+genome1118	d__Bacteria;p__WOR-3;c__WOR-3;o__UBA2258;f__JAOUPE01;g__JAOUPE01;s__	98.65	2.66	122
+genome1119	d__Bacteria;p__Zhuqueibacterota;c__QNDG01;o__QNDG01;f__DSAB01;g__JAFGDT01;s__	95.31	2.23	69
+genome1120	d__Bacteria;p__Zhuqueibacterota;c__QNDG01;o__QNDG01;f__DTFT01;g__;s__	78.49	1.24	1039
+genome1121	d__Bacteria;p__Zhuqueibacterota;c__QNDG01;o__QNDG01;f__DTFT01;g__JBFZEN01;s__	97.92	2.8	258
+genome1122	d__Bacteria;p__Zhuqueibacterota;c__QNDG01;o__QNDG01;f__DTFT01;g__JBFZEN01;s__	55.61	9.82	1343
+genome1123	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__GN15;f__FEB-12;g__DATMWY01;s__	98.72	4.12	326
+genome1124	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__GN15;f__FEB-12;g__JAGGTI01;s__	86.07	1.67	999
+genome1125	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__GN15;f__JAAZOE01;g__;s__	97.82	1.45	406
+genome1126	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__;g__;s__	58.05	9.46	1625
+genome1127	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__RBG-16-43-9;g__;s__	95.95	7.19	550
+genome1128	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__RBG-16-43-9;g__;s__	84.12	1.9	534
+genome1129	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__RBG-16-43-9;g__RBG-16-43-9;s__	96.58	0.42	27
+genome1130	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__RBG-16-43-9;g__RBG-16-43-9;s__	73.45	0.66	328
+genome1131	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__SM1-73;g__SM1-73;s__	97.1	0.52	82
+genome1132	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__SM1-73;g__SM1-73;s__	96.4	0.54	157
+genome1133	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__SM1-73;g__SM1-73;s__	95.78	0.35	161
+genome1134	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__SM1-73;g__SM1-73;s__	92.86	0.79	286
+genome1135	d__Bacteria;p__Zixibacteria;c__MSB-5A5;o__MSB-5A5;f__SM1-73;g__SM1-73;s__SM1-73 sp022866585	95.26	2.73	292
