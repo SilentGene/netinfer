@@ -64,11 +64,15 @@ def standardize_taxonomy(df: pd.DataFrame, logger: logging.Logger = None) -> pd.
         if logger:
             logger.info("Renamed numeric columns to standard taxonomy levels")
     
-    # Fill missing values with "unclassified"
-    df = df.fillna('unclassified')
-    
-    # Ensure all taxonomy strings are stripped of whitespace
-    df = df.apply(lambda x: x.str.strip())
+    # Only the first column after the feature ID is the taxonomy string;
+    # extra columns (e.g. completeness, contamination) are ignored
+    if df.shape[1] > 1:
+        if logger:
+            logger.info(f"Using '{df.columns[0]}' as the taxonomy column; ignoring extra column(s): {', '.join(map(str, df.columns[1:]))}")
+        df = df.iloc[:, [0]]
+
+    # Fill missing values with "unclassified" and strip whitespace
+    df = df.fillna('unclassified').astype(str).apply(lambda x: x.str.strip())
     
     if logger:
         logger.info(f"Standardized taxonomy table with columns: {', '.join(df.columns)}")

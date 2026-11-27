@@ -17,11 +17,13 @@ if config.get("visualization", {}).get("enabled", True):
             network = f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
             stats = f"{outdir}/final_results/network_stats{suffix_tag}.txt",
             nodes = f"{outdir}/final_results/merged_nodes{suffix_tag}.tsv",
-            abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv",
+            abundance = f"{outdir}/preprocessed_data/display_values.tsv",
             taxonomy = f"{outdir}/preprocessed_data/processed_taxonomy.tsv" if taxonomy_in else [],
             metadata = f"{outdir}/preprocessed_data/processed_metadata.tsv" if metadata_in else []
         output:
             html = f"{outdir}/final_results/netinfer_dashboard{suffix_tag}.html"
+        params:
+            value_type = display_value_type
 
         threads: 1
         log:

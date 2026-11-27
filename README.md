@@ -31,7 +31,7 @@ Output interactive html dashboard:
 
 ![image](docs/dashboard_screenshot.jpg)
 
-We provide an example in [example](example) directory, where you can learn the input file format and the expected output.
+We provide an example in [example](example) directory, where you can learn the input file format and the expected output. Note that the example abundance table only illustrates the file format. For real analyses, use raw read counts (see [Abundance Tables](#abundance-tables)).
 
 ## Quick Start
 
@@ -57,52 +57,71 @@ julia netinfer/workflow/scripts/install_flashweave.jl
 ### Basic Usage
 
 1. Prepare your data:
-   - Required: abundance table `abundance_table.tsv`
+   - Required: a read count table `count_table.tsv` (recommended) and/or a relative abundance table `relab_table.tsv`. If neither is available, use another abundance table such as coverage (see [Abundance Tables](#abundance-tables)).
    - (Optional) taxonomy table `taxonomy.tsv` for additional annotations
    - (Optional) sample metadata table `metadata.tsv` for `FlashWeave` and additional annotations
 
 2. Run the pipeline:
 ```powershell
 # Simple run with all methods enabled and using default settings
-netinfer --input abundance_table.tsv --output results_dir --threads 6
+netinfer --input_count count_table.tsv --output results_dir --threads 6
+
+# Also provide relative abundance: used for filtering and for the abundances shown in outputs
+netinfer --input_count count_table.tsv --input_relative_abundance relab_table.tsv --output results_dir --threads 6
+
+# Only coverage is available (e.g. CoverM trimmed_mean): not optimal, but supported
+netinfer --input_others trimmed_mean.tsv --output results_dir --threads 6
 
 # Include taxonomy to allow more information in the output and produce a addictional file with associations between different phyla
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
 
 # I don't have a separate taxonomy file, but let's try to infer from feature IDs
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --infer-taxonomy
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --infer-taxonomy
 
 # Only use my favorite methods, and use my own suffix for output files
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman --suffix samples007
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --methods flashweave,fastspar,spearman --suffix samples007
 
 # Retain strong negative associations too (filter signed methods by absolute value)
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --include-negative
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --include-negative
 
 # Skip visualization
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --no-visual
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --no-visual
 
 # I'm an expert: specify every detail with my own config file
-netinfer --input abundance_table.tsv --output results_dir --threads 6 --config my_config.yaml
+netinfer --input_count count_table.tsv --output results_dir --threads 6 --config my_config.yaml
 ```
 
 ### Output
 
 The pipeline generates:
-1. Filtered and processed input data (`results/preprocessed_data/`)
+1. Filtered and processed input data (`results/preprocessed_data/`). `filtered_abundance.tsv` is used for network inference. `display_values.tsv` holds the values shown in the final tables and dashboard.
 2. Individual network files for each method (`results/subtool_outputs/`)
 3. Network statistics with modularity detection (`results/final_results/network_stats.txt`)
 4. Merged network edges with consensus scores and community assignment (`results/final_results/merged_edges.tsv`)
 5. Merged network nodes with Zi-Pi analysis (`results/final_results/merged_nodes.tsv`)
 6. Interactive HTML dashboard (`results/final_results/netinfer_dashboard.html`)
+7. Taxon–metadata associations found by FlashWeave (`results/final_results/metadata_associations.tsv`; only filled when `--metadata` is given)
 
 ## Input File Formats
 
-### Abundance Table
+### Abundance Tables
 > No matter what column names are, the first column will always be treated as Feature IDs, and the rest columns as Sample IDs.
 - Format: TSV/CSV/BIOM
-- Rows: Features (OTUs/ASVs)
+- Rows: Features (OTUs/ASVs/genomes)
 - Columns: Samples
-- Values: Raw counts or relative abundances (Raw counts are recommended)
+
+Provide at least one of the following tables:
+
+| Flag | Values | Used for |
+| ---- | ------ | -------- |
+| `--input_count` | **Raw read counts (strongly recommended)**, e.g. `coverm genome -m count` | Network inference |
+| `--input_relative_abundance` | Relative abundance as a fraction (0–1) or a percentage (0–100), e.g. `coverm genome -m relative_abundance`. If every sample sums to ≤ 1, values are read as fractions; otherwise as percentages. | Abundance filtering and the abundances shown in the final tables and dashboard. Used for network inference only if no other table is given. |
+| `--input_others` | Other non-negative abundance values, e.g. CoverM `trimmed_mean` or sandpiper `full_coverage`. **Not optimal**: use only if read counts are unavailable. Cannot be combined with `--input_count`. | Network inference |
+
+- **Both tables (recommended)**: networks are inferred from counts. Abundances are reported as relative abundance (%). The two tables must share the same samples and features.
+- **Counts only**: abundance-related columns are named after read counts (e.g. `Mean Read Count A`). The dashboard plots `log10(read count + 1)`. Relative abundance for filtering is computed from the counts.
+- **Relative abundance only**: networks are inferred from relative abundance. FastSpar results are then unreliable and SPIEC-EASI results are biased, because both expect read counts.
+- **Other values (± relative abundance)**: networks are inferred from the other values, with the same FastSpar and SPIEC-EASI caveats. Without a relative abundance table, abundance-related columns are named after input values (e.g. `Mean Input Value A`). The dashboard then plots `log10(value + c)`, where `c` is half the smallest non-zero value. Relative abundance for filtering is computed from the other values.
 
 Example:
 ```
@@ -112,8 +131,30 @@ OTU2           50       60       40
 ...
 ```
 
+> [!NOTE]
+> **Q: Doesn't using raw read counts ignore genome size, causing larger genomes to receive more reads and introducing statistical bias?**
+>
+> **A: Genome size can affect read counts:** at the same organism abundance, a larger genome may yield more reads. If genome length is constant across samples, it acts as a constant scaling factor for that feature and does not change correlations or log-ratios used for network inference. It can still affect abundance-based filtering and comparisons between features, and this does not account for other biases such as differences in sequencing or mapping efficiency.
+
+> [!NOTE]
+> **Q: Do I need to transform my compositional data (e.g. CLR, log, rarefaction) before running NetInfer?**
+>
+> **A: No. Provide the untransformed raw read counts.** Each method already handles compositionality, either internally or through NetInfer:
+>
+> - **FlashWeave**: CLR transformation with an adaptive pseudocount in normal mode, and CLR on non-zero values only in HE mode.
+> - **SPIEC-EASI**: CLR transformation after adding a pseudocount of 1.
+> - **FastSpar**: SparCC log-ratio variances computed on compositions sampled from the counts.
+> - **propR**: proportionality (rho) on CLR-transformed data.
+> - **Pearson**: Pearson correlation is not compositionally aware, so NetInfer applies a CLR transformation before computing it.
+> - **Spearman**: NetInfer converts each sample to relative abundance first, so differences in sequencing depth do not create spurious rank correlations. Spearman does not correct for compositional effects, so interpret its edges with more caution.
+> - **Jaccard**: uses presence/absence only, so no transformation is needed.
+>
+> For propR and Pearson, NetInfer handles zeros according to the data scale. For integer counts it adds a pseudocount of 1. For non-integer data it replaces each zero with half of that sample's smallest non-zero value.
+>
+> Pre-transformed input can break the pipeline. CLR or log values can be negative, which breaks prevalence filtering and count-based methods. A transformation applied twice also distorts the results.
+
 ### Taxonomy Table (Optional)
-> No matter what column names are, the first column will always be treated as Feature IDs, and the second column as Taxonomy strings.
+> No matter what column names are, the first column will always be treated as Feature IDs, and the second column as Taxonomy strings. Any additional columns are ignored.
 - Format: TSV/CSV
 - Required columns: 
   - Feature ID (matching abundance table)
@@ -129,8 +170,10 @@ OTU2     d__Bacteria;p__Bacteroidetes;c__Bacteroidia
 
 ### Metadata Table (Optional)
 > This table is only used by FlashWeave and for additional annotations in the final output.
+
+FlashWeave models metadata variables together with the taxa. Categorical variables are split into one variable per category (e.g. `Group_g1`). FlashWeave's taxon–taxon edges are therefore conditioned on the metadata. Edges between a taxon and a metadata variable are written to `final_results/metadata_associations.tsv`, which also includes each taxon's FlashWeave weight and abundance statistics. These edges are excluded from the microbial network, so they do not affect communities, Zi-Pi roles or network statistics. Edges between two metadata variables are dropped.
 - Format: TSV or CSV with a header
-- First column: unique, nonempty sample names matching the abundance table columns exactly (no missing or extra samples).
+- First column: unique, nonempty sample names matching the abundance table columns exactly (no missing or extra samples). Samples removed during [preprocessing](#preprocessing-abundance-filtering) are dropped from the metadata automatically.
 - Remaining columns: metadata variables.
 
 Example:
@@ -140,7 +183,31 @@ Sample1  groupA  Site1
 Sample2  groupB  Site2
 Sample3  groupA  Site1
 ...
+```
 
+## Preprocessing (Abundance Filtering)
+
+Before network inference, NetInfer filters the abundance table once, and every method uses the result. By default:
+
+1. Rows named `unmapped` or `undefined` are removed.
+2. **Samples** with fewer than **1000 reads** are removed. This step only runs when a count table is given.
+3. **Features** are kept only if they are present (> 0) in **≥ 10% of samples** and reach a **peak relative abundance ≥ 0.1%** in at least one sample. Relative abundance comes from `--input_relative_abundance` if given. Otherwise it is computed per sample from the counts (or from the `--input_others` values). It is used only for this check: the filtered table keeps your original values.
+4. Features with the same value in every sample are removed.
+
+You can change any threshold with a CLI flag or in a config file:
+
+| CLI flag                   | Config key               | Default | Meaning |
+| -------------------------- | ------------------------ | ------- | ------- |
+| `--min-sample-depth`       | `min_sample_depth`       | `1000`  | Minimum total reads per sample (count table only; `0` disables) |
+| `--min-prevalence`         | `min_prevalence`         | `0.1`   | Minimum fraction of samples in which a feature is present |
+| `--min-prevalent-samples`  | `min_prevalent_samples`  | `0`     | Minimum number of samples in which a feature is present (`0` disables). This is useful for small datasets: 10% of 20 samples is only 2. |
+| `--min-peak-rel-abundance` | `min_peak_rel_abundance` | `0.001` | Minimum peak relative abundance (`0.001` = 0.1%) |
+
+```bash
+netinfer --input_count count_table.tsv --output results_dir --min-prevalence 0.2 --min-prevalent-samples 10
+```
+
+The results are written to `<output>/preprocessed_data/`. `filtered_abundance.tsv` is the filtered table used for inference. `display_values.tsv` holds the same samples and features as relative abundance (%). Without a relative abundance table, it holds the read counts or the `--input_others` values instead. `abundance_stats.tsv` lists the samples and features before and after filtering, the removed samples, and the thresholds used. NetInfer also warns in `<output>/logs/preprocess_abundance.log` if inference uses non-count data, if the counts are not integers, or if more features than samples remain.
 
 ## Configuration
 
@@ -157,18 +224,18 @@ Default:
 | Method                   | Default Parameters                             |
 | ------------------------ | -----------------------------------------------|
 | FlashWeave (HE / normal) | P-value ≤ 0.001<br>Weight ≥ 0.4                |
-| SPIEC-EASI               | Weight ≥ 0.5<br>Method: MB (default) or GLasso |
+| SPIEC-EASI               | Weight ≥ 0.3<br>Method: MB (default) or GLasso |
 
 
 **Other methods**:
 
 | Method             | Default Parameters                                                                    |
 | ------------------ | ------------------------------------------------------------------------------------- |
-| FastSpar           | P-value ≤ 0.05<br>Iterations: 1000<br>Correlation ≥ 0.2<br>Final correlation ≥ 0.3    |
-| propR              | Correlation ≥ 0.5                                                                     |
+| FastSpar           | P-value ≤ 0.05<br>Iterations: 50<br>Bootstraps: 1000<br>Correlation ≥ 0.2<br>Final correlation ≥ 0.3 |
+| propR              | Rho ≥ 0.7                                                                             |
 | Spearman           | FDR ≤ 0.05<br>Correlation ≥ 0.7                                                       |
 | Pearson            | FDR ≤ 0.05<br>Correlation ≥ 0.7<br>CLR transformation implemented                     |
-| Jaccard            | Similarity ≥ 0.3                                                                      |
+| Jaccard            | Similarity ≥ 0.7                                                                      |
 
 By default, signed methods retain only positive associations that meet their
 configured thresholds. Add `--include-negative` to apply each threshold to
@@ -182,16 +249,6 @@ The same behavior can be enabled in a YAML configuration file:
 ```yaml
 include_negative: true
 ```
-
-## Do I need to transform compositional data?
-
-In most cases, **no**.
-
-- **FlashWeave**, **SPIEC-EASI**, **FastSpar**, and **propR** are designed specifically for compositional data. They incorporate appropriate handling internally (e.g., **CLR (Centered Log-Ratio) transformation** or other compositional-data methods), so you generally do not need to apply an additional transformation yourself.
-- **Spearman correlation** is _rank-based_ and is relatively insensitive to compositionality.
-- **Jaccard** is based on _presence/absence_ and estimates co-occurrence probabilities without relying on abundance values, so no compositional transformation is required.
-- **Pearson correlation** assumes absolute values and can produce spurious correlations on compositional data. Therefore, in the **NetInfer pipeline**, we apply an internal _CLR transformation_ when computing Pearson correlations.
-
 
 ## Troubleshooting
 
@@ -211,16 +268,31 @@ netinfer <original_args> --snake_args="--unlock"
 ## ALL flags
 ```powershell
 $ netinfer --help
-usage: netinfer [-h] [--input INPUT] [--output OUTPUT] [--taxonomy TAXONOMY] 
+usage: netinfer [-h] [--input_count INPUT_COUNT] [--input_relative_abundance INPUT_RELATIVE_ABUNDANCE]
+                [--input_others INPUT_OTHERS]
+                [--output OUTPUT] [--taxonomy TAXONOMY]
                 [--infer-taxonomy] [--metadata METADATA] [--methods METHODS] 
                 [--config CONFIG] [--threads THREADS] [--no-visual]
-                [--include-negative] [--snake-args SNAKE_ARGS] [--suffix SUFFIX]
+                [--include-negative] [--min-sample-depth MIN_SAMPLE_DEPTH]
+                [--min-prevalence MIN_PREVALENCE] [--min-prevalent-samples MIN_PREVALENT_SAMPLES]
+                [--min-peak-rel-abundance MIN_PEAK_REL_ABUNDANCE] [--snake-args SNAKE_ARGS] [--suffix SUFFIX]
 
 NetInfer: Microbiome Network Inference Pipeline
 
 options:
   -h, --help            show this help message and exit
-  --input INPUT         Input abundance table file (TSV/CSV/BIOM format). Overrides config file if specified.
+  --input_count, --input-count INPUT_COUNT
+                        Read count table (TSV/CSV/BIOM; features x samples), e.g. from `coverm genome -m count`.
+                        Recommended; used for network inference. Overrides config file if specified.
+  --input_relative_abundance, --input-relative-abundance INPUT_RELATIVE_ABUNDANCE
+                        Relative abundance table (TSV/CSV/BIOM; features x samples; fraction or percentage), e.g.
+                        from `coverm genome -m relative_abundance`. Used for abundance filtering and display; used
+                        for network inference only if --input_count is not given. Overrides config file if specified.
+  --input_others, --input-others INPUT_OTHERS
+                        Other abundance table (TSV/CSV/BIOM; features x samples) with non-negative values that are
+                        neither read counts nor relative abundance, e.g. CoverM `trimmed_mean` or sandpiper
+                        `full_coverage`. Not optimal: use only if read counts are unavailable. Used for network
+                        inference; cannot be combined with --input_count.
   --output OUTPUT       Output directory for results. Overrides config file if specified.
   --taxonomy TAXONOMY   Taxonomy mapping file (optional)
   --infer-taxonomy      Infer taxonomy from feature IDs in the abundance table (looks for 'd__' or 'p__')
@@ -237,6 +309,16 @@ options:
                         --snake-args "--unlock --rerun-incomplete --dry-run"
   --suffix SUFFIX       Optional suffix to append to final aggregated outputs (inserted before file extension). Invalid filename characters
                         will be replaced with '_'
+
+abundance filtering (overrides config; see README 'Preprocessing'):
+  --min-sample-depth MIN_SAMPLE_DEPTH
+                        Drop samples with fewer total reads (integer counts only; 0 disables). Default: 1000
+  --min-prevalence MIN_PREVALENCE
+                        Minimum fraction of samples in which a feature is present (> 0). Default: 0.1
+  --min-prevalent-samples MIN_PREVALENT_SAMPLES
+                        Minimum number of samples in which a feature is present (0 disables). Default: 0
+  --min-peak-rel-abundance MIN_PEAK_REL_ABUNDANCE
+                        Minimum peak (max per-sample) relative abundance of a feature, e.g. 0.001 = 0.1%. Default: 0.001
 ```
 
 ### Continue from interrupted runs

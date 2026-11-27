@@ -26,8 +26,15 @@ def get_method_columns(df: pd.DataFrame) -> list:
     potential_methods = ['FlashWeave', 'FlashWeaveHE', 'FastSpar', 'Spearman', 'Pearson', 'SpiecEasi', 'PropR', 'Jaccard']
     return [col for col in potential_methods if col in df.columns]
 
-def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, nodes_df: pd.DataFrame, logger: logging.Logger) -> dict:
-    """Prepare data structures for the dashboard."""
+def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, nodes_df: pd.DataFrame, logger: logging.Logger,
+                 value_type: str = 'relative_abundance') -> dict:
+    """Prepare data structures for the dashboard.
+
+    value_type: 'relative_abundance' (abundance_df holds percentages),
+    'count' (read counts; charts use log10(count + 1)) or 'other' (other input
+    values such as coverage; charts use log10(value + c), where c is half the
+    smallest non-zero value in the table).
+    """
     
     # 1. Process Network Data
     method_cols = get_method_columns(network_df)
@@ -113,8 +120,19 @@ def prepare_data(network_df: pd.DataFrame, abundance_df: pd.DataFrame, nodes_df:
         'samples': samples,
         'abundance': abundance_map,
         'nodes': nodes_map,
-        'hasInterPhylumColumn': 'Inter phylum' in network_df.columns
+        'hasInterPhylumColumn': 'Inter phylum' in network_df.columns,
+        'valueType': value_type,
+        'logPseudocount': log_pseudocount(abundance_df, value_type)
     }
+
+
+def log_pseudocount(abundance_df: pd.DataFrame, value_type: str) -> float:
+    """Pseudocount for log-scaled charts: 1 for counts, half the smallest non-zero value otherwise."""
+    if value_type == 'count':
+        return 1.0
+    values = abundance_df.select_dtypes(include='number').to_numpy().ravel()
+    nonzero = values[values > 0]
+    return float(nonzero.min() / 2) if nonzero.size else 1.0
 
 def generate_html(data_json: str, logo_base64: str = "") -> str:
     """Generate the full HTML content."""
@@ -855,14 +873,29 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         `;
         $('#infoBox').html(html);
 
-        const abA = DATA.abundance[edge.TaxonA];
-        const abB = DATA.abundance[edge.TaxonB];
+        const rawA = DATA.abundance[edge.TaxonA];
+        const rawB = DATA.abundance[edge.TaxonB];
         const samples = DATA.samples;
 
-        if (!abA || !abB) {
+        if (!rawA || !rawB) {
             console.error("Abundance data missing for one of the taxa");
             return;
         }
+
+        // Read counts and other input values (e.g. coverage) are log-scaled so they
+        // are not mistaken for relative abundance and low values remain visible.
+        const VT = DATA.valueType;
+        const IS_LOG = VT === 'count' || VT === 'other';
+        const PC = DATA.logPseudocount;
+        const toDisplay = v => IS_LOG ? Math.log10(v + PC) : v;
+        const abA = rawA.map(toDisplay);
+        const abB = rawB.map(toDisplay);
+        const VALUE_LABEL = VT === 'count' ? 'log10(read count + 1)'
+            : VT === 'other' ? `log10(input value + ${PC.toPrecision(2)})` : 'Relative abundance (%)';
+        const PROFILE_TITLE = VT === 'count' ? 'Read Count Profile'
+            : VT === 'other' ? 'Input Value Profile' : 'Relative Abundance Profile';
+        const rawHover = (raw) => raw.map(v => VT === 'count' ? `Read count: ${v}`
+            : VT === 'other' ? `Input value: ${v.toPrecision(3)}` : `Relative abundance: ${v.toPrecision(3)}%`);
 
         // 2. Line Chart (Abundance Profile)
         const traceA = {
@@ -870,6 +903,8 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
             y: abA,
             mode: 'lines+markers',
             name: edge.TaxonA,
+            text: rawHover(rawA),
+            hovertemplate: '%{x}<br>%{text}<extra>%{fullData.name}</extra>',
             line: {color: COLOR_A, width: 2},
             marker: {size: 6}
         };
@@ -878,6 +913,8 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
             y: abB,
             mode: 'lines+markers',
             name: edge.TaxonB,
+            text: rawHover(rawB),
+            hovertemplate: '%{x}<br>%{text}<extra>%{fullData.name}</extra>',
             line: {color: COLOR_B, width: 2},
             marker: {size: 6}
         };
@@ -889,7 +926,7 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         const finalWidth = Math.max(containerWidth, calcWidth);
 
         const layoutLine = {
-            title: { text: '<b style="color: #455a64;">Abundance Profile</b>', font: { size: 16 }, x: 0, xanchor: 'left'},
+            title: { text: `<b style="color: #455a64;">${PROFILE_TITLE}</b>`, font: { size: 16 }, x: 0, xanchor: 'left'},
             width: finalWidth,
             height: 450,
             template: PLOT_TEMPLATE,
@@ -900,6 +937,7 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
                 gridcolor: '#f0f0f0'
             },
             yaxis: {
+                title: VALUE_LABEL,
                 gridcolor: '#f0f0f0',
                 zerolinecolor: '#e0e0e0'
             },
@@ -985,7 +1023,7 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
         const layoutScatter = {
 
             title: { 
-                text: `<b style="color: #455a64;">Correlation</b><br><span style="font-size: 13px; color: #546e7a;">R² = ${reg.r2.toFixed(3)}, Slope = ${reg.slope.toFixed(3)}</span>`, 
+                text: `<b style="color: #455a64;">Correlation</b> <span style="font-size: 13px; color: #78909c;">(${VALUE_LABEL})</span><br><span style="font-size: 13px; color: #546e7a;">R² = ${reg.r2.toFixed(3)}, Slope = ${reg.slope.toFixed(3)}</span>`, 
                 font: { size: 16 }, 
                 x: 0, 
                 xanchor: 'left',
@@ -994,8 +1032,8 @@ def generate_html(data_json: str, logo_base64: str = "") -> str:
             },
             height: 300,
             template: PLOT_TEMPLATE,
-            xaxis: { title: `Abundance ${edge.TaxonA}`, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
-            yaxis: { title: `Abundance ${edge.TaxonB}`, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            xaxis: { title: edge.TaxonA, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
+            yaxis: { title: edge.TaxonB, gridcolor: '#f0f0f0', zerolinecolor: '#e0e0e0' },
             margin: { t: 50, b: 40, l: 50, r: 20 },
             showlegend: false,
             font: { family: 'Inter' }
@@ -1072,7 +1110,9 @@ def main(snakemake):
              nodes_df = pd.read_csv(snakemake.input.nodes, sep='\t')
         
         # Prepare Data
-        data = prepare_data(network_df, abundance_df, nodes_df, logger)
+        value_type = getattr(snakemake.params, 'value_type', 'relative_abundance')
+        logger.info(f"Dashboard values: {value_type}")
+        data = prepare_data(network_df, abundance_df, nodes_df, logger, value_type)
         
         # Generate HTML
         data_json = json.dumps(data)

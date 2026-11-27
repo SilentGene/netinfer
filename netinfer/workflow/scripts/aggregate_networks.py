@@ -84,8 +84,14 @@ def combine_methods(networks: Dict[str, pd.DataFrame], trusted_methods: List[str
 
 
 def calculate_edge_statistics(edge_df: pd.DataFrame,
-                            abundance_df: pd.DataFrame) -> pd.DataFrame:
-    """Calculate edge statistics from abundance data."""
+                            abundance_df: pd.DataFrame,
+                            v: str = 'abundance') -> pd.DataFrame:
+    """Calculate edge statistics from abundance data.
+
+    `v` names the value type in the column keys: 'abundance' (relative
+    abundance), 'count' (read counts) or 'value' (other input values such as
+    coverage), so counts or coverage are never labelled as relative abundance.
+    """
     stats = []
     
     for _, row in edge_df.iterrows():
@@ -102,17 +108,80 @@ def calculate_edge_statistics(edge_df: pd.DataFrame,
             'target': taxon_b,
             'prevalence_a': (abund_a > 0).mean() * 100,
             'prevalence_b': (abund_b > 0).mean() * 100,
-            'mean_abundance_a': abund_a.mean(),
-            'mean_abundance_b': abund_b.mean(),
-            'max_abundance_a': abund_a.max(),
-            'max_abundance_b': abund_b.max(),
-            'abundance_b_at_max_a': abund_b[abund_a.idxmax()],
-            'abundance_a_at_max_b': abund_a[abund_b.idxmax()],
+            f'mean_{v}_a': abund_a.mean(),
+            f'mean_{v}_b': abund_b.mean(),
+            f'max_{v}_a': abund_a.max(),
+            f'max_{v}_b': abund_b.max(),
+            f'{v}_b_at_max_a': abund_b[abund_a.idxmax()],
+            f'{v}_a_at_max_b': abund_a[abund_b.idxmax()],
             'sample_at_max_a': abund_a.idxmax(),
             'sample_at_max_b': abund_b.idxmax()
         })
     
     return pd.DataFrame(stats)
+
+def split_non_taxon_edges(networks: Dict[str, pd.DataFrame], taxa: set,
+                          logger: logging.Logger) -> Tuple[Dict[str, pd.DataFrame], pd.DataFrame]:
+    """Separate edges whose nodes are not all taxa (e.g. FlashWeave metadata variables).
+
+    Returns the taxon-taxon networks and one table of the other edges, with
+    one column per method that reported them.
+    """
+    taxon_networks, other_edges = {}, []
+    for method, df in networks.items():
+        if df.empty:
+            taxon_networks[method] = df
+            continue
+        is_taxon_edge = df['source'].isin(taxa) & df['target'].isin(taxa)
+        taxon_networks[method] = df[is_taxon_edge].reset_index(drop=True)
+        if (~is_taxon_edge).any():
+            logger.info(f"{method}: separated {int((~is_taxon_edge).sum())} edge(s) involving non-taxon nodes")
+            other_edges.append(df[~is_taxon_edge])
+    if other_edges:
+        other = reduce(lambda left, right: pd.merge(left, right, on=['source', 'target'], how='outer'), other_edges)
+    else:
+        other = pd.DataFrame(columns=['source', 'target'])
+    return taxon_networks, other
+
+
+def build_metadata_associations(other: pd.DataFrame, taxa: set, abundance_df: pd.DataFrame,
+                                taxonomy_dict: Dict, label: str, unit: str,
+                                logger: logging.Logger) -> pd.DataFrame:
+    """Build the taxon - metadata association table (metadata-metadata edges are dropped)."""
+    method_names = {'flashweave': 'FlashWeave', 'flashweaveHE': 'FlashWeaveHE'}
+    method_cols = [c for c in other.columns if c not in ('source', 'target')]
+    rows = []
+    n_meta_meta = 0
+    for _, r in other.iterrows():
+        if r['source'] in taxa:
+            taxon, meta = r['source'], r['target']
+        elif r['target'] in taxa:
+            taxon, meta = r['target'], r['source']
+        else:
+            n_meta_meta += 1
+            continue
+        values = abundance_df[taxon]
+        row = {'Taxon': taxon, 'Metadata variable': meta}
+        row.update({method_names.get(m, m): r[m] for m in method_cols})
+        row.update({
+            'Prevalence (%)': (values > 0).mean() * 100,
+            f'Mean {label}{unit}': values.mean(),
+            f'Max {label}{unit}': values.max(),
+        })
+        if taxonomy_dict:
+            row['Taxonomy'] = taxonomy_dict.get(taxon)
+        rows.append(row)
+    if n_meta_meta:
+        logger.info(f"Dropped {n_meta_meta} metadata-metadata edge(s)")
+    weight_cols = [method_names.get(m, m) for m in method_cols]
+    columns = ['Taxon', 'Metadata variable'] + weight_cols + \
+        ['Prevalence (%)', f'Mean {label}{unit}', f'Max {label}{unit}'] + (['Taxonomy'] if taxonomy_dict else [])
+    table = pd.DataFrame(rows, columns=columns)
+    if not table.empty and weight_cols:
+        order = table[weight_cols].abs().max(axis=1).sort_values(ascending=False).index
+        table = table.loc[order]
+    return table
+
 
 def calculate_network_metrics(G: nx.Graph, trusted_methods_list: List[str] = None, other_methods_list: List[str] = None) -> Dict:
     """Calculate network-level metrics."""
@@ -282,6 +351,28 @@ def main(snakemake):
             'jaccard': load_network_file(snakemake.input.jaccard, 'jaccard', logger)
         }
         
+        # Load display values (relative abundance %, read counts or other input values)
+        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
+        abundance_df = abundance_df.T
+        abundance_df.columns = abundance_df.columns.astype(str)
+        value_type = getattr(snakemake.params, 'value_type', 'relative_abundance')
+        v = {'count': 'count', 'other': 'value'}.get(value_type, 'abundance')
+        label, unit = {'count': ('Read Count', ''),
+                       'value': ('Input Value', '')}.get(v, ('Relative Abundance', ' (%)'))
+        logger.info(f"Abundance statistics use: {value_type}")
+
+        # Nodes that are not taxa of the abundance table are metadata variables
+        # added by FlashWeave. Keep them out of the microbial network.
+        taxa = set(abundance_df.columns)
+        for method, df in networks.items():
+            if not df.empty:
+                networks[method] = df.astype({'source': str, 'target': str})
+        networks, other_edges = split_non_taxon_edges(networks, taxa, logger)
+        has_metadata = bool(getattr(snakemake.params, 'has_metadata', False))
+        if not other_edges.empty and not has_metadata:
+            logger.warning(f"Dropped {len(other_edges)} edge(s) whose nodes are not in the abundance table "
+                           "(no metadata was given)")
+
         combined_df = combine_methods(networks, snakemake.params.trusted_methods)
 
         # Ensure all trusted methods are present as columns (fill with NaN if missing)
@@ -299,10 +390,8 @@ def main(snakemake):
         method_cols = [col for col in combined_df.columns if col not in ['source', 'target']]
         combined_df['n_methods'] = combined_df[method_cols].notnull().sum(axis=1)
 
-        # Load abundance data and calculate edge statistics
-        abundance_df = pd.read_csv(snakemake.input.abundance, sep='\t', index_col=0)
-        abundance_df = abundance_df.T
-        edge_stats = calculate_edge_statistics(combined_df.reset_index(), abundance_df)
+        # Calculate edge statistics
+        edge_stats = calculate_edge_statistics(combined_df.reset_index(), abundance_df, v)
         
         # Load taxonomy data if available
         taxonomy_input = snakemake.input.taxonomy
@@ -312,12 +401,21 @@ def main(snakemake):
         else:
             taxonomy_path = str(taxonomy_input)
 
+        taxonomy_dict = {}
         if taxonomy_path and Path(taxonomy_path).exists():
             taxonomy_df = pd.read_csv(taxonomy_path, sep='\t')
             # Use first column as Feature and second as Taxonomy, ignoring column names
-            taxonomy_dict = dict(zip(taxonomy_df.iloc[:, 0], taxonomy_df.iloc[:, 1]))
+            taxonomy_dict = dict(zip(taxonomy_df.iloc[:, 0].astype(str), taxonomy_df.iloc[:, 1]))
             edge_stats['taxonomy_a'] = edge_stats['source'].map(taxonomy_dict)
             edge_stats['taxonomy_b'] = edge_stats['target'].map(taxonomy_dict)
+
+        # Taxon - metadata associations (FlashWeave with --metadata)
+        meta_table = build_metadata_associations(
+            other_edges if has_metadata else pd.DataFrame(columns=['source', 'target']),
+            taxa, abundance_df, taxonomy_dict, label, unit, logger)
+        meta_table.to_csv(snakemake.output.metadata_associations, sep='\t', index=False)
+        logger.info(f"Saved {len(meta_table)} taxon-metadata association(s) to "
+                    f"{snakemake.output.metadata_associations}")
         
         # Combine all information
         final_df = pd.merge(
@@ -352,10 +450,10 @@ def main(snakemake):
                 node_attr_mapping[src] = {}
                 for c in node_cols:
                     # Standard source attributes end in _a and don't describe B
-                    if c.endswith('_a') and 'abundance_b' not in c:
+                    if c.endswith('_a') and f'{v}_b' not in c:
                         node_attr_mapping[src][c] = row[c]
                     # Cross-attribute: A's abundance when B is max
-                    if c == 'abundance_a_at_max_b':
+                    if c == f'{v}_a_at_max_b':
                         node_attr_mapping[src][c] = row[c]
             
             # Map attributes to target node (Node B)
@@ -363,10 +461,10 @@ def main(snakemake):
                 node_attr_mapping[tgt] = {}
                 for c in node_cols:
                     # Standard target attributes end in _b and don't describe A
-                    if c.endswith('_b') and 'abundance_a' not in c:
+                    if c.endswith('_b') and f'{v}_a' not in c:
                         node_attr_mapping[tgt][c] = row[c]
                     # Cross-attribute: B's abundance when A is max
-                    if c == 'abundance_b_at_max_a':
+                    if c == f'{v}_b_at_max_a':
                         node_attr_mapping[tgt][c] = row[c]
                 
         # Drop all node-related columns from edge dataframe
@@ -437,12 +535,12 @@ def main(snakemake):
             'jaccard': 'Jaccard',
             'prevalence_a': 'Prevalence A (%)',
             'prevalence_b': 'Prevalence B (%)',
-            'mean_abundance_a': 'Mean Abundance A',
-            'mean_abundance_b': 'Mean Abundance B',
-            'max_abundance_a': 'Max Abundance A',
-            'max_abundance_b': 'Max Abundance B',
-            'abundance_b_at_max_a': 'Abundance B at Max A',
-            'abundance_a_at_max_b': 'Abundance A at Max B',
+            f'mean_{v}_a': f'Mean {label} A{unit}',
+            f'mean_{v}_b': f'Mean {label} B{unit}',
+            f'max_{v}_a': f'Max {label} A{unit}',
+            f'max_{v}_b': f'Max {label} B{unit}',
+            f'{v}_b_at_max_a': f'{label} B at Max A{unit}',
+            f'{v}_a_at_max_b': f'{label} A at Max B{unit}',
             'sample_at_max_a': 'Sample at Max A',
             'sample_at_max_b': 'Sample at Max B',
             'taxonomy_a': 'Taxonomy A',
@@ -582,9 +680,9 @@ def main(snakemake):
             'Role': 'Zi-Pi Role',
             'taxonomy': 'Taxonomy',
             'prevalence': 'Prevalence (%)',
-            'mean_abundance': 'Mean Abundance',
-            'max_abundance': 'Max Abundance',
-            'sample_at_max': 'Sample at Max Abundance'
+            f'mean_{v}': f'Mean {label}{unit}',
+            f'max_{v}': f'Max {label}{unit}',
+            'sample_at_max': f'Sample at Max {label}'
         }
         
         nodes_df = nodes_df.rename(columns=column_mapping_nodes)

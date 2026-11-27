@@ -4,6 +4,6 @@ output_dir=example_output
 
 conda activate /mnt/weka/pkg/cmr/heyu/netinfer
 
-netinfer --input $abundance_table --taxonomy $taxonomy_table --output $output_dir --suffix mytest --threads 8
+netinfer --input_relative_abundance $abundance_table --taxonomy $taxonomy_table --output $output_dir --suffix mytest --threads 8
 
 conda deactivate

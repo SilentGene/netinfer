@@ -18,12 +18,14 @@ def validate_sample_ids(sample_ids, source):
         raise ValueError(f"{source} contains duplicate sample names: {duplicates}")
 
 
-def preprocess_metadata(metadata_path, abundance_path, output_path, logger=None):
+def preprocess_metadata(metadata_path, abundance_path, output_path, logger=None, removed_samples=()):
     """Match metadata rows exactly to the filtered abundance table's columns.
 
     Read all fields as text to preserve identifiers (e.g. 001 or NA) and
     metadata values. Metadata uses commas for .csv files and tabs otherwise.
     The filtered abundance table is TSV with feature IDs in its first column.
+    Metadata rows for samples removed during abundance preprocessing
+    (``removed_samples``) are allowed and dropped.
     """
     with open(abundance_path, newline="", encoding="utf-8-sig") as handle:
         abundance_header = next(csv.reader(handle, delimiter="\t"), [])
@@ -53,7 +55,10 @@ def preprocess_metadata(metadata_path, abundance_path, output_path, logger=None)
     abundance_set = set(samples)
     metadata_set = set(metadata_samples)
     missing = [sample for sample in samples if sample not in metadata_set]
-    extra = [sample for sample in metadata_samples if sample not in abundance_set]
+    removed_set = set(removed_samples)
+    dropped = [sample for sample in metadata_samples if sample in removed_set]
+    extra = [sample for sample in metadata_samples
+             if sample not in abundance_set and sample not in removed_set]
     if missing or extra:
         raise ValueError(
             f"Metadata sample names do not match abundance table. "
@@ -66,6 +71,8 @@ def preprocess_metadata(metadata_path, abundance_path, output_path, logger=None)
         writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
         writer.writerow(header[1:])
         writer.writerows(by_sample[sample] for sample in samples)
+    if logger and dropped:
+        logger.info("Dropped %d metadata row(s) for samples removed during preprocessing: %s", len(dropped), dropped)
     if logger:
         logger.info("Validated %d samples; reordered=%s", len(samples), metadata_samples != samples)
         logger.info("Saved metadata without sample IDs to %s", output_path)
@@ -80,11 +87,18 @@ def main(snakemake):
     handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
     logger.addHandler(handler)
     try:
+        removed_samples = []
+        if hasattr(snakemake.input, "stats"):
+            import yaml
+            with open(snakemake.input.stats) as handle:
+                stats = yaml.safe_load(handle) or {}
+            removed_samples = [str(s) for s in stats.get("removed_samples") or []]
         preprocess_metadata(
             snakemake.input.metadata,
             snakemake.input.abundance,
             snakemake.output.processed,
             logger,
+            removed_samples,
         )
     except Exception:
         logger.exception("Metadata preprocessing failed")

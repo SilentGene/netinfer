@@ -2,7 +2,20 @@
 
 # Input files
 input:
-  abundance_table: ""  # OTU/ASV abundance table
+  # Provide at least one of the two abundance tables (features x samples).
+  # count_table: raw read counts (recommended; e.g. `coverm genome -m count`).
+  #   Used for network inference when given.
+  # relative_abundance_table: relative abundance (fraction 0-1 or percentage 0-100,
+  #   detected automatically; e.g. `coverm genome -m relative_abundance`).
+  #   Used for abundance filtering and for displaying abundances when given;
+  #   used for network inference only if no count_table is given.
+  # other_table: other non-negative abundance values that are neither counts nor
+  #   relative abundance (e.g. CoverM `trimmed_mean`, sandpiper `full_coverage`).
+  #   Not optimal; use only if no count table is available. Cannot be combined
+  #   with count_table. Used for network inference when given.
+  count_table: ""
+  relative_abundance_table: ""
+  other_table: ""
   taxonomy_table: ""          # Optional taxonomy mapping
   metadata_table: ""          # Optional sample metadata
 
@@ -17,9 +30,12 @@ include_negative: false
 # Output directory
 output_dir: "netinfer_results"
 
-# Prefiltering thresholds
-min_prevalence: 0.1  # OTUs should be present in at least 10% of samples
-min_peak_abundance: 0.1  # Minimum required peak (max per-sample) abundance for a OTU (i.e. the max value in a row of the abundance table)
+# Prefiltering thresholds (see README "Preprocessing")
+min_sample_depth: 1000         # Drop samples with fewer reads than this (only applied to integer read counts; 0 disables)
+min_prevalence: 0.1            # Keep features present (> 0) in at least this fraction of samples
+min_prevalent_samples: 0       # ...and in at least this many samples (0 disables)
+min_peak_rel_abundance: 0.001  # Keep features whose max per-sample relative abundance is >= this (0.001 = 0.1%)
+# min_peak_abundance: 10       # Deprecated: threshold on the raw max value; only applied if set
 
 # Trusted methods: Edges must be present in at least one method from these trusted methods to be retained in the final aggregated table.
 trusted_methods:

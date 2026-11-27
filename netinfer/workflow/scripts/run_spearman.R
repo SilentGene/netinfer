@@ -52,13 +52,24 @@ main <- function() {
         pivot_wider(names_from = `#OTU ID`, values_from = Abundance)
     abundance_data_t
     
-    # Add a small pseudocount to avoid issues with zeros
-    pseudocount <- 1e-6
-    data_spearman <- abundance_data_t[,-1] + pseudocount
-    data_spearman
+    data_mat <- as.matrix(abundance_data_t[,-1])
+    rownames(data_mat) <- abundance_data_t$Sample
+
+    # Drop samples without any abundance (cannot be normalised)
+    empty_samples <- rowSums(data_mat) <= 0
+    if (any(empty_samples)) {
+        message(sprintf("Removing %d sample(s) with zero total abundance", sum(empty_samples)))
+        data_mat <- data_mat[!empty_samples, , drop = FALSE]
+    }
+
+    # Total-sum scaling: convert each sample to relative abundance so that
+    # sequencing depth differences do not create spurious rank correlations.
+    # (A pseudocount is unnecessary for rank-based correlation.)
+    message("Normalising each sample to relative abundance (total-sum scaling)")
+    data_spearman <- data_mat / rowSums(data_mat)
 
     # Compute Spearman correlations and p-values
-    cor_results <- rcorr(as.matrix(data_spearman), type = "spearman")
+    cor_results <- rcorr(data_spearman, type = "spearman")
     cor_matrix <- cor_results$r
     p_matrix <- cor_results$P
 

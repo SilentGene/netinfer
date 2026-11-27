@@ -25,6 +25,23 @@ log_con <- file(log_file, open="wt")
 sink(log_con, type="message")
 sink(log_con, type="output")
 
+# Scale-aware zero handling before log-ratio transformation.
+# Integer counts: add a pseudocount of 1 to every entry.
+# Non-integer data (relative abundance, coverage): replace zeros in each
+# sample with half of that sample's smallest non-zero value.
+# Input: samples x features matrix without all-zero samples.
+replace_zeros <- function(mat) {
+    if (all(mat == round(mat))) {
+        message("Integer counts detected: adding pseudocount 1")
+        return(mat + 1)
+    }
+    message("Non-integer abundances detected: replacing zeros with half of each sample's minimum non-zero value")
+    t(apply(mat, 1, function(x) {
+        x[x == 0] <- min(x[x > 0]) / 2
+        x
+    }))
+}
+
 # Main function
 main <- function() {
     message("Starting Pearson correlation network inference")
@@ -49,12 +66,17 @@ main <- function() {
     data_mat <- as.matrix(abundance_data_t[,-1])
     rownames(data_mat) <- abundance_data_t$Sample
     
+    # Drop samples without any abundance (CLR undefined)
+    empty_samples <- rowSums(data_mat) <= 0
+    if (any(empty_samples)) {
+        message(sprintf("Removing %d sample(s) with zero total abundance", sum(empty_samples)))
+        data_mat <- data_mat[!empty_samples, , drop = FALSE]
+    }
+
     # Apply CLR transformation
     message("Applying CLR transformation...")
-    # Add pseudocount to handle zeros
-    pseudocount <- 1e-6
-    data_mat_input <- data_mat + pseudocount
-    
+    data_mat_input <- replace_zeros(data_mat)
+
     # Calculate CLR: log(x) - mean(log(x)) per sample (row)
     # transposing because apply returns (cols x rows) when margin=1
     data_mat_clr <- t(apply(data_mat_input, 1, function(x) {

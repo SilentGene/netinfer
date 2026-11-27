@@ -24,6 +24,23 @@ log_con <- file(log_file, open="wt")
 sink(log_con, type="message")
 sink(log_con, type="output")
 
+# Scale-aware zero handling before log-ratio transformation.
+# Integer counts: add a pseudocount of 1 to every entry.
+# Non-integer data (relative abundance, coverage): replace zeros in each
+# sample with half of that sample's smallest non-zero value.
+# Input: samples x features matrix without all-zero samples.
+replace_zeros <- function(mat) {
+    if (all(mat == round(mat))) {
+        message("Integer counts detected: adding pseudocount 1")
+        return(mat + 1)
+    }
+    message("Non-integer abundances detected: replacing zeros with half of each sample's minimum non-zero value")
+    t(apply(mat, 1, function(x) {
+        x[x == 0] <- min(x[x > 0]) / 2
+        x
+    }))
+}
+
 # Main function
 main <- function() {
     message("Starting propR network inference")
@@ -45,10 +62,19 @@ main <- function() {
         pivot_wider(names_from = `#OTU ID`, values_from = Abundance)
     abundance_data_t
 
-    # Add a small pseudocount to avoid issues with zeros
-    pseudocount <- 1e-6
-    data_propr <- abundance_data_t[,-1] + pseudocount
-    
+    data_mat <- as.matrix(abundance_data_t[,-1])
+    rownames(data_mat) <- abundance_data_t$Sample
+
+    # Drop samples without any abundance (CLR undefined)
+    empty_samples <- rowSums(data_mat) <= 0
+    if (any(empty_samples)) {
+        message(sprintf("Removing %d sample(s) with zero total abundance", sum(empty_samples)))
+        data_mat <- data_mat[!empty_samples, , drop = FALSE]
+    }
+
+    # Scale-aware zero replacement so that propr receives no zeros
+    data_propr <- as.data.frame(replace_zeros(data_mat), check.names = FALSE)
+
     # Run propr with Centered Log-Ratio (CLR) transformation
     # The 'propr' function computes proportionality matrix 'rho'
     rho_results <- propr(data_propr, metric = "rho", symmetrize = TRUE)  # use clr transformation by default if no `ivar` is provided
@@ -85,9 +111,9 @@ main <- function() {
     stats <- list(
         edges_count = nrow(network_df),
         rho_threshold = rho_threshold,
-        min_rho = ifelse(nrow(network_df) > 0, min(network_df$rho), NA),
-        max_rho = ifelse(nrow(network_df) > 0, max(network_df$rho), NA),
-        mean_rho = ifelse(nrow(network_df) > 0, mean(network_df$rho), NA)
+        min_rho = ifelse(nrow(network_df) > 0, min(network_df$Rho), NA),
+        max_rho = ifelse(nrow(network_df) > 0, max(network_df$Rho), NA),
+        mean_rho = ifelse(nrow(network_df) > 0, mean(network_df$Rho), NA)
     )
     write_json(stats, stats_file, pretty=TRUE)
     

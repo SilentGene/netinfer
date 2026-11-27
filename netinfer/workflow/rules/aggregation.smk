@@ -9,6 +9,7 @@ suffix = str(config.get("suffix", "")).strip()
 suffix_tag = f"-{suffix}" if suffix else ""
 taxonomy_in = str(config.get("input", {}).get("taxonomy_table", "")).strip()
 infer_tax = config.get("infer_taxonomy", False)
+metadata_in = str(config.get("input", {}).get("metadata_table", "") or "").strip()
 has_taxonomy = bool(taxonomy_in) or infer_tax
 
 rule aggregate_networks:
@@ -22,16 +23,19 @@ rule aggregate_networks:
         jaccard = f"{outdir}/subtool_outputs/jaccard/network.tsv" if config["jaccard"]["enabled"] else [],
         pearson = f"{outdir}/subtool_outputs/pearson/network.tsv" if config["pearson"]["enabled"] else [],
         taxonomy = f"{outdir}/preprocessed_data/processed_taxonomy.tsv" if has_taxonomy else [],
-        abundance = f"{outdir}/preprocessed_data/filtered_abundance.tsv"
+        abundance = f"{outdir}/preprocessed_data/display_values.tsv"
     output:
         combined_table = f"{outdir}/final_results/merged_edges{suffix_tag}.tsv",
         nodes_table = f"{outdir}/final_results/merged_nodes{suffix_tag}.tsv",
         combined_graph = f"{outdir}/final_results/merged_network{suffix_tag}.gml",
         combined_gexf = f"{outdir}/final_results/merged_network{suffix_tag}.gexf",
-        stats = f"{outdir}/final_results/network_stats{suffix_tag}.txt"
+        stats = f"{outdir}/final_results/network_stats{suffix_tag}.txt",
+        metadata_associations = f"{outdir}/final_results/metadata_associations{suffix_tag}.tsv"
     threads: 1
     params:
-        trusted_methods = config.get("trusted_methods")
+        trusted_methods = config.get("trusted_methods"),
+        value_type = display_value_type,
+        has_metadata = bool(metadata_in)
     log:
         f"{outdir}/logs/aggregate_networks.log"
     script:

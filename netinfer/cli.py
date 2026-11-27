@@ -103,7 +103,9 @@ def find_workflow_dir() -> Path:
         "\n".join(f"- {p}" for p in searched_paths)
     )
 
-def create_config(input_file: Optional[str] = None,
+def create_config(count_file: Optional[str] = None,
+                 relab_file: Optional[str] = None,
+                 other_file: Optional[str] = None,
                  output_dir: Optional[str] = None,
                  taxonomy_file: Optional[str] = None,
                  metadata_file: Optional[str] = None,
@@ -112,11 +114,14 @@ def create_config(input_file: Optional[str] = None,
                  infer_taxonomy: bool = False,
                  include_negative: Optional[bool] = None,
                  base_config_path: Optional[str] = None,
-                 suffix: Optional[str] = None) -> str:
+                 suffix: Optional[str] = None,
+                 filter_params: Optional[dict] = None) -> str:
     """Create a config file for the pipeline run.
     
     Args:
-        input_file: Input abundance table path (overrides config if provided)
+        count_file: Read count table path (overrides config if provided)
+        relab_file: Relative abundance table path (overrides config if provided)
+        other_file: Other abundance table path, e.g. coverage (overrides config if provided)
         output_dir: Output directory path (overrides config if provided)
         taxonomy_file: Taxonomy table path (overrides config if provided)
         metadata_file: Metadata table path (overrides config if provided)
@@ -127,6 +132,8 @@ def create_config(input_file: Optional[str] = None,
             on absolute values, retaining sufficiently strong negative edges.
             If None, preserve the base configuration value.
         base_config_path: Path to base config file (uses default if None)
+        filter_params: Preprocessing thresholds to override (keys as in config;
+            None values are ignored)
     
     Returns:
         Path to the final config file written to output directory
@@ -146,8 +153,31 @@ def create_config(input_file: Optional[str] = None,
         config = yaml.safe_load(f)
     
     # Update input/output paths (CLI overrides config)
-    if input_file:
-        config["input"]["abundance_table"] = os.path.abspath(input_file)
+    config.setdefault("input", {})
+    if str(config["input"].get("abundance_table", "") or "").strip():
+        raise ValueError(
+            "Config key 'input.abundance_table' is no longer supported. Use 'input.count_table' "
+            "(raw read counts) and/or 'input.relative_abundance_table' instead."
+        )
+    config["input"].pop("abundance_table", None)
+    if count_file:
+        config["input"]["count_table"] = os.path.abspath(count_file)
+    if relab_file:
+        config["input"]["relative_abundance_table"] = os.path.abspath(relab_file)
+    if other_file:
+        config["input"]["other_table"] = os.path.abspath(other_file)
+    given = {k: str(config["input"].get(k, "") or "").strip()
+             for k in ("count_table", "relative_abundance_table", "other_table")}
+    if not any(given.values()):
+        raise ValueError(
+            "No abundance table given. Use --input_count (raw read counts, recommended), "
+            "--input_relative_abundance and/or --input_others, or set them in the config file."
+        )
+    if given["count_table"] and given["other_table"]:
+        raise ValueError(
+            "--input_count and --input_others cannot be combined: read counts are always "
+            "preferred for network inference. Drop --input_others."
+        )
     if taxonomy_file:
         config["input"]["taxonomy_table"] = os.path.abspath(taxonomy_file)
     if metadata_file:
@@ -160,6 +190,11 @@ def create_config(input_file: Optional[str] = None,
     # method thresholds to absolute values so strong negative edges are kept.
     if include_negative is not None:
         config["include_negative"] = include_negative
+
+    # Preprocessing (filtering) thresholds: CLI overrides config
+    for key, value in (filter_params or {}).items():
+        if value is not None:
+            config[key] = value
 
     # Sanitize and set optional output suffix
     if suffix:
@@ -300,9 +335,34 @@ def main():
     )
     
     parser.add_argument(
-        "--input",
-        help="Input abundance table file (TSV/CSV/BIOM format). Overrides config file if specified."
+        "--input_count", "--input-count",
+        dest="input_count",
+        help=(
+            "Read count table (TSV/CSV/BIOM; features x samples), e.g. from `coverm genome -m count`. "
+            "Recommended; used for network inference. Overrides config file if specified."
+        )
     )
+    parser.add_argument(
+        "--input_relative_abundance", "--input-relative-abundance",
+        dest="input_relative_abundance",
+        help=(
+            "Relative abundance table (TSV/CSV/BIOM; features x samples; fraction or percentage), "
+            "e.g. from `coverm genome -m relative_abundance`. Used for abundance filtering and display; "
+            "used for network inference only if --input_count is not given. Overrides config file if specified."
+        )
+    )
+    parser.add_argument(
+        "--input_others", "--input-others",
+        dest="input_others",
+        help=(
+            "Other abundance table (TSV/CSV/BIOM; features x samples) with non-negative values that are "
+            "neither read counts nor relative abundance, e.g. CoverM `trimmed_mean` or sandpiper "
+            "`full_coverage`. Not optimal: use only if read counts are unavailable. Used for network "
+            "inference; cannot be combined with --input_count."
+        )
+    )
+    # Removed option: kept only to give a clear error instead of passing it to Snakemake
+    parser.add_argument("--input", dest="legacy_input", help=argparse.SUPPRESS)
     
     parser.add_argument(
         "--output",
@@ -361,6 +421,15 @@ def main():
             "strong negative as well as positive associations"
         )
     )
+    filt = parser.add_argument_group("abundance filtering (overrides config; see README 'Preprocessing')")
+    filt.add_argument("--min-sample-depth", type=float, default=None,
+                      help="Drop samples with fewer total reads (integer counts only; 0 disables). Default: 1000")
+    filt.add_argument("--min-prevalence", type=float, default=None,
+                      help="Minimum fraction of samples in which a feature is present (> 0). Default: 0.1")
+    filt.add_argument("--min-prevalent-samples", type=int, default=None,
+                      help="Minimum number of samples in which a feature is present (0 disables). Default: 0")
+    filt.add_argument("--min-peak-rel-abundance", type=float, default=None,
+                      help="Minimum peak (max per-sample) relative abundance of a feature, e.g. 0.001 = 0.1%%. Default: 0.001")
     parser.add_argument(
         "--snake-args", "--snake_args",
         dest="snake_args",
@@ -390,16 +459,25 @@ def main():
         if args.methods:
             methods = [m.strip().lower() for m in args.methods.split(",")]
         
-        # Validate that either --input/--output or --config is provided
-        if not args.config and (not args.input or not args.output):
+        if args.legacy_input:
             raise ValueError(
-                "Either --config must be specified, or both --input and --output must be provided"
+                "--input is no longer supported. Use --input_count for raw read counts (recommended) "
+                "and/or --input_relative_abundance for relative abundance (or --input_others for e.g. coverage)."
+            )
+        # Validate that either an input table and --output, or --config is provided
+        if not args.config and (not (args.input_count or args.input_relative_abundance or args.input_others)
+                                or not args.output):
+            raise ValueError(
+                "Either --config must be specified, or --output and at least one of "
+                "--input_count / --input_relative_abundance / --input_others must be provided"
             )
         
         # Create configuration (with CLI overrides applied)
         logger.info("Creating pipeline configuration...")
         config_path = create_config(
-            input_file=args.input,
+            count_file=args.input_count,
+            relab_file=args.input_relative_abundance,
+            other_file=args.input_others,
             output_dir=args.output,
             taxonomy_file=args.taxonomy,
             metadata_file=args.metadata,
@@ -408,7 +486,13 @@ def main():
             infer_taxonomy=args.infer_taxonomy,
             include_negative=args.include_negative,
             base_config_path=args.config,
-            suffix=args.suffix
+            suffix=args.suffix,
+            filter_params={
+                "min_sample_depth": args.min_sample_depth,
+                "min_prevalence": args.min_prevalence,
+                "min_prevalent_samples": args.min_prevalent_samples,
+                "min_peak_rel_abundance": args.min_peak_rel_abundance,
+            }
         )
         logger.info(f"Configuration file created at: {config_path}")
         
