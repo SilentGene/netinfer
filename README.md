@@ -145,28 +145,6 @@ OTU2           50       60       40
 ...
 ```
 
-> [!NOTE]
-> **Q: Doesn't using raw read counts ignore genome size, causing larger genomes to receive more reads and introducing statistical bias?**
->
-> **A: Genome size can affect read counts:** at the same organism abundance, a larger genome may yield more reads. If genome length is constant across samples, it acts as a constant scaling factor for that feature and does not change correlations or log-ratios used for network inference. It can still affect abundance-based filtering and comparisons between features, and this does not account for other biases such as differences in sequencing or mapping efficiency.
-
-> [!NOTE]
-> **Q: Do I need to transform my compositional data (e.g. CLR, log, rarefaction) before running NetInfer?**
->
-> **A: No. Provide the untransformed raw read counts.** Each method already handles compositionality, either internally or through NetInfer:
->
-> - **FlashWeave**: CLR transformation with an adaptive pseudocount in normal mode, and CLR on non-zero values only in HE mode.
-> - **SPIEC-EASI**: CLR transformation after adding a pseudocount of 1.
-> - **FastSpar**: SparCC log-ratio variances computed on compositions sampled from the counts.
-> - **propR**: proportionality (rho) on CLR-transformed data.
-> - **Pearson**: Pearson correlation is not compositionally aware, so NetInfer applies a CLR transformation before computing it.
-> - **Spearman**: NetInfer converts each sample to relative abundance first, so differences in sequencing depth do not create spurious rank correlations. Spearman does not correct for compositional effects, so interpret its edges with more caution.
-> - **Jaccard**: uses presence/absence only, so no transformation is needed.
->
-> For propR and Pearson, NetInfer handles zeros according to the data scale. For integer counts it adds a pseudocount of 1. For non-integer data it replaces each zero with half of that sample's smallest non-zero value.
->
-> Pre-transformed input can break the pipeline. CLR or log values can be negative, which breaks prevalence filtering and count-based methods. A transformation applied twice also distorts the results.
-
 ### Taxonomy Table (Optional)
 > No matter what column names are, the first column will always be treated as Feature IDs, and the second column as Taxonomy strings. Any additional columns are ignored.
 - Format: TSV/CSV
@@ -278,6 +256,54 @@ it usually means a previous Snakemake run was interrupted and left a lock behind
 ```bash
 netinfer <original_args> --snake_args="--unlock"
 ```
+
+## FAQ
+
+> [!NOTE]
+> **Q: Larger genomes get more reads. Doesn't using raw read counts bias the network?**
+>
+> **A: Not the network.** A genome twice as large gets about twice as many reads in *every* sample. This is a fixed multiplier for that genome. Network methods only look at how each genome's abundance rises and falls *across samples*, so the multiplier has no effect. In the log-ratio methods (e.g. CLR) it becomes a constant that cancels out.
+>
+> Genome size does matter when you compare different genomes with each other (e.g. "Is genome A more abundant than genome B?"), and for the abundance filter. To handle this, also provide a length-corrected table with `--input_relative_abundance`, such as the output of `coverm genome -m relative_abundance`. NetInfer then uses it for filtering and for the abundances shown in outputs, while the network is still inferred from read counts.
+
+> [!NOTE]
+> **Q: I only have a relative abundance table. Can I still trust the results?**
+>
+> **A: Mostly, but not for every method.** Most methods only need the *proportions* of each feature, which relative abundance keeps. Two methods are built for read counts:
+>
+> | Method | With relative abundance only |
+> | ------ | ---------------------------- |
+> | FlashWeave (normal / HE), propR, Pearson, Spearman, Jaccard | ✅ Reliable |
+> | SPIEC-EASI | ⚠️ Biased: it adds a fixed pseudocount of 1 before CLR. On fractions (0–1) this 1 outweighs the real values; on percentages it still distorts low-abundance features. |
+> | FastSpar | ❌ Unreliable: it samples compositions from the values as if they were read counts. |
+>
+> Our advice:
+> 1. **If you have the read alignments (e.g. BAM files), generate a count table** with `coverm genome -m count` and provide it with `--input_count`. This is usually quick and gives the most reliable results.
+> 2. **Otherwise, leave out the two count-based methods:**
+>    ```bash
+>    netinfer --input_relative_abundance relab_table.tsv --output results_dir \
+>        --methods flashweave,flashweaveHE,propr,pearson,spearman,jaccard
+>    ```
+>    FlashWeave and FlashWeave HE remain as trusted methods.
+>
+> Without read counts, NetInfer also cannot remove shallowly sequenced samples (`--min-sample-depth`), so check your sequencing depths yourself.
+
+> [!NOTE]
+> **Q: Do I need to transform my compositional data (e.g. CLR, log, rarefaction) before running NetInfer?**
+>
+> **A: No. Provide the untransformed raw read counts.** Each method already handles compositionality, either internally or through NetInfer:
+>
+> - **FlashWeave**: CLR transformation with an adaptive pseudocount in normal mode, and CLR on non-zero values only in HE mode.
+> - **SPIEC-EASI**: CLR transformation after adding a pseudocount of 1.
+> - **FastSpar**: SparCC log-ratio variances computed on compositions sampled from the counts.
+> - **propR**: proportionality (rho) on CLR-transformed data.
+> - **Pearson**: Pearson correlation is not compositionally aware, so NetInfer applies a CLR transformation before computing it.
+> - **Spearman**: NetInfer converts each sample to relative abundance first, so differences in sequencing depth do not create spurious rank correlations. Spearman does not correct for compositional effects, so interpret its edges with more caution.
+> - **Jaccard**: uses presence/absence only, so no transformation is needed.
+>
+> For propR and Pearson, NetInfer handles zeros according to the data scale. For integer counts it adds a pseudocount of 1. For non-integer data it replaces each zero with half of that sample's smallest non-zero value.
+>
+> Pre-transformed input can break the pipeline. CLR or log values can be negative, which breaks prevalence filtering and count-based methods. A transformation applied twice also distorts the results.
 
 ## ALL flags
 ```powershell
