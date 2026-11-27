@@ -62,12 +62,26 @@ julia netinfer/workflow/scripts/install_flashweave.jl
    - (Optional) sample metadata table `metadata.tsv` for `FlashWeave` and additional annotations
 
 2. Run the pipeline:
+
+```powershell
+# Input files:
+# 1. Read count table: for co-abundance analysis
+# 2. Relative abundance table: for filtering and for the abundances shown in outputs
+# 3. Taxonomy table: for additional annotations
+
+netinfer \
+    --input_count count_table.tsv \
+    --input_relative_abundance relab_table.tsv \
+    --taxonomy taxonomy.tsv \
+    --output results_dir \
+    --threads 6
+```
+
+### Other Usage Examples
+
 ```powershell
 # Simple run with all methods enabled and using default settings
 netinfer --input_count count_table.tsv --output results_dir --threads 6
-
-# Also provide relative abundance: used for filtering and for the abundances shown in outputs
-netinfer --input_count count_table.tsv --input_relative_abundance relab_table.tsv --output results_dir --threads 6
 
 # Only coverage is available (e.g. CoverM trimmed_mean): not optimal, but supported
 netinfer --input_others trimmed_mean.tsv --output results_dir --threads 6
@@ -75,7 +89,7 @@ netinfer --input_others trimmed_mean.tsv --output results_dir --threads 6
 # Include taxonomy to allow more information in the output and produce a addictional file with associations between different phyla
 netinfer --input_count count_table.tsv --output results_dir --threads 6 --taxonomy taxonomy.tsv
 
-# I don't have a separate taxonomy file, but let's try to infer from feature IDs
+# I don't have a separate taxonomy file, but the taxonomy info is available from genome IDs
 netinfer --input_count count_table.tsv --output results_dir --threads 6 --infer-taxonomy
 
 # Only use my favorite methods, and use my own suffix for output files
