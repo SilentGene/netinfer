@@ -382,11 +382,8 @@ NetInfer has not been published in a peer-reviewed journal yet. If you use NetIn
 ```
 
 # Future plans
-
-- Metadata support. If a metadata file is provided with sample groups specified, the pipeline will generate an additional boxplot for taxon abundance in each group.
 - Radar plot for abundance profiles.
 - PCA plot for samples according to taxon abundance.
-- Allow users to specify trusted methods and other methods to use by CLI arguments (e.g. `--trust flashweave,flashweaveHE,spieceasi` [default]), other methods specified by `--methods` will be used as other methods. For now, this can be achieved by editing the config file.
 
 ## Contact
 
